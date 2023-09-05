@@ -1,0 +1,25 @@
+{
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "useTabs": false,
+  "printWidth": 80,
+  "endOfLine": "auto",
+  "trailingComma": "none",
+  "arrowParens": "always",
+  "jsxBracketSameLine": true,
+  "importOrder": [
+    "^@api/(.*)$",
+    "^@components/(.*)$",
+    "^@constants/(.*)$",
+    "^@hooks/(.*)$",
+    "^@pages/(.*)$",
+    "^@store/(.*)$",
+    "^@styles/(.*)$",
+    "^@types/(.*)$",
+    "^@utils/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": "true",
+  "importOrderSortSpecifiers": "true"
+}
