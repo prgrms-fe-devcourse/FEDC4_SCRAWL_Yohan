@@ -8,18 +8,21 @@
   "trailingComma": "none",
   "arrowParens": "always",
   "jsxBracketSameLine": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
-    "^@api/(.*)$",
-    "^@components/(.*)$",
-    "^@constants/(.*)$",
-    "^@hooks/(.*)$",
+    "^react(.*)",
+    "<THIRD_PARTY_MODULES>",
+    "^@apis/(.*)$",
     "^@pages/(.*)$",
-    "^@store/(.*)$",
+    "^@components/(.*)$",
+    "^@hooks/(.*)$",
     "^@styles/(.*)$",
+    "^@store/(.*)$",
     "^@types/(.*)$",
+    "^@constants/(.*)$",
     "^@utils/(.*)$",
     "^[./]"
   ],
-  "importOrderSeparation": "true",
-  "importOrderSortSpecifiers": "true"
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }
