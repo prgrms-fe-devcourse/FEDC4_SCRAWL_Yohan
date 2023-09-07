@@ -1,7 +1,7 @@
 ---
 name: hotfix
 about: hotfix template
-title: ''
+title: "[ 이름 ] "
 labels: ''
 assignees: ''
 

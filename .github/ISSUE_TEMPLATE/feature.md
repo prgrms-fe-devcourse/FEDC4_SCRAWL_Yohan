@@ -1,7 +1,7 @@
 ---
 name: feature
 about: feature template
-title: ''
+title: "[ 이름 ] "
 labels: ''
 assignees: ''
 
