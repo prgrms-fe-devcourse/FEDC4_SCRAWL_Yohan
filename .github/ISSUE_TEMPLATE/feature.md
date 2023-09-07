@@ -1,3 +1,12 @@
+---
+name: feature
+about: feature template
+title: ''
+labels: ''
+assignees: ''
+
+---
+
 ## 📝 TODO
 
 ## 🚀 구현 계획
