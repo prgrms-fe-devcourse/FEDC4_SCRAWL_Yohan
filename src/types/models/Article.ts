@@ -2,7 +2,7 @@ import { Channel } from "./Channel";
 import { Like } from "./Like";
 import { User } from "./User";
 
-export interface Post {
+export interface Article {
   likes: Like[];
   comments: Comment[];
   _id: string;

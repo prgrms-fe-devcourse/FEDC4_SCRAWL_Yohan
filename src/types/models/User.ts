@@ -1,6 +1,6 @@
+import { Article } from "./Article";
 import { Like } from "./Like";
 import { Message } from "./Message";
-import { Post } from "./Post";
 
 export interface User {
   coverImage: string;
@@ -9,7 +9,7 @@ export interface User {
   emailVerified: boolean;
   banned: boolean;
   isOnline: boolean;
-  posts: Post[];
+  posts: Article[];
   likes: Like[];
   comments: string[];
   followers: [];
