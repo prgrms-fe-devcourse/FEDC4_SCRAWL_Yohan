@@ -1,9 +1,10 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), svgr()],
   resolve: {
     alias: [
       { find: "@apis", replacement: "/src/apis" },
@@ -14,7 +15,8 @@ export default defineConfig({
       { find: "@store", replacement: "/src/store" },
       { find: "@type", replacement: "/src/types" },
       { find: "@constants", replacement: "/src/constants" },
-      { find: "@utils", replacement: "/src/utils" }
+      { find: "@utils", replacement: "/src/utils" },
+      { find: "@assets", replacement: "/src/assets" }
     ]
   }
 });
