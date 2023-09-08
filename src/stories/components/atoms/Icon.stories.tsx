@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Icon from "@components/atoms/Icon";
 
-import { Logo } from "../../../assets/svg";
+import { Logo } from "@assets/svg";
 
 const meta = {
   title: "components/atoms/Icon",

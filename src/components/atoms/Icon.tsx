@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { SVGType } from "../../assets/svg";
+import { SVGType } from "@assets/svg";
 
 type IconProps = {
   Svg: SVGType;
