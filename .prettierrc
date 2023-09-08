@@ -17,7 +17,7 @@
     "^@components/(.*)$",
     "^@hooks/(.*)$",
     "^@styles/(.*)$",
-    "^@store/(.*)$",
+    "^@stores/(.*)$",
     "^@type/(.*)$",
     "^@constants/(.*)$",
     "^@utils/(.*)$",
