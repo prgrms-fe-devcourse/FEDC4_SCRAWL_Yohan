@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Icon from "@components/atoms/Icon";
 
+import { Logo } from "../../../assets/svg";
+
 const meta = {
   title: "components/atoms/Icon",
   component: Icon,
@@ -15,5 +17,5 @@ const meta = {
 export default meta;
 
 export const Default: StoryObj<typeof Icon> = {
-  render: (args) => <Icon {...args} />
+  render: (args) => <Icon {...args} Svg={Logo} />
 };
