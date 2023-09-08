@@ -1,4 +1,5 @@
-type Theme = Readonly<{
+export type Theme = Readonly<{
+  type: "LIGHT" | "DARK";
   BACKGROUND100: string;
   BACKGROUND200: string;
   BACKGROUND300: string;
@@ -11,6 +12,7 @@ type Theme = Readonly<{
 }>;
 
 export const LIGHT_MODE_THEME: Theme = {
+  type: "LIGHT",
   BACKGROUND100: "#FFFFFF",
   BACKGROUND200: "#FAFAFA",
   BACKGROUND300: "#F0F0F0",
@@ -23,6 +25,7 @@ export const LIGHT_MODE_THEME: Theme = {
 };
 
 export const DARK_MODE_THEME: Theme = {
+  type: "DARK",
   BACKGROUND100: "#161A23",
   BACKGROUND200: "#2D2F39",
   BACKGROUND300: "#161A23",
