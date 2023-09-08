@@ -35,7 +35,7 @@ const Input = ({
         box-sizing: border-box;
         width: ${width};
         height: ${height};
-        fontsize: ${fontSize};
+        font-size: ${fontSize};
         background: ${background};
         color: ${color};
         border: ${border};
