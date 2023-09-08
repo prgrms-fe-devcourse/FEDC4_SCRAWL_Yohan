@@ -1,6 +1,6 @@
 import { axiosInstance } from "@apis/axiosInstance";
 
-import { Channels } from "@type/Channel";
+import { Channels } from "@type/models/Channel";
 
 export const getChannels = async () => {
   const { data } = await axiosInstance.get<Channels>("/channels", {
