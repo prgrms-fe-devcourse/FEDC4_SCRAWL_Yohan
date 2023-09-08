@@ -31,13 +31,12 @@ const Button = ({
       css={css`
         width: ${width};
         height: ${height};
-        fontsize: ${fontSize};
+        font-size: ${fontSize};
         background: ${background};
         color: ${color};
         border-radius: ${borderRadius};
         border: none;
-      `}
-    >
+      `}>
       {children}
     </button>
   );
