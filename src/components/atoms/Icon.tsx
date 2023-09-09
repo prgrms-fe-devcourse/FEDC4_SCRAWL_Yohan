@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 import { SVGType } from "@assets/svg";
 
-type IconProps = {
+export type IconProps = {
   Svg: SVGType;
   size?: number;
   fill?: string;
