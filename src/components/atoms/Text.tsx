@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-type TextProps = {
+export type TextProps = {
   children: React.ReactNode;
   block?: boolean;
   paragraph?: boolean;
