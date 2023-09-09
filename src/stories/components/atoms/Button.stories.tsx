@@ -19,6 +19,7 @@ export const Default: StoryObj<typeof meta> = {
     background: "#007AFF",
     color: "#FFF",
     borderRadius: "8px",
-    children: <div>hi</div>
+    children: <div>hi</div>,
+    onClick: (e) => console.log(e.currentTarget.value)
   }
 };

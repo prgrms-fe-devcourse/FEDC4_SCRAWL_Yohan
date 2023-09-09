@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, MouseEventHandler } from "react";
 
 import { css } from "@emotion/react";
 
@@ -6,13 +6,14 @@ import { Combine } from "@type/Combine";
 
 export type ButtonProps = Combine<
   {
-    width: string;
-    height: string;
-    fontSize: string;
-    color: string;
-    background: string;
-    borderRadius: string;
-    children?: string | React.ReactNode;
+    width?: string;
+    height?: string;
+    fontSize?: string;
+    color?: string;
+    background?: string;
+    borderRadius?: string;
+    children: string | React.ReactNode;
+    onClick: MouseEventHandler<HTMLButtonElement>;
   },
   HTMLAttributes<HTMLButtonElement>
 >;
@@ -24,10 +25,12 @@ const Button = ({
   background = "#007AFF",
   color = "#FFF",
   borderRadius = "8px",
-  children
+  children,
+  onClick
 }: ButtonProps) => {
   return (
     <button
+      onClick={onClick}
       css={css`
         width: ${width};
         height: ${height};
