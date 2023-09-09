@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { ChangeEventHandler, HTMLAttributes } from "react";
 
 import { css } from "@emotion/react";
 
@@ -6,14 +6,16 @@ import { Combine } from "@type/Combine";
 
 export type InputProps = Combine<
   {
-    width: string;
-    height: string;
-    fontSize: string;
-    background: string;
-    color: string;
-    border: string;
-    borderRadius: string;
-    type: "text" | "password" | "email";
+    width?: string;
+    height?: string;
+    fontSize?: string;
+    background?: string;
+    color?: string;
+    border?: string;
+    borderRadius?: string;
+    type?: "text" | "password" | "email";
+    placeholder?: string;
+    onChange: ChangeEventHandler<HTMLInputElement>;
   },
   HTMLAttributes<HTMLInputElement>
 >;
@@ -26,11 +28,15 @@ const Input = ({
   border = "1px solid #EEE",
   background = "#F9F9F9",
   borderRadius = "8px",
-  type = "text"
+  type = "text",
+  placeholder,
+  onChange
 }: InputProps) => {
   return (
     <input
+      onChange={onChange}
       type={type}
+      placeholder={placeholder}
       css={css`
         box-sizing: border-box;
         width: ${width};
