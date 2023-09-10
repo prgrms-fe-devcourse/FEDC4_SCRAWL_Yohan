@@ -1,6 +1,6 @@
 import { User } from "@type/models/User";
 
-export interface GetUsersRequest {
+export interface GetUsersRequestParams {
   offset?: number;
   limit?: number;
 }

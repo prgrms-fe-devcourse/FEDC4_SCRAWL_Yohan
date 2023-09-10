@@ -1,6 +1,6 @@
 import { User } from "@type/models/User";
 
-export interface UpdateUserRequest {
+export interface UpdateUserRequestBody {
   fullName: string;
   username: string;
 }

@@ -1,4 +1,4 @@
-export interface CreateCommentRequest {
+export interface CreateCommentRequestBody {
   comment: string;
   postId: string;
 }

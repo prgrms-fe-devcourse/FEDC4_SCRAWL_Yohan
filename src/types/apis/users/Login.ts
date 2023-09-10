@@ -1,6 +1,6 @@
 import { User } from "@type/models/User";
 
-export interface LoginRequest {
+export interface LoginRequestBody {
   authRequired: boolean;
   description: string;
   name: string;

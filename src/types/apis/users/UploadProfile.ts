@@ -1,6 +1,6 @@
 import { User } from "@type/models/User";
 
-export interface UploadProfileRequest {
+export interface UploadProfileRequestBody {
   isCover: false;
   image: BinaryData;
 }

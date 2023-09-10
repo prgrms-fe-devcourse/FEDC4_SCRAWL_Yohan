@@ -1,4 +1,4 @@
-export interface UpdateArticleRequest {
+export interface UpdateArticleRequestBody {
   postId: string;
   title: string;
   image?: BinaryData | null;

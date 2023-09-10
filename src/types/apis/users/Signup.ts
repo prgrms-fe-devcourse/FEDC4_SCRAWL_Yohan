@@ -1,6 +1,6 @@
 import { User } from "@type/models/User";
 
-export interface SignupRequest {
+export interface SignupRequestBody {
   email: string;
   fullName: string;
   password: string;
