@@ -25,7 +25,6 @@ const Text = ({
   const Tag = block ? "div" : paragraph ? "p" : "span";
   if (del) {
     children = <del>{children}</del>;
-    console.log(children);
   }
 
   return (
