@@ -1,3 +1,4 @@
+import Flex from "@components/atoms/Flex";
 import Icon from "@components/atoms/Icon";
 import { IconProps } from "@components/atoms/Icon";
 import Text from "@components/atoms/Text";
@@ -29,7 +30,7 @@ const IconText = ({
   } = textValue;
 
   return (
-    <div>
+    <Flex align="center">
       <Icon Svg={Svg} size={iconSize} fill={fill} {...iconProps} />
       <Text
         children={children}
@@ -42,7 +43,7 @@ const IconText = ({
         color={color}
         {...textprops}
       />
-    </div>
+    </Flex>
   );
 };
 
