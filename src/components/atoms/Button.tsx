@@ -39,6 +39,7 @@ const Button = ({
         color: ${color};
         border-radius: ${borderRadius};
         border: none;
+        cursor: pointer;
       `}>
       {children}
     </button>
