@@ -1,4 +1,8 @@
+import { ChangeEventHandler, useState } from "react";
+
 import { css } from "@emotion/react";
+
+import { createComment } from "@apis/comment/createComment";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
@@ -11,9 +15,28 @@ type CommentFormProps = {
   width: string;
   src: string;
   themeType: "LIGHT" | "DARK";
+  articleId: string;
 };
 
-const CommentForm = ({ width, src, themeType }: CommentFormProps) => {
+const CommentForm = ({
+  width,
+  src,
+  themeType,
+  articleId
+}: CommentFormProps) => {
+  const [comment, setComment] = useState("");
+
+  const handleUpdateCommentText: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setComment(e.currentTarget.value);
+  };
+  const handleSubmitComment = async () => {
+    await createComment({
+      comment,
+      postId: articleId
+    });
+    setComment("");
+  };
+
   return (
     <Flex
       justify={"center"}
@@ -55,6 +78,8 @@ const CommentForm = ({ width, src, themeType }: CommentFormProps) => {
           />
         </Flex>
         <Input
+          onChange={handleUpdateCommentText}
+          value={comment}
           width={"75%"}
           height={"96px"}
           fontSize={"16px"}
@@ -83,6 +108,7 @@ const CommentForm = ({ width, src, themeType }: CommentFormProps) => {
             height: 100%;
           `}>
           <Button
+            onClick={handleSubmitComment}
             width={"106px"}
             height={"48px"}
             fontSize={"16px"}

@@ -15,6 +15,7 @@ export const Default: StoryObj<typeof meta> = {
   args: {
     width: "935px",
     src: "https://picsum.photos/500",
-    themeType: "DARK"
+    themeType: "DARK",
+    articleId: "64f57c520a678e0ff0ed0937"
   }
 };
