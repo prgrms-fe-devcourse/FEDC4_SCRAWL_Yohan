@@ -20,8 +20,9 @@ export const Default: StoryObj<typeof meta> = {
     color: "#111",
     border: "1px solid #eee",
     borderRadius: "8px",
-    type: "password",
+    type: "text",
     placeholder: "password",
+    value: "hi",
     onChange: (e) => console.log(e.currentTarget.value)
   }
 };
