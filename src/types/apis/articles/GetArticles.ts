@@ -1,6 +1,6 @@
 import { Article } from "@type/models/Article";
 
-export interface GetArticlesRequest {
+export interface GetArticlesRequestParams {
   offset?: number;
   limit?: number;
 }

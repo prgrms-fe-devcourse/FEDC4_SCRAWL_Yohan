@@ -1,4 +1,4 @@
-export interface CreateNotificationRequest {
+export interface CreateNotificationRequestBody {
   notificationType: "COMMENT" | "FOLLOW" | "LIKE" | "MESSAGE";
   notificationTypeId: string;
   userId: string;
