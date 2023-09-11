@@ -26,7 +26,8 @@ const Button = ({
   color = "#FFF",
   borderRadius = "8px",
   children,
-  onClick
+  onClick,
+  ...props
 }: ButtonProps) => {
   return (
     <button
@@ -40,7 +41,8 @@ const Button = ({
         border-radius: ${borderRadius};
         border: none;
         cursor: pointer;
-      `}>
+      `}
+      {...props}>
       {children}
     </button>
   );

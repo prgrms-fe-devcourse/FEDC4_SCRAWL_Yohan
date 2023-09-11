@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import Input from "@components/atoms/Input";
@@ -11,7 +12,14 @@ const meta = {
 export default meta;
 
 export const Default: StoryObj<typeof meta> = {
-  render: (args) => <Input {...args} />,
+  render: (args) => (
+    <Input
+      {...args}
+      css={css`
+        background: red;
+      `}
+    />
+  ),
   args: {
     width: "272px",
     height: "35px",
@@ -23,6 +31,7 @@ export const Default: StoryObj<typeof meta> = {
     type: "text",
     placeholder: "password",
     value: "hi",
+    name: "comment",
     onChange: (e) => console.log(e.currentTarget.value)
   }
 };

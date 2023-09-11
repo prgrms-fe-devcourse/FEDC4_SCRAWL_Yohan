@@ -15,6 +15,7 @@ export type InputProps = Combine<
     borderRadius?: string;
     type?: "text" | "password" | "email";
     value: string;
+    name?: string;
     placeholder?: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
   },
@@ -31,14 +32,17 @@ const Input = ({
   borderRadius = "8px",
   type = "text",
   value,
+  name,
   placeholder,
-  onChange
+  onChange,
+  ...props
 }: InputProps) => {
   return (
     <input
       onChange={onChange}
       value={value}
       type={type}
+      name={name}
       placeholder={placeholder}
       css={css`
         box-sizing: border-box;
@@ -52,6 +56,7 @@ const Input = ({
         padding: 10px;
         outline: none;
       `}
+      {...props}
     />
   );
 };
