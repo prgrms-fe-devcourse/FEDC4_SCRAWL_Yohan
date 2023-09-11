@@ -1,4 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
 
@@ -8,6 +9,8 @@ import Input from "@components/atoms/Input";
 
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
+
+import { DOMAIN } from "@constants/api";
 
 type FormState = {
   [key: string]: string;
@@ -23,10 +26,15 @@ type UserFormProps = {
   handleGetAccessToken: (formState: FormState) => Promise<string>;
 };
 
-const UserForm = ({ formFilelds, handleGetAccessToken }: UserFormProps) => {
+const UserForm = ({
+  formFilelds,
+  handleGetAccessToken,
+  buttonText
+}: UserFormProps) => {
   const [form, setForm] = useState<FormState>({});
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const theme = useThemeStore((state) => state.theme);
+  const navigate = useNavigate();
 
   const handleUpdateForm: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
@@ -35,6 +43,7 @@ const UserForm = ({ formFilelds, handleGetAccessToken }: UserFormProps) => {
   const handleGetAuth = async (form: FormState) => {
     const token = await handleGetAccessToken(form);
     setAccessToken(token);
+    navigate(DOMAIN.HOME, { replace: true });
   };
 
   return (
@@ -45,6 +54,7 @@ const UserForm = ({ formFilelds, handleGetAccessToken }: UserFormProps) => {
         background: ${theme.BACKGROUND100};
         box-shadow: ${theme.SHADOW};
         width: 320px;
+        border-radius: 8px;
       `}>
       <Flex
         direction="column"
@@ -90,7 +100,7 @@ const UserForm = ({ formFilelds, handleGetAccessToken }: UserFormProps) => {
           height="35px"
           onClick={() => handleGetAuth(form)}
           color={theme.TEXT100}>
-          계정 생성하기
+          {buttonText}
         </Button>
       </Flex>
     </Flex>
