@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { useParams } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
@@ -47,9 +48,11 @@ const ChannelPage = () => {
       </Flex>
       <Flex gap={30} css={cardListStyle}>
         {articles?.map((article) => (
-          <ErrorBoundary fallback={null}>
-            <Card key={article._id} article={article} width={300} />
-          </ErrorBoundary>
+          <Fragment key={article._id}>
+            <ErrorBoundary fallback={null}>
+              <Card article={article} width={300} />
+            </ErrorBoundary>
+          </Fragment>
         ))}
       </Flex>
     </Flex>
