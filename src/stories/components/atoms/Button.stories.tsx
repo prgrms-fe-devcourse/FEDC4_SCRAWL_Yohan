@@ -1,3 +1,6 @@
+import { MouseEventHandler } from "react";
+
+import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
 
 import Button from "@components/atoms/Button";
@@ -11,7 +14,15 @@ const meta = {
 export default meta;
 
 export const Default: StoryObj<typeof meta> = {
-  render: (args) => <Button {...args}>{args.children}</Button>,
+  render: (args) => (
+    <Button
+      {...args}
+      css={css`
+        border: 10px solid lightgray;
+      `}>
+      {args.children}
+    </Button>
+  ),
   args: {
     width: "200px",
     height: "50px",
@@ -19,7 +30,9 @@ export const Default: StoryObj<typeof meta> = {
     background: "#007AFF",
     color: "#FFF",
     borderRadius: "8px",
-    children: <div>hi</div>,
-    onClick: (e) => console.log(e.currentTarget.value)
+    children: "hi",
+    onClick: (e): MouseEventHandler<HTMLButtonElement> => {
+      console.log(e.currentTarget.textContent);
+    }
   }
 };
