@@ -13,6 +13,7 @@ export const cardDescriptionStyle = css`
 
 export const titleStyle = css`
   ${getLineClampStyle(1)}
+  line-height: 20px;
   margin: 2px;
 `;
 
