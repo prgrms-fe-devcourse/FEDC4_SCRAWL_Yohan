@@ -1,30 +1,41 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 
 import { css } from "@emotion/react";
 
 import { createComment } from "@apis/comment/createComment";
+import { authUser } from "@apis/user/authUser";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
+import Icon from "@components/atoms/Icon";
 import Image from "@components/atoms/Image";
 import Input from "@components/atoms/Input";
 
-import { DARK_MODE_THEME, LIGHT_MODE_THEME } from "@constants/theme";
+import { useThemeStore } from "@stores/theme.store";
+
+import { AuthUserResponse } from "@type/apis/users/AuthUser";
+
+import { Logo } from "@assets/svg";
 
 type CommentFormProps = {
   width: string;
-  src: string;
-  themeType: "LIGHT" | "DARK";
   articleId: string;
 };
 
-const CommentForm = ({
-  width,
-  src,
-  themeType,
-  articleId
-}: CommentFormProps) => {
+const CommentForm = ({ width, articleId }: CommentFormProps) => {
   const [comment, setComment] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const theme = useThemeStore((state) => state.theme);
+
+  useEffect(() => {
+    (async () => {
+      const { image }: AuthUserResponse = await authUser();
+      console.log(await authUser());
+      if (image) {
+        setImageUrl(image);
+      }
+    })();
+  });
 
   const handleUpdateCommentText: ChangeEventHandler<HTMLInputElement> = (e) => {
     setComment(e.currentTarget.value);
@@ -39,22 +50,17 @@ const CommentForm = ({
 
   return (
     <Flex
-      justify={"center"}
-      align={"center"}
+      justify="center"
+      align="center"
       css={css`
         width: ${width};
         height: 144px;
         border-radius: 8px;
-        box-shadow: ${themeType === "LIGHT"
-          ? LIGHT_MODE_THEME.SHADOW
-          : DARK_MODE_THEME.SHADOW};
-        background: ${themeType === "LIGHT"
-          ? LIGHT_MODE_THEME.BACKGROUND100
-          : DARK_MODE_THEME.BACKGROUND100};
+        box-shadow: ${theme.SHADOW};
       `}>
       <Flex
-        justify={"center"}
-        align={"center"}
+        justify="center"
+        align="center"
         css={css`
           width: 95%;
           gap: 20px;
@@ -66,16 +72,20 @@ const CommentForm = ({
           css={css`
             height: 100%;
           `}>
-          <Image
-            src={src}
-            width={40}
-            height={40}
-            mode={"cover"}
-            css={css`
-              border-radius: 50%;
-            `}
-            alt={"이미지가 없습니다."}
-          />
+          {imageUrl === "" ? (
+            <Icon Svg={Logo} />
+          ) : (
+            <Image
+              src={imageUrl}
+              width={40}
+              height={40}
+              mode={"cover"}
+              css={css`
+                border-radius: 50%;
+              `}
+              alt={"이미지가 없습니다."}
+            />
+          )}
         </Flex>
         <Input
           onChange={handleUpdateCommentText}
@@ -83,21 +93,9 @@ const CommentForm = ({
           width={"75%"}
           height={"96px"}
           fontSize={"16px"}
-          background={
-            themeType === "LIGHT"
-              ? LIGHT_MODE_THEME.BACKGROUND100
-              : DARK_MODE_THEME.BACKGROUND100
-          }
-          color={
-            themeType === "LIGHT"
-              ? LIGHT_MODE_THEME.TEXT600
-              : DARK_MODE_THEME.TEXT600
-          }
-          border={`1px solid ${
-            themeType === "LIGHT"
-              ? LIGHT_MODE_THEME.BORDER100
-              : DARK_MODE_THEME.BORDER100
-          }`}
+          background={theme.BACKGROUND100}
+          color={theme.TEXT600}
+          border={`1px solid ${theme.BORDER100}`}
           borderRadius={"8px"}
           type={"text"}
         />
@@ -112,16 +110,8 @@ const CommentForm = ({
             width={"106px"}
             height={"48px"}
             fontSize={"16px"}
-            color={
-              themeType === "LIGHT"
-                ? LIGHT_MODE_THEME.TEXT100
-                : DARK_MODE_THEME.TEXT100
-            }
-            background={
-              themeType === "LIGHT"
-                ? LIGHT_MODE_THEME.PRIMARY
-                : DARK_MODE_THEME.PRIMARY
-            }
+            color={theme.TEXT100}
+            background={theme.PRIMARY}
             borderRadius={"8px"}>
             REPLY
           </Button>

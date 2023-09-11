@@ -14,8 +14,6 @@ export const Default: StoryObj<typeof meta> = {
   render: (args) => <CommentForm {...args} />,
   args: {
     width: "935px",
-    src: "https://picsum.photos/500",
-    themeType: "DARK",
     articleId: "64f57c520a678e0ff0ed0937"
   }
 };
