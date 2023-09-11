@@ -15,6 +15,7 @@ const ArticleWrite = () => {
   const [title, setTitle] = useState("");
   const [tag, setTag] = useState("");
   const [content, setContent] = useState("");
+  const width = "750px";
   useEffect(() => {
     console.log("title:", title);
     console.log("tag:", tag);
@@ -24,9 +25,9 @@ const ArticleWrite = () => {
     <>
       <Flex direction="column">
         <ChannelSelect />
-        <ArticleTitle stateChange={stateChange(setTitle)} />
-        <ArticleTag stateChange={stateChange(setTag)} />
-        <ArticleEditor stateChange={stateChange(setContent)} />
+        <ArticleTitle stateChange={stateChange(setTitle)} width={width} />
+        <ArticleTag stateChange={stateChange(setTag)} width={width} />
+        <ArticleEditor stateChange={stateChange(setContent)} width={width} />
       </Flex>
     </>
   );

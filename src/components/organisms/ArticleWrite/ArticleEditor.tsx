@@ -6,6 +6,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 interface ArticleEditorProps {
   stateChange: (value: string) => void;
+  width: string;
 }
 // const editorConfiguration = {
 //   toolbar: ["bold", "italic"]
@@ -13,7 +14,7 @@ interface ArticleEditorProps {
 class ArticleEditor extends React.Component<ArticleEditorProps> {
   render() {
     return (
-      <div>
+      <div style={{ width: this.props.width }}>
         <CKEditor
           config={{ language: "ko" }}
           editor={ClassicEditor}

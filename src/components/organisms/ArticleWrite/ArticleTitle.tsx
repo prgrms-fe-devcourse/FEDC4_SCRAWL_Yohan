@@ -4,8 +4,9 @@ import Input from "@components/atoms/Input";
 
 interface ArticleTagProps {
   stateChange: (value: string) => void;
+  width: string;
 }
-const ArticleTitle = ({ stateChange }: ArticleTagProps) => {
+const ArticleTitle = ({ stateChange, width }: ArticleTagProps) => {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const ArticleTitle = ({ stateChange }: ArticleTagProps) => {
       value={inputValue}
       placeholder="제목을 입력하세요"
       height="70px"
-      width="750px"
+      width={width}
       fontSize="35px"
       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
         setInputValue(e.target.value)
