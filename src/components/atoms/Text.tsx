@@ -1,15 +1,22 @@
+import { HTMLAttributes } from "react";
+
 import { css } from "@emotion/react";
 
-export type TextProps = {
-  children: React.ReactNode;
-  block?: boolean;
-  paragraph?: boolean;
-  size: number;
-  strong?: boolean;
-  underline?: boolean;
-  delete?: boolean;
-  color?: string;
-};
+import { Combine } from "@type/Combine";
+
+export type TextProps = Combine<
+  {
+    children: React.ReactNode;
+    block?: boolean;
+    paragraph?: boolean;
+    size: number;
+    strong?: boolean;
+    underline?: boolean;
+    delete?: boolean;
+    color?: string;
+  },
+  HTMLAttributes<HTMLElement>
+>;
 
 const Text = ({
   children,
