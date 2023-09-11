@@ -4,7 +4,7 @@ import { ButtonProps } from "@components/atoms/Button";
 import { IconProps } from "@components/atoms/Icon";
 import FloatingButton from "@components/molecules/FloatingButton";
 
-import { UpperBracket } from "@assets/svg";
+import { BracketUpper } from "@assets/svg";
 
 const meta = {
   title: "components/molecules/floatingButton",
@@ -27,14 +27,18 @@ export const Default: StoryObj<{
   buttonValue: ButtonProps;
 }> = {
   args: {
-    iconValue: { Svg: UpperBracket, size: 20, fill: "#8B8B8B" },
+    iconValue: { Svg: BracketUpper, size: 20, fill: "#8B8B8B" },
     buttonValue: {
       width: "50px",
       height: "50px",
       fontSize: "14px",
       background: "#cccccc",
       color: "#FFF",
-      borderRadius: "50px"
+      borderRadius: "50px",
+      children: "",
+      onClick: (e) => {
+        console.log(e.currentTarget.textContent);
+      }
     }
   },
 

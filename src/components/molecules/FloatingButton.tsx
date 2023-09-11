@@ -25,7 +25,9 @@ const FloatingButton = ({
     color = "#FFF",
     borderRadius = "50px"
   } = buttonValue;
-
+  function click() {
+    return;
+  }
   return (
     <Button
       width={width}
@@ -33,7 +35,8 @@ const FloatingButton = ({
       fontSize={fontSize}
       background={background}
       color={color}
-      borderRadius={borderRadius}>
+      borderRadius={borderRadius}
+      onClick={click}>
       <Flex justify="center">
         <Icon Svg={Svg} size={iconSize} fill={fill} {...iconProps} />
       </Flex>
