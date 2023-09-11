@@ -1,7 +1,7 @@
-import { ArticleContent } from "@type/models/Article";
+import { ArticleTitleData } from "@type/models/Article";
 
 export interface CreateArticleRequestBody {
-  title: ArticleContent;
+  title: ArticleTitleData;
   image?: BinaryData | null;
   channelId: string;
 }
