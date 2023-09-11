@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import LoginPage from "@pages/LoginPage";
+import SignUpPage from "@pages/SignUpPage";
 import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 
 import { PageTemplate } from "@components/templates/PageTemplate";
@@ -40,8 +42,8 @@ const AppRouter = () => {
           <Route path={PATH.SEARCH} element={<div>search</div>} />
           <Route path={PATH.USER(":userId")} element={<div>user info</div>} />
         </Route>
-        <Route path={PATH.SIGNUP} element={<div>signup</div>} />
-        <Route path={PATH.LOGIN} element={<div>login</div>} />
+        <Route path={PATH.SIGNUP} element={<SignUpPage />} />
+        <Route path={PATH.LOGIN} element={<LoginPage />} />
         <Route path={PATH.PASSWORD} element={<div>password</div>} />
         <Route path={PATH.ERROR} element={<div>404 error</div>} />
       </Routes>

@@ -1,6 +1,7 @@
 export const BASE_URL = "https://kdt.frontend.4th.programmers.co.kr:5003";
 
 export const DOMAIN = {
+  HOME: "/",
   CREATE_CHANNEL: "/channels/create",
   LOGIN: "/login",
   LOGOUT: "/logout",
