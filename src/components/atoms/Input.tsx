@@ -1,4 +1,4 @@
-import { ChangeEventHandler, HTMLAttributes } from "react";
+import { HTMLAttributes } from "react";
 
 import { css } from "@emotion/react";
 
@@ -17,7 +17,6 @@ export type InputProps = Combine<
     value: string;
     name?: string;
     placeholder?: string;
-    onChange: ChangeEventHandler<HTMLInputElement>;
   },
   HTMLAttributes<HTMLInputElement>
 >;
