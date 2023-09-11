@@ -1,15 +1,22 @@
+import { HTMLAttributes } from "react";
+
 import { css } from "@emotion/react";
 
-type TextProps = {
-  children: React.ReactNode;
-  block?: boolean;
-  paragraph?: boolean;
-  size: number;
-  strong?: boolean;
-  underline?: boolean;
-  delete?: boolean;
-  color?: string;
-};
+import { Combine } from "@type/Combine";
+
+export type TextProps = Combine<
+  {
+    children: React.ReactNode;
+    block?: boolean;
+    paragraph?: boolean;
+    size: number;
+    strong?: boolean;
+    underline?: boolean;
+    delete?: boolean;
+    color?: string;
+  },
+  HTMLAttributes<HTMLElement>
+>;
 
 const Text = ({
   children,
@@ -25,7 +32,6 @@ const Text = ({
   const Tag = block ? "div" : paragraph ? "p" : "span";
   if (del) {
     children = <del>{children}</del>;
-    console.log(children);
   }
 
   return (
