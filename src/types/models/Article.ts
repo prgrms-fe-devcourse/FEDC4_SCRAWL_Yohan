@@ -9,13 +9,27 @@ export interface ArticleContent {
   tags: string[];
 }
 
+export type ArticleTitleData = string & { label: "articleTitle" };
+
+export function articleContentToArticleTitleData(
+  articleContent: ArticleContent
+): ArticleTitleData {
+  return JSON.stringify(articleContent) as ArticleTitleData;
+}
+
+export function articleTitleDataToArticleContent(
+  articletitleData: ArticleTitleData
+): ArticleContent {
+  return JSON.parse(articletitleData);
+}
+
 export interface Article {
   likes: Like[];
   comments: Comment[];
   _id: string;
   image?: string;
   imagePublicId?: string;
-  title: ArticleContent;
+  title: ArticleTitleData;
   channel: Channel;
   author: User;
   createdAt: string;

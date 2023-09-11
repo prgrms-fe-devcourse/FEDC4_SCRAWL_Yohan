@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import LoginPage from "@pages/LoginPage";
 import SignUpPage from "@pages/SignUpPage";
+import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 
 import { PageTemplate } from "@components/templates/PageTemplate";
 
@@ -15,7 +17,11 @@ const AppRouter = () => {
           <Route path={PATH.HOME} element={<div>home</div>} />
           <Route
             path={PATH.CHANNEL(":channelId")}
-            element={<div>channel</div>}
+            element={
+              <Suspense fallback={<ChannelPageSkeleton />}>
+                <ChannelPage />
+              </Suspense>
+            }
           />
           <Route
             path={PATH.ARTICLE(":articleId")}

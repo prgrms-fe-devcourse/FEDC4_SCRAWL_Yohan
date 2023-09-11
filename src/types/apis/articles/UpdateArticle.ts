@@ -1,8 +1,8 @@
-import { ArticleContent } from "@type/models/Article";
+import { ArticleTitleData } from "@type/models/Article";
 
 export interface UpdateArticleRequestBody {
   postId: string;
-  title: ArticleContent;
+  title: ArticleTitleData;
   image?: BinaryData | null;
   imageToDeletePublicId?: string;
   channelId: string;
