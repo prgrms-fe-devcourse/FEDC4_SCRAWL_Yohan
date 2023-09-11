@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import ArticleWrite from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
 import { PATH } from "@constants/index";
@@ -20,7 +21,7 @@ const AppRouter = () => {
           />
           <Route
             path={PATH.EDIT_ARTICLE(":articleId")}
-            element={<div>article edit</div>}
+            element={<ArticleWrite />}
           />
           <Route
             path={PATH.QUESTION(":questionId")}
