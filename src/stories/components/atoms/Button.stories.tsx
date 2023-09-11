@@ -1,5 +1,3 @@
-import { MouseEventHandler } from "react";
-
 import { css } from "@emotion/react";
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -31,7 +29,7 @@ export const Default: StoryObj<typeof meta> = {
     color: "#FFF",
     borderRadius: "8px",
     children: "hi",
-    onClick: (e): MouseEventHandler<HTMLButtonElement> => {
+    onClick: (e) => {
       console.log(e.currentTarget.textContent);
     }
   }
