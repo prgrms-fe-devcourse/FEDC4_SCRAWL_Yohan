@@ -1,30 +1,39 @@
 import React from "react";
 
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import "@ckeditor/ckeditor5-build-classic/build/translations/ko";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
-class ArticleEditor extends React.Component {
+interface ArticleEditorProps {
+  stateChange: (value: string) => void;
+}
+// const editorConfiguration = {
+//   toolbar: ["bold", "italic"]
+// };
+class ArticleEditor extends React.Component<ArticleEditorProps> {
   render() {
     return (
-      <div className="App">
-        <h2>Using CKEditor&nbsp;5 build in React</h2>
+      <div>
         <CKEditor
+          config={{ language: "ko" }}
           editor={ClassicEditor}
-          data="<p>Hello from CKEditor&nbsp;5!</p>"
-          onReady={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor);
-          }}
+          // config={editorConfiguration}
+          data=""
+          // onReady={(editor) => {
+          //   // You can store the "editor" and use when it is needed.
+          //   console.log("Editor is ready to use!", editor);
+          // }}
           onChange={(event, editor) => {
             const data = editor.getData();
             console.log({ event, editor, data });
+            this.props.stateChange(data);
           }}
-          onBlur={(event, editor) => {
-            console.log("Blur.", editor, event);
-          }}
-          onFocus={(event, editor) => {
-            console.log("Focus.", editor, event);
-          }}
+          // onBlur={(event, editor) => {
+          //   console.log("Blur.", editor, event);
+          // }}
+          // onFocus={(event, editor) => {
+          //   console.log("Focus.", editor, event);
+          // }}
         />
       </div>
     );
