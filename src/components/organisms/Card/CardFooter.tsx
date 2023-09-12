@@ -5,6 +5,7 @@ import { css } from "@emotion/react";
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
+import { Tags } from "@components/organisms/Tags";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -15,6 +16,8 @@ import {
 
 import { PATH } from "@constants/index";
 
+import { htmlToPlainText } from "@utils/htmlToPlainText";
+
 import { Like, Message } from "@assets/svg";
 
 import {
@@ -23,7 +26,6 @@ import {
   contentStyle,
   titleStyle
 } from "./CardFooter.styles";
-import Tags from "./Tags";
 
 type CardFooterProps = {
   article: Article;
@@ -33,9 +35,11 @@ const CardFooter = ({ article }: CardFooterProps) => {
   const { theme } = useThemeStore();
   const navigate = useNavigate();
 
-  const { title, content, tags } = articleTitleDataToArticleContent(
-    article.title
-  );
+  const {
+    title,
+    content: html,
+    tags
+  } = articleTitleDataToArticleContent(article.title);
 
   return (
     <Flex direction="column" gap={8} css={cardFoorterOuterStyle}>
@@ -48,7 +52,7 @@ const CardFooter = ({ article }: CardFooterProps) => {
           {title}
         </Text>
         <Text size={14} css={contentStyle}>
-          {content}
+          <div dangerouslySetInnerHTML={{ __html: htmlToPlainText(html) }} />
         </Text>
       </Flex>
 
