@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 import { Global } from "@emotion/react";
 
+import Login from "@components/Login";
+
 import { getglobalStyles } from "@styles/globalStyles";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -19,7 +21,9 @@ function App() {
     <>
       <Global styles={getglobalStyles(theme)} />
       <ErrorBoundary fallback={<Link to={PATH.HOME} />}>
-        <AppRouter />
+        <Login>
+          <AppRouter />
+        </Login>
       </ErrorBoundary>
     </>
   );
