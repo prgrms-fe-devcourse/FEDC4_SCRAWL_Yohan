@@ -1,12 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { css } from "@emotion/react";
-import DOMpurify from "dompurify";
+import DOMPurify from "dompurify";
 
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
-import Tag from "@components/molecules/Tag";
+import { Tags } from "@components/organisms/Tags";
 
 import { useArticleQuery } from "@hooks/api/useArticleQuery";
 
@@ -14,11 +13,25 @@ import { useThemeStore } from "@stores/theme.store";
 
 import { articleTitleDataToArticleContent } from "@type/models/Article";
 
+import { PATH } from "@constants/index";
+
 import { Like } from "@assets/svg";
+
+import {
+  articleOuterStyle,
+  getArticleContetnStyle,
+  getLikeIconTextStyle,
+  getTextButtonStyle,
+  headerLeftItemStyle,
+  headerRightItemStyle,
+  headerStyle,
+  tagsStyle
+} from "./Article.styles";
 
 const Article = () => {
   const theme = useThemeStore((state) => state.theme);
   const { articleId } = useParams();
+  const navigate = useNavigate();
 
   if (!articleId) {
     throw new Error("articleId is undefined");
@@ -32,82 +45,47 @@ const Article = () => {
     tags
   } = articleTitleDataToArticleContent(article.title);
 
-  const sanitizedHTML = DOMpurify.sanitize(html);
+  const sanitizedHTML = DOMPurify.sanitize(html);
 
   return (
-    <Flex
-      direction="column"
-      gap={20}
-      css={css`
-        min-width: 500px;
-        max-width: 1000px;
-        margin: 20px 20px 0 0;
-      `}>
-      <Flex
-        justify="space-between"
-        css={css`
-          width: 100%;
-        `}>
-        <Flex
-          direction="column"
-          gap={20}
-          css={css`
-            width: calc(100% - 100px);
-          `}>
+    <Flex direction="column" gap={20} css={articleOuterStyle}>
+      <Flex justify="space-between" css={headerStyle}>
+        <Flex direction="column" gap={20} css={headerLeftItemStyle}>
           <Text size={32} strong={true}>
             {title}
           </Text>
-          <Flex
-            gap={5}
-            css={css`
-              flex-wrap: wrap;
-            `}>
-            {tags.map((tag, i) => (
-              <Tag key={`${tag}${i}`} size={16} name={tag} />
-            ))}
-          </Flex>
+          <Tags gap={10} size={16} tags={tags} css={tagsStyle} />
         </Flex>
         <Flex
           direction="column"
           align="end"
           gap={20}
-          css={css`
-            white-space: nowrap;
-          `}>
+          css={headerRightItemStyle}>
           <Flex gap={10}>
             <Text
               size={16}
-              css={css`
-                cursor: pointer;
-              `}>
+              css={getTextButtonStyle(theme)}
+              onClick={() => confirm("TODO 삭제 api 연결")}>
               삭제
             </Text>
             <Text
               size={16}
-              css={css`
-                cursor: pointer;
-              `}>
+              css={getTextButtonStyle(theme)}
+              onClick={() => navigate(PATH.EDIT_ARTICLE(article._id))}>
               수정
             </Text>
           </Flex>
           <IconText
             iconValue={{ Svg: Like }}
             textValue={{ size: 12, children: "110" }}
-            css={css`
-              gap: 5px;
-            `}
+            css={getLikeIconTextStyle(theme)}
+            onClick={() => confirm("TODO 좋아요 api 연결")}
           />
         </Flex>
       </Flex>
       <div
         dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
-        css={css`
-          min-height: 500px;
-          border: 1px solid var(--border-color);
-          border-radius: 16px;
-          box-shadow: ${theme.SHADOW};
-          padding: 10px;
-        `}
+        css={getArticleContetnStyle(theme)}
       />
       <div>TODO: 댓글 리스트</div>
       <div>TODO: 댓글폼</div>
