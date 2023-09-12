@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { css } from "@emotion/react";
 
@@ -6,7 +6,11 @@ import Button from "@components/atoms/Button";
 
 import { useThemeStore } from "@stores/theme.store";
 
-const ThemeToggle = () => {
+type themeToggleProps = {
+  width: string;
+  height: string;
+};
+const ThemeToggle = ({ width, height }: themeToggleProps) => {
   const { theme, toggleTheme } = useThemeStore();
   const [checked, setIsChecked] = useState(theme.type === "DARK");
 
@@ -42,9 +46,6 @@ const ThemeToggle = () => {
     }
   `;
 
-  useEffect(() => {
-    console.log(checked);
-  });
   return (
     <>
       <label css={ToggleContainer} onClick={handleChange}>
@@ -56,8 +57,8 @@ const ThemeToggle = () => {
           checked={checked}
         />
         <Button
-          width="200px"
-          height="40px"
+          width={width}
+          height={height}
           borderRadius="8px"
           background={background}
           children=""
