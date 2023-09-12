@@ -33,6 +33,7 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
         height: 30px;
         border-radius: 6px;
         background-color: ${theme.BACKGROUND100};
+        transition: left 0.2s ease-out;
       }
     }
   `;
