@@ -177,37 +177,46 @@ const Sidebar = () => {
             onClick={() => navigatePage("TEST1")}
           />
         </div>
-        <Flex align="center" direction="column">
-          <div
-            css={css`
-              position: absolute;
-              bottom: 15px;
-              margin-left: 36px;
-            `}>
-            {useLoggedIn().isLoggedIn ? (
-              <Button
-                width={buttonWidth}
-                height={buttonHeight}
-                css={css`
-                  margin: 10px 0px;
-                `}
-                onClick={() => navigatePage("LOGOUT")}>
-                로그아웃
-              </Button>
-            ) : (
-              <Button
-                width={buttonWidth}
-                height={buttonHeight}
-                css={css`
-                  margin: 10px 0px;
-                `}
-                onClick={() => navigatePage("LOGIN")}>
-                로그인
-              </Button>
-            )}
-            <ThemeToggle width={buttonWidth} height={buttonHeight} />
-          </div>
-        </Flex>
+        <div
+          css={css`
+            background-color: ${theme.BACKGROUND200};
+            margin: -10px 0px 0px -10px;
+            padding: 25px 0px;
+            position: absolute;
+            bottom: 0px;
+            border-radius: 0px 0px ${borderRadius} ${borderRadius};
+            border-top: 1px solid var(--border-color);
+          `}>
+          <Flex align="center" direction="column">
+            <div
+              css={css`
+                margin-left: 36px;
+              `}>
+              {useLoggedIn().isLoggedIn ? (
+                <Button
+                  width={buttonWidth}
+                  height={buttonHeight}
+                  css={css`
+                    margin: 10px 0px;
+                  `}
+                  onClick={() => navigatePage("LOGOUT")}>
+                  로그아웃
+                </Button>
+              ) : (
+                <Button
+                  width={buttonWidth}
+                  height={buttonHeight}
+                  css={css`
+                    margin: 10px 0px;
+                  `}
+                  onClick={() => navigatePage("LOGIN")}>
+                  로그인
+                </Button>
+              )}
+              <ThemeToggle width={buttonWidth} height={buttonHeight} />
+            </div>
+          </Flex>
+        </div>
       </nav>
     </Flex>
   );
