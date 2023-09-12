@@ -5,7 +5,7 @@ import { ACCESS_TOKEN_KEY } from "@constants/api";
 
 interface TokenState {
   accessToken: string | null;
-  setAccessToken: (accessToken: string) => void;
+  setAccessToken: (accessToken: string | null) => void;
 }
 
 export const useTokenStore = create(
