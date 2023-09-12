@@ -3,8 +3,8 @@ import { Like } from "./Like";
 import { Message } from "./Message";
 
 export interface User {
-  coverImage: string;
-  image: string;
+  coverImage?: string;
+  image?: string;
   role: string;
   emailVerified: boolean;
   banned: boolean;

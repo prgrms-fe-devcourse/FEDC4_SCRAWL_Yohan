@@ -6,7 +6,10 @@ import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Icon from "@components/atoms/Icon";
 import Text from "@components/atoms/Text";
-import { pageTemplateWrapperStyle } from "@components/templates/PageTemplate/PageTemplate.styles";
+import {
+  pageInnerWrapperStyle,
+  pageTemplateWrapperStyle
+} from "@components/templates/PageTemplate/PageTemplate.styles";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -21,7 +24,7 @@ const PageTemplate = () => {
       <Flex
         direction="column"
         css={css`
-          position: sticky;
+          position: fixed;
           height: 100vh;
           top: 0;
           left: 0;
@@ -30,7 +33,7 @@ const PageTemplate = () => {
           css={css`
             margin: 20px;
             padding: 10px;
-            width: 300px;
+            width: 256px;
             flex-grow: 1;
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -45,7 +48,9 @@ const PageTemplate = () => {
           <Button onClick={toggleTheme}>toggle theme</Button>
         </nav>
       </Flex>
-      <Outlet />
+      <div css={pageInnerWrapperStyle}>
+        <Outlet />
+      </div>
     </Flex>
   );
 };

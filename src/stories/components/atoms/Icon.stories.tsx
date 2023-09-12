@@ -2,7 +2,19 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import Icon from "@components/atoms/Icon";
 
-import { Logo } from "@assets/svg";
+import {
+  Alert,
+  BracketLower,
+  BracketUpper,
+  Folder,
+  Home,
+  Like,
+  Logo,
+  Message,
+  My,
+  Question,
+  Search
+} from "@assets/svg";
 
 const meta = {
   title: "components/atoms/Icon",
@@ -17,5 +29,19 @@ const meta = {
 export default meta;
 
 export const Default: StoryObj<typeof Icon> = {
-  render: (args) => <Icon {...args} Svg={Logo} />
+  render: (args) => (
+    <>
+      <Icon {...args} Svg={Alert} />
+      <Icon {...args} Svg={BracketLower} />
+      <Icon {...args} Svg={BracketUpper} />
+      <Icon {...args} Svg={Folder} />
+      <Icon {...args} Svg={Home} />
+      <Icon {...args} Svg={Like} />
+      <Icon {...args} Svg={Logo} />
+      <Icon {...args} Svg={Message} />
+      <Icon {...args} Svg={My} />
+      <Icon {...args} Svg={Question} />
+      <Icon {...args} Svg={Search} />
+    </>
+  )
 };
