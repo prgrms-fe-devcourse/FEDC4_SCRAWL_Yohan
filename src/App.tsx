@@ -1,5 +1,7 @@
 import { Global } from "@emotion/react";
 
+import Login from "@components/Login";
+
 import { getglobalStyles } from "@styles/globalStyles";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -12,7 +14,9 @@ function App() {
   return (
     <>
       <Global styles={getglobalStyles(theme)} />
-      <AppRouter />
+      <Login>
+        <AppRouter />
+      </Login>
     </>
   );
 }
