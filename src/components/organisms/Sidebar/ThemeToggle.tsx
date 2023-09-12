@@ -69,9 +69,9 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
           background={background}
           children=""
           css={css`
-          box-sizing: border-box;
-          padding="2px"
-        `}
+            box-sizing: border-box;
+            padding: 2px;
+          `}
           className="ToggleButton"
         />
         <Flex
