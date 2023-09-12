@@ -77,7 +77,7 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
         <Flex
           css={css`
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             z-index: 1;
           `}>
           <IconText
