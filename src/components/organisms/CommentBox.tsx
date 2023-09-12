@@ -33,7 +33,9 @@ const QuestionBox = ({
         box-shadow: ${theme.SHADOW};
         background: ${theme.BACKGROUND100};
         border-radius: 0.4em;
+        box-sizing: border-box;
         padding: 20px;
+        border: 1px solid ${theme.BORDER100};
       `}>
       <Flex
         direction="column"
