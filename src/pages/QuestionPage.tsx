@@ -5,6 +5,7 @@ import { css } from "@emotion/react";
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
+import CommentForm from "@components/molecules/CommentForm";
 import IconText from "@components/molecules/IconText";
 import CommentBox from "@components/organisms/CommentBox";
 
@@ -79,8 +80,9 @@ const QuestionPage = () => {
             margin-bottom: 20px;
           `}>
           <Flex>
-            {tags.map((item) => (
+            {tags.map((item, index) => (
               <Text
+                key={index}
                 children={`#${item.replace(/_/g, "")}`}
                 size={16}
                 color={theme.PRIMARY}
@@ -120,6 +122,7 @@ const QuestionPage = () => {
           />
         ))}
       </Flex>
+      <CommentForm width="100%" articleId={questionId}></CommentForm>
     </Flex>
   );
 };
