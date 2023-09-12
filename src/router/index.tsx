@@ -6,6 +6,7 @@ import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
 import SignUpPage from "@pages/SignUpPage";
 
+import ArticleWrite from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
 import { PATH } from "@constants/index";
@@ -30,7 +31,7 @@ const AppRouter = () => {
           />
           <Route
             path={PATH.EDIT_ARTICLE(":articleId")}
-            element={<div>article edit</div>}
+            element={<ArticleWrite />}
           />
           <Route
             path={PATH.QUESTION(":questionId")}

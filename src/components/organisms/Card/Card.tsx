@@ -13,7 +13,7 @@ import { Article } from "@type/models/Article";
 import { MIN_CARD_WIDTH } from "@constants/card";
 import { PATH } from "@constants/index";
 
-import mySvg from "@assets/svg/my.svg";
+import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import { cardImgStyle, getCardOuterStyle, userInfoStyle } from "./Card.styles";
 import CardFooter from "./CardFooter";
@@ -33,7 +33,7 @@ const Card = ({ article, width: w }: CardProps) => {
     <Flex css={getCardOuterStyle(theme, width)} direction="column" gap={4}>
       <UserInfo
         imgWidth={24}
-        imageSrc={article.author.image || mySvg}
+        imageSrc={article.author.image || placeholderUser}
         username={article.author.fullName}
         fontSize={14}
         css={userInfoStyle}
