@@ -70,7 +70,6 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
           children=""
           css={css`
             box-sizing: border-box;
-            padding: 2px;
           `}
           className="ToggleButton"
         />
