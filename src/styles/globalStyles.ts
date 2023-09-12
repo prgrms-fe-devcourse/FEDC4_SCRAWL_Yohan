@@ -113,9 +113,6 @@ export const getglobalStyles = (theme: Theme) => {
       --border-color: ${theme.BORDER100};
       background-color: ${theme.BACKGROUND100};
       box-sizing: border-box;
-      body {
-        line-height: 1;
-      }
     }
     ol,
     ul {

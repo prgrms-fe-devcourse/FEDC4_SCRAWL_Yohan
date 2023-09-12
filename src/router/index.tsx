@@ -7,6 +7,7 @@ import LoginPage from "@pages/LoginPage";
 import QuestionPage from "@pages/QuestionPage";
 import SignUpPage from "@pages/SignUpPage";
 
+import { Article, ArticleSkeleton } from "@components/organisms/Article";
 import ArticleWrite from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
@@ -28,7 +29,11 @@ const AppRouter = () => {
           />
           <Route
             path={PATH.ARTICLE(":articleId")}
-            element={<div>article</div>}
+            element={
+              <Suspense fallback={<ArticleSkeleton />}>
+                <Article />
+              </Suspense>
+            }
           />
           <Route
             path={PATH.EDIT_ARTICLE(":articleId")}

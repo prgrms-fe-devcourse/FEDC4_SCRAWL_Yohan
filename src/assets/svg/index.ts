@@ -6,9 +6,11 @@ import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Like } from "./like.svg";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as Message } from "./message.svg";
+import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as My } from "./my.svg";
 import { ReactComponent as Question } from "./question.svg";
 import { ReactComponent as Search } from "./search.svg";
+import { ReactComponent as Sun } from "./sun.svg";
 
 export {
   Logo,
@@ -21,6 +23,8 @@ export {
   Question,
   Search,
   BracketUpper,
-  BracketLower
+  BracketLower,
+  Sun,
+  Moon
 };
 export type SVGType = typeof Alert;
