@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import ArticleWrite from "@components/organisms/ArticleWrite";
 import LoginPage from "@pages/LoginPage";
 import SignUpPage from "@pages/SignUpPage";
 import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
@@ -29,7 +30,7 @@ const AppRouter = () => {
           />
           <Route
             path={PATH.EDIT_ARTICLE(":articleId")}
-            element={<div>article edit</div>}
+            element={<ArticleWrite />}
           />
           <Route
             path={PATH.QUESTION(":questionId")}
