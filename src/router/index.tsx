@@ -6,7 +6,7 @@ import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
 import SignUpPage from "@pages/SignUpPage";
 
-import Article from "@components/organisms/Article/Article";
+import { Article, ArticleSkeleton } from "@components/organisms/Article";
 import ArticleWrite from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
@@ -26,7 +26,14 @@ const AppRouter = () => {
               </Suspense>
             }
           />
-          <Route path={PATH.ARTICLE(":articleId")} element={<Article />} />
+          <Route
+            path={PATH.ARTICLE(":articleId")}
+            element={
+              <Suspense fallback={<ArticleSkeleton />}>
+                <Article />
+              </Suspense>
+            }
+          />
           <Route
             path={PATH.EDIT_ARTICLE(":articleId")}
             element={<ArticleWrite />}
