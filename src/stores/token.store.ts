@@ -4,14 +4,14 @@ import { persist } from "zustand/middleware";
 import { ACCESS_TOKEN_KEY } from "@constants/api";
 
 interface TokenState {
-  accessToken: string;
-  setAccessToken: (accessToken: string) => void;
+  accessToken: string | null;
+  setAccessToken: (accessToken: string | null) => void;
 }
 
 export const useTokenStore = create(
   persist<TokenState, [], [], TokenState>(
     (set) => ({
-      accessToken: "",
+      accessToken: null,
       setAccessToken: (accessToken) => set({ accessToken })
     }),
     {

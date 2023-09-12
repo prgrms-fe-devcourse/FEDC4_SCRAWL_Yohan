@@ -23,8 +23,8 @@ const ChannelPageSkeleton = () => {
       <Flex gap={30} css={cardListStyle}>
         {Array(20)
           .fill(null)
-          .map(() => (
-            <CardSkeleton width={300} />
+          .map((_, i) => (
+            <CardSkeleton key={i} width={300} />
           ))}
       </Flex>
     </Flex>

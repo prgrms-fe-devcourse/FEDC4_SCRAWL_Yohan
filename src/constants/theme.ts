@@ -36,3 +36,5 @@ export const DARK_MODE_THEME: Theme = {
   SHADOW: "0px 0px 15px 0px rgba(0, 0, 0, 0.1)",
   PRIMARY: "#007AFF"
 };
+
+export const THEME_KEY = "THEME";

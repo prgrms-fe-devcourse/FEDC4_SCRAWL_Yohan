@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import ArticleWrite from "@components/organisms/ArticleWrite";
+import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
+import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
 import SignUpPage from "@pages/SignUpPage";
-import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 
+import ArticleWrite from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
 import { PATH } from "@constants/index";
@@ -15,7 +16,7 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="" element={<PageTemplate />}>
-          <Route path={PATH.HOME} element={<div>home</div>} />
+          <Route path={PATH.HOME} element={<HomePage />} />
           <Route
             path={PATH.CHANNEL(":channelId")}
             element={
