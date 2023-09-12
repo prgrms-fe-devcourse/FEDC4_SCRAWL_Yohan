@@ -1,20 +1,20 @@
 import { ChangeEventHandler, useState } from "react";
 
 import { css } from "@emotion/react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { createComment } from "@apis/comment/createComment";
-import { authUser } from "@apis/user/authUser";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
-import Icon from "@components/atoms/Icon";
 import Image from "@components/atoms/Image";
 import Input from "@components/atoms/Input";
 
+import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
+
 import { useThemeStore } from "@stores/theme.store";
 
-import { Logo } from "@assets/svg";
+import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 type CommentFormProps = {
   width: string;
@@ -25,10 +25,7 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
   const [comment, setComment] = useState("");
   const theme = useThemeStore((state) => state.theme);
   const mutation = useMutation({ mutationFn: createComment });
-  const { isError, data } = useQuery({
-    queryKey: ["user"],
-    queryFn: authUser
-  });
+  const { data } = useUserByTokenQuery();
 
   const handleUpdateCommentText: ChangeEventHandler<HTMLInputElement> = (e) => {
     setComment(e.currentTarget.value);
@@ -47,6 +44,7 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
         height: 144px;
         border-radius: 8px;
         box-shadow: ${theme.SHADOW};
+        background: ${theme.BACKGROUND100};
       `}>
       <Flex
         justify="center"
@@ -62,20 +60,16 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
           css={css`
             height: 100%;
           `}>
-          {isError || !data?.image ? (
-            <Icon Svg={Logo} />
-          ) : (
-            <Image
-              src={data.image}
-              width={40}
-              height={40}
-              mode={"cover"}
-              css={css`
-                border-radius: 50%;
-              `}
-              alt={"이미지가 없습니다."}
-            />
-          )}
+          <Image
+            src={(data && data?.image) || placeholderUser}
+            width={40}
+            height={40}
+            mode={"cover"}
+            css={css`
+              border-radius: 50%;
+            `}
+            alt={"이미지가 없습니다."}
+          />
         </Flex>
         <Input
           onChange={handleUpdateCommentText}
