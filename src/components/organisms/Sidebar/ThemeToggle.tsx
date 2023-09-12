@@ -3,8 +3,12 @@ import { useState } from "react";
 import { css } from "@emotion/react";
 
 import Button from "@components/atoms/Button";
+import Flex from "@components/atoms/Flex";
+import IconText from "@components/molecules/IconText";
 
 import { useThemeStore } from "@stores/theme.store";
+
+import { Moon, Sun } from "@assets/svg";
 
 type themeToggleProps = {
   width: string;
@@ -21,6 +25,7 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
   };
   const ToggleContainer = css`
     display: inline-block;
+    position: relative;
     cursor: pointer;
     user-select: none;
     .ToggleButton {
@@ -32,7 +37,7 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
         width: 90px;
         height: 30px;
         border-radius: 6px;
-        background-color: ${theme.BACKGROUND100};
+        background-color: ${theme.BACKGROUND200};
         transition: left 0.2s ease-out;
       }
     }
@@ -40,7 +45,7 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
   const ToggleInput = css`
     display: none;
     &:checked + .ToggleButton {
-      background: ${theme.TEXT300};
+      background: ${theme.BACKGROUND100};
     }
     &:checked + .ToggleButton:after {
       left: calc(100% - 90px);
@@ -49,7 +54,7 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
 
   return (
     <>
-      <label css={ToggleContainer} onClick={handleChange}>
+      <div css={ToggleContainer} onClick={handleChange}>
         <input
           type="checkbox"
           css={ToggleInput}
@@ -69,7 +74,38 @@ const ThemeToggle = ({ width, height }: themeToggleProps) => {
         `}
           className="ToggleButton"
         />
-      </label>
+        <Flex
+          css={css`
+            position: absolute;
+            bottom: -10px;
+            z-index: 1;
+          `}>
+          <IconText
+            iconValue={{ Svg: Sun, size: 12, fill: theme.TEXT100 }}
+            textValue={{
+              children: "Light",
+              size: 12,
+              color: theme.TEXT300
+            }}
+            css={css`
+              margin: 25px;
+              gap: 10px;
+            `}
+          />
+          <IconText
+            iconValue={{ Svg: Moon, size: 12, fill: theme.TEXT100 }}
+            textValue={{
+              children: "Dark",
+              size: 12,
+              color: theme.TEXT300
+            }}
+            css={css`
+              margin: 25px;
+              gap: 10px;
+            `}
+          />
+        </Flex>
+      </div>
     </>
   );
 };
