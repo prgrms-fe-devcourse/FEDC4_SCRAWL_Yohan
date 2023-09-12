@@ -1,6 +1,7 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 
 import { css } from "@emotion/react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { createComment } from "@apis/comment/createComment";
 import { authUser } from "@apis/user/authUser";
@@ -13,8 +14,6 @@ import Input from "@components/atoms/Input";
 
 import { useThemeStore } from "@stores/theme.store";
 
-import { AuthUserResponse } from "@type/apis/users/AuthUser";
-
 import { Logo } from "@assets/svg";
 
 type CommentFormProps = {
@@ -24,27 +23,18 @@ type CommentFormProps = {
 
 const CommentForm = ({ width, articleId }: CommentFormProps) => {
   const [comment, setComment] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
   const theme = useThemeStore((state) => state.theme);
-
-  useEffect(() => {
-    (async () => {
-      const { image }: AuthUserResponse = await authUser();
-      console.log(await authUser());
-      if (image) {
-        setImageUrl(image);
-      }
-    })();
+  const mutation = useMutation({ mutationFn: createComment });
+  const { isError, data } = useQuery({
+    queryKey: ["user"],
+    queryFn: authUser
   });
 
   const handleUpdateCommentText: ChangeEventHandler<HTMLInputElement> = (e) => {
     setComment(e.currentTarget.value);
   };
-  const handleSubmitComment = async () => {
-    await createComment({
-      comment,
-      postId: articleId
-    });
+  const handleSubmitComment = () => {
+    mutation.mutate({ comment, postId: articleId });
     setComment("");
   };
 
@@ -72,11 +62,11 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
           css={css`
             height: 100%;
           `}>
-          {imageUrl === "" ? (
+          {isError || !data?.image ? (
             <Icon Svg={Logo} />
           ) : (
             <Image
-              src={imageUrl}
+              src={data.image}
               width={40}
               height={40}
               mode={"cover"}
