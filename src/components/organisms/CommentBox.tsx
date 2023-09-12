@@ -6,7 +6,7 @@ import UserInfo from "@components/molecules/UserInfo";
 
 import { useThemeStore } from "@stores/theme.store";
 
-import like from "@assets/svg/like.svg";
+import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 type QuestionBoxProps = {
   imageSrc: string | undefined;
@@ -42,17 +42,19 @@ const QuestionBox = ({
           gap: 15px;
         `}>
         <UserInfo
-          imageSrc={imageSrc || like}
+          imageSrc={imageSrc || placeholderUser}
           imgWidth={40}
           username={questionAuthorName}
           fontSize={16}
           css={css`
             font-weight: 600;
+            color: ${theme.TEXT600};
           `}
         />
         <Flex
           css={css`
             font-size: 14px;
+            color: ${theme.TEXT600};
           `}>
           <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></div>
         </Flex>
