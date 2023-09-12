@@ -1,4 +1,5 @@
 import { Channel } from "./Channel";
+import { Comment } from "./Comment";
 import { Like } from "./Like";
 import { User } from "./User";
 
