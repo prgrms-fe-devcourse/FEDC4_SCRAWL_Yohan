@@ -196,8 +196,11 @@ const Sidebar = () => {
                 <Button
                   width={buttonWidth}
                   height={buttonHeight}
+                  background={theme.BACKGROUND200}
+                  color={theme.TEXT300}
                   css={css`
                     margin: 10px 0px;
+                    border: 1px solid var(--border-color);
                   `}
                   onClick={() => navigatePage("LOGOUT")}>
                   로그아웃
