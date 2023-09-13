@@ -34,6 +34,7 @@ const AppRouter = () => {
               </Suspense>
             }
           />
+          <Route path={PATH.CREATE_ARTICLE} element={<ArticleWrite />} />
           <Route
             path={PATH.EDIT_ARTICLE(":articleId")}
             element={<ArticleWrite />}
