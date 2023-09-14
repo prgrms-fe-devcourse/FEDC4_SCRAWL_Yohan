@@ -11,6 +11,7 @@ export const useArticlesByChannelIdQuery = (channelId: string) => {
     {
       getNextPageParam: (lastPage, allPages) =>
         lastPage.length === pageOffset ? allPages.length + 1 : undefined,
+      staleTime: 10000,
       suspense: true,
       useErrorBoundary: true
     }
