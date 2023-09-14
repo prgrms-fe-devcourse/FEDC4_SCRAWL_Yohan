@@ -14,10 +14,10 @@ export const DOMAIN = {
   UPDATE_PASSWORD: "/settings/update-password",
   GET_CHANNELS: "/channels",
   GET_CHANNEL: (channelName: string) => `/channel/${channelName}`,
-  GET_ARTICLE: {
+  GET_ARTICLE: (articleId: string) => `/posts/${articleId}`,
+  GET_ARTICLES: {
     BY_CHANNEL_ID: (channelId: string) => `/posts/channel/${channelId}`,
-    BY_USER_ID: (userId: string) => `/posts/author/${userId}`,
-    BY_ARTICLE_ID: (articleId: string) => `/posts/${articleId}`
+    BY_USER_ID: (userId: string) => `/posts/author/${userId}`
   },
   CREATE_ARTICLE: "/posts/create",
   UPDATE_ARTICLE: "/posts/update",
@@ -25,7 +25,7 @@ export const DOMAIN = {
   CREATE_LIKE: "/likes/create",
   DELETE_LIKE: "/likes/delete",
   CREATE_COMMENT: "/comments/create",
-  DELETE_COMMENT: " /comments/delete",
+  DELETE_COMMENT: "/comments/delete",
   GET_NOTIFICATIONS: "/notifications",
   READ_NOTIFICATION: "/notifications/seen",
   CREATE_NOTIFICATION: "/notifications/create",
