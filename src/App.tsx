@@ -1,16 +1,12 @@
-import { Link } from "react-router-dom";
+import { Suspense } from "react";
 
 import { Global } from "@emotion/react";
 
 import Login from "@components/Login";
 
-import { getglobalStyles } from "@styles/globalStyles";
+import { getGlobalStyles } from "@styles/globalStyles";
 
 import { useThemeStore } from "@stores/theme.store";
-
-import { PATH } from "@constants/index";
-
-import ErrorBoundary from "@utils/ErrorBoundary";
 
 import AppRouter from "./router";
 
@@ -19,12 +15,11 @@ function App() {
 
   return (
     <>
-      <Global styles={getglobalStyles(theme)} />
-      <ErrorBoundary fallback={<Link to={PATH.HOME} />}>
-        <Login>
-          <AppRouter />
-        </Login>
-      </ErrorBoundary>
+      <Global styles={getGlobalStyles(theme)} />
+      <Suspense fallback={null}>
+        <Login />
+        <AppRouter />
+      </Suspense>
     </>
   );
 }

@@ -7,8 +7,10 @@ export const useArticleCreateMutation = () => {
 
   return useMutation({
     mutationFn: createArticle,
-    onSuccess: (article) => {
-      queryClient.invalidateQueries(["articles", article.channel._id]);
-    }
+    onSuccess: (article) =>
+      Promise.all([
+        queryClient.invalidateQueries(["articles", article.channel._id]),
+        queryClient.invalidateQueries(["user-by-token"])
+      ])
   });
 };

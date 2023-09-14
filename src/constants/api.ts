@@ -23,7 +23,7 @@ export const DOMAIN = {
   UPDATE_ARTICLE: "/posts/update",
   DELETE_ARTICLE: "/posts/delete",
   CREATE_LIKE: "/likes/create",
-  DELETE_LIKE: " /likes/delete",
+  DELETE_LIKE: "/likes/delete",
   CREATE_COMMENT: "/comments/create",
   DELETE_COMMENT: " /comments/delete",
   GET_NOTIFICATIONS: "/notifications",

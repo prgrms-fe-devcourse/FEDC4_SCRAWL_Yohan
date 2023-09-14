@@ -20,14 +20,16 @@ export const headerRightItemStyle = css`
   white-space: nowrap;
 `;
 
-export const getTextButtonStyle = (theme: Theme) => css`
+export const getTextButtonStyle = (theme: Theme, isMe: boolean) => css`
+  display: ${isMe ? "initial" : "none"};
   cursor: pointer;
   :hover {
     color: ${theme.TEXT300};
   }
 `;
 
-export const getLikeIconTextStyle = (theme: Theme) => css`
+export const getLikeIconTextStyle = (theme: Theme, isMe: boolean) => css`
+  pointer-events: ${isMe ? "none" : "initial"};
   cursor: pointer;
   gap: 5px;
 

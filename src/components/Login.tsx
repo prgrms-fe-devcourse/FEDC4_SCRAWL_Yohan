@@ -1,26 +1,24 @@
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 
-import { getUserByToken } from "@apis/user/getUserByToken";
+import { useQueryClient } from "@tanstack/react-query";
 
-import { useLoggedIn } from "@hooks/useLoggedIn";
+import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
 
-import { useMyInfoStore } from "@stores/myInfo.store";
+import { useTokenStore } from "@stores/token.store";
 
-const Login = ({ children }: { children: React.ReactNode }) => {
-  const { isLoggedIn } = useLoggedIn();
-  const setMyinfo = useMyInfoStore((state) => state.setMyinfo);
+const Login = () => {
+  const setAccessToken = useTokenStore((state) => state.setAccessToken);
+  const queryClient = useQueryClient();
+  const { isError } = useUserByTokenQuery();
 
-  useLayoutEffect(() => {
-    if (isLoggedIn) {
-      getUserByToken().then((data) => {
-        if (data) {
-          setMyinfo(data);
-        }
-      });
+  useEffect(() => {
+    if (isError) {
+      queryClient.clear();
+      setAccessToken(null);
     }
-  }, [isLoggedIn, setMyinfo]);
+  }, [isError, queryClient, setAccessToken]);
 
-  return children;
+  return null;
 };
 
 export default Login;
