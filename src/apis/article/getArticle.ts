@@ -6,7 +6,7 @@ import { DOMAIN } from "@constants/api";
 
 export const getArticle = async (articleId: string) => {
   const { data } = await axiosInstance.get<GetArticleResponse>(
-    DOMAIN.GET_ARTICLE.BY_ARTICLE_ID(articleId),
+    DOMAIN.GET_ARTICLE(articleId),
     {
       useAuth: false
     }

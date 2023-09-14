@@ -10,7 +10,7 @@ export const getArticlesByChannelId = async (
   limit: number
 ) => {
   const { data } = await axiosInstance.get<GetArticlesResponse>(
-    DOMAIN.GET_ARTICLE.BY_CHANNEL_ID(channelId),
+    DOMAIN.GET_ARTICLES.BY_CHANNEL_ID(channelId),
     {
       params: { offset, limit },
       useAuth: false
