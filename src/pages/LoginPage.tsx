@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { login } from "@apis/user/login";
 
@@ -12,6 +13,7 @@ import { Logo } from "@assets/svg";
 
 const LoginPage = () => {
   const theme = useThemeStore((state) => state.theme);
+  const queryClient = useQueryClient();
 
   return (
     <Flex
@@ -43,6 +45,7 @@ const LoginPage = () => {
           buttonText="로그인"
           handleGetAccessToken={async (formState) => {
             const token = await login(formState);
+            queryClient.clear();
             return token;
           }}
         />

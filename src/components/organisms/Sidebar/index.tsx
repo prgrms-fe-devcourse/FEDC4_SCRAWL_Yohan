@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
@@ -31,6 +32,7 @@ const { test1 } = { test1: "64f1b17f0a678e0ff0ed05f3" };
 const Sidebar = () => {
   const { theme } = useThemeStore();
   const channelColor = theme.TEXT300;
+  const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const navigate = useNavigate();
   const navigatePage = (page: string) => {
@@ -41,6 +43,7 @@ const Sidebar = () => {
         return navigate("/login");
       case "LOGOUT":
         setAccessToken(null);
+        queryClient.clear();
         return navigate("/");
       case "USER":
         return navigate("/users/1");
