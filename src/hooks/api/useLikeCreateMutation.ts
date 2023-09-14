@@ -7,8 +7,10 @@ export const useLikeCreateMutation = () => {
 
   return useMutation({
     mutationFn: createLike,
-    onSuccess: (like) => {
-      queryClient.invalidateQueries(["article", like.post]);
-    }
+    onSuccess: (like) =>
+      Promise.all([
+        queryClient.invalidateQueries(["article", like.post]),
+        queryClient.invalidateQueries(["user-by-token"])
+      ])
   });
 };
