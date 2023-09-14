@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useState } from "react";
 
 import { css } from "@emotion/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createComment } from "@apis/comment/createComment";
 
@@ -24,7 +24,14 @@ type CommentFormProps = {
 const CommentForm = ({ width, articleId }: CommentFormProps) => {
   const [comment, setComment] = useState("");
   const theme = useThemeStore((state) => state.theme);
-  const mutation = useMutation({ mutationFn: createComment });
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: createComment,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["articles", articleId]);
+    }
+  });
+
   const { data } = useUserByTokenQuery();
 
   const handleUpdateCommentText: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -45,6 +52,8 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
         border-radius: 8px;
         box-shadow: ${theme.SHADOW};
         background: ${theme.BACKGROUND100};
+        border: 1px solid ${theme.BORDER100};
+        margin-top: 20px;
       `}>
       <Flex
         justify="center"
