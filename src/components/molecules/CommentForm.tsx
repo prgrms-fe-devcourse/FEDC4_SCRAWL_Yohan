@@ -1,15 +1,13 @@
 import { ChangeEventHandler, useState } from "react";
 
 import { css } from "@emotion/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-import { createComment } from "@apis/comment/createComment";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
 import Input from "@components/atoms/Input";
 
+import { useCommentCreateMutation } from "@hooks/api/useCommentCreateMutation";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -24,13 +22,7 @@ type CommentFormProps = {
 const CommentForm = ({ width, articleId }: CommentFormProps) => {
   const [comment, setComment] = useState("");
   const theme = useThemeStore((state) => state.theme);
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: createComment,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["articles", articleId]);
-    }
-  });
+  const { mutate: commentCreateMutate } = useCommentCreateMutation();
 
   const { data } = useUserByTokenQuery();
 
@@ -38,8 +30,12 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
     setComment(e.currentTarget.value);
   };
   const handleSubmitComment = () => {
-    mutation.mutate({ comment, postId: articleId });
-    setComment("");
+    commentCreateMutate(
+      { comment, postId: articleId },
+      {
+        onSuccess: () => setComment("")
+      }
+    );
   };
 
   return (
