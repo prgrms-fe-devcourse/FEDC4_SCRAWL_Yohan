@@ -24,3 +24,7 @@ export const contentStyle = css`
   ${getLineClampStyle(2)}
   line-height: 20px;
 `;
+
+export const tagsHeightStyle = css`
+  height: 18px;
+`;
