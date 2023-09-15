@@ -66,9 +66,11 @@ const ChannelSelect = ({ stateChange }: ArticleChannelProps) => {
       position: absolute;
       top: 100%;
       margin-top: 5px;
+      padding: 0;
       color: ${theme.TEXT600};
       background-color: ${theme.BACKGROUND100};
       border-radius: 5px;
+      border: 1px solid var(--border-color);
       list-style: none;
       z-index: 1;
       :hover {
@@ -76,10 +78,11 @@ const ChannelSelect = ({ stateChange }: ArticleChannelProps) => {
       }
     }
     li {
-      margin: 2.5px 5px 2.5px 5px;
+      margin: 2.5px 5px;
       padding: 5px;
       border-radius: 5px;
       min-width: 100px;
+      text-align: center;
       :hover {
         background-color: ${theme.BACKGROUND300};
       }
