@@ -9,6 +9,7 @@ import Icon from "@components/atoms/Icon";
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
+import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -27,15 +28,14 @@ const channelTextSize = 20;
 const channelMargine = "30px";
 const channelGap = "15px";
 
-const { test1 } = { test1: "64f1b17f0a678e0ff0ed05f3" };
-
 const Sidebar = () => {
   const { theme } = useThemeStore();
   const channelColor = theme.TEXT300;
   const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
+  const channelList = [...useChannelsQuery().channels];
   const navigate = useNavigate();
-  const navigatePage = (page: string) => {
+  const navigatePage = (page: string, channelId?: string) => {
     switch (page) {
       case "HOME":
         return navigate("/");
@@ -47,8 +47,9 @@ const Sidebar = () => {
         return navigate("/");
       case "USER":
         return navigate("/users/1");
-      case "TEST1":
-        return navigate(`/channels/${test1}`);
+      case "CHANNEL":
+        console.log(channelId);
+        return navigate(`/channels/${channelId}`);
     }
   };
 
@@ -146,39 +147,28 @@ const Sidebar = () => {
               gap: ${channelGap};
             `}
           />
-          <IconText
-            iconValue={{
-              Svg: Question,
-              size: channelIconSize,
-              fill: channelColor
-            }}
-            textValue={{
-              children: "질문/답변",
-              size: channelTextSize,
-              color: channelColor
-            }}
-            css={css`
-              margin: ${channelMargine};
-              gap: ${channelGap};
-            `}
-          />
-          <IconText
-            iconValue={{
-              Svg: Folder,
-              size: channelIconSize,
-              fill: channelColor
-            }}
-            textValue={{
-              children: "TEST1",
-              size: channelTextSize,
-              color: channelColor
-            }}
-            css={css`
-              margin: ${channelMargine};
-              gap: ${channelGap};
-            `}
-            onClick={() => navigatePage("TEST1")}
-          />
+          {channelList.map(({ name, _id }) => {
+            return (
+              <IconText
+                key={_id}
+                iconValue={{
+                  Svg: name === "질문/답변" ? Question : Folder,
+                  size: channelIconSize,
+                  fill: channelColor
+                }}
+                textValue={{
+                  children: name,
+                  size: channelTextSize,
+                  color: channelColor
+                }}
+                css={css`
+                  margin: ${channelMargine};
+                  gap: ${channelGap};
+                `}
+                onClick={() => navigatePage("CHANNEL", _id)}
+              />
+            );
+          })}
         </div>
         <div
           css={css`
