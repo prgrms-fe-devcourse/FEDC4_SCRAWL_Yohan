@@ -6,8 +6,6 @@ export const PATH = {
   ARTICLE: (articleId: PathId) => `/articles/${articleId}`,
   CREATE_ARTICLE: "/create",
   EDIT_ARTICLE: (articleId: PathId) => `/articles/${articleId}/edit`,
-  QUESTION: (questionId: PathId) => `/questions/${questionId}`,
-  EDIT_QUESTION: (questionId: PathId) => `/questions/${questionId}/edit`,
   USER: (userId: PathId) => `/users/${userId}`,
   SEARCH: "/search",
   SIGNUP: "/signup",

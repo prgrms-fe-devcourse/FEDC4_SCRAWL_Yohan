@@ -6,7 +6,6 @@ import { User } from "./User";
 export interface ArticleContent {
   title: string;
   content: string;
-  isQuestion: boolean;
   tags: string[];
 }
 

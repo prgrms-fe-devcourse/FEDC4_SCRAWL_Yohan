@@ -1,4 +1,6 @@
+import { Comment } from "@type/models/Comment";
+
 export interface DeleteCommentRequestBody {
-  postId: string;
+  id: string;
 }
 export type DeleteCommentResponse = Comment;

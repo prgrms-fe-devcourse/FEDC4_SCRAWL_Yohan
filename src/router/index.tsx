@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
-import QuestionPage from "@pages/QuestionPage";
 import SignUpPage from "@pages/SignUpPage";
 
 import { Article, ArticleSkeleton } from "@components/organisms/Article";
@@ -39,14 +38,6 @@ const AppRouter = () => {
           <Route
             path={PATH.EDIT_ARTICLE(":articleId")}
             element={<ArticleWrite />}
-          />
-          <Route
-            path={PATH.QUESTION(":questionId")}
-            element={<QuestionPage />}
-          />
-          <Route
-            path={PATH.EDIT_QUESTION(":questionId")}
-            element={<div>question edit</div>}
           />
           <Route path={PATH.SEARCH} element={<div>search</div>} />
           <Route path={PATH.USER(":userId")} element={<div>user info</div>} />
