@@ -49,7 +49,6 @@ const ArticleWrite = () => {
         title: articleContentToArticleTitleData({
           title,
           content,
-          isQuestion: false,
           tags
         }),
         channelId: channelId
