@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
@@ -41,15 +42,21 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   const isMyArticle = myInfo?._id === article.author._id;
   const myLike = article.likes.find(({ user }) => user === myInfo?._id);
 
-  const { mutate: likeCreateMutate } = useLikeCreateMutation();
-  const { mutate: likeDeleteMutate } = useLikeDeleteMutation();
+  const [isPending, setIsPending] = useState(false);
+
+  const { mutate: likeCreateMutate } = useLikeCreateMutation(() =>
+    setIsPending(true)
+  );
+  const { mutate: likeDeleteMutate } = useLikeDeleteMutation(() =>
+    setIsPending(true)
+  );
   const { mutate: articleDeleteMutate } = useArticleDeleteMutation();
 
   const toggleLikeMutate = () => {
     if (myLike) {
-      likeDeleteMutate(myLike._id);
+      likeDeleteMutate(myLike._id, { onSuccess: () => setIsPending(false) });
     } else {
-      likeCreateMutate(article._id);
+      likeCreateMutate(article._id, { onSuccess: () => setIsPending(false) });
     }
   };
 
@@ -64,6 +71,9 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   };
 
   const handleLikeButtonClick = () => {
+    if (isPending) {
+      return;
+    }
     if (!myInfo) {
       alert("로그인이 필요한 서비스입니다.");
     } else {
