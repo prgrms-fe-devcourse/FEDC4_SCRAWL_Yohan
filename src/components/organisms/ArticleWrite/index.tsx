@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -56,13 +56,6 @@ const ArticleWrite = () => {
       navigatePage("CHANNEL");
     }
   };
-
-  useEffect(() => {
-    console.log("title:", title);
-    console.log("tag:", tags);
-    console.log("content:", content);
-    console.log("channelId:", channelId);
-  }, [title, tags, content, channelId]);
 
   return (
     <Flex
