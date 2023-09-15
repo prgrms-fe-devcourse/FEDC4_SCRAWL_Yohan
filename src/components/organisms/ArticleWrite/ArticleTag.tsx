@@ -9,7 +9,7 @@ import Tag from "@components/molecules/Tag";
 import { useThemeStore } from "@stores/theme.store";
 
 interface ArticleTagProps {
-  stateChange: (value: string) => void;
+  stateChange: (value: string[]) => void;
   width: string;
 }
 const ArticleTag = ({ stateChange, width }: ArticleTagProps) => {
@@ -17,8 +17,7 @@ const ArticleTag = ({ stateChange, width }: ArticleTagProps) => {
   const [tags, setTags] = useState<string[]>([]);
   const { theme } = useThemeStore();
   useEffect(() => {
-    stateChange(inputValue);
-    console.log(tags);
+    stateChange(tags);
   });
   return (
     <>
