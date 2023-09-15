@@ -1,10 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
 import Icon from "@components/atoms/Icon";
 
+import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 import useDetectClose from "@hooks/useDetectClose";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -31,13 +32,17 @@ const Select = ({
   return <li onClick={ValueClick}>{value}</li>;
 };
 
-const ChannelSelect = () => {
+interface ArticleChannelProps {
+  stateChange: (value: string) => void;
+}
+const ChannelSelect = ({ stateChange }: ArticleChannelProps) => {
   const dropdownRef = useRef(null);
   const [channelIdentify, setChannelIdentify] = useState("채널 선택");
-  const channelList = ["프론트엔드", "백엔드", "AI"];
   const { theme } = useThemeStore();
-
+  const channelList = [...useChannelsQuery().channels];
   const [isOpen, setIsOpen] = useDetectClose(dropdownRef, false);
+  console.log("channel:", channelList);
+  const selectedChannel = channelList.find((x) => x.name === channelIdentify);
 
   const CSSdropdown = css`
     position: relative;
@@ -81,6 +86,10 @@ const ChannelSelect = () => {
     }
   `;
 
+  useEffect(() => {
+    stateChange(selectedChannel ? selectedChannel._id : "");
+  });
+
   return (
     <>
       <div css={CSSdropdown} ref={dropdownRef}>
@@ -97,10 +106,10 @@ const ChannelSelect = () => {
           </div>
           {isOpen && (
             <ul>
-              {channelList.map((value, index) => (
+              {channelList.map(({ name, _id }) => (
                 <Select
-                  key={index}
-                  value={value}
+                  key={_id}
+                  value={name}
                   setIsOpen={setIsOpen}
                   setChannelIdentify={setChannelIdentify}
                   isOpen={isOpen}
