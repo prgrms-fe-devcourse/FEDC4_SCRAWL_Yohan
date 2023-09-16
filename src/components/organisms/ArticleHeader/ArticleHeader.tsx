@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
@@ -42,29 +41,17 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   const isMyArticle = myInfo?._id === article.author._id;
   const myLike = article.likes.find(({ user }) => user === myInfo?._id);
 
-  const isPending = useRef(false);
-
-  const { mutate: likeCreateMutate } = useLikeCreateMutation(
-    () => (isPending.current = true)
-  );
-  const { mutate: likeDeleteMutate } = useLikeDeleteMutation(
-    () => (isPending.current = true)
-  );
+  const { mutate: likeCreateMutate, isLoading: isLikeCreateLoading } =
+    useLikeCreateMutation();
+  const { mutate: likeDeleteMutate, isLoading: isLikeDeleteLoading } =
+    useLikeDeleteMutation();
   const { mutate: articleDeleteMutate } = useArticleDeleteMutation();
 
   const toggleLikeMutate = () => {
     if (myLike) {
-      likeDeleteMutate(myLike._id, {
-        onSuccess: () => {
-          isPending.current = false;
-        }
-      });
+      likeDeleteMutate(myLike._id);
     } else {
-      likeCreateMutate(article._id, {
-        onSuccess: () => {
-          isPending.current = false;
-        }
-      });
+      likeCreateMutate(article._id);
     }
   };
 
@@ -79,7 +66,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   };
 
   const handleLikeButtonClick = () => {
-    if (isPending.current) {
+    if (isLikeCreateLoading || isLikeDeleteLoading) {
       return;
     }
     if (!myInfo) {
