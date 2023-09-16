@@ -1,6 +1,6 @@
 import { User } from "./User";
 
-export interface Notifications {
+export interface Notification {
   seen: boolean;
   _id: string;
   author: User;
@@ -9,6 +9,7 @@ export interface Notifications {
   follow?: string;
   comment?: Comment;
   message?: string;
+  like?: null;
   createdAt: string;
   updatedAt: string;
 }
