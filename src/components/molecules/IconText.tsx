@@ -44,6 +44,11 @@ const IconText = ({
         underline={underline}
         delete={del}
         color={color}
+        css={{
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap"
+        }}
         {...textprops}
       />
     </Flex>
