@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const pageTemplateWrapperStyle = css`
   position: relative;
   height: 100vh;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 `;
 
 export const pageInnerWrapperStyle = css`
