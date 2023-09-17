@@ -41,6 +41,9 @@ const Text = ({
         font-size: ${size}px;
         text-decoration: ${underline ? "underline" : undefined};
         color: ${color};
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       `}
       {...props}>
       {children}
