@@ -44,3 +44,11 @@ export const getSidebarIconText = (
     background: ${theme.BACKGROUND200};
   }
 `;
+
+export const getSidebarText = (
+  channelMargine: string,
+  channelPadding: string
+) => css`
+  margin: ${channelMargine};
+  padding: ${channelPadding};
+`;

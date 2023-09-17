@@ -5,6 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
+import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
@@ -20,6 +21,7 @@ import {
   getSidebarIconText,
   getSidebarLogo,
   getSidebarNav,
+  getSidebarText,
   sidebarLogo
 } from "./Sidebar.styles";
 import ThemeToggle from "./ThemeToggle";
@@ -27,9 +29,11 @@ import ThemeToggle from "./ThemeToggle";
 const buttonWidth = "200px";
 const buttonHeight = "40px";
 const borderRadius = "8px";
+const textMargine = "0px 15px";
+const textPadding = "0px";
 const channelIconSize = 25;
 const channelTextSize = 14;
-const channelMargine = "15px";
+const channelMargine = "4px";
 const channelPadding = "10px";
 const channelGap = "15px";
 
@@ -81,7 +85,13 @@ const Sidebar = () => {
             />
           </div>
         </div>
-        <div>
+        <div
+          css={css`
+            margin: 20px 0px 0px 0px;
+          `}>
+          <Text size={12} css={getSidebarText(textMargine, textPadding)}>
+            MAIN
+          </Text>
           <IconText
             iconValue={{ Svg: Home, size: channelIconSize, fill: channelColor }}
             textValue={{
@@ -152,6 +162,9 @@ const Sidebar = () => {
               theme
             )}
           />
+          <Text size={12} css={getSidebarText(textMargine, textPadding)}>
+            CHANNELS
+          </Text>
           {channelList.map(({ name, _id }) => {
             return (
               <IconText
