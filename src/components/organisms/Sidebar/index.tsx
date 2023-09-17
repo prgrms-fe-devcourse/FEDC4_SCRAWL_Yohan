@@ -5,8 +5,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
-import Icon from "@components/atoms/Icon";
-import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
@@ -18,14 +16,21 @@ import { useTokenStore } from "@stores/token.store";
 import { Logo } from "@assets/svg";
 import { Alert, Folder, Home, My, Question, Search } from "@assets/svg";
 
+import {
+  getSidebarIconText,
+  getSidebarLogo,
+  getSidebarNav,
+  sidebarLogo
+} from "./Sidebar.styles";
 import ThemeToggle from "./ThemeToggle";
 
 const buttonWidth = "200px";
 const buttonHeight = "40px";
 const borderRadius = "8px";
 const channelIconSize = 25;
-const channelTextSize = 20;
-const channelMargine = "30px";
+const channelTextSize = 14;
+const channelMargine = "15px";
+const channelPadding = "10px";
 const channelGap = "15px";
 
 const Sidebar = () => {
@@ -62,31 +67,19 @@ const Sidebar = () => {
         top: 0;
         left: 0;
       `}>
-      <nav
-        css={css`
-          margin: 20px;
-          padding: 10px;
-          width: 250px;
-          flex-grow: 1;
-          border: 1px solid var(--border-color);
-          border-radius: ${borderRadius};
-          background-color: ${theme.BACKGROUND100};
-          position: relative;
-        `}>
-        <div
-          css={css`
-            background-color: ${theme.BACKGROUND200};
-            margin: -10px -10px;
-            padding: 10px;
-            border-radius: ${borderRadius} ${borderRadius} 0px 0px;
-            border-bottom: 1px solid var(--border-color);
-          `}>
-          <Flex align="center" onClick={() => navigatePage("HOME")}>
-            <Icon size={50} fill={theme.TEXT600} Svg={Logo}></Icon>
-            <Text size={30} color={theme.TEXT600} strong={true}>
-              괴발개발
-            </Text>
-          </Flex>
+      <nav css={getSidebarNav(borderRadius, theme)}>
+        <div css={getSidebarLogo(borderRadius, theme)}>
+          <div css={sidebarLogo}>
+            <IconText
+              iconValue={{ Svg: Logo, size: 50, fill: theme.TEXT600 }}
+              textValue={{
+                children: "괴발개발",
+                size: 30,
+                color: theme.TEXT600
+              }}
+              onClick={() => navigatePage("HOME")}
+            />
+          </div>
         </div>
         <div>
           <IconText
@@ -96,10 +89,13 @@ const Sidebar = () => {
               size: channelTextSize,
               color: channelColor
             }}
-            css={css`
-              margin: ${channelMargine};
-              gap: ${channelGap};
-            `}
+            css={getSidebarIconText(
+              channelMargine,
+              channelPadding,
+              borderRadius,
+              channelGap,
+              theme
+            )}
             onClick={() => navigatePage("HOME")}
           />
           <IconText
@@ -113,10 +109,13 @@ const Sidebar = () => {
               size: channelTextSize,
               color: channelColor
             }}
-            css={css`
-              margin: ${channelMargine};
-              gap: ${channelGap};
-            `}
+            css={getSidebarIconText(
+              channelMargine,
+              channelPadding,
+              borderRadius,
+              channelGap,
+              theme
+            )}
           />
           <IconText
             iconValue={{ Svg: My, size: channelIconSize, fill: channelColor }}
@@ -125,10 +124,13 @@ const Sidebar = () => {
               size: channelTextSize,
               color: channelColor
             }}
-            css={css`
-              margin: ${channelMargine};
-              gap: ${channelGap};
-            `}
+            css={getSidebarIconText(
+              channelMargine,
+              channelPadding,
+              borderRadius,
+              channelGap,
+              theme
+            )}
             onClick={() => navigatePage("USER")}
           />
           <IconText
@@ -142,10 +144,13 @@ const Sidebar = () => {
               size: channelTextSize,
               color: channelColor
             }}
-            css={css`
-              margin: ${channelMargine};
-              gap: ${channelGap};
-            `}
+            css={getSidebarIconText(
+              channelMargine,
+              channelPadding,
+              borderRadius,
+              channelGap,
+              theme
+            )}
           />
           {channelList.map(({ name, _id }) => {
             return (
@@ -161,10 +166,13 @@ const Sidebar = () => {
                   size: channelTextSize,
                   color: channelColor
                 }}
-                css={css`
-                  margin: ${channelMargine};
-                  gap: ${channelGap};
-                `}
+                css={getSidebarIconText(
+                  channelMargine,
+                  channelPadding,
+                  borderRadius,
+                  channelGap,
+                  theme
+                )}
                 onClick={() => navigatePage("CHANNEL", _id)}
               />
             );
