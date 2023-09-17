@@ -6,6 +6,7 @@ import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
 import QuestionPage from "@pages/QuestionPage";
 import SignUpPage from "@pages/SignUpPage";
+import UserPage from "@pages/UserPage/UserPage";
 
 import { Article, ArticleSkeleton } from "@components/organisms/Article";
 import ArticleWrite from "@components/organisms/ArticleWrite";
@@ -49,7 +50,7 @@ const AppRouter = () => {
             element={<div>question edit</div>}
           />
           <Route path={PATH.SEARCH} element={<div>search</div>} />
-          <Route path={PATH.USER(":userId")} element={<div>user info</div>} />
+          <Route path={PATH.USER(":userId")} element={<UserPage />} />
         </Route>
         <Route path={PATH.SIGNUP} element={<SignUpPage />} />
         <Route path={PATH.LOGIN} element={<LoginPage />} />
