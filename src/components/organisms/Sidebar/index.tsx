@@ -88,6 +88,8 @@ const Sidebar = () => {
         <div
           css={css`
             margin: 20px 0px 0px 0px;
+            overflow: auto;
+            height: calc(100vh - 280px);
           `}>
           <Text size={12} css={getSidebarText(textMargine, textPadding)}>
             MAIN
@@ -194,10 +196,11 @@ const Sidebar = () => {
         <div
           css={css`
             background-color: ${theme.BACKGROUND200};
-            margin: -10px 0px 0px -10px;
+            margin: 0px 0px 0px -10px;
             padding: 25px 0px;
-            position: absolute;
-            bottom: 0px;
+            position: fixed;
+            width: 270px;
+            bottom: 21px;
             border-radius: 0px 0px ${borderRadius} ${borderRadius};
             border-top: 1px solid var(--border-color);
           `}>
@@ -213,7 +216,7 @@ const Sidebar = () => {
                   background={theme.BACKGROUND200}
                   color={theme.TEXT300}
                   css={css`
-                    margin: 10px 0px;
+                    margin: 0px 0px 10px 0px;
                     border: 1px solid var(--border-color);
                   `}
                   onClick={() => navigatePage("LOGOUT")}>
