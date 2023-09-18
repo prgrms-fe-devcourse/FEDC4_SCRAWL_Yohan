@@ -10,9 +10,10 @@ export const getArticleByUserId = async (
   limit: number
 ) => {
   const { data } = await axiosInstance.get<GetArticlesResponse>(
-    DOMAIN.GET_ARTICLE.BY_USER_ID(userId),
+    DOMAIN.GET_ARTICLES.BY_USER_ID(userId),
     {
-      params: { offset, limit }
+      params: { offset, limit },
+      useAuth: false
     }
   );
 
