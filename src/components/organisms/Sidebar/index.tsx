@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -18,6 +19,7 @@ import { useTokenStore } from "@stores/token.store";
 import { Logo } from "@assets/svg";
 import { Alert, Folder, Home, My, Question, Search } from "@assets/svg";
 
+import { NotiDropdown } from "../NotiDropdown";
 import {
   getSidebarIconText,
   getSidebarLogo,
@@ -48,6 +50,7 @@ const Sidebar = () => {
   const { data: user } = useUserByTokenQuery();
   const { isLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
+  const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
   const navigatePage = (page: string, channelId?: string) => {
     switch (page) {
       case "HOME":
@@ -92,7 +95,6 @@ const Sidebar = () => {
         <div
           css={css`
             margin: 20px 0px 0px 0px;
-            overflow: auto;
             height: calc(100vh - 280px);
           `}>
           <Text size={12} css={getSidebarText(textMargine, textPadding)}>
@@ -153,29 +155,39 @@ const Sidebar = () => {
             }
             onClick={() => navigatePage("USER")}
           />
-          <IconText
-            iconValue={{
-              Svg: Alert,
-              size: channelIconSize,
-              fill: channelColor
-            }}
-            textValue={{
-              children: "알림",
-              size: channelTextSize,
-              color: channelColor
-            }}
-            css={
-              isLoggedIn
-                ? getSidebarIconText(
-                    channelMargine,
-                    channelPadding,
-                    borderRadius,
-                    channelGap,
-                    theme
-                  )
-                : sidebarIconTextHide
-            }
-          />
+          <div
+            css={css`
+              position: relative;
+            `}>
+            <IconText
+              iconValue={{
+                Svg: Alert,
+                size: channelIconSize,
+                fill: channelColor
+              }}
+              textValue={{
+                children: "알림",
+                size: channelTextSize,
+                color: channelColor
+              }}
+              css={
+                isLoggedIn
+                  ? getSidebarIconText(
+                      channelMargine,
+                      channelPadding,
+                      borderRadius,
+                      channelGap,
+                      theme
+                    )
+                  : sidebarIconTextHide
+              }
+              onClick={() => setIsNotiDropdownOpen(true)}
+            />
+            <NotiDropdown
+              visible={isNotiDropdownOpen}
+              onClose={() => setIsNotiDropdownOpen(false)}
+            />
+          </div>
           <Text size={12} css={getSidebarText(textMargine, textPadding)}>
             CHANNELS
           </Text>
