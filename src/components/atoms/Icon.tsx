@@ -20,6 +20,7 @@ const Icon = ({ Svg, size = 20, fill = "#8B8B8B", ...props }: IconProps) => {
       <Svg
         css={css`
           width: ${size}px;
+          min-width: ${size}px;
           height: ${size}px;
           fill: ${fill};
         `}
