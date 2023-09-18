@@ -9,6 +9,7 @@ import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
+import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -22,6 +23,7 @@ import {
   getSidebarLogo,
   getSidebarNav,
   getSidebarText,
+  sidebarIconTextHide,
   sidebarLogo
 } from "./Sidebar.styles";
 import ThemeToggle from "./ThemeToggle";
@@ -43,6 +45,8 @@ const Sidebar = () => {
   const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const channelList = [...useChannelsQuery().channels];
+  const { data: user } = useUserByTokenQuery();
+  const { isLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const navigatePage = (page: string, channelId?: string) => {
     switch (page) {
@@ -55,7 +59,7 @@ const Sidebar = () => {
         queryClient.clear();
         return navigate("/");
       case "USER":
-        return navigate("/users/1");
+        return navigate(`/users/${user?._id}`);
       case "CHANNEL":
         console.log(channelId);
         return navigate(`/channels/${channelId}`);
@@ -136,13 +140,17 @@ const Sidebar = () => {
               size: channelTextSize,
               color: channelColor
             }}
-            css={getSidebarIconText(
-              channelMargine,
-              channelPadding,
-              borderRadius,
-              channelGap,
-              theme
-            )}
+            css={
+              isLoggedIn
+                ? getSidebarIconText(
+                    channelMargine,
+                    channelPadding,
+                    borderRadius,
+                    channelGap,
+                    theme
+                  )
+                : sidebarIconTextHide
+            }
             onClick={() => navigatePage("USER")}
           />
           <IconText
@@ -156,13 +164,17 @@ const Sidebar = () => {
               size: channelTextSize,
               color: channelColor
             }}
-            css={getSidebarIconText(
-              channelMargine,
-              channelPadding,
-              borderRadius,
-              channelGap,
-              theme
-            )}
+            css={
+              isLoggedIn
+                ? getSidebarIconText(
+                    channelMargine,
+                    channelPadding,
+                    borderRadius,
+                    channelGap,
+                    theme
+                  )
+                : sidebarIconTextHide
+            }
           />
           <Text size={12} css={getSidebarText(textMargine, textPadding)}>
             CHANNELS
@@ -209,7 +221,7 @@ const Sidebar = () => {
               css={css`
                 margin-left: 36px;
               `}>
-              {useLoggedIn().isLoggedIn ? (
+              {isLoggedIn ? (
                 <Button
                   width={buttonWidth}
                   height={buttonHeight}

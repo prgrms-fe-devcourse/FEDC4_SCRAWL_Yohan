@@ -5,6 +5,7 @@ import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 import ErrorPage from "@pages/ErrorPage";
 import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
+import PasswordPage from "@pages/PasswordPage/PasswordPage";
 import SignUpPage from "@pages/SignUpPage";
 import UserPage from "@pages/UserPage/UserPage";
 

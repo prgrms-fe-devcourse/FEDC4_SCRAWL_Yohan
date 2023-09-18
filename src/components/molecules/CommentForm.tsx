@@ -102,7 +102,7 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
             color={theme.TEXT100}
             background={theme.PRIMARY}
             borderRadius={"8px"}>
-            REPLY
+            댓글 쓰기
           </Button>
         </Flex>
       </Flex>
