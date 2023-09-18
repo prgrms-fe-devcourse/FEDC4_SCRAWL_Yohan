@@ -24,6 +24,7 @@ import {
   cardDescriptionStyle,
   cardFoorterOuterStyle,
   contentStyle,
+  tagsHeightStyle,
   titleStyle
 } from "./CardFooter.styles";
 
@@ -56,7 +57,11 @@ const CardFooter = ({ article }: CardFooterProps) => {
         </Text>
       </Flex>
 
-      <Tags tags={tags} />
+      {tags.length === 0 ? (
+        <div css={tagsHeightStyle}></div>
+      ) : (
+        <Tags tags={tags} />
+      )}
 
       <Text
         size={12}

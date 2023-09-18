@@ -1,6 +1,7 @@
 import { Article } from "./Article";
 import { Like } from "./Like";
 import { Message } from "./Message";
+import { Notification } from "./Notification";
 
 export interface User {
   coverImage?: string;
