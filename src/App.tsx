@@ -9,6 +9,8 @@ import { getGlobalStyles } from "@styles/globalStyles";
 
 import { useThemeStore } from "@stores/theme.store";
 
+import AuthErrorBoundary from "@utils/AuthErrorBoundary";
+
 import AppRouter from "./router";
 
 function App() {
@@ -19,7 +21,9 @@ function App() {
       <Global styles={getGlobalStyles(theme)} />
       <Suspense fallback={null}>
         <Login />
-        <AppRouter />
+        <AuthErrorBoundary>
+          <AppRouter />
+        </AuthErrorBoundary>
         <Toaster />
       </Suspense>
     </>

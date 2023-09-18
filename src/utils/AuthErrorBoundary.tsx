@@ -1,9 +1,10 @@
 import { Component } from "react";
 
+import ErrorPage from "@pages/ErrorPage";
+
 import { AuthError } from "@utils/AuthError";
 
 interface Props {
-  fallback: React.ReactNode;
   children?: React.ReactNode;
 }
 
@@ -26,7 +27,7 @@ class AuthErrorBoundary extends Component<Props, State> {
       return this.props.children;
     }
     if (this.state.error instanceof AuthError) {
-      return this.props.fallback;
+      return <ErrorPage error={this.state.error} />;
     }
     throw this.state.error;
   }

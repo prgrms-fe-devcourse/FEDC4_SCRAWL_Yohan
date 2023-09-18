@@ -9,7 +9,11 @@ import App from "./App.tsx";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false
+      retry: false,
+      suspense: true
+    },
+    mutations: {
+      useErrorBoundary: true
     }
   }
 });
