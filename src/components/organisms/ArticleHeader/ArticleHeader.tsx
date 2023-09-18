@@ -8,6 +8,7 @@ import { Tags } from "@components/organisms/Tags";
 import { useArticleDeleteMutation } from "@hooks/api/useArticleDeleteMutation";
 import { useLikeCreateMutation } from "@hooks/api/useLikeCreateMutation";
 import { useLikeDeleteMutation } from "@hooks/api/useLikeDeleteMutation";
+import { useNotificationCreateMutation } from "@hooks/api/useNotificationCreateMutation";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -46,10 +47,19 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   const { mutate: likeDeleteMutate, isLoading: isLikeDeleteLoading } =
     useLikeDeleteMutation();
   const { mutate: articleDeleteMutate } = useArticleDeleteMutation();
+  const { mutate: notificationCreateMutate } = useNotificationCreateMutation();
 
   const toggleLikeMutate = () => {
     if (myLike) {
-      likeDeleteMutate(myLike._id);
+      likeDeleteMutate(myLike._id, {
+        onSuccess: (newLike) =>
+          notificationCreateMutate({
+            notificationType: "LIKE",
+            notificationTypeId: newLike._id,
+            postId: newLike.post,
+            userId: article.author._id
+          })
+      });
     } else {
       likeCreateMutate(article._id);
     }
