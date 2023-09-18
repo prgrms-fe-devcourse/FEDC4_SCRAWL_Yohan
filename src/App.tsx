@@ -4,6 +4,7 @@ import { Global } from "@emotion/react";
 
 import Toaster from "@components/Toaster";
 import AuthErrorBoundary from "@components/_errorBoundaries/AuthErrorBoundary";
+import RootErrorBoundary from "@components/_errorBoundaries/RootErrorBoundary";
 
 import { getGlobalStyles } from "@styles/globalStyles";
 
@@ -17,11 +18,13 @@ function App() {
   return (
     <>
       <Global styles={getGlobalStyles(theme)} />
-      <AuthErrorBoundary>
-        <Suspense fallback={null}>
-          <AppRouter />
-        </Suspense>
-      </AuthErrorBoundary>
+      <RootErrorBoundary>
+        <AuthErrorBoundary>
+          <Suspense fallback={null}>
+            <AppRouter />
+          </Suspense>
+        </AuthErrorBoundary>
+      </RootErrorBoundary>
       <Toaster />
     </>
   );
