@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
-import FloatingButtons from "@components/organisms/FloatingButtons/FloatingButtons";
+import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import Sidebar from "@components/organisms/Sidebar";
 import {
   pageInnerWrapperStyle,
