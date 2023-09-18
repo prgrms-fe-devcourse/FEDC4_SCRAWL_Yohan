@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -54,6 +55,8 @@ const ArticleWrite = () => {
         channelId: channelId
       });
       navigatePage("CHANNEL");
+    } else {
+      toast.error("채널 선택과 제목 입력은 필수사항입니다.");
     }
   };
 
