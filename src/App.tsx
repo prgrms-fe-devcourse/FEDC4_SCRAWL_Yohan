@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Global } from "@emotion/react";
 
 import Login from "@components/Login";
+import Toaster from "@components/Toaster";
 
 import { getGlobalStyles } from "@styles/globalStyles";
 
@@ -19,6 +20,7 @@ function App() {
       <Suspense fallback={null}>
         <Login />
         <AppRouter />
+        <Toaster />
       </Suspense>
     </>
   );
