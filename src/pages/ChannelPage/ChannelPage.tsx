@@ -1,12 +1,14 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
+import { CardSkeleton } from "@components/organisms/Card";
 import Card from "@components/organisms/Card/Card";
 
 import { useArticlesByChannelIdQuery } from "@hooks/api/useArticlesByChannelIdQuery";
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
+import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -19,22 +21,34 @@ import {
 } from "./ChannelPage.styles";
 
 const ChannelPage = () => {
-  const { theme } = useThemeStore();
   const { channelId } = useParams();
-
   if (!channelId) {
     throw new Error("channelId is undefined");
   }
 
-  const { channels } = useChannelsQuery();
-  const { data } = useArticlesByChannelIdQuery(channelId);
+  const { theme } = useThemeStore();
+  const lastElementRef = useRef<HTMLDivElement | null>(null);
+  const entry = useIntersectionObserver(lastElementRef, { threshold: 1 });
 
+  const { channels } = useChannelsQuery();
+  const { data, fetchNextPage, isFetchingNextPage } =
+    useArticlesByChannelIdQuery(channelId);
+
+  const channel = channels.find((channel) => channel._id === channelId);
   const articles = data?.pages.reduce(
     (articles, page) => [...articles, ...page],
     []
   );
 
-  const channel = channels.find((channel) => channel._id === channelId);
+  useEffect(() => {
+    if (isFetchingNextPage) {
+      return;
+    }
+
+    if (entry?.isIntersecting) {
+      fetchNextPage();
+    }
+  }, [entry?.isIntersecting, fetchNextPage, isFetchingNextPage]);
 
   return (
     <Flex direction="column" css={channelPageOuterStyle}>
@@ -54,7 +68,12 @@ const ChannelPage = () => {
             </ErrorBoundary>
           </Fragment>
         ))}
+        {isFetchingNextPage &&
+          Array(2)
+            .fill(null)
+            .map((_, i) => <CardSkeleton key={i} width={300} />)}
       </Flex>
+      <div ref={lastElementRef} />
     </Flex>
   );
 };
