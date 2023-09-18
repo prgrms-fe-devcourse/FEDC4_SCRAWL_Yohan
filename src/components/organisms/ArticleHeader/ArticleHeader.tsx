@@ -1,3 +1,4 @@
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
@@ -80,7 +81,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
       return;
     }
     if (!myInfo) {
-      alert("로그인이 필요한 서비스입니다.");
+      toast.error("로그인이 필요한 서비스입니다.");
     } else {
       toggleLikeMutate();
     }
