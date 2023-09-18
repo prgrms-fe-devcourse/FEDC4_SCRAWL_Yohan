@@ -21,8 +21,9 @@ export const titleStyle = css`
 
 export const contentStyle = css`
   width: 100%;
-  ${getLineClampStyle(2)}
+  height: 40px;
   line-height: 20px;
+  ${getLineClampStyle(2)}
 `;
 
 export const tagsHeightStyle = css`

@@ -8,6 +8,8 @@ import Image from "@components/atoms/Image";
 import Input from "@components/atoms/Input";
 import Text from "@components/atoms/Text";
 
+import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
+
 import { useThemeStore } from "@stores/theme.store";
 
 import { User } from "@type/models/User";
@@ -37,6 +39,7 @@ const UserInfo = ({
   handleEditModeOff
 }: UserInfoProps) => {
   const theme = useThemeStore((state) => state.theme);
+  const loggedInUser = useUserByTokenQuery();
   return (
     <>
       <Flex
@@ -45,13 +48,15 @@ const UserInfo = ({
           width: 100%;
           margin-bottom: 30px;
         `}>
-        <div
-          css={css`
-            cursor: pointer;
-          `}
-          onClick={handleMovePasswordPage}>
-          비밀번호 변경
-        </div>
+        {user._id === loggedInUser.data?._id && (
+          <div
+            css={css`
+              cursor: pointer;
+            `}
+            onClick={handleMovePasswordPage}>
+            비밀번호 변경
+          </div>
+        )}
       </Flex>
       <Flex
         css={css`
@@ -122,14 +127,16 @@ const UserInfo = ({
                 size={15}
               />
             ) : (
-              <Icon
-                css={css`
-                  cursor: pointer;
-                `}
-                onClick={handleEditModeOn}
-                Svg={Edit}
-                size={15}
-              />
+              user._id === loggedInUser.data?._id && (
+                <Icon
+                  css={css`
+                    cursor: pointer;
+                  `}
+                  onClick={handleEditModeOn}
+                  Svg={Edit}
+                  size={15}
+                />
+              )
             )}
           </Flex>
           <div>{user.posts.length} posts</div>

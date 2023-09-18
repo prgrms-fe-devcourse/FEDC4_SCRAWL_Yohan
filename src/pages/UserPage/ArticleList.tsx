@@ -22,6 +22,7 @@ const ArticleList = ({ userId, currentChannel }: ArticleListProps) => {
         ?.filter((article) => article.channel._id === currentChannel)
         .map((article) => (
           <div
+            key={article._id}
             css={css`
               margin-bottom: 20px;
             `}>
