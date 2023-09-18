@@ -11,27 +11,30 @@ import { Add, ExpandLess } from "@assets/svg";
 
 import { floatingButtonLocation } from "./FloatingButtons.styles";
 
-const FloatingButtons = () => {
+const FloatingButtons = ({ scrollPosition }: { scrollPosition: number }) => {
   const { theme } = useThemeStore();
   const navigate = useNavigate();
   const { isLoggedIn } = useLoggedIn();
   const { pathname } = useLocation();
+
   return (
     <>
       {pathname !== "/create" && (
         <div css={floatingButtonLocation}>
           <Flex direction="column">
-            <FloatingButton
-              iconValue={{ Svg: ExpandLess, size: 50, fill: theme.TEXT600 }}
-              buttonValue={{
-                color: theme.TEXT300,
-                children: "",
-                onClick: () => {
-                  console.log("up");
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }
-              }}
-            />
+            {!!scrollPosition && (
+              <FloatingButton
+                iconValue={{ Svg: ExpandLess, size: 50, fill: theme.TEXT600 }}
+                buttonValue={{
+                  color: theme.TEXT300,
+                  children: "",
+                  onClick: () => {
+                    console.log("up");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+              />
+            )}
             {isLoggedIn && (
               <FloatingButton
                 iconValue={{ Svg: Add, size: 50, fill: theme.TEXT600 }}
