@@ -1,6 +1,8 @@
 import { ReactComponent as Alert } from "./alert.svg";
 import { ReactComponent as BracketLower } from "./bracketLower.svg";
 import { ReactComponent as BracketUpper } from "./bracketUpper.svg";
+import { ReactComponent as Done } from "./done.svg";
+import { ReactComponent as Edit } from "./edit.svg";
 import { ReactComponent as Folder } from "./folder.svg";
 import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Like } from "./like.svg";
@@ -13,6 +15,8 @@ import { ReactComponent as Search } from "./search.svg";
 import { ReactComponent as Sun } from "./sun.svg";
 
 export {
+  Done,
+  Edit,
   Logo,
   Alert,
   Folder,
