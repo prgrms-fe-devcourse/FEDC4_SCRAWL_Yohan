@@ -8,10 +8,14 @@ import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 
 import { useArticleCreateMutation } from "@hooks/api/useArticleCreateMutation";
+import { useError } from "@hooks/useError";
+import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
 
 import { articleContentToArticleTitleData } from "@type/models/Article";
+
+import { AuthError } from "@utils/AuthError";
 
 import ArticleEditor from "./ArticleEditor";
 import ArticleTag from "./ArticleTag";
@@ -21,11 +25,16 @@ import ChannelSelect from "./ChannelSelect";
 const ArticleWrite = () => {
   const navigate = useNavigate();
   const { mutate } = useArticleCreateMutation();
+  const { dispatchError } = useError();
+  const { isLoggedIn } = useLoggedIn();
   const [channelId, setChannelId] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
   const [content, setContent] = useState("");
   const { theme } = useThemeStore();
+
+  if (!isLoggedIn) dispatchError(new AuthError("로그인이 필요합니다."));
+
   const navigatePage = (page: string) => {
     switch (page) {
       case "CHANNEL":
@@ -59,7 +68,6 @@ const ArticleWrite = () => {
       toast.error("채널 선택과 제목 입력은 필수사항입니다.");
     }
   };
-
   return (
     <Flex
       direction="column"
