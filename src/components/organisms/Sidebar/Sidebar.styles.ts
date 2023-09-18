@@ -37,12 +37,16 @@ export const getSidebarIconText = (
 ) => css`
   margin: ${channelMargine};
   padding: ${channelPadding};
-  borderradius: ${borderRadius};
   gap: ${channelGap};
   :hover {
     cursor: pointer;
     background: ${theme.BACKGROUND200};
+    border-radius: ${borderRadius};
   }
+`;
+
+export const sidebarIconTextHide = css`
+  display: none;
 `;
 
 export const getSidebarText = (
