@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import { Theme } from "@constants/theme";
 
 export const getThreadOuterStyle = (theme: Theme) => css`
-  position: relative;
   width: 100%;
   box-shadow: ${theme.SHADOW};
   background: ${theme.BACKGROUND100};
