@@ -12,6 +12,7 @@ export type ButtonProps = Combine<
     color?: string;
     background?: string;
     borderRadius?: string;
+    disabled?: boolean;
     children: React.ReactNode;
   },
   HTMLAttributes<HTMLButtonElement>
@@ -24,6 +25,7 @@ const Button = ({
   background = "#007AFF",
   color = "#FFF",
   borderRadius = "8px",
+  disabled = false,
   children,
   onClick,
   ...props
@@ -31,6 +33,7 @@ const Button = ({
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       css={css`
         width: ${width};
         height: ${height};
