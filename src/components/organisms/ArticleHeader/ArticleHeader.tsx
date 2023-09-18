@@ -41,8 +41,10 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   const isMyArticle = myInfo?._id === article.author._id;
   const myLike = article.likes.find(({ user }) => user === myInfo?._id);
 
-  const { mutate: likeCreateMutate } = useLikeCreateMutation();
-  const { mutate: likeDeleteMutate } = useLikeDeleteMutation();
+  const { mutate: likeCreateMutate, isLoading: isLikeCreateLoading } =
+    useLikeCreateMutation();
+  const { mutate: likeDeleteMutate, isLoading: isLikeDeleteLoading } =
+    useLikeDeleteMutation();
   const { mutate: articleDeleteMutate } = useArticleDeleteMutation();
 
   const toggleLikeMutate = () => {
@@ -64,6 +66,9 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   };
 
   const handleLikeButtonClick = () => {
+    if (isLikeCreateLoading || isLikeDeleteLoading) {
+      return;
+    }
     if (!myInfo) {
       alert("로그인이 필요한 서비스입니다.");
     } else {
