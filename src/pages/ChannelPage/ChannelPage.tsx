@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
+import ErrorBoundary from "@components/_errorBoundaries/ErrorBoundary";
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import { CardSkeleton } from "@components/organisms/Card";
@@ -11,8 +12,6 @@ import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
 
 import { useThemeStore } from "@stores/theme.store";
-
-import ErrorBoundary from "@utils/ErrorBoundary";
 
 import {
   cardListStyle,

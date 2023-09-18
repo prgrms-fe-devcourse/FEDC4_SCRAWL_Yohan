@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import ErrorPage from "@pages/ErrorPage";
+import AuthErrorFallback from "@components/_errorFallbacks/AuthErrorFallback";
 
 import { AuthError } from "@utils/AuthError";
 
@@ -27,7 +27,12 @@ class AuthErrorBoundary extends Component<Props, State> {
       return this.props.children;
     }
     if (this.state.error instanceof AuthError) {
-      return <ErrorPage error={this.state.error} />;
+      return (
+        <AuthErrorFallback
+          error={this.state.error}
+          onMounted={() => this.setState({ hasError: false })}
+        />
+      );
     }
     throw this.state.error;
   }

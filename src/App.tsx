@@ -2,14 +2,12 @@ import { Suspense } from "react";
 
 import { Global } from "@emotion/react";
 
-import Login from "@components/Login";
 import Toaster from "@components/Toaster";
+import AuthErrorBoundary from "@components/_errorBoundaries/AuthErrorBoundary";
 
 import { getGlobalStyles } from "@styles/globalStyles";
 
 import { useThemeStore } from "@stores/theme.store";
-
-import AuthErrorBoundary from "@utils/AuthErrorBoundary";
 
 import AppRouter from "./router";
 
@@ -19,13 +17,12 @@ function App() {
   return (
     <>
       <Global styles={getGlobalStyles(theme)} />
-      <Suspense fallback={null}>
-        <Login />
-        <AuthErrorBoundary>
+      <AuthErrorBoundary>
+        <Suspense fallback={null}>
           <AppRouter />
-        </AuthErrorBoundary>
-        <Toaster />
-      </Suspense>
+        </Suspense>
+      </AuthErrorBoundary>
+      <Toaster />
     </>
   );
 }
