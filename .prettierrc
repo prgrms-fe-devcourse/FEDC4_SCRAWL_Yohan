@@ -7,7 +7,7 @@
   "endOfLine": "auto",
   "trailingComma": "none",
   "arrowParens": "always",
-  "jsxBracketSameLine": true,
+  "bracketSameLine": true,
   "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "importOrder": [
     "^react(.*)",
@@ -17,10 +17,11 @@
     "^@components/(.*)$",
     "^@hooks/(.*)$",
     "^@styles/(.*)$",
-    "^@store/(.*)$",
+    "^@stores/(.*)$",
     "^@type/(.*)$",
     "^@constants/(.*)$",
     "^@utils/(.*)$",
+    "^@assets/(.*)$",
     "^[./]"
   ],
   "importOrderSeparation": true,
