@@ -9,6 +9,7 @@ import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
+import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
@@ -44,6 +45,7 @@ const Sidebar = () => {
   const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const channelList = [...useChannelsQuery().channels];
+  const { data: user } = useUserByTokenQuery();
   const { isLoggedIn } = useLoggedIn();
   const navigate = useNavigate();
   const navigatePage = (page: string, channelId?: string) => {
@@ -57,7 +59,7 @@ const Sidebar = () => {
         queryClient.clear();
         return navigate("/");
       case "USER":
-        return navigate("/users/1");
+        return navigate(`/users/${user?._id}`);
       case "CHANNEL":
         console.log(channelId);
         return navigate(`/channels/${channelId}`);
