@@ -183,10 +183,12 @@ const Sidebar = () => {
               }
               onClick={() => setIsNotiDropdownOpen(true)}
             />
-            <NotiDropdown
-              visible={isNotiDropdownOpen}
-              onClose={() => setIsNotiDropdownOpen(false)}
-            />
+            {isLoggedIn && (
+              <NotiDropdown
+                visible={isNotiDropdownOpen}
+                onClose={() => setIsNotiDropdownOpen(false)}
+              />
+            )}
           </div>
           <Text size={12} css={getSidebarText(textMargine, textPadding)}>
             CHANNELS
