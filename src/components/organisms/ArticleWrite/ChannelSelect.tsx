@@ -10,7 +10,7 @@ import useDetectClose from "@hooks/useDetectClose";
 
 import { useThemeStore } from "@stores/theme.store";
 
-import { BracketLower, BracketUpper } from "@assets/svg";
+import { ExpandLess, ExpandMore } from "@assets/svg";
 
 type ChannelProps = {
   value: string;
@@ -101,9 +101,9 @@ const ChannelSelect = ({ stateChange }: ArticleChannelProps) => {
             <Flex align="center">
               <input type="button" value={channelIdentify} />
               {isOpen ? (
-                <Icon Svg={BracketUpper} size={15} />
+                <Icon Svg={ExpandLess} size={15} />
               ) : (
-                <Icon Svg={BracketLower} size={15} />
+                <Icon Svg={ExpandMore} size={15} />
               )}
             </Flex>
           </div>

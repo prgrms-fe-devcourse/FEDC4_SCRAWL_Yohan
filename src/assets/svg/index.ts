@@ -1,8 +1,11 @@
+import { ReactComponent as Add } from "./add.svg";
 import { ReactComponent as Alert } from "./alert.svg";
 import { ReactComponent as BracketLower } from "./bracketLower.svg";
 import { ReactComponent as BracketUpper } from "./bracketUpper.svg";
 import { ReactComponent as Done } from "./done.svg";
 import { ReactComponent as Edit } from "./edit.svg";
+import { ReactComponent as ExpandLess } from "./expandLess.svg";
+import { ReactComponent as ExpandMore } from "./expandMore.svg";
 import { ReactComponent as Folder } from "./folder.svg";
 import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Like } from "./like.svg";
@@ -15,6 +18,7 @@ import { ReactComponent as Search } from "./search.svg";
 import { ReactComponent as Sun } from "./sun.svg";
 
 export {
+  Add,
   Done,
   Edit,
   Logo,
@@ -28,6 +32,8 @@ export {
   Search,
   BracketUpper,
   BracketLower,
+  ExpandLess,
+  ExpandMore,
   Sun,
   Moon
 };

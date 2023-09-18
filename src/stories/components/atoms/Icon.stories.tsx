@@ -3,9 +3,12 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Icon from "@components/atoms/Icon";
 
 import {
+  Add,
   Alert,
   BracketLower,
   BracketUpper,
+  ExpandLess,
+  ExpandMore,
   Folder,
   Home,
   Like,
@@ -34,6 +37,8 @@ export const Default: StoryObj<typeof Icon> = {
       <Icon {...args} Svg={Alert} />
       <Icon {...args} Svg={BracketLower} />
       <Icon {...args} Svg={BracketUpper} />
+      <Icon {...args} Svg={ExpandLess} />
+      <Icon {...args} Svg={ExpandMore} />
       <Icon {...args} Svg={Folder} />
       <Icon {...args} Svg={Home} />
       <Icon {...args} Svg={Like} />
@@ -42,6 +47,7 @@ export const Default: StoryObj<typeof Icon> = {
       <Icon {...args} Svg={My} />
       <Icon {...args} Svg={Question} />
       <Icon {...args} Svg={Search} />
+      <Icon {...args} Svg={Add} />
     </>
   )
 };
