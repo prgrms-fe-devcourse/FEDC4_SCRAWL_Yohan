@@ -26,7 +26,7 @@ const AuthErrorFallback = ({ error, onMounted }: AuthErrorFallbackProps) => {
     onMounted();
   }, [error, queryClient, setAccessToken, onMounted]);
 
-  return <Navigate to={PATH.ERROR} />;
+  return <Navigate to={PATH.LOGIN} />;
 };
 
 export default AuthErrorFallback;
