@@ -1,11 +1,11 @@
-import { ChangeEventHandler, useState } from "react";
+import { useState } from "react";
 
 import { css } from "@emotion/react";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
-import Input from "@components/atoms/Input";
+import ArticleEditor from "@components/organisms/ArticleWrite/ArticleEditor";
 
 import { useCommentCreateMutation } from "@hooks/api/useCommentCreateMutation";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
@@ -26,8 +26,8 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
 
   const { data } = useUserByTokenQuery();
 
-  const handleUpdateCommentText: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setComment(e.currentTarget.value);
+  const handleUpdateCommentText = (value: string) => {
+    setComment(value);
   };
   const handleSubmitComment = () => {
     commentCreateMutate(
@@ -76,17 +76,9 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
             alt={"이미지가 없습니다."}
           />
         </Flex>
-        <Input
-          onChange={handleUpdateCommentText}
-          value={comment}
-          width={"75%"}
-          height={"96px"}
-          fontSize={"16px"}
-          background={theme.BACKGROUND100}
-          color={theme.TEXT600}
-          border={`1px solid ${theme.BORDER100}`}
-          borderRadius={"8px"}
-          type={"text"}
+        <ArticleEditor
+          stateChange={(value) => handleUpdateCommentText(value)}
+          width="75%"
         />
         <Flex
           direction={"column"}
