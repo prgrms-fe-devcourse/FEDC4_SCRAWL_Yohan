@@ -212,7 +212,7 @@ const SignUpPage = () => {
               height="35px"
               onClick={() => handleSignUp(form)}
               color={theme.TEXT100}>
-              로그인
+              회원가입
             </Button>
           </Flex>
         </Flex>
