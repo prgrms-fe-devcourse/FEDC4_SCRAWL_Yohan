@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,8 @@ import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Input from "@components/atoms/Input";
 import IconText from "@components/molecules/IconText";
+
+import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
@@ -36,6 +38,14 @@ const SignUpPage = () => {
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const [form, setForm] = useState<FormState>({});
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoggedIn();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(DOMAIN.HOME, { replace: true });
+      return;
+    }
+  }, []);
 
   const handleUpdateForm: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
