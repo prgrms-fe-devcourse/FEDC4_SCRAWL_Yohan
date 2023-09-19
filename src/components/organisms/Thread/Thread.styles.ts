@@ -22,6 +22,7 @@ export const threadHeaderStyle = css`
 `;
 
 export const getThreadUserInfoStyle = (theme: Theme) => css`
+  cursor: pointer;
   font-weight: 600;
   color: ${theme.TEXT600};
 `;
