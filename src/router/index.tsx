@@ -10,7 +10,7 @@ import SignUpPage from "@pages/SignUpPage";
 import UserPage from "@pages/UserPage/UserPage";
 
 import { Article, ArticleSkeleton } from "@components/organisms/Article";
-import ArticleWrite from "@components/organisms/ArticleWrite";
+import { ArticleWrite } from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
 import { PATH } from "@constants/index";
