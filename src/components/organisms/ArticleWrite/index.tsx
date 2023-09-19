@@ -15,12 +15,11 @@ import { AuthError } from "@utils/AuthError";
 import ArticleChannelSelect from "./ArticleChannelSelect";
 import ArticleEditor from "./ArticleEditor";
 import ArticleTag from "./ArticleTag";
-import ArticleTitle from "./ArticleTitle";
 import ArticleWriteButtons from "./ArticleWriteButtons";
+import ArticleWriteTitle from "./ArticleWriteTitle";
 
 const ArticleWrite = () => {
   const navigate = useNavigate();
-
   const { dispatchError } = useError();
   const { isLoggedIn } = useLoggedIn();
   const [channelId, setChannelId] = useState("");
@@ -48,7 +47,10 @@ const ArticleWrite = () => {
         margin: 20px;
       `}>
       <ArticleChannelSelect stateChange={(value) => setChannelId(value)} />
-      <ArticleTitle stateChange={(value) => setTitle(value)} width={width} />
+      <ArticleWriteTitle
+        stateChange={(value) => setTitle(value)}
+        width={width}
+      />
       <ArticleTag stateChange={(value) => setTags(value)} width={width} />
       <ArticleEditor stateChange={(value) => setContent(value)} width={width} />
       <ArticleWriteButtons
