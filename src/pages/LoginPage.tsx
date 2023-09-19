@@ -25,15 +25,16 @@ import { testRegex } from "@utils/testRegEx";
 
 import { Logo } from "@assets/svg";
 
-type FormState = {
-  [key: string]: string;
+type loginFormState = {
+  email: string;
+  password: string;
 };
 
 const LoginPage = () => {
   const theme = useThemeStore((state) => state.theme);
   const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
-  const [form, setForm] = useState<FormState>({});
+  const [form, setForm] = useState<loginFormState>({ email: "", password: "" });
   const navigate = useNavigate();
   const { isLoggedIn } = useLoggedIn();
 
@@ -49,7 +50,7 @@ const LoginPage = () => {
     setForm((form) => ({ ...form, [name]: value }));
   };
 
-  const handleLogin = async (form: FormState) => {
+  const handleLogin = async (form: loginFormState) => {
     if (form.email === "" || form.password === "") {
       toast.error("비밀번호 혹은 아이디가 입력되지 않았습니다.");
       return;
@@ -138,7 +139,7 @@ const LoginPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="email"
-                value={form.value}
+                value={form.email}
                 name="email"
                 onChange={handleUpdateForm}
               />
@@ -166,7 +167,7 @@ const LoginPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="password"
-                value={form.value}
+                value={form.password}
                 name="password"
                 onChange={handleUpdateForm}
               />

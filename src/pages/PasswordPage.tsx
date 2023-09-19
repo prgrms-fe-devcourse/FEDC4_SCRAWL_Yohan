@@ -22,8 +22,9 @@ import { testRegex } from "@utils/testRegEx";
 
 import { Logo } from "@assets/svg";
 
-type FormState = {
-  [key: string]: string;
+type passwordFormState = {
+  password: string;
+  passwordConfirm: string;
 };
 
 const PasswordPage = () => {
@@ -31,7 +32,10 @@ const PasswordPage = () => {
   const theme = useThemeStore((state) => state.theme);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const [form, setForm] = useState<FormState>({});
+  const [form, setForm] = useState<passwordFormState>({
+    password: "",
+    passwordConfirm: ""
+  });
 
   const { isLoggedIn } = useLoggedIn();
 
@@ -140,7 +144,7 @@ const PasswordPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="password"
-                value={form.value}
+                value={form.password}
                 name="password"
                 onChange={handleUpdateForm}
               />
@@ -168,7 +172,7 @@ const PasswordPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="password"
-                value={form.value}
+                value={form.passwordConfirm}
                 name="passwordConfirm"
                 onChange={handleUpdateForm}
               />

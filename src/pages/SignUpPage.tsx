@@ -29,14 +29,20 @@ import { testRegex } from "@utils/testRegEx";
 import { Logo } from "@assets/svg";
 
 type FormState = {
-  [key: string]: string;
+  email: string;
+  fullName: string;
+  password: string;
 };
 
 const SignUpPage = () => {
   const theme = useThemeStore((state) => state.theme);
   const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
-  const [form, setForm] = useState<FormState>({});
+  const [form, setForm] = useState<FormState>({
+    email: "",
+    fullName: "",
+    password: ""
+  });
   const navigate = useNavigate();
   const { isLoggedIn } = useLoggedIn();
 
@@ -149,7 +155,7 @@ const SignUpPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="email"
-                value={form.value}
+                value={form.email}
                 name="email"
                 onChange={handleUpdateForm}
               />
@@ -178,7 +184,7 @@ const SignUpPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="text"
-                value={form.value}
+                value={form.fullName}
                 name="fullName"
                 onChange={handleUpdateForm}
               />
@@ -207,7 +213,7 @@ const SignUpPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="password"
-                value={form.value}
+                value={form.password}
                 name="password"
                 onChange={handleUpdateForm}
               />
