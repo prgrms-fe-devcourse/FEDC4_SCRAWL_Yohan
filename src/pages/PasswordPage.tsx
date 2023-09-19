@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ import Input from "@components/atoms/Input";
 import IconText from "@components/molecules/IconText";
 
 import { useUserPasswordUpdateMutation } from "@hooks/api/useUserPasswordUpdateMutation";
+import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -30,8 +31,17 @@ const PasswordPage = () => {
   const theme = useThemeStore((state) => state.theme);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
   const [form, setForm] = useState<FormState>({});
+
+  const { isLoggedIn } = useLoggedIn();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate(DOMAIN.HOME, { replace: true });
+      return;
+    }
+  }, []);
+
   const handleUpdatePassword = () => {
     if (form.password === "" || form.passwordConfirm === "") {
       toast.error("비밀번호 혹은 비밀번호 확인이 입력되지 않았습니다.");
