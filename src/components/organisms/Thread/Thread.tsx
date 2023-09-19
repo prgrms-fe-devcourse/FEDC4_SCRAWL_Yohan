@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import DOMPurify from "dompurify";
 
 import Flex from "@components/atoms/Flex";
@@ -14,6 +16,8 @@ import {
   articleTitleDataToArticleContent
 } from "@type/models/Article";
 import { Comment } from "@type/models/Comment";
+
+import { PATH } from "@constants/index";
 
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
@@ -35,6 +39,7 @@ const Thread = ({ data }: ThreadProps) => {
   const { data: user } = useUserByTokenQuery();
   const { mutate: commentDeleteMutate } = useCommentDeleteMutation();
   const { author } = data;
+  const navigate = useNavigate();
 
   const getIsComment = (data: Comment | Article): data is Comment => {
     return "comment" in data;
@@ -46,11 +51,16 @@ const Thread = ({ data }: ThreadProps) => {
 
   const sanitizedHTML = DOMPurify.sanitize(htmlContent);
 
+  const handleMoveUserPage = (userId: string) => {
+    navigate(PATH.USER(userId));
+  };
+
   return (
     <Flex justify="center" align="center" css={getThreadOuterStyle(theme)}>
       <Flex direction="column" css={threadInnerStyle}>
         <Flex justify="space-between" css={threadHeaderStyle}>
           <UserInfo
+            onClick={() => handleMoveUserPage(author._id)}
             imageSrc={author.image || placeholderUser}
             imgWidth={40}
             username={author.fullName}
