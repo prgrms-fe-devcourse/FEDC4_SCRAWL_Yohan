@@ -13,8 +13,8 @@ import { useThemeStore } from "@stores/theme.store";
 import { AuthError } from "@utils/AuthError";
 
 import ArticleChannelSelect from "./ArticleChannelSelect";
-import ArticleEditor from "./ArticleEditor";
 import ArticleWriteButtons from "./ArticleWriteButtons";
+import ArticleWriteEditor from "./ArticleWriteEditor";
 import ArticleWriteTag from "./ArticleWriteTag";
 import ArticleWriteTitle from "./ArticleWriteTitle";
 
@@ -52,7 +52,10 @@ const ArticleWrite = () => {
         width={width}
       />
       <ArticleWriteTag stateChange={(value) => setTags(value)} width={width} />
-      <ArticleEditor stateChange={(value) => setContent(value)} width={width} />
+      <ArticleWriteEditor
+        stateChange={(value) => setContent(value)}
+        width={width}
+      />
       <ArticleWriteButtons
         theme={theme}
         navigatePage={navigatePage}
