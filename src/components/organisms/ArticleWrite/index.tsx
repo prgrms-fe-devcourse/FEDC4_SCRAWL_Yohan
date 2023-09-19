@@ -14,8 +14,8 @@ import { AuthError } from "@utils/AuthError";
 
 import ArticleChannelSelect from "./ArticleChannelSelect";
 import ArticleEditor from "./ArticleEditor";
-import ArticleTag from "./ArticleTag";
 import ArticleWriteButtons from "./ArticleWriteButtons";
+import ArticleWriteTag from "./ArticleWriteTag";
 import ArticleWriteTitle from "./ArticleWriteTitle";
 
 const ArticleWrite = () => {
@@ -51,7 +51,7 @@ const ArticleWrite = () => {
         stateChange={(value) => setTitle(value)}
         width={width}
       />
-      <ArticleTag stateChange={(value) => setTags(value)} width={width} />
+      <ArticleWriteTag stateChange={(value) => setTags(value)} width={width} />
       <ArticleEditor stateChange={(value) => setContent(value)} width={width} />
       <ArticleWriteButtons
         theme={theme}
