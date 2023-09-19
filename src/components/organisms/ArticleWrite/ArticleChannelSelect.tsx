@@ -32,10 +32,10 @@ const Select = ({
   return <li onClick={ValueClick}>{value}</li>;
 };
 
-interface ArticleChannelProps {
+interface ArticleChannelSelectProps {
   stateChange: (value: string) => void;
 }
-const ChannelSelect = ({ stateChange }: ArticleChannelProps) => {
+const ArticleChannelSelect = ({ stateChange }: ArticleChannelSelectProps) => {
   const dropdownRef = useRef(null);
   const [channelIdentify, setChannelIdentify] = useState("채널 선택");
   const { theme } = useThemeStore();
@@ -125,4 +125,4 @@ const ChannelSelect = ({ stateChange }: ArticleChannelProps) => {
     </>
   );
 };
-export default ChannelSelect;
+export default ArticleChannelSelect;

@@ -17,10 +17,10 @@ import { articleContentToArticleTitleData } from "@type/models/Article";
 
 import { AuthError } from "@utils/AuthError";
 
+import ArticleChannelSelect from "./ArticleChannelSelect";
 import ArticleEditor from "./ArticleEditor";
 import ArticleTag from "./ArticleTag";
 import ArticleTitle from "./ArticleTitle";
-import ChannelSelect from "./ChannelSelect";
 
 const ArticleWrite = () => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const ArticleWrite = () => {
         return navigate(-1);
     }
   };
-  const width = "1000px";
+  const width = "70%";
 
   const ArticleWriteButton = css`
     margin-top: 10px;
@@ -74,7 +74,7 @@ const ArticleWrite = () => {
       css={css`
         margin: 20px;
       `}>
-      <ChannelSelect stateChange={(value) => setChannelId(value)} />
+      <ArticleChannelSelect stateChange={(value) => setChannelId(value)} />
       <ArticleTitle stateChange={(value) => setTitle(value)} width={width} />
       <ArticleTag stateChange={(value) => setTags(value)} width={width} />
       <ArticleEditor stateChange={(value) => setContent(value)} width={width} />
