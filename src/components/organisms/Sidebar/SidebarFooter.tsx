@@ -1,38 +1,26 @@
-import { useNavigate } from "react-router-dom";
-
 import { css } from "@emotion/react";
-import { useQueryClient } from "@tanstack/react-query";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 
-import { useLoggedIn } from "@hooks/useLoggedIn";
-
-import { useThemeStore } from "@stores/theme.store";
-import { useTokenStore } from "@stores/token.store";
+import { Theme } from "@constants/theme";
 
 import { getSidebarFooter } from "./Sidebar.styles";
 import ThemeToggle from "./ThemeToggle";
 
-const SidebarFooter = () => {
-  const { theme } = useThemeStore();
-  const { isLoggedIn } = useLoggedIn();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const setAccessToken = useTokenStore((state) => state.setAccessToken);
+type SidebarFooterProps = {
+  theme: Theme;
+  navigatePage: (page: string, channelID?: string) => void;
+  isLoggedIn: boolean;
+};
+const SidebarFooter = ({
+  theme,
+  navigatePage,
+  isLoggedIn
+}: SidebarFooterProps) => {
   const buttonWidth = "200px";
   const buttonHeight = "40px";
 
-  const navigatePage = (page: string) => {
-    switch (page) {
-      case "LOGIN":
-        return navigate("/login");
-      case "LOGOUT":
-        setAccessToken(null);
-        queryClient.clear();
-        return navigate("/");
-    }
-  };
   return (
     <div css={getSidebarFooter(theme)}>
       <Flex align="center" direction="column">
