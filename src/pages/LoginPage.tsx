@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import { login } from "@apis/user/login";
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Input from "@components/atoms/Input";
+import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
 import { useLoggedIn } from "@hooks/useLoggedIn";
@@ -171,6 +172,19 @@ const LoginPage = () => {
               color={theme.TEXT100}>
               로그인
             </Button>
+            <Text size={14}>
+              아직 회원이 아니신가요?&nbsp;
+              <Link
+                css={css`
+                  color: ${theme.PRIMARY};
+                  &:visited {
+                    color: ${theme.PRIMARY};
+                  }
+                `}
+                to={DOMAIN.SIGNUP}>
+                회원가입
+              </Link>
+            </Text>
           </Flex>
         </Flex>
       </Flex>
