@@ -6,6 +6,7 @@ import { ArticleHeader } from "@components/organisms/ArticleHeader";
 import Thread from "@components/organisms/Thread/Thread";
 
 import { useArticleQuery } from "@hooks/api/useArticleQuery";
+import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { articleTitleDataToArticleContent } from "@type/models/Article";
 
@@ -13,6 +14,7 @@ import { articleOuterStyle } from "./Article.styles";
 
 const Article = () => {
   const { articleId } = useParams();
+  const { isLoggedIn } = useLoggedIn();
   if (!articleId) {
     throw new Error("articleId is undefined");
   }
@@ -27,7 +29,9 @@ const Article = () => {
       {article.comments.map((comment) => (
         <Thread key={comment._id} data={comment} />
       ))}
-      <CommentForm width="100%" articleId={articleId}></CommentForm>
+      {isLoggedIn && (
+        <CommentForm width="100%" articleId={articleId}></CommentForm>
+      )}
     </Flex>
   );
 };
