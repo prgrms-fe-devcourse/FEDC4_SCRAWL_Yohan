@@ -79,6 +79,9 @@ const SignUpPage = () => {
       return;
     }
   };
+  const handleMoveHome = () => {
+    navigate(DOMAIN.HOME);
+  };
 
   return (
     <Flex
@@ -97,8 +100,10 @@ const SignUpPage = () => {
           width: 320px;
           height: 428px;
           gap: 20px;
+          cursor: pointer;
         `}>
         <IconText
+          onClick={handleMoveHome}
           iconValue={{ Svg: Logo, size: 80, fill: theme.TEXT300 }}
           textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
         />
