@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
+import Modal from "@components/atoms/Modal";
 import Text from "@components/atoms/Text";
+import ConfirmModal from "@components/molecules/ConfirmModal";
 import IconText from "@components/molecules/IconText";
 import { Tags } from "@components/organisms/Tags";
 
@@ -39,6 +42,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   const theme = useThemeStore((state) => state.theme);
   const navigate = useNavigate();
   const { data: myInfo } = useUserByTokenQuery();
+  const [isOpen, setIsOpen] = useState(false);
 
   const isMyArticle = myInfo?._id === article.author._id;
   const myLike = article.likes.find(({ user }) => user === myInfo?._id);
@@ -66,8 +70,12 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
     }
   };
 
-  const handleDeleteButtonClick = () => {
-    if (isMyArticle && confirm("게시글을 삭제하시겠습니까?")) {
+  const handleToggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleDeleteArticle = () => {
+    if (isMyArticle) {
       articleDeleteMutate(article._id, {
         onSuccess: (article) => {
           navigate(PATH.CHANNEL(article.channel), { replace: true });
@@ -100,7 +108,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
           <Text
             size={16}
             css={getTextButtonStyle(theme, isMyArticle)}
-            onClick={handleDeleteButtonClick}>
+            onClick={handleToggleModal}>
             삭제
           </Text>
           <Text
@@ -117,6 +125,20 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
           onClick={handleLikeButtonClick}
         />
       </Flex>
+      <Modal visible={isOpen}>
+        <Modal.Background></Modal.Background>
+        <Modal.Container
+          onClose={handleToggleModal}
+          children={
+            <ConfirmModal
+              message="정말 글을 삭제하시겠습니까?"
+              subMessage="다시 한번 확인해 보세요!"
+              onYesButtonClick={handleDeleteArticle}
+              onNoButtonClick={handleToggleModal}
+            />
+          }
+        />
+      </Modal>
     </Flex>
   );
 };
