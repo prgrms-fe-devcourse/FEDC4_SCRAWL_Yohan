@@ -9,46 +9,48 @@ import { useThemeStore } from "@stores/theme.store";
 
 import { Add, ExpandLess } from "@assets/svg";
 
-import {
-  floatingButtonLocation,
-  floatingButtonOuterStyleHide
-} from "./FloatingButtons.styles";
+import { floatingButtonLocation } from "./FloatingButtons.styles";
 
-const FloatingButtons = () => {
+const FloatingButtons = ({ scrollPosition }: { scrollPosition: number }) => {
   const { theme } = useThemeStore();
   const navigate = useNavigate();
+  const { isLoggedIn } = useLoggedIn();
+  const { pathname } = useLocation();
+
   return (
-    <div
-      css={
-        useLocation().pathname !== "/create"
-          ? floatingButtonLocation
-          : floatingButtonOuterStyleHide
-      }>
-      <Flex direction="column">
-        <FloatingButton
-          iconValue={{ Svg: ExpandLess, size: 50, fill: theme.TEXT600 }}
-          buttonValue={{
-            color: theme.TEXT300,
-            children: "",
-            onClick: () => {
-              console.log("up");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-        />
-        <FloatingButton
-          iconValue={{ Svg: Add, size: 50, fill: theme.TEXT600 }}
-          buttonValue={{
-            color: theme.TEXT300,
-            children: "",
-            onClick: () => {
-              navigate("/create");
-            }
-          }}
-          css={!useLoggedIn().isLoggedIn && floatingButtonOuterStyleHide}
-        />
-      </Flex>
-    </div>
+    <>
+      {pathname !== "/create" && (
+        <div css={floatingButtonLocation}>
+          <Flex direction="column">
+            {!!scrollPosition && (
+              <FloatingButton
+                iconValue={{ Svg: ExpandLess, size: 50, fill: theme.TEXT600 }}
+                buttonValue={{
+                  color: theme.TEXT300,
+                  children: "",
+                  onClick: () => {
+                    console.log("up");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+              />
+            )}
+            {isLoggedIn && (
+              <FloatingButton
+                iconValue={{ Svg: Add, size: 50, fill: theme.TEXT600 }}
+                buttonValue={{
+                  color: theme.TEXT300,
+                  children: "",
+                  onClick: () => {
+                    navigate("/create");
+                  }
+                }}
+              />
+            )}
+          </Flex>
+        </div>
+      )}
+    </>
   );
 };
 
