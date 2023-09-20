@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
-import ArticleEditor from "@components/organisms/ArticleWrite/ArticleEditor";
+import ArticleWriteEditor from "@components/organisms/ArticleWrite/ArticleWriteEditor";
 
 import { useCommentCreateMutation } from "@hooks/api/useCommentCreateMutation";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
@@ -76,7 +76,7 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
             alt={"이미지가 없습니다."}
           />
         </Flex>
-        <ArticleEditor
+        <ArticleWriteEditor
           stateChange={(value) => handleUpdateCommentText(value)}
           width="75%"
         />
