@@ -6,6 +6,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 interface ArticleEditorProps {
   stateChange: (value: string) => void;
+  state?: string;
   width: string;
 }
 // const editorConfiguration = {
@@ -19,7 +20,7 @@ class ArticleEditor extends React.Component<ArticleEditorProps> {
           config={{ language: "ko" }}
           editor={ClassicEditor}
           // config={editorConfiguration}
-          data=""
+          data={this.props.state ? this.props.state : ""}
           // onReady={(editor) => {
           //   // You can store the "editor" and use when it is needed.
           //   console.log("Editor is ready to use!", editor);

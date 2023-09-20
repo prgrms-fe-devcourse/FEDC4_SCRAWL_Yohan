@@ -40,8 +40,6 @@ const ArticleEdit = () => {
   const [content, setContent] = useState(preContent);
   const { theme } = useThemeStore();
 
-  console.log("현재 정보", channelId, title, tags, content);
-
   if (!isLoggedIn) dispatchError(new AuthError("로그인이 필요합니다."));
 
   const navigatePage = (page: string) => {
@@ -76,6 +74,7 @@ const ArticleEdit = () => {
       />
       <ArticleWriteEditor
         stateChange={(value) => setContent(value)}
+        state={content}
         width={width}
       />
       <ArticleWriteButtons
