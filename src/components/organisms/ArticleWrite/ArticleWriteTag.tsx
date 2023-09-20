@@ -17,6 +17,19 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState<string[]>(state ? [...state] : []);
   const { theme } = useThemeStore();
+
+  const addToSet = (value: string) => {
+    const updatedSet = new Set(tags);
+    updatedSet.add(value);
+    setTags([...updatedSet]);
+  };
+
+  const removeFromSet = (value: string) => {
+    const updatedSet = new Set(tags);
+    updatedSet.delete(value);
+    setTags([...updatedSet]);
+  };
+
   useEffect(() => {
     stateChange(tags);
   });
@@ -36,7 +49,7 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
         onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
           if (e.nativeEvent.isComposing || !inputValue) return;
           if (e.key === "Enter") {
-            setTags([...tags, `__${inputValue}__`]);
+            addToSet(`__${inputValue}__`);
             setInputValue("");
           }
         }}
@@ -56,7 +69,7 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
               size={16}
               name={tag}
               onClick={() => {
-                setTags([...tags].filter((x) => x !== tag));
+                removeFromSet(tag);
               }}
             />
           );
