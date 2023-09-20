@@ -42,6 +42,10 @@ const ArticleWriteButtons = ({
         channelId: channelId
       });
       navigatePage("CHANNEL");
+    } else if (!title && channelId) {
+      toast.error("제목을 입력해 주세요.");
+    } else if (title && !channelId) {
+      toast.error("채널을 선택해 주세요.");
     } else {
       toast.error("채널 선택과 제목 입력은 필수사항입니다.");
     }
