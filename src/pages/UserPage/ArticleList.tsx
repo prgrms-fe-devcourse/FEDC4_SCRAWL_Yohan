@@ -19,7 +19,10 @@ const ArticleList = ({ userId, currentChannel }: ArticleListProps) => {
         gap: 20px;
       `}>
       {articles
-        ?.filter((article) => article.channel._id === currentChannel)
+        ?.filter(
+          (article) =>
+            currentChannel === "all" || article.channel._id === currentChannel
+        )
         .map((article) => (
           <div
             key={article._id}

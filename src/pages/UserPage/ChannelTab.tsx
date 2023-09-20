@@ -18,9 +18,21 @@ const ChannelList = ({
   const theme = useThemeStore((state) => state.theme);
   const { channels } = useChannelsQuery();
 
+  const channelsPlus = [
+    {
+      posts: [],
+      _id: "all",
+      name: "all",
+      description: "all",
+      createdAt: "",
+      updatedAt: ""
+    },
+    ...channels
+  ];
+
   return (
     <Flex justify="center" css={getChannelTabStyle(theme)}>
-      {channels.map((item) => (
+      {channelsPlus.map((item) => (
         <Flex
           onClick={() => handleUpdateCurrentChannel(item._id)}
           align="center"
