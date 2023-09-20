@@ -1,73 +1,77 @@
 import { ChangeEventHandler, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import { login } from "@apis/user/login";
-
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Input from "@components/atoms/Input";
-import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
+import { useUserPasswordUpdateMutation } from "@hooks/api/useUserPasswordUpdateMutation";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
-import { useTokenStore } from "@stores/token.store";
 
 import { DOMAIN } from "@constants/api";
-import { emailPattern } from "@constants/regex";
+import { passwordPattern } from "@constants/regex";
 
 import { testRegex } from "@utils/testRegEx";
 
 import { Logo } from "@assets/svg";
 
-type loginFormState = {
-  email: string;
+type passwordFormState = {
   password: string;
+  passwordConfirm: string;
 };
 
-const LoginPage = () => {
+const PasswordPage = () => {
+  const userPasswordUpdate = useUserPasswordUpdateMutation();
   const theme = useThemeStore((state) => state.theme);
   const queryClient = useQueryClient();
-  const setAccessToken = useTokenStore((state) => state.setAccessToken);
-  const [form, setForm] = useState<loginFormState>({ email: "", password: "" });
   const navigate = useNavigate();
+  const [form, setForm] = useState<passwordFormState>({
+    password: "",
+    passwordConfirm: ""
+  });
+
   const { isLoggedIn } = useLoggedIn();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       navigate(DOMAIN.HOME, { replace: true });
       return;
     }
   }, []);
 
+  const handleUpdatePassword = () => {
+    if (form.password === "" || form.passwordConfirm === "") {
+      toast.error("비밀번호 혹은 비밀번호 확인이 입력되지 않았습니다.");
+      return;
+    }
+    if (form.password !== form.passwordConfirm) {
+      toast.error("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      return;
+    }
+    if (!testRegex(passwordPattern, form.password)) {
+      toast.error("패스워드 형식이 맞지 않습니다.");
+      return;
+    }
+
+    try {
+      userPasswordUpdate.mutate(form);
+      queryClient.clear();
+      navigate(DOMAIN.HOME);
+    } catch (e) {
+      toast.error("비밀번호 변경 중 오류가 발생하였습니다.");
+      return;
+    }
+  };
   const handleUpdateForm: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
     setForm((form) => ({ ...form, [name]: value }));
-  };
-
-  const handleLogin = async (form: loginFormState) => {
-    if (form.email === "" || form.password === "") {
-      toast.error("비밀번호 혹은 아이디가 입력되지 않았습니다.");
-      return;
-    }
-    if (!testRegex(emailPattern, form.email)) {
-      toast.error("이메일 형식이 맞지 않습니다.");
-      return;
-    }
-    try {
-      const token = await login(form);
-      queryClient.clear();
-      setAccessToken(token);
-      navigate(DOMAIN.HOME, { replace: true });
-    } catch (e) {
-      toast.error("비밀번호 혹은 아이디가 잘못되었습니다.");
-      return;
-    }
   };
 
   const handleMoveHome = () => {
@@ -128,9 +132,10 @@ const LoginPage = () => {
                 css={css`
                   color: ${theme.TEXT600};
                 `}>
-                이메일
+                비밀번호
               </Flex>
               <Input
+                placeholder="6자 이상(알파벳, 숫자 필수)"
                 width="100%"
                 height="35px"
                 fontSize="14px"
@@ -138,9 +143,9 @@ const LoginPage = () => {
                 color={theme.TEXT300}
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
-                type="email"
-                value={form.email}
-                name="email"
+                type="password"
+                value={form.password}
+                name="password"
                 onChange={handleUpdateForm}
               />
             </Flex>
@@ -156,7 +161,7 @@ const LoginPage = () => {
                 css={css`
                   color: ${theme.TEXT600};
                 `}>
-                비밀번호
+                비밀번호 확인
               </Flex>
               <Input
                 width="100%"
@@ -167,36 +172,22 @@ const LoginPage = () => {
                 border={`1px solid ${theme.BORDER100}`}
                 borderRadius="4px"
                 type="password"
-                value={form.password}
-                name="password"
+                value={form.passwordConfirm}
+                name="passwordConfirm"
                 onChange={handleUpdateForm}
               />
             </Flex>
             <Button
               width="100%"
               height="35px"
-              onClick={() => handleLogin(form)}
+              onClick={handleUpdatePassword}
               color={theme.TEXT100}>
-              로그인
+              비밀번호 변경하기
             </Button>
-            <Text size={14}>
-              아직 회원이 아니신가요?&nbsp;
-              <Link
-                css={css`
-                  color: ${theme.PRIMARY};
-                  &:visited {
-                    color: ${theme.PRIMARY};
-                  }
-                `}
-                to={DOMAIN.SIGNUP}>
-                회원가입
-              </Link>
-            </Text>
           </Flex>
         </Flex>
       </Flex>
     </Flex>
   );
 };
-
-export default LoginPage;
+export default PasswordPage;
