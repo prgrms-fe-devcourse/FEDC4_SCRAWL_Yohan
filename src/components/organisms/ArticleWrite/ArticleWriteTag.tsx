@@ -34,7 +34,6 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
           setInputValue(e.target.value)
         }
         onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
-          console.log(e);
           if (e.nativeEvent.isComposing || !inputValue) return;
           if (e.key === "Enter") {
             setTags([...tags, `__${inputValue}__`]);
