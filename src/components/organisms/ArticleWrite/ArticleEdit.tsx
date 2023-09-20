@@ -69,7 +69,11 @@ const ArticleEdit = () => {
         state={title}
         width={width}
       />
-      <ArticleWriteTag stateChange={(value) => setTags(value)} width={width} />
+      <ArticleWriteTag
+        stateChange={(value) => setTags(value)}
+        state={tags}
+        width={width}
+      />
       <ArticleWriteEditor
         stateChange={(value) => setContent(value)}
         width={width}

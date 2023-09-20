@@ -10,11 +10,12 @@ import { useThemeStore } from "@stores/theme.store";
 
 interface ArticleTagProps {
   stateChange: (value: string[]) => void;
+  state?: string[];
   width: string;
 }
-const ArticleTag = ({ stateChange, width }: ArticleTagProps) => {
+const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
   const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(state ? [...state] : []);
   const { theme } = useThemeStore();
   useEffect(() => {
     stateChange(tags);
