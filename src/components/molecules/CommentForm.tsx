@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { css } from "@emotion/react";
 
@@ -30,6 +31,10 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
     setComment(value);
   };
   const handleSubmitComment = () => {
+    if (comment === "") {
+      toast.error("댓글에 내용을 입력해주세요.");
+      return;
+    }
     commentCreateMutate(
       { comment, postId: articleId },
       {
