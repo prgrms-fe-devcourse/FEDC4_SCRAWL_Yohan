@@ -60,6 +60,7 @@ const ArticleWrite = () => {
         theme={theme}
         navigatePage={navigatePage}
         totalContent={{ title, channelId, content, tags }}
+        purpose="create"
       />
     </Flex>
   );

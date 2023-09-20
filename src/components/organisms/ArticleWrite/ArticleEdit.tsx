@@ -39,7 +39,6 @@ const ArticleEdit = () => {
   const [tags, setTags] = useState<string[]>([...preTags]);
   const [content, setContent] = useState(preContent);
   const { theme } = useThemeStore();
-
   if (!isLoggedIn) dispatchError(new AuthError("로그인이 필요합니다."));
 
   const navigatePage = (page: string) => {
@@ -81,6 +80,8 @@ const ArticleEdit = () => {
         theme={theme}
         navigatePage={navigatePage}
         totalContent={{ title, channelId, content, tags }}
+        postId={article._id}
+        purpose="edit"
       />
     </Flex>
   );
