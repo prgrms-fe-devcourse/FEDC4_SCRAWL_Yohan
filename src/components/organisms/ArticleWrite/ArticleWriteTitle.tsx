@@ -8,10 +8,11 @@ import { useThemeStore } from "@stores/theme.store";
 
 interface ArticleTagProps {
   stateChange: (value: string) => void;
+  state?: string;
   width: string;
 }
-const ArticleTitle = ({ stateChange, width }: ArticleTagProps) => {
-  const [inputValue, setInputValue] = useState("");
+const ArticleTitle = ({ stateChange, state, width }: ArticleTagProps) => {
+  const [inputValue, setInputValue] = useState(state ? state : "");
   const { theme } = useThemeStore();
   useEffect(() => {
     stateChange(inputValue);

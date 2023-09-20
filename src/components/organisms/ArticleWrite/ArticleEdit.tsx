@@ -40,7 +40,7 @@ const ArticleEdit = () => {
   const [content, setContent] = useState(preContent);
   const { theme } = useThemeStore();
 
-  console.log(channelId, title, tags, content);
+  console.log("현재 정보", channelId, title, tags, content);
 
   if (!isLoggedIn) dispatchError(new AuthError("로그인이 필요합니다."));
 
@@ -66,6 +66,7 @@ const ArticleEdit = () => {
       />
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}
+        state={title}
         width={width}
       />
       <ArticleWriteTag stateChange={(value) => setTags(value)} width={width} />
