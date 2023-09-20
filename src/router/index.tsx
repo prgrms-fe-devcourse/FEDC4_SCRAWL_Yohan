@@ -10,7 +10,7 @@ import SignUpPage from "@pages/SignUpPage";
 import UserPage from "@pages/UserPage/UserPage";
 
 import { Article, ArticleSkeleton } from "@components/organisms/Article";
-import { ArticleWrite } from "@components/organisms/ArticleWrite";
+import { ArticleEdit, ArticleWrite } from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
 import { PATH } from "@constants/index";
@@ -39,7 +39,7 @@ const AppRouter = () => {
         <Route path={PATH.CREATE_ARTICLE} element={<ArticleWrite />} />
         <Route
           path={PATH.EDIT_ARTICLE(":articleId")}
-          element={<ArticleWrite />}
+          element={<ArticleEdit />}
         />
         <Route path={PATH.SEARCH} element={<div>search</div>} />
         <Route path={PATH.USER(":userId")} element={<UserPage />} />
