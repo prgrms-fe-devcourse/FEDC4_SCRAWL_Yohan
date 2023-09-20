@@ -78,10 +78,9 @@ const ArticleWriteButtons = ({
         color={theme.TEXT600}
         onClick={() => navigatePage("BACK")}></Button>
       <Button
-        children="완료"
+        children={purpose === "create" ? "생성" : "수정"}
         width="50px"
         height="30px"
-        color={theme.TEXT100}
         onClick={handleCreateButtonClick}></Button>
     </Flex>
   );
