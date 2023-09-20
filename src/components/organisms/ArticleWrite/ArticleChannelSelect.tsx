@@ -34,17 +34,24 @@ const Select = ({
 
 interface ArticleChannelSelectProps {
   stateChange: (value: string) => void;
+  state?: string;
 }
-const ArticleChannelSelect = ({ stateChange }: ArticleChannelSelectProps) => {
+const ArticleChannelSelect = ({
+  stateChange,
+  state
+}: ArticleChannelSelectProps) => {
   const dropdownRef = useRef(null);
-  const [channelIdentify, setChannelIdentify] = useState("채널 선택");
-  const { theme } = useThemeStore();
   const channelList = [...useChannelsQuery().channels];
+  const Mychannel = channelList.filter((x) => x._id === state);
+  const [channelIdentify, setChannelIdentify] = useState(
+    state ? Mychannel[0].name : "채널 선택"
+  );
+  const { theme } = useThemeStore();
   const [isOpen, setIsOpen] = useDetectClose(dropdownRef, false);
   const selectedChannel = channelList.find((x) => x.name === channelIdentify);
 
   useEffect(() => {
-    stateChange(selectedChannel ? selectedChannel._id : "");
+    stateChange(selectedChannel ? selectedChannel._id : state ? state : "");
   });
 
   return (

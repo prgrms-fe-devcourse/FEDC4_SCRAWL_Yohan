@@ -24,10 +24,11 @@ import ArticleWriteTitle from "./ArticleWriteTitle";
 const ArticleEdit = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const articleId = location.pathname.split("/")[2];
+
   const { dispatchError } = useError();
   const { isLoggedIn } = useLoggedIn();
-  const { article } = useArticleQuery(articleId);
+  const { article } = useArticleQuery(location.pathname.split("/")[2]);
+  const articleId = article.channel._id;
   const {
     title: preTitle,
     content: preContent,
@@ -59,7 +60,10 @@ const ArticleEdit = () => {
       css={css`
         margin: 20px;
       `}>
-      <ArticleChannelSelect stateChange={(value) => setChannelId(value)} />
+      <ArticleChannelSelect
+        stateChange={(value) => setChannelId(value)}
+        state={channelId}
+      />
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}
         width={width}
