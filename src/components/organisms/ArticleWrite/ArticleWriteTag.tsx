@@ -10,12 +10,26 @@ import { useThemeStore } from "@stores/theme.store";
 
 interface ArticleTagProps {
   stateChange: (value: string[]) => void;
+  state?: string[];
   width: string;
 }
-const ArticleTag = ({ stateChange, width }: ArticleTagProps) => {
+const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
   const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>(state ? [...state] : []);
   const { theme } = useThemeStore();
+
+  const addToSet = (value: string) => {
+    const updatedSet = new Set(tags);
+    updatedSet.add(value);
+    setTags([...updatedSet]);
+  };
+
+  const removeFromSet = (value: string) => {
+    const updatedSet = new Set(tags);
+    updatedSet.delete(value);
+    setTags([...updatedSet]);
+  };
+
   useEffect(() => {
     stateChange(tags);
   });
@@ -33,10 +47,9 @@ const ArticleTag = ({ stateChange, width }: ArticleTagProps) => {
           setInputValue(e.target.value)
         }
         onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
-          console.log(e);
           if (e.nativeEvent.isComposing || !inputValue) return;
           if (e.key === "Enter") {
-            setTags([...tags, `__${inputValue}__`]);
+            addToSet(`__${inputValue}__`);
             setInputValue("");
           }
         }}
@@ -56,7 +69,7 @@ const ArticleTag = ({ stateChange, width }: ArticleTagProps) => {
               size={16}
               name={tag}
               onClick={() => {
-                setTags([...tags].filter((x) => x !== tag));
+                removeFromSet(tag);
               }}
             />
           );
