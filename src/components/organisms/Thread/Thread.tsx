@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import DOMPurify from "dompurify";
 
 import Flex from "@components/atoms/Flex";
+import Modal from "@components/atoms/Modal";
 import Text from "@components/atoms/Text";
+import ConfirmModal from "@components/molecules/ConfirmModal";
 import UserInfo from "@components/molecules/UserInfo";
 
 import { useCommentDeleteMutation } from "@hooks/api/useCommentDeleteMutation";
@@ -39,6 +42,7 @@ const Thread = ({ data }: ThreadProps) => {
   const { data: user } = useUserByTokenQuery();
   const { mutate: commentDeleteMutate } = useCommentDeleteMutation();
   const { author } = data;
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const getIsComment = (data: Comment | Article): data is Comment => {
@@ -53,6 +57,12 @@ const Thread = ({ data }: ThreadProps) => {
 
   const handleMoveUserPage = (userId: string) => {
     navigate(PATH.USER(userId));
+  };
+  const handleToggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+  const handleDeleteComment = () => {
+    commentDeleteMutate({ id: data._id });
   };
 
   return (
@@ -70,11 +80,25 @@ const Thread = ({ data }: ThreadProps) => {
           {getIsComment(data) && (
             <Text
               size={16}
-              onClick={() => commentDeleteMutate({ id: data._id })}
+              onClick={handleToggleModal}
               css={getThreadDeleteBtnStyle(user?._id === data.author._id)}>
               삭제
             </Text>
           )}
+          <Modal visible={isOpen}>
+            <Modal.Background></Modal.Background>
+            <Modal.Container
+              onClose={handleToggleModal}
+              children={
+                <ConfirmModal
+                  message="정말 댓글을 삭제하시겠습니까?"
+                  subMessage="다시 한번 확인해 보세요!"
+                  onYesButtonClick={handleDeleteComment}
+                  onNoButtonClick={handleToggleModal}
+                />
+              }
+            />
+          </Modal>
         </Flex>
 
         <Flex css={getThreadContentStyle(theme)}>
