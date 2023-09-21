@@ -1,4 +1,9 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import {
+  ChangeEventHandler,
+  KeyboardEventHandler,
+  useEffect,
+  useState
+} from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -19,6 +24,7 @@ import { DOMAIN } from "@constants/api";
 import { passwordPattern } from "@constants/regex";
 
 import { testRegex } from "@utils/testRegEx";
+import withEnter from "@utils/withEnter";
 
 import { Logo } from "@assets/svg";
 
@@ -69,6 +75,13 @@ const PasswordPage = () => {
       return;
     }
   };
+
+  const handleUpdatePasswordWithEnter: KeyboardEventHandler<HTMLElement> = (
+    e
+  ) => {
+    withEnter(e, () => handleUpdatePassword());
+  };
+
   const handleUpdateForm: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
     setForm((form) => ({ ...form, [name]: value }));
@@ -80,6 +93,7 @@ const PasswordPage = () => {
 
   return (
     <Flex
+      onKeyUp={handleUpdatePasswordWithEnter}
       justify="center"
       align="center"
       css={css`
