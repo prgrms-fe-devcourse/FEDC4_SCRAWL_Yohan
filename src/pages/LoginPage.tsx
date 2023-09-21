@@ -1,4 +1,9 @@
-import { ChangeEventHandler, useEffect, useState } from "react";
+import {
+  ChangeEventHandler,
+  KeyboardEventHandler,
+  useEffect,
+  useState
+} from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,6 +27,7 @@ import { DOMAIN } from "@constants/api";
 import { emailPattern } from "@constants/regex";
 
 import { testRegex } from "@utils/testRegEx";
+import withEnter from "@utils/withEnter";
 
 import { Logo } from "@assets/svg";
 
@@ -69,6 +75,9 @@ const LoginPage = () => {
       return;
     }
   };
+  const handleLoginWithEnter: KeyboardEventHandler<HTMLElement> = (e) => {
+    withEnter(e, () => handleLogin(form));
+  };
 
   const handleMoveHome = () => {
     navigate(DOMAIN.HOME);
@@ -76,6 +85,7 @@ const LoginPage = () => {
 
   return (
     <Flex
+      onKeyUp={handleLoginWithEnter}
       justify="center"
       align="center"
       css={css`
