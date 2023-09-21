@@ -69,10 +69,13 @@ const UserInfo = ({
           css={css`
             width: 33%;
           `}>
-          <label htmlFor="uploadImageFile">
+          <label
+            htmlFor={
+              user._id === loggedInUser.data?._id ? "uploadImageFile" : ""
+            }>
             <Image
               css={css`
-                cursor: pointer;
+                cursor: ${user._id === loggedInUser.data?._id && "pointer"};
                 border-radius: 50%;
                 border: 1px solid ${theme.BORDER100};
               `}
