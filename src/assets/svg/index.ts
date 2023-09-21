@@ -1,5 +1,6 @@
 import { ReactComponent as Add } from "./add.svg";
 import { ReactComponent as Alert } from "./alert.svg";
+import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as BracketLower } from "./bracketLower.svg";
 import { ReactComponent as BracketUpper } from "./bracketUpper.svg";
 import { ReactComponent as Done } from "./done.svg";
@@ -39,6 +40,7 @@ export {
   ExpandMore,
   Sun,
   Moon,
-  NotFound
+  NotFound,
+  ArrowBack
 };
 export type SVGType = typeof Alert;
