@@ -16,6 +16,7 @@ import {
 
 import { PATH } from "@constants/index";
 
+import { createdAtToString } from "@utils/createdAtToString";
 import { htmlToPlainText } from "@utils/htmlToPlainText";
 
 import { Like, Message } from "@assets/svg";
@@ -66,7 +67,7 @@ const CardFooter = ({ article }: CardFooterProps) => {
       <Text
         size={12}
         color={theme.type === "DARK" ? theme.TEXT100 : theme.TEXT300}>
-        {new Date(article.createdAt).toLocaleDateString()}
+        {createdAtToString(new Date(article.createdAt))}
       </Text>
 
       <Flex
