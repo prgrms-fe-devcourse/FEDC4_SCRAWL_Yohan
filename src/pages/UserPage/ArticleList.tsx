@@ -29,7 +29,7 @@ const ArticleList = ({ userId, currentChannel }: ArticleListProps) => {
             css={css`
               margin-bottom: 20px;
             `}>
-            <Card width={271} article={article}></Card>
+            <Card article={article}></Card>
           </div>
         ))}
     </Flex>

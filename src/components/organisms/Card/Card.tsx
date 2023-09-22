@@ -10,7 +10,6 @@ import { useThemeStore } from "@stores/theme.store";
 
 import { Article } from "@type/models/Article";
 
-import { MIN_CARD_WIDTH } from "@constants/card";
 import { PATH } from "@constants/index";
 
 import placeholderUser from "@assets/svg/placeholderUser.svg";
@@ -19,18 +18,15 @@ import { cardImgStyle, getCardOuterStyle, userInfoStyle } from "./Card.styles";
 import CardFooter from "./CardFooter";
 
 type CardProps = {
-  width: number;
   article: Article;
 };
 
-const Card = ({ article, width: w }: CardProps) => {
+const Card = ({ article }: CardProps) => {
   const { theme } = useThemeStore();
   const navigate = useNavigate();
 
-  const width = Math.max(w, MIN_CARD_WIDTH);
-
   return (
-    <Flex css={getCardOuterStyle(theme, width)} direction="column" gap={4}>
+    <Flex css={getCardOuterStyle(theme)} direction="column" gap={4}>
       <UserInfo
         imgWidth={24}
         imageSrc={article.author.image || placeholderUser}
@@ -42,8 +38,8 @@ const Card = ({ article, width: w }: CardProps) => {
 
       {article.image ? (
         <Image
-          width={width}
-          height={width * 0.6}
+          width={0}
+          height={0}
           src={article.image}
           alt="contentImg"
           mode="cover"
@@ -53,8 +49,8 @@ const Card = ({ article, width: w }: CardProps) => {
       ) : (
         <div
           css={css`
-            width: ${width}px;
-            height: ${width * 0.6}px;
+            width: 100%;
+            aspect-ratio: 16 / 10;
             cursor: pointer;
           `}
           onClick={() => navigate(PATH.ARTICLE(article._id))}
