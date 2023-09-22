@@ -32,7 +32,7 @@ import {
 import { testRegex } from "@utils/testRegEx";
 import withEnter from "@utils/withEnter";
 
-import { Logo } from "@assets/svg";
+import { Logo2 } from "@assets/svg";
 
 type FormState = {
   email: string;
@@ -126,11 +126,16 @@ const SignUpPage = () => {
           gap: 20px;
           cursor: pointer;
         `}>
-        <IconText
-          onClick={handleMoveHome}
-          iconValue={{ Svg: Logo, size: 80, fill: theme.TEXT300 }}
-          textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
-        />
+        <Flex>
+          <IconText
+            css={css`
+              gap: 10px;
+            `}
+            onClick={handleMoveHome}
+            iconValue={{ Svg: Logo2, size: 64, fill: theme.TEXT300 }}
+            textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
+          />
+        </Flex>
         <Flex
           justify="center"
           align="center"
@@ -268,8 +273,7 @@ const SignUpPage = () => {
             <Button
               width="100%"
               height="35px"
-              onClick={() => handleSignUp(form)}
-              color={theme.TEXT100}>
+              onClick={() => handleSignUp(form)}>
               회원가입
             </Button>
           </Flex>

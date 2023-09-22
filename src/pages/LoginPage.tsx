@@ -29,7 +29,7 @@ import { emailPattern } from "@constants/regex";
 import { testRegex } from "@utils/testRegEx";
 import withEnter from "@utils/withEnter";
 
-import { Logo } from "@assets/svg";
+import { Logo2 } from "@assets/svg";
 
 type loginFormState = {
   email: string;
@@ -103,11 +103,17 @@ const LoginPage = () => {
           gap: 20px;
           cursor: pointer;
         `}>
-        <IconText
-          onClick={handleMoveHome}
-          iconValue={{ Svg: Logo, size: 80, fill: theme.TEXT300 }}
-          textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
-        />
+        <Flex>
+          <IconText
+            css={css`
+              gap: 10px;
+            `}
+            onClick={handleMoveHome}
+            iconValue={{ Svg: Logo2, size: 64, fill: theme.TEXT300 }}
+            textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
+          />
+        </Flex>
+
         <Flex
           justify="center"
           align="center"
@@ -185,8 +191,7 @@ const LoginPage = () => {
             <Button
               width="100%"
               height="35px"
-              onClick={() => handleLogin(form)}
-              color={theme.TEXT100}>
+              onClick={() => handleLogin(form)}>
               로그인
             </Button>
             <Text size={14}>
