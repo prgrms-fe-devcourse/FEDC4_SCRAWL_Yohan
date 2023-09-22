@@ -1,36 +1,58 @@
-import { useEffect } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
+
+import { css } from "@emotion/react";
+
+import Button from "@components/atoms/Button";
+import Flex from "@components/atoms/Flex";
+
+import { useSearchArticlesQuery } from "@hooks/api/useSearchArticlesQuery";
+
+import { useThemeStore } from "@stores/theme.store";
 
 import { PATH } from "@constants/index";
 
+import SearchItem from "./SearchItem";
+
 type TagSearchResultsProps = {
   tag: string;
-  onKeyDown: () => void;
+  onClick: () => void;
 };
 
-const TagSearchResults = ({ tag, onKeyDown }: TagSearchResultsProps) => {
+const TagSearchResults = ({ tag, onClick }: TagSearchResultsProps) => {
   const navigate = useNavigate();
+  const { articles } = useSearchArticlesQuery(`__${tag}__`);
+  const theme = useThemeStore((state) => state.theme);
 
-  useEffect(() => {
-    const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && tag) {
-        onKeyDown();
-        navigate({
-          pathname: PATH.SEARCH,
-          search: createSearchParams({
-            tag: `__${tag}__`
-          }).toString()
-        });
-      }
-    };
-
-    window.addEventListener("keydown", handleKeydown);
-    return () => {
-      window.removeEventListener("keydown", handleKeydown);
-    };
-  }, [navigate, onKeyDown, tag]);
-
-  return null;
+  return (
+    <Flex
+      direction="column"
+      gap={10}
+      css={css`
+        padding: 10px;
+      `}>
+      {articles.slice(0, 10).map((article) => (
+        <SearchItem key={article._id} article={article} onClick={onClick} />
+      ))}
+      {articles.length > 0 && (
+        <Button
+          width="100%"
+          height="40px"
+          background={theme.BACKGROUND200}
+          color={theme.TEXT600}
+          onClick={() => {
+            onClick();
+            navigate({
+              pathname: PATH.SEARCH,
+              search: createSearchParams({
+                tag: `__${tag}__`
+              }).toString()
+            });
+          }}>
+          자세히 보기
+        </Button>
+      )}
+    </Flex>
+  );
 };
 
 export default TagSearchResults;

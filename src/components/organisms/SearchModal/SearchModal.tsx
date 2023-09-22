@@ -125,7 +125,10 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
               ))}
             </Conditional.Condition>
             <Conditional.Condition name="TAG">
-              <TagSearchResults tag={searchKeyword} onKeyDown={onClose} />
+              <TagSearchResults
+                tag={debouncedSearchKeyword}
+                onClick={onClose}
+              />
             </Conditional.Condition>
             <Conditional.Condition name="USER">
               <UserSearchResults
@@ -134,7 +137,10 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
               />
             </Conditional.Condition>
             <Conditional.Condition name="ARTICLE">
-              <ArticleSearchResults title={searchKeyword} onKeyDown={onClose} />
+              <ArticleSearchResults
+                keyword={debouncedSearchKeyword}
+                onClick={onClose}
+              />
             </Conditional.Condition>
           </Conditional>
         </div>
