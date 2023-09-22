@@ -4,13 +4,19 @@ import { css } from "@emotion/react";
 
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
+import UserInfo from "@components/molecules/UserInfo";
 
 import { Theme } from "@constants/theme";
 
-import { Alert, Home, My, Search } from "@assets/svg";
+import { Alert, Home, Search } from "@assets/svg";
+import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import { NotiDropdown } from "../NotiDropdown";
-import { getSidebarIconText, getSidebarText } from "./Sidebar.styles";
+import {
+  getSidebarIconText,
+  getSidebarText,
+  getUserInfoStyle
+} from "./Sidebar.styles";
 
 type SidebarMainProps = {
   theme: Theme;
@@ -18,13 +24,15 @@ type SidebarMainProps = {
   channelIconSize: number;
   channelTextSize: number;
   isLoggedIn: boolean;
+  userImage: string | undefined;
 };
 const SidebarMain = ({
   theme,
   navigatePage,
   channelIconSize,
   channelTextSize,
-  isLoggedIn
+  isLoggedIn,
+  userImage
 }: SidebarMainProps) => {
   const channelColor = theme.TEXT300;
   const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
@@ -62,14 +70,13 @@ const SidebarMain = ({
         css={getSidebarIconText(theme)}
       />
       {isLoggedIn && (
-        <IconText
-          iconValue={{ Svg: My, size: channelIconSize, fill: channelColor }}
-          textValue={{
-            children: "내 정보",
-            size: channelTextSize,
-            color: channelColor
-          }}
-          css={getSidebarIconText(theme)}
+        <UserInfo
+          imgWidth={24}
+          imageSrc={userImage ? userImage : placeholderUser}
+          username="내 정보"
+          fontSize={14}
+          color={theme.TEXT300}
+          css={getUserInfoStyle(theme)}
           onClick={() => navigatePage("USER")}
         />
       )}
