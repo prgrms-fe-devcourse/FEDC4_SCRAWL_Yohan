@@ -22,6 +22,8 @@ import { Comment } from "@type/models/Comment";
 
 import { PATH } from "@constants/index";
 
+import { createdAtToString } from "@utils/createdAtToString";
+
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import {
@@ -41,7 +43,7 @@ const Thread = ({ data }: ThreadProps) => {
   const theme = useThemeStore((state) => state.theme);
   const { data: user } = useUserByTokenQuery();
   const { mutate: commentDeleteMutate } = useCommentDeleteMutation();
-  const { author } = data;
+  const { author, createdAt } = data;
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -69,14 +71,19 @@ const Thread = ({ data }: ThreadProps) => {
     <Flex justify="center" align="center" css={getThreadOuterStyle(theme)}>
       <Flex direction="column" css={threadInnerStyle}>
         <Flex justify="space-between" css={threadHeaderStyle}>
-          <UserInfo
-            onClick={() => handleMoveUserPage(author._id)}
-            imageSrc={author.image || placeholderUser}
-            imgWidth={40}
-            username={author.fullName}
-            fontSize={16}
-            css={getThreadUserInfoStyle(theme)}
-          />
+          <Flex align="center" gap={10}>
+            <UserInfo
+              onClick={() => handleMoveUserPage(author._id)}
+              imageSrc={author.image || placeholderUser}
+              imgWidth={40}
+              username={author.fullName}
+              fontSize={16}
+              css={getThreadUserInfoStyle(theme)}
+            />
+            <Text size={12} color={theme.TEXT300}>
+              {createdAtToString(new Date(createdAt))}
+            </Text>
+          </Flex>
           {getIsComment(data) && (
             <Text
               size={16}
