@@ -13,6 +13,7 @@ import { useThemeStore } from "@stores/theme.store";
 
 import { ArrowBack, Search } from "@assets/svg";
 
+import ArticleSearchResults from "./ArticleSearchResults";
 import TagSearchResults from "./TagSearchResults";
 import UserSearchResults from "./UserSearchResults";
 
@@ -133,7 +134,7 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
               />
             </Conditional.Condition>
             <Conditional.Condition name="ARTICLE">
-              article
+              <ArticleSearchResults title={searchKeyword} onKeyDown={onClose} />
             </Conditional.Condition>
           </Conditional>
         </div>
