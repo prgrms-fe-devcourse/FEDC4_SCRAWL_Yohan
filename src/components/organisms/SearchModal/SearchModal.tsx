@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 import { css } from "@emotion/react";
 
@@ -38,6 +39,9 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
 
   useDebouncedEffect(
     () => {
+      if (searchKeyword && searchOption === "INITIAL") {
+        toast("먼저 검색 옵션을 선택해주세요!");
+      }
       setDebouncedSearchKeyword(searchKeyword);
     },
     500,
