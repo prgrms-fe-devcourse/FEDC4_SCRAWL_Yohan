@@ -20,7 +20,6 @@ import { ReactComponent as Game } from "./game.svg";
 import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Job } from "./job.svg";
 import { ReactComponent as Like } from "./like.svg";
-import { ReactComponent as Logo2 } from "./logo2.svg";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as Message } from "./message.svg";
 import { ReactComponent as Moon } from "./moon.svg";
@@ -44,7 +43,6 @@ export {
   Game,
   Job,
   Security,
-  Logo2,
   Add,
   Done,
   Edit,
