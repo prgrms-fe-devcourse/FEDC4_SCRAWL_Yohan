@@ -12,6 +12,8 @@ import { useThemeStore } from "@stores/theme.store";
 
 import { PATH } from "@constants/index";
 
+import { createdAtToString } from "@utils/createdAtToString";
+
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import {
@@ -77,7 +79,7 @@ const NotiDropdown = ({ visible, onClose }: NotiDropdownProps) => {
                   : "님이 댓글을 남겼습니다"}
               </Text>
               <Text size={10} color={theme.TEXT300}>
-                {new Date(createdAt).toLocaleString()}
+                {createdAtToString(new Date(createdAt))}
               </Text>
             </Flex>
           </Flex>
