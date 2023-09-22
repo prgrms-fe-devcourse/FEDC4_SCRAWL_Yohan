@@ -12,6 +12,7 @@ import { Alert, Home, Search } from "@assets/svg";
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import { NotiDropdown } from "../NotiDropdown";
+import { SearchModal } from "../SearchModal";
 import {
   getSidebarIconText,
   getSidebarText,
@@ -36,6 +37,7 @@ const SidebarMain = ({
 }: SidebarMainProps) => {
   const channelColor = theme.TEXT300;
   const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   return (
     <>
@@ -68,6 +70,7 @@ const SidebarMain = ({
           color: channelColor
         }}
         css={getSidebarIconText(theme)}
+        onClick={() => setIsSearchModalOpen(true)}
       />
       {isLoggedIn && (
         <UserInfo
@@ -105,6 +108,10 @@ const SidebarMain = ({
           />
         </div>
       )}
+      <SearchModal
+        visible={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+      />
     </>
   );
 };

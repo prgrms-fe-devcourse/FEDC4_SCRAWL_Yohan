@@ -1,6 +1,7 @@
 import { ReactComponent as AI } from "./AI.svg";
 import { ReactComponent as Add } from "./add.svg";
 import { ReactComponent as Alert } from "./alert.svg";
+import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as AlertMore } from "./alertMore.svg";
 import { ReactComponent as Back } from "./back.svg";
 import { ReactComponent as BigData } from "./bigData.svg";
@@ -61,6 +62,7 @@ export {
   ExpandMore,
   Sun,
   Moon,
-  NotFound
+  NotFound,
+  ArrowBack
 };
 export type SVGType = typeof Alert;

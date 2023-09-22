@@ -30,7 +30,7 @@ export const DOMAIN = {
   READ_NOTIFICATION: "/notifications/seen",
   CREATE_NOTIFICATION: "/notifications/create",
   SEARCH_USER: (searchKeyword: string) => `/search/users/${searchKeyword}`,
-  SEARCH_ALL: (searchKeyword: string) => ` /search/all/${searchKeyword}`
+  SEARCH_ALL: (searchKeyword: string) => `/search/all/${searchKeyword}`
 } as const;
 
 export const NETWORK = {

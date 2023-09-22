@@ -6,6 +6,7 @@ import ErrorPage from "@pages/ErrorPage";
 import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
 import PasswordPage from "@pages/PasswordPage";
+import SearchPage from "@pages/SearchPage/SearchPage";
 import SignUpPage from "@pages/SignUpPage";
 import UserPage from "@pages/UserPage/UserPage";
 
@@ -41,7 +42,7 @@ const AppRouter = () => {
           path={PATH.EDIT_ARTICLE(":articleId")}
           element={<ArticleEdit />}
         />
-        <Route path={PATH.SEARCH} element={<div>search</div>} />
+        <Route path={PATH.SEARCH} element={<SearchPage />} />
         <Route path={PATH.USER(":userId")} element={<UserPage />} />
       </Route>
       <Route path={PATH.SIGNUP} element={<SignUpPage />} />
