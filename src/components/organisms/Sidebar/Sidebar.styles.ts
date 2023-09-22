@@ -22,11 +22,11 @@ export const getSidebarNav = (theme: Theme) => css`
   position: relative;
   z-index: 10;
   @media (max-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 1s;
+    transition: transform 0.5s;
     transform: translate(-200%);
   }
   @media (min-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 1s;
+    transition: transform 0.5s;
     transform: translate(0%);
   }
 `;
