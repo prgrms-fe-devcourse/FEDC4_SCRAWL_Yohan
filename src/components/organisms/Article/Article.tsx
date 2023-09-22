@@ -29,9 +29,7 @@ const Article = () => {
       {article.comments.map((comment) => (
         <Thread key={comment._id} data={comment} />
       ))}
-      {isLoggedIn && (
-        <CommentForm width="100%" articleId={articleId}></CommentForm>
-      )}
+      {isLoggedIn && <CommentForm width="100%" article={article}></CommentForm>}
     </Flex>
   );
 };
