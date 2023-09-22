@@ -26,7 +26,7 @@ import { passwordPattern } from "@constants/regex";
 import { testRegex } from "@utils/testRegEx";
 import withEnter from "@utils/withEnter";
 
-import { Logo } from "@assets/svg";
+import { Logo2 } from "@assets/svg";
 
 type passwordFormState = {
   password: string;
@@ -111,11 +111,16 @@ const PasswordPage = () => {
           gap: 20px;
           cursor: pointer;
         `}>
-        <IconText
-          onClick={handleMoveHome}
-          iconValue={{ Svg: Logo, size: 80, fill: theme.TEXT300 }}
-          textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
-        />
+        <Flex>
+          <IconText
+            css={css`
+              gap: 10px;
+            `}
+            onClick={handleMoveHome}
+            iconValue={{ Svg: Logo2, size: 64, fill: theme.TEXT300 }}
+            textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
+          />
+        </Flex>
         <Flex
           justify="center"
           align="center"

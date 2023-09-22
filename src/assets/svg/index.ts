@@ -9,6 +9,7 @@ import { ReactComponent as ExpandMore } from "./expandMore.svg";
 import { ReactComponent as Folder } from "./folder.svg";
 import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Like } from "./like.svg";
+import { ReactComponent as Logo2 } from "./logo2.svg";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as Message } from "./message.svg";
 import { ReactComponent as Moon } from "./moon.svg";
@@ -19,6 +20,7 @@ import { ReactComponent as Search } from "./search.svg";
 import { ReactComponent as Sun } from "./sun.svg";
 
 export {
+  Logo2,
   Add,
   Done,
   Edit,
