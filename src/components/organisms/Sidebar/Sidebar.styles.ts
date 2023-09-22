@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 
+import { WIDTH_MAP } from "@constants/media";
 import { Theme } from "@constants/theme";
 
 const navWidth = "250px";
@@ -20,6 +21,14 @@ export const getSidebarNav = (theme: Theme) => css`
   background-color: ${theme.BACKGROUND100};
   position: relative;
   z-index: 10;
+  @media (max-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 1s;
+    transform: translate(-200%);
+  }
+  @media (min-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 1s;
+    transform: translate(0%);
+  }
 `;
 
 export const getSidebarLogo = (theme: Theme) => css`
