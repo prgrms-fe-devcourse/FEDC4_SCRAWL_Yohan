@@ -8,21 +8,25 @@ import Image from "@components/atoms/Image";
 import ArticleWriteEditor from "@components/organisms/ArticleWrite/ArticleWriteEditor";
 
 import { useCommentCreateMutation } from "@hooks/api/useCommentCreateMutation";
+import { useNotificationCreateMutation } from "@hooks/api/useNotificationCreateMutation";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
 
 import { useThemeStore } from "@stores/theme.store";
+
+import { Article } from "@type/models/Article";
 
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 type CommentFormProps = {
   width: string;
-  articleId: string;
+  article: Article;
 };
 
-const CommentForm = ({ width, articleId }: CommentFormProps) => {
+const CommentForm = ({ width, article }: CommentFormProps) => {
   const [comment, setComment] = useState("");
   const theme = useThemeStore((state) => state.theme);
   const { mutate: commentCreateMutate } = useCommentCreateMutation();
+  const { mutate: notificationCreateMutate } = useNotificationCreateMutation();
 
   const { data } = useUserByTokenQuery();
 
@@ -31,9 +35,17 @@ const CommentForm = ({ width, articleId }: CommentFormProps) => {
   };
   const handleSubmitComment = () => {
     commentCreateMutate(
-      { comment, postId: articleId },
+      { comment, postId: article._id },
       {
-        onSuccess: () => setComment("")
+        onSuccess: (newComment) => {
+          setComment("");
+          notificationCreateMutate({
+            notificationType: "COMMENT",
+            notificationTypeId: newComment._id,
+            postId: newComment.post,
+            userId: article.author._id
+          });
+        }
       }
     );
   };
