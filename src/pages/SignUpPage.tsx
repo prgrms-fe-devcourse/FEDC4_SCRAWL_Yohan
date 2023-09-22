@@ -38,6 +38,7 @@ type FormState = {
   email: string;
   fullName: string;
   password: string;
+  passwordConfirm: string;
 };
 
 const SignUpPage = () => {
@@ -47,7 +48,8 @@ const SignUpPage = () => {
   const [form, setForm] = useState<FormState>({
     email: "",
     fullName: "",
-    password: ""
+    password: "",
+    passwordConfirm: ""
   });
   const navigate = useNavigate();
   const { isLoggedIn } = useLoggedIn();
@@ -79,6 +81,10 @@ const SignUpPage = () => {
     }
     if (!testRegex(passwordPattern, form.password)) {
       toast.error("패스워드 형식이 맞지 않습니다.");
+      return;
+    }
+    if (form.password !== form.passwordConfirm) {
+      toast.error("패스워드와 패스워드 확인이 일치하지 않습니다.");
       return;
     }
     try {
@@ -227,6 +233,35 @@ const SignUpPage = () => {
                 type="password"
                 value={form.password}
                 name="password"
+                onChange={handleUpdateForm}
+              />
+            </Flex>
+            <Flex
+              direction="column"
+              justify="space-between"
+              align="start"
+              css={css`
+                width: 272px;
+                height: 62px;
+              `}>
+              <Flex
+                css={css`
+                  color: ${theme.TEXT600};
+                `}>
+                비밀번호 확인
+              </Flex>
+              <Input
+                placeholder="6자 이상(알파벳, 숫자 필수)"
+                width="100%"
+                height="35px"
+                fontSize="14px"
+                background={theme.BACKGROUND200}
+                color={theme.TEXT300}
+                border={`1px solid ${theme.BORDER100}`}
+                borderRadius="4px"
+                type="password"
+                value={form.passwordConfirm}
+                name="passwordConfirm"
                 onChange={handleUpdateForm}
               />
             </Flex>
