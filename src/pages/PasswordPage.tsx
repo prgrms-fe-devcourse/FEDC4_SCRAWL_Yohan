@@ -191,11 +191,7 @@ const PasswordPage = () => {
                 onChange={handleUpdateForm}
               />
             </Flex>
-            <Button
-              width="100%"
-              height="35px"
-              onClick={handleUpdatePassword}
-              color={theme.TEXT100}>
+            <Button width="100%" height="35px" onClick={handleUpdatePassword}>
               비밀번호 변경하기
             </Button>
           </Flex>

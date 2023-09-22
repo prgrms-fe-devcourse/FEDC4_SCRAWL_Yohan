@@ -233,8 +233,7 @@ const SignUpPage = () => {
             <Button
               width="100%"
               height="35px"
-              onClick={() => handleSignUp(form)}
-              color={theme.TEXT100}>
+              onClick={() => handleSignUp(form)}>
               회원가입
             </Button>
           </Flex>

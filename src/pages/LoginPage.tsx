@@ -185,8 +185,7 @@ const LoginPage = () => {
             <Button
               width="100%"
               height="35px"
-              onClick={() => handleLogin(form)}
-              color={theme.TEXT100}>
+              onClick={() => handleLogin(form)}>
               로그인
             </Button>
             <Text size={14}>
