@@ -17,6 +17,7 @@ type UserInfoProps = Combine<
     username: string;
     fontSize: number;
     gap?: number;
+    color?: string;
   },
   HTMLAttributes<HTMLDivElement>
 >;
@@ -27,6 +28,7 @@ const UserInfo = ({
   username,
   fontSize,
   gap = 5,
+  color,
   ...props
 }: UserInfoProps) => {
   const { theme } = useThemeStore();
@@ -44,7 +46,9 @@ const UserInfo = ({
           border-radius: 50%;
         `}
       />
-      <Text size={fontSize}>{username}</Text>
+      <Text size={fontSize} color={color}>
+        {username}
+      </Text>
     </Flex>
   );
 };
