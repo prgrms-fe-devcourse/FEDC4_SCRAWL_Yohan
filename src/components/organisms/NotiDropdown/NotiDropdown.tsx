@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Dropdown from "@components/atoms/Dropdown";
@@ -20,6 +21,7 @@ import {
   getUserImageStyle,
   notiDropdownInnerStyle
 } from "./NotiDropdown.styles";
+import { filterNotifications } from "./filterNotifications";
 
 type NotiDropdownProps = {
   visible: boolean;
@@ -30,7 +32,12 @@ const NotiDropdown = ({ visible, onClose }: NotiDropdownProps) => {
   const theme = useThemeStore((state) => state.theme);
   const navigate = useNavigate();
 
-  const { notifications } = useNotificationsQuery();
+  const { notifications: rawNotifications } = useNotificationsQuery();
+  const notifications = useMemo(
+    () => filterNotifications(rawNotifications),
+    [rawNotifications]
+  );
+
   const { mutate: notificationsReadMutate } = useNotificationsReadMutation();
 
   return (
