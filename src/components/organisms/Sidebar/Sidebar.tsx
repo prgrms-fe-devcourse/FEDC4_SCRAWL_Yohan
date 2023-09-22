@@ -68,6 +68,7 @@ const Sidebar = () => {
             channelIconSize={channelIconSize}
             channelTextSize={channelTextSize}
             isLoggedIn={isLoggedIn}
+            userImage={user?.image}
           />
           <SidebarChannels
             theme={theme}

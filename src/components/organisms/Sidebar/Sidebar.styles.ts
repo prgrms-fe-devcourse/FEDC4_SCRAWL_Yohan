@@ -70,3 +70,14 @@ export const sidebarChannelLogout = css`
   height: calc(90vh - 375px);
   min-height: 150px;
 `;
+export const getUserInfoStyle = (theme: Theme) => css`
+  margin: ${channelMargine};
+  padding: ${channelPadding};
+  color: ${theme.TEXT300};
+  gap: ${channelGap};
+  :hover {
+    cursor: pointer;
+    background: ${theme.BACKGROUND200};
+    border-radius: ${borderRadius};
+  }
+`;
