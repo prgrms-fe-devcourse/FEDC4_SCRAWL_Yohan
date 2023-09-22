@@ -14,6 +14,21 @@ import {
   sidebarChannelLogout
 } from "./Sidebar.styles";
 
+const channels = [
+  "질문/답변",
+  "자유",
+  "취업/이직",
+  "프론트엔드",
+  "백엔드",
+  "게임",
+  "데이터",
+  "AI",
+  "빅데이터",
+  "DevOps",
+  "임베디드",
+  "보안"
+];
+
 type SidebarChannelsProps = {
   theme: Theme;
   navigatePage: (page: string, channelID?: string) => void;
@@ -37,17 +52,17 @@ const SidebarChannels = ({
         CHANNELS
       </Text>
       <div css={isLoggedIn ? sidebarChannelLogin : sidebarChannelLogout}>
-        {channelList.map(({ name, _id }) => {
+        {channelList.map(({ name, _id }, i) => {
           return (
             <IconText
               key={_id}
               iconValue={{
-                Svg: name === "질문/답변" ? Question : Folder,
+                Svg: name === "question" ? Question : Folder,
                 size: channelIconSize,
                 fill: channelColor
               }}
               textValue={{
-                children: name,
+                children: channels[i],
                 size: channelTextSize,
                 color: channelColor
               }}
