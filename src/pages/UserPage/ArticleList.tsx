@@ -1,7 +1,4 @@
-import { css } from "@emotion/react";
-
-import Flex from "@components/atoms/Flex";
-import { Card } from "@components/organisms/Card";
+import { CardList } from "@components/organisms/CardList";
 
 import { useArticlesByUserIdQuery } from "@hooks/api/useArticleByUserIdQuery";
 
@@ -11,29 +8,13 @@ type ArticleListProps = {
 };
 
 const ArticleList = ({ userId, currentChannel }: ArticleListProps) => {
-  const { articles } = useArticlesByUserIdQuery(userId);
-  return (
-    <Flex
-      css={css`
-        flex-wrap: wrap;
-        gap: 20px;
-      `}>
-      {articles
-        ?.filter(
-          (article) =>
-            currentChannel === "all" || article.channel._id === currentChannel
-        )
-        .map((article) => (
-          <div
-            key={article._id}
-            css={css`
-              margin-bottom: 20px;
-            `}>
-            <Card width={271} article={article}></Card>
-          </div>
-        ))}
-    </Flex>
+  const { articles: allArticles } = useArticlesByUserIdQuery(userId);
+  const articles = allArticles?.filter(
+    (article) =>
+      currentChannel === "all" || article.channel._id === currentChannel
   );
+
+  return <CardList articles={articles} />;
 };
 
 export default ArticleList;

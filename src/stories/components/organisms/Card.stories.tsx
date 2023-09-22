@@ -16,10 +16,7 @@ const meta = {
       </BrowserRouter>
     )
   ],
-  tags: ["autodocs"],
-  argTypes: {
-    width: { control: { type: "range", min: 0, max: 500 } }
-  }
+  tags: ["autodocs"]
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -27,7 +24,6 @@ export default meta;
 export const Default: StoryObj<typeof meta> = {
   render: (args) => <Card {...args} />,
   args: {
-    width: 300,
     article: {
       _id: "kajskldjl123",
       title: JSON.stringify({

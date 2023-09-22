@@ -5,10 +5,6 @@ export const channelPageOuterStyle = css`
 `;
 
 export const channelPageHeaderStyle = css`
+  height: 48px;
   gap: 10px;
-`;
-
-export const cardListStyle = css`
-  margin-top: 30px;
-  flex-wrap: wrap;
 `;
