@@ -4,11 +4,9 @@ import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import { CardList } from "@components/organisms/CardList";
 
-import { useSearchAllQuery } from "@hooks/api/useSearchAllQuery";
+import { useSearchArticlesQuery } from "@hooks/api/useSearchArticlesQuery";
 
 import { useThemeStore } from "@stores/theme.store";
-
-import { Article } from "@type/models/Article";
 
 import {
   searchPageHeaderStyle,
@@ -19,11 +17,7 @@ const SearchPage = () => {
   const theme = useThemeStore((state) => state.theme);
   const [searchParams] = useSearchParams();
   const [option, keyword] = getSearchMap(searchParams);
-  const { searchResults } = useSearchAllQuery(keyword);
-
-  const articles = searchResults.filter(
-    (searchResult): searchResult is Article => "title" in searchResult
-  );
+  const { articles } = useSearchArticlesQuery(keyword);
 
   return (
     <Flex direction="column" css={searchPageOuterStyle}>
