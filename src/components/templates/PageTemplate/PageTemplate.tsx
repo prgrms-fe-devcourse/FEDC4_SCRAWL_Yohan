@@ -4,50 +4,44 @@ import { Outlet } from "react-router-dom";
 import Flex from "@components/atoms/Flex";
 import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import { Sidebar } from "@components/organisms/Sidebar";
+import { sidebarAppearButton } from "@components/organisms/Sidebar/Sidebar.styles";
 import SidebarAppearButton from "@components/organisms/Sidebar/SidebarAppearButton";
 import {
-  pageInnerWrapperStyle,
-  pageTemplateWrapperStyle
+  getPageTemplateWrapperStyle,
+  pageInnerWrapperStyle
 } from "@components/templates/PageTemplate/PageTemplate.styles";
-
-import { WIDTH_MAP } from "@constants/media";
 
 const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [outerWidth, setOuterWidth] = useState(0);
+  const [sidebarAppearForce, setSidebarAppearForce] = useState(true);
+
+  const handleSidebarAppear = () => {
+    setSidebarAppearForce(!sidebarAppearForce);
+  };
+
   const handleScroll = useCallback(() => {
     setScrollPosition(window.scrollY);
   }, []);
-  const handleResize = useCallback(() => {
-    setOuterWidth(window.outerWidth);
-  }, []);
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll, { passive: true });
 
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
     };
-  }, [handleScroll, handleResize]);
-  // useEffect(() => {
-  //   console.log(outerWidth);
-  //   console.log(scrollPosition);
-  // }, [outerWidth, scrollPosition]);
+  }, [handleScroll]);
   return (
     <>
-      <Flex css={pageTemplateWrapperStyle}>
+      <Flex css={getPageTemplateWrapperStyle(sidebarAppearForce)}>
         <SidebarAppearButton
-          appearButton={WIDTH_MAP.sm > outerWidth ? true : false}
           Rtl={false}
+          handleSidebarAppear={handleSidebarAppear}
+          css={sidebarAppearButton}
         />
-        <Sidebar outerWidth={outerWidth} />
+        <Sidebar
+          outerWidth={outerWidth}
+          sidebarAppearForce={sidebarAppearForce}
+          handleSidebarAppear={handleSidebarAppear}
+        />
         <div css={pageInnerWrapperStyle}>
           <Outlet />
         </div>

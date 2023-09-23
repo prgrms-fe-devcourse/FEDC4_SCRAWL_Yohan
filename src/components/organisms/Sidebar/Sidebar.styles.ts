@@ -30,14 +30,23 @@ export const getSidebarNav = (theme: Theme) => css`
     transform: translate(0%);
   } */
 `;
-export const sidebarNavMedia = css`
+
+export const getSidebarNavMedia = (sidebarAppearForce: boolean) => css`
   @media (max-width: ${WIDTH_MAP.sm}px) {
     transition: transform 0.5s;
     transform: translate(-200%);
+
+    transform: translate(${sidebarAppearForce ? 0 : -200}%);
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: visible;
+    }
   }
   @media (min-width: ${WIDTH_MAP.sm}px) {
     transition: transform 0.5s;
     transform: translate(0%);
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: hidden;
+    }
   }
 `;
 
@@ -101,11 +110,10 @@ export const getUserInfoStyle = (theme: Theme) => css`
   }
 `;
 export const sidebarAppearButton = css`
-  position: "fixed";
-  margin-left: 15px;
-  margin-top: 30px;
+  position: absolute;
+  top: 15px;
+  z-index: 1;
 `;
 export const sidebarAppearButtonRtl = css`
-  position: "fixed";
-  margin-left: 30px;
+  margin-left: 80px;
 `;

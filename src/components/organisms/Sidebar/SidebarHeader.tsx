@@ -1,11 +1,11 @@
 import Flex from "@components/atoms/Flex";
 import IconText from "@components/molecules/IconText";
 
-import { WIDTH_MAP } from "@constants/media";
 import { Theme } from "@constants/theme";
 
 import { Logo } from "@assets/svg";
 
+import { sidebarAppearButtonRtl } from "./Sidebar.styles";
 import { getSidebarLogo, sidebarLogo } from "./Sidebar.styles";
 import SidebarAppearButton from "./SidebarAppearButton";
 
@@ -13,11 +13,12 @@ type SidebarHeaderProps = {
   theme: Theme;
   outerWidth: number;
   navigatePage: (page: string, channelID?: string) => void;
+  handleSidebarAppear: () => void;
 };
 const SidebarHeader = ({
   theme,
   navigatePage,
-  outerWidth
+  handleSidebarAppear
 }: SidebarHeaderProps) => {
   return (
     <div css={getSidebarLogo(theme)}>
@@ -34,8 +35,9 @@ const SidebarHeader = ({
           />
         </div>
         <SidebarAppearButton
-          appearButton={WIDTH_MAP.sm > outerWidth ? true : false}
           Rtl={true}
+          handleSidebarAppear={handleSidebarAppear}
+          css={sidebarAppearButtonRtl}
         />
       </Flex>
     </div>

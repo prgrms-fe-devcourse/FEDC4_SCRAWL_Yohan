@@ -1,35 +1,42 @@
+import { HTMLAttributes } from "react";
+
 import FloatingButton from "@components/molecules/FloatingButton";
 
 import { useThemeStore } from "@stores/theme.store";
 
+import { Combine } from "@type/Combine";
+
 import { KeyboardTab, KeyboardTabRtl } from "@assets/svg";
 
-import { sidebarAppearButton, sidebarAppearButtonRtl } from "./Sidebar.styles";
+type SidebarAppearButton = Combine<
+  {
+    Rtl: boolean;
+    handleSidebarAppear: () => void;
+  },
+  HTMLAttributes<HTMLElement>
+>;
 
-const SidebarAppearButton = ({ appearButton = true, Rtl = true }) => {
+const SidebarAppearButton = ({
+  Rtl = true,
+  handleSidebarAppear,
+  ...props
+}: SidebarAppearButton) => {
   const { theme } = useThemeStore();
   return (
     <>
-      {appearButton && (
-        <FloatingButton
-          iconValue={{
-            Svg: Rtl ? KeyboardTabRtl : KeyboardTab,
-            size: 25,
-            fill: theme.TEXT600
-          }}
-          buttonValue={{
-            background: "transparent",
-            children: "",
-            shadow: false,
-            onClick: () => {
-              // console.log("up");
-              // window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-          css={
-            Rtl ? sidebarAppearButtonRtl : sidebarAppearButton
-          }></FloatingButton>
-      )}
+      <FloatingButton
+        iconValue={{
+          Svg: Rtl ? KeyboardTabRtl : KeyboardTab,
+          size: 25,
+          fill: theme.TEXT600
+        }}
+        buttonValue={{
+          background: "transparent",
+          children: "",
+          shadow: false,
+          onClick: handleSidebarAppear
+        }}
+        {...props}></FloatingButton>
     </>
   );
 };
