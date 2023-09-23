@@ -10,13 +10,17 @@ import { IconProps } from "@components/atoms/Icon";
 
 import { useThemeStore } from "@stores/theme.store";
 
+interface FloatingButtonProps extends ButtonProps {
+  shadow?: boolean;
+}
+
 const FloatingButton = ({
   iconValue,
   buttonValue,
   ...props
 }: {
   iconValue: IconProps;
-  buttonValue: ButtonProps;
+  buttonValue: FloatingButtonProps;
 } & HTMLAttributes<HTMLDivElement>) => {
   const {
     Svg,
@@ -31,12 +35,10 @@ const FloatingButton = ({
     background = "#ffffff",
     color = "#FFF",
     borderRadius = "50px",
+    shadow = true,
     ...buttonProps
   } = buttonValue;
   const { theme } = useThemeStore();
-  function click() {
-    return;
-  }
   return (
     <div {...props}>
       <Button
@@ -46,9 +48,8 @@ const FloatingButton = ({
         background={background}
         color={color}
         borderRadius={borderRadius}
-        onClick={click}
         css={css`
-          box-shadow: ${theme.SHADOW};
+          box-shadow: ${shadow && theme.SHADOW};
         `}
         {...buttonProps}>
         <Flex justify="center">
