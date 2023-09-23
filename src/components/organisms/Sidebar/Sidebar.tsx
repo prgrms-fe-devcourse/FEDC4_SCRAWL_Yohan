@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -38,6 +38,7 @@ const Sidebar = ({
   const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const navigate = useNavigate();
+  const myLocation = useLocation().pathname;
   const navigatePage = (page: string, channelId?: string) => {
     switch (page) {
       case "HOME":
@@ -45,7 +46,6 @@ const Sidebar = ({
       case "USER":
         return navigate(`/users/${user?._id}`);
       case "CHANNEL":
-        console.log(channelId);
         return navigate(`/channels/${channelId}`);
       case "LOGIN":
         return navigate("/login");
@@ -57,7 +57,6 @@ const Sidebar = ({
         console.log("일치하는 경로가 없습니다.");
     }
   };
-
   return (
     <Flex
       direction="column"
@@ -85,6 +84,7 @@ const Sidebar = ({
             channelTextSize={channelTextSize}
             isLoggedIn={isLoggedIn}
             userImage={user?.image}
+            myLocation={myLocation}
           />
           <SidebarChannels
             theme={theme}
@@ -92,6 +92,7 @@ const Sidebar = ({
             channelIconSize={channelIconSize}
             channelTextSize={channelTextSize}
             isLoggedIn={isLoggedIn}
+            myLocation={myLocation}
           />
         </div>
         <SidebarFooter

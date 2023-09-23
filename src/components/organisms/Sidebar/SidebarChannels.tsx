@@ -24,6 +24,7 @@ import {
 } from "@assets/svg";
 
 import {
+  getSelectedSidebarIconText,
   getSidebarIconText,
   getSidebarText,
   sidebarChannelLogin,
@@ -51,13 +52,15 @@ type SidebarChannelsProps = {
   channelIconSize: number;
   channelTextSize: number;
   isLoggedIn: boolean;
+  myLocation: string;
 };
 const SidebarChannels = ({
   theme,
   navigatePage,
   channelIconSize,
   channelTextSize,
-  isLoggedIn
+  isLoggedIn,
+  myLocation
 }: SidebarChannelsProps) => {
   const channelColor = theme.TEXT300;
   const channelList = [...useChannelsQuery().channels];
@@ -113,7 +116,11 @@ const SidebarChannels = ({
                 size: channelTextSize,
                 color: channelColor
               }}
-              css={getSidebarIconText(theme)}
+              css={
+                myLocation.includes(_id)
+                  ? getSelectedSidebarIconText(theme)
+                  : getSidebarIconText(theme)
+              }
               onClick={() => navigatePage("CHANNEL", _id)}
             />
           );
