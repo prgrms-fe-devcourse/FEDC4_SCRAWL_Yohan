@@ -4,11 +4,11 @@ import { Outlet } from "react-router-dom";
 import Flex from "@components/atoms/Flex";
 import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import { Sidebar } from "@components/organisms/Sidebar";
-import { sidebarAppearButton } from "@components/organisms/Sidebar/Sidebar.styles";
+import { getSidebarAppearButton } from "@components/organisms/Sidebar/Sidebar.styles";
 import SidebarAppearButton from "@components/organisms/Sidebar/SidebarAppearButton";
 import {
-  getPageTemplateWrapperStyle,
-  pageInnerWrapperStyle
+  pageInnerWrapperStyle,
+  pageTemplateWrapperStyle
 } from "@components/templates/PageTemplate/PageTemplate.styles";
 
 const PageTemplate = () => {
@@ -31,11 +31,11 @@ const PageTemplate = () => {
   }, [handleScroll]);
   return (
     <>
-      <Flex css={getPageTemplateWrapperStyle(sidebarAppearForce)}>
+      <Flex css={pageTemplateWrapperStyle}>
         <SidebarAppearButton
           Rtl={false}
           handleSidebarAppear={handleSidebarAppear}
-          css={sidebarAppearButton}
+          css={getSidebarAppearButton(sidebarAppearForce)}
         />
         <Sidebar
           outerWidth={outerWidth}
