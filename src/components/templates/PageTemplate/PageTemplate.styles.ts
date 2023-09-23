@@ -10,13 +10,13 @@ export const pageTemplateWrapperStyle = css`
 
 export const pageInnerWrapperStyle = css`
   flex-grow: 1;
-
+  margin-left: 330px;
   @media (max-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 0.5s;
-    transform: translate(10px);
+    transition: margin-left 0.5s ease-in-out;
+    margin-left: 10px;
   }
   @media (min-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 0.5s;
-    transform: translate(330px);
+    transition: margin-left 0.5s ease-in-out;
+    margin-left: 330px;
   }
 `;

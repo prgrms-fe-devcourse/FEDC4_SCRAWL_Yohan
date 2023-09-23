@@ -11,18 +11,32 @@ import {
 
 const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [, setOuterWidth] = useState(0);
   const handleScroll = () => {
-    const position = window.scrollY;
-    setScrollPosition(position);
+    setScrollPosition(window.scrollY);
   };
+  const handleResize = () => {
+    setOuterWidth(window.outerWidth);
+  };
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll, { passive: true });
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-
+    window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
-
+  // useEffect(() => {
+  //   console.log(outerWidth);
+  //   console.log(scrollPosition);
+  // }, [outerWidth, scrollPosition]);
   return (
     <>
       <Flex css={pageTemplateWrapperStyle}>
