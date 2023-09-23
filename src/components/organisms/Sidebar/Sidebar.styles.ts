@@ -21,6 +21,16 @@ export const getSidebarNav = (theme: Theme) => css`
   background-color: ${theme.BACKGROUND100};
   position: relative;
   z-index: 10;
+  /* @media (max-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 0.5s;
+    transform: translate(-200%);
+  }
+  @media (min-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 0.5s;
+    transform: translate(0%);
+  } */
+`;
+export const sidebarNavMedia = css`
   @media (max-width: ${WIDTH_MAP.sm}px) {
     transition: transform 0.5s;
     transform: translate(-200%);
