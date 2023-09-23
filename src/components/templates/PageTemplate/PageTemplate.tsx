@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
@@ -11,13 +11,13 @@ import {
 
 const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [, setOuterWidth] = useState(0);
-  const handleScroll = () => {
+  const [outerWidth, setOuterWidth] = useState(0);
+  const handleScroll = useCallback(() => {
     setScrollPosition(window.scrollY);
-  };
-  const handleResize = () => {
+  }, []);
+  const handleResize = useCallback(() => {
     setOuterWidth(window.outerWidth);
-  };
+  }, []);
   // useEffect(() => {
   //   window.addEventListener("scroll", handleScroll, { passive: true });
 
@@ -32,7 +32,7 @@ const PageTemplate = () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [handleScroll, handleResize]);
   // useEffect(() => {
   //   console.log(outerWidth);
   //   console.log(scrollPosition);
@@ -40,7 +40,7 @@ const PageTemplate = () => {
   return (
     <>
       <Flex css={pageTemplateWrapperStyle}>
-        <Sidebar />
+        <Sidebar outerWidth={outerWidth} />
         <div css={pageInnerWrapperStyle}>
           <Outlet />
         </div>
