@@ -1,10 +1,10 @@
-import { css } from "@emotion/react";
-
 import FloatingButton from "@components/molecules/FloatingButton";
 
 import { useThemeStore } from "@stores/theme.store";
 
 import { KeyboardTab, KeyboardTabRtl } from "@assets/svg";
+
+import { sidebarAppearButton, sidebarAppearButtonRtl } from "./Sidebar.styles";
 
 const SidebarAppearButton = ({ appearButton = true, Rtl = true }) => {
   const { theme } = useThemeStore();
@@ -26,10 +26,9 @@ const SidebarAppearButton = ({ appearButton = true, Rtl = true }) => {
               // window.scrollTo({ top: 0, behavior: "smooth" });
             }
           }}
-          css={css`
-            margin-left: 15px;
-            margin-top: 30px;
-          `}></FloatingButton>
+          css={
+            Rtl ? sidebarAppearButtonRtl : sidebarAppearButton
+          }></FloatingButton>
       )}
     </>
   );

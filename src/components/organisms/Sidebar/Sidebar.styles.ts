@@ -100,3 +100,12 @@ export const getUserInfoStyle = (theme: Theme) => css`
     border-radius: ${borderRadius};
   }
 `;
+export const sidebarAppearButton = css`
+  position: "fixed";
+  margin-left: 15px;
+  margin-top: 30px;
+`;
+export const sidebarAppearButtonRtl = css`
+  position: "fixed";
+  margin-left: 30px;
+`;

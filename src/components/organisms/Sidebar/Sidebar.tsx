@@ -11,7 +11,7 @@ import { useLoggedIn } from "@hooks/useLoggedIn";
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
 
-import { getSidebarNav } from "./Sidebar.styles";
+import { getSidebarNav, sidebarNavMedia } from "./Sidebar.styles";
 import SidebarChannels from "./SidebarChannels";
 import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
@@ -20,7 +20,11 @@ import SidebarMain from "./SidebarMain";
 const channelIconSize = 25;
 const channelTextSize = 14;
 
-const Sidebar = () => {
+type SidebarProps = {
+  outerWidth: number;
+};
+
+const Sidebar = ({ outerWidth }: SidebarProps) => {
   const { theme } = useThemeStore();
   const { data: user } = useUserByTokenQuery();
   const { isLoggedIn } = useLoggedIn();
@@ -54,8 +58,12 @@ const Sidebar = () => {
         position: fixed;
         height: 100vh;
       `}>
-      <nav css={getSidebarNav(theme)}>
-        <SidebarHeader theme={theme} navigatePage={navigatePage} />
+      <nav css={[getSidebarNav(theme), sidebarNavMedia]}>
+        <SidebarHeader
+          theme={theme}
+          navigatePage={navigatePage}
+          outerWidth={outerWidth}
+        />
         <div
           css={css`
             height: calc(100vh - 273px);
