@@ -66,6 +66,16 @@ export const getSidebarIconText = (theme: Theme) => css`
     border-radius: ${borderRadius};
   }
 `;
+export const getSelectedSidebarIconText = (theme: Theme) => css`
+  margin: ${channelMargine};
+  padding: ${channelPadding};
+  gap: ${channelGap};
+  background: ${theme.BACKGROUND200};
+  border-radius: ${borderRadius};
+  :hover {
+    cursor: pointer;
+  }
+`;
 
 export const getSidebarText = () => css`
   margin-left: ${textMargine};
@@ -99,6 +109,17 @@ export const getUserInfoStyle = (theme: Theme) => css`
     cursor: pointer;
     background: ${theme.BACKGROUND200};
     border-radius: ${borderRadius};
+  }
+`;
+export const getSelectedUserInfoStyle = (theme: Theme) => css`
+  margin: ${channelMargine};
+  padding: ${channelPadding};
+  color: ${theme.TEXT300};
+  gap: ${channelGap};
+  background: ${theme.BACKGROUND200};
+  border-radius: ${borderRadius};
+  :hover {
+    cursor: pointer;
   }
 `;
 export const getSidebarAppearButton = (sidebarAppearForce: boolean) => css`
