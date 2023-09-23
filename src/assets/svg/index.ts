@@ -1,8 +1,8 @@
 import { ReactComponent as AI } from "./AI.svg";
 import { ReactComponent as Add } from "./add.svg";
 import { ReactComponent as Alert } from "./alert.svg";
-import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as AlertMore } from "./alertMore.svg";
+import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as Back } from "./back.svg";
 import { ReactComponent as BigData } from "./bigData.svg";
 import { ReactComponent as BracketLower } from "./bracketLower.svg";
@@ -20,6 +20,8 @@ import { ReactComponent as Front } from "./front.svg";
 import { ReactComponent as Game } from "./game.svg";
 import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Job } from "./job.svg";
+import { ReactComponent as KeyboardTab } from "./keyboardTab.svg";
+import { ReactComponent as KeyboardTabRtl } from "./keyboardTabRtl.svg";
 import { ReactComponent as Like } from "./like.svg";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as Message } from "./message.svg";
@@ -63,6 +65,8 @@ export {
   Sun,
   Moon,
   NotFound,
-  ArrowBack
+  ArrowBack,
+  KeyboardTab,
+  KeyboardTabRtl
 };
 export type SVGType = typeof Alert;
