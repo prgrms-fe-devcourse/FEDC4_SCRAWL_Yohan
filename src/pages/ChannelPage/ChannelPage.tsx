@@ -60,7 +60,6 @@ const ChannelPage = () => {
         </Text>
       </Flex>
       {articles?.length === 0 && <EmptyAlert message="게시글이 없습니다" />}
-      <CardList articles={articles} isFetchingNext={isFetchingNextPage} />
       <div
         css={css`
           box-sizing: border-box;
