@@ -17,21 +17,12 @@ import { getCardSliderStyle } from "./ArticlesByChannelSlider.style";
 const CardSlider = ({ articles }: { articles: Article[] }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-  const offset = useRef(4);
+  const offset = useRef(getOffset(window.innerWidth));
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const [, setWindowWidth] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => {
-      if (innerWidth >= WIDTH_MAP.sm && innerWidth < WIDTH_MAP.md) {
-        offset.current = 2;
-      }
-      if (innerWidth >= WIDTH_MAP.md && innerWidth < WIDTH_MAP.lg) {
-        offset.current = 3;
-      }
-      if (innerWidth >= WIDTH_MAP.lg) {
-        offset.current = 4;
-      }
-
+      offset.current = getOffset(windowWidth);
       setTotalPage(Math.ceil(articles.length / offset.current));
       setWindowWidth(window.innerWidth);
       setCurrentPage(1);
@@ -43,7 +34,7 @@ const CardSlider = ({ articles }: { articles: Article[] }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [articles.length]);
+  }, [articles.length, windowWidth]);
 
   const filteredArticles = articles.filter(
     (_, index) =>
@@ -85,3 +76,16 @@ const CardSlider = ({ articles }: { articles: Article[] }) => {
 };
 
 export default CardSlider;
+
+const getOffset = (width: number) => {
+  if (width < WIDTH_MAP.sm) {
+    return 2;
+  }
+  if (width >= WIDTH_MAP.sm && width < WIDTH_MAP.md) {
+    return 2;
+  }
+  if (width >= WIDTH_MAP.md && width < WIDTH_MAP.lg) {
+    return 3;
+  }
+  return 4;
+};
