@@ -10,6 +10,7 @@ import { useUserQuery } from "@hooks/api/useUserQuery";
 import { useUserUpdateMutation } from "@hooks/api/useUserUpdateMutation";
 
 import { PATH } from "@constants/index";
+import { WIDTH_MAP } from "@constants/media";
 
 import ArticleList from "./ArticleList";
 import ChannelList from "./ChannelTab";
@@ -69,7 +70,11 @@ const UserPage = () => {
       <Flex
         direction="column"
         css={css`
-          width: 90%;
+          padding-right: 20px;
+          box-sizing: border-box;
+          width: calc(100vw - 340px);
+          min-width: ${WIDTH_MAP.sm}px;
+          max-width: ${WIDTH_MAP.lg}px;
         `}>
         <UserInfo
           editMode={editMode}

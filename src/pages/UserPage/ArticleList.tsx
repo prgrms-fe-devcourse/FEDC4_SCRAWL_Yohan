@@ -20,7 +20,6 @@ const ArticleList = ({ userId, currentChannel }: ArticleListProps) => {
     <div
       css={css`
         width: 100%;
-        margin-right: -20px;
       `}>
       <CardList articles={articles} />
     </div>
