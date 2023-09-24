@@ -6,7 +6,6 @@ const MAX_CARD_WIDTH = 320;
 
 export const cardListStyle = css`
   box-sizing: border-box;
-  padding: 20px 20px 0 0;
   flex-grow: 1;
 
   width: 100%;

@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import { CardList } from "@components/organisms/CardList";
@@ -56,7 +58,14 @@ const ChannelPage = () => {
           {channel?.name}
         </Text>
       </Flex>
-      <CardList articles={articles} isFetchingNext={isFetchingNextPage} />
+      <div
+        css={css`
+          box-sizing: border-box;
+          padding: 20px 20px 0 0;
+          width: 100%;
+        `}>
+        <CardList articles={articles} isFetchingNext={isFetchingNextPage} />
+      </div>
       <div ref={lastElementRef} />
     </Flex>
   );

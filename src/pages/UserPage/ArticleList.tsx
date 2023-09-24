@@ -1,3 +1,5 @@
+import { css } from "@emotion/react";
+
 import { CardList } from "@components/organisms/CardList";
 
 import { useArticlesByUserIdQuery } from "@hooks/api/useArticleByUserIdQuery";
@@ -14,7 +16,14 @@ const ArticleList = ({ userId, currentChannel }: ArticleListProps) => {
       currentChannel === "all" || article.channel._id === currentChannel
   );
 
-  return <CardList articles={articles} />;
+  return (
+    <div
+      css={css`
+        width: 100%;
+      `}>
+      <CardList articles={articles} />
+    </div>
+  );
 };
 
 export default ArticleList;

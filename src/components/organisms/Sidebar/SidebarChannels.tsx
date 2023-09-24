@@ -1,27 +1,10 @@
-import { FunctionComponent } from "react";
-
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 
+import { CHANNEL_MAP } from "@constants/channel";
 import { Theme } from "@constants/theme";
-
-import {
-  AI,
-  Back,
-  BigData,
-  Data,
-  DevOps,
-  Embedded,
-  Folder,
-  Free,
-  Front,
-  Game,
-  Job,
-  Question,
-  Security
-} from "@assets/svg";
 
 import {
   getSidebarIconText,
@@ -29,21 +12,6 @@ import {
   sidebarChannelLogin,
   sidebarChannelLogout
 } from "./Sidebar.styles";
-
-const channels = [
-  "질문/답변",
-  "자유",
-  "취업/이직",
-  "프론트엔드",
-  "백엔드",
-  "게임",
-  "데이터",
-  "AI",
-  "빅데이터",
-  "DevOps",
-  "임베디드",
-  "보안"
-];
 
 type SidebarChannelsProps = {
   theme: Theme;
@@ -61,55 +29,24 @@ const SidebarChannels = ({
 }: SidebarChannelsProps) => {
   const channelColor = theme.TEXT300;
   const channelList = [...useChannelsQuery().channels];
-  const IconMatch = (channel: string) => {
-    switch (channel) {
-      case "question":
-        return Question;
-      case "free":
-        return Free;
-      case "job search":
-        return Job;
-      case "frontend":
-        return Front;
-      case "backend":
-        return Back;
-      case "game":
-        return Game;
-      case "data":
-        return Data;
-      case "AI":
-        return AI;
-      case "big data":
-        return BigData;
-      case "DevOps":
-        return DevOps;
-      case "embedded":
-        return Embedded;
-      case "security":
-        return Security;
-      default:
-        return Folder;
-    }
-  };
+
   return (
     <>
       <Text size={12} css={getSidebarText}>
         CHANNELS
       </Text>
       <div css={isLoggedIn ? sidebarChannelLogin : sidebarChannelLogout}>
-        {channelList.map(({ name, _id }, i) => {
+        {channelList.map(({ name, _id }) => {
           return (
             <IconText
               key={_id}
               iconValue={{
-                Svg: IconMatch(name) as FunctionComponent<
-                  React.SVGProps<SVGSVGElement>
-                >,
+                Svg: CHANNEL_MAP[_id].Svg,
                 size: channelIconSize,
                 fill: channelColor
               }}
               textValue={{
-                children: channels[i],
+                children: name,
                 size: channelTextSize,
                 color: channelColor
               }}
