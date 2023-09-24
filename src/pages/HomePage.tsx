@@ -21,7 +21,7 @@ const HomePage = () => {
     <Flex
       direction="column"
       css={css`
-        margin-top: 20px;
+        margin: 20px 0;
       `}>
       <Flex gap={10}>
         <Text
@@ -29,8 +29,8 @@ const HomePage = () => {
             cursor: pointer;
           `}
           onClick={() => setSortType("date")}
-          size={32}
-          color={sortType === "date" ? theme.TEXT600 : theme.TEXT300}
+          size={20}
+          color={sortType === "date" ? theme.PRIMARY : theme.TEXT300}
           strong={true}>
           최신순
         </Text>
@@ -39,8 +39,8 @@ const HomePage = () => {
             cursor: pointer;
           `}
           onClick={() => setSortType("like")}
-          size={32}
-          color={sortType === "like" ? theme.TEXT600 : theme.TEXT300}
+          size={20}
+          color={sortType === "like" ? theme.PRIMARY : theme.TEXT300}
           strong={true}>
           인기순
         </Text>
@@ -49,6 +49,7 @@ const HomePage = () => {
         direction="column"
         css={css`
           margin-top: 20px;
+          margin-left: -36px;
           gap: 20px;
         `}>
         {channels.map((channel) => (

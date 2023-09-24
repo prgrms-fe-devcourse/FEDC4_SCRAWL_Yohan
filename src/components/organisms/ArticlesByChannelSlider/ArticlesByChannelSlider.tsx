@@ -55,6 +55,9 @@ const ArticlesByChannelSlider = ({
       }
     });
   }
+  if (filteredArticles.length === 0) {
+    return null;
+  }
 
   return (
     <Flex
@@ -65,6 +68,7 @@ const ArticlesByChannelSlider = ({
       `}>
       <Text
         css={css`
+          margin-left: 36px;
           cursor: pointer;
         `}
         onClick={() => navigate(PATH.CHANNEL(channelId))}
@@ -72,11 +76,7 @@ const ArticlesByChannelSlider = ({
         strong={true}>
         {channelName}
       </Text>
-      {filteredArticles.length === 0 ? (
-        <Text size={24}>채널에 글이 존재하지 않습니다.</Text>
-      ) : (
-        <CardSlider articles={filteredArticles}></CardSlider>
-      )}
+      <CardSlider articles={filteredArticles}></CardSlider>
     </Flex>
   );
 };
