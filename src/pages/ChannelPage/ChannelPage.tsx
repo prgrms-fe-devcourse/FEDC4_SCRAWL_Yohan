@@ -60,7 +60,9 @@ const ChannelPage = () => {
       </Flex>
       <div
         css={css`
-          margin: 20px 20px 0 0;
+          box-sizing: border-box;
+          padding: 20px 20px 0 0;
+          width: 100%;
         `}>
         <CardList articles={articles} isFetchingNext={isFetchingNextPage} />
       </div>
