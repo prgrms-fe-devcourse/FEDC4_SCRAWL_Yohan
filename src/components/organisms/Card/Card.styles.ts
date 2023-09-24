@@ -9,8 +9,8 @@ export const getCardOuterStyle = (theme: Theme) => css`
   border-radius: 8px;
   background-color: ${theme.BACKGROUND200};
   :hover {
-    transform: scale(1.01);
-    transition: transform 0.1s ease;
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
   }
 `;
 
