@@ -1,8 +1,8 @@
 import { ReactComponent as AI } from "./AI.svg";
 import { ReactComponent as Add } from "./add.svg";
 import { ReactComponent as Alert } from "./alert.svg";
-import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as AlertMore } from "./alertMore.svg";
+import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as Back } from "./back.svg";
 import { ReactComponent as BigData } from "./bigData.svg";
 import { ReactComponent as BracketLower } from "./bracketLower.svg";
@@ -25,7 +25,9 @@ import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as Message } from "./message.svg";
 import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as My } from "./my.svg";
+import { ReactComponent as Next } from "./next.svg";
 import { ReactComponent as NotFound } from "./notFound.svg";
+import { ReactComponent as Prev } from "./prev.svg";
 import { ReactComponent as Question } from "./question.svg";
 import { ReactComponent as Search } from "./search.svg";
 import { ReactComponent as Security } from "./security.svg";
@@ -44,6 +46,8 @@ export {
   Game,
   Job,
   Security,
+  Prev,
+  Next,
   Add,
   Done,
   Edit,
