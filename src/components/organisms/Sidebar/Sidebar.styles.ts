@@ -13,6 +13,8 @@ const borderRadius = "8px";
 export const getSidebarNav = (theme: Theme) => css`
   margin: 20px;
   width: ${navWidth};
+  display: flex;
+  flex-direction: column;
   height: 100%;
   flex-grow: 1;
   min-height: 531px;
@@ -92,12 +94,12 @@ export const getSidebarFooter = (theme: Theme) => css`
 
 export const sidebarChannelLogin = css`
   overflow: auto;
-  height: calc(90vh - 475px);
+  height: calc(90vh - 420px);
   min-height: 50px;
 `;
 export const sidebarChannelLogout = css`
   overflow: auto;
-  height: calc(90vh - 375px);
+  height: calc(90vh - 325px);
   min-height: 150px;
 `;
 export const getUserInfoStyle = (theme: Theme) => css`

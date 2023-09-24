@@ -73,7 +73,7 @@ const Sidebar = ({
         />
         <div
           css={css`
-            height: calc(100vh - 273px);
+            flex-grow: 1;
             min-height: 300px;
             padding: 5px;
           `}>

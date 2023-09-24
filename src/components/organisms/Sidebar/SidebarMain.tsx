@@ -78,11 +78,7 @@ const SidebarMain = ({
           size: channelTextSize,
           color: channelColor
         }}
-        css={
-          isSearchModalOpen
-            ? getSelectedSidebarIconText(theme)
-            : getSidebarIconText(theme)
-        }
+        css={getSidebarIconText(theme)}
         onClick={() => setIsSearchModalOpen(true)}
       />
       {isLoggedIn && (
@@ -116,11 +112,7 @@ const SidebarMain = ({
               size: channelTextSize,
               color: channelColor
             }}
-            css={
-              isNotiDropdownOpen
-                ? getSelectedSidebarIconText(theme)
-                : getSidebarIconText(theme)
-            }
+            css={getSidebarIconText(theme)}
             onClick={() => setIsNotiDropdownOpen(true)}
           />
           <NotiDropdown
