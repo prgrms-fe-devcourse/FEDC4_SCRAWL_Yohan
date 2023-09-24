@@ -32,6 +32,7 @@ import { ReactComponent as Prev } from "./prev.svg";
 import { ReactComponent as Question } from "./question.svg";
 import { ReactComponent as Search } from "./search.svg";
 import { ReactComponent as Security } from "./security.svg";
+import { ReactComponent as Spinner } from "./spinner.svg";
 import { ReactComponent as Sun } from "./sun.svg";
 
 export {
@@ -69,6 +70,7 @@ export {
   Moon,
   NotFound,
   ArrowBack,
+  Spinner
   NoImage
 };
 export type SVGType = typeof Alert;

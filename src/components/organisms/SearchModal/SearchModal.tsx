@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { css } from "@emotion/react";
@@ -132,22 +132,28 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
               ))}
             </Conditional.Condition>
             <Conditional.Condition name="TAG">
-              <TagSearchResults
-                tag={debouncedSearchKeyword}
-                onClick={onClose}
-              />
+              <Suspense fallback={null}>
+                <TagSearchResults
+                  tag={debouncedSearchKeyword}
+                  onClick={onClose}
+                />
+              </Suspense>
             </Conditional.Condition>
             <Conditional.Condition name="USER">
-              <UserSearchResults
-                searchKeyword={debouncedSearchKeyword}
-                onClick={onClose}
-              />
+              <Suspense fallback={null}>
+                <UserSearchResults
+                  searchKeyword={debouncedSearchKeyword}
+                  onClick={onClose}
+                />
+              </Suspense>
             </Conditional.Condition>
             <Conditional.Condition name="ARTICLE">
-              <ArticleSearchResults
-                keyword={debouncedSearchKeyword}
-                onClick={onClose}
-              />
+              <Suspense fallback={null}>
+                <ArticleSearchResults
+                  keyword={debouncedSearchKeyword}
+                  onClick={onClose}
+                />
+              </Suspense>
             </Conditional.Condition>
           </Conditional>
         </div>
