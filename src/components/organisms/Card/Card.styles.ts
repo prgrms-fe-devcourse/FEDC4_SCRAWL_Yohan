@@ -8,6 +8,10 @@ export const getCardOuterStyle = (theme: Theme) => css`
   box-shadow: ${theme.SHADOW};
   border-radius: 8px;
   background-color: ${theme.BACKGROUND200};
+  :hover {
+    transform: scale(1.01);
+    transition: transform 0.1s ease;
+  }
 `;
 
 export const cardImgStyle = css`
