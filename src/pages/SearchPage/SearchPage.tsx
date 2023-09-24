@@ -1,5 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import { CardList } from "@components/organisms/CardList";
@@ -29,7 +31,14 @@ const SearchPage = () => {
           {keyword.replace(/__/g, "")}
         </Text>
       </Flex>
-      <CardList articles={articles} />
+      <div
+        css={css`
+          box-sizing: border-box;
+          padding: 20px 20px 0 0;
+          width: 100%;
+        `}>
+        <CardList articles={articles} />
+      </div>
     </Flex>
   );
 };

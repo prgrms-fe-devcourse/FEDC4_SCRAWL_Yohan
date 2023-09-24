@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
+import { EmptyAlert } from "@components/molecules/EmptyAlert";
 import UserInfo from "@components/molecules/UserInfo";
 
 import { useSearchUsersQuery } from "@hooks/api/useSearchUsersQuery";
@@ -56,6 +57,9 @@ const UserSearchResults = ({
           }}
         />
       ))}
+      {searchKeyword && users.length === 0 && (
+        <EmptyAlert message="검색 결과가 없습니다" />
+      )}
     </Flex>
   );
 };

@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
+import { EmptyAlert } from "@components/molecules/EmptyAlert";
 
 import { useSearchArticlesQuery } from "@hooks/api/useSearchArticlesQuery";
 
@@ -50,6 +51,9 @@ const TagSearchResults = ({ tag, onClick }: TagSearchResultsProps) => {
           }}>
           자세히 보기
         </Button>
+      )}
+      {tag && articles.length === 0 && (
+        <EmptyAlert message="검색 결과가 없습니다" />
       )}
     </Flex>
   );

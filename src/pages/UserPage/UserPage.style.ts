@@ -14,6 +14,7 @@ export const getChannelItemStyle = (
   cursor: pointer;
   border-top: ${item._id === currentChannel && `1px solid ${theme.TEXT600}`};
   color: ${item._id === currentChannel && theme.TEXT300};
+  white-space: nowrap;
 `;
 export const getChannelTabStyle = (theme: Theme) => css`
   gap: 20px;
