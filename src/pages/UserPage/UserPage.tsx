@@ -5,7 +5,6 @@ import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
 
-import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 import { useUserProfileUploadMutation } from "@hooks/api/useUserProfileUploadMutation";
 import { useUserQuery } from "@hooks/api/useUserQuery";
 import { useUserUpdateMutation } from "@hooks/api/useUserUpdateMutation";
@@ -27,11 +26,10 @@ const UserPage = () => {
   const userUpdateMutation = useUserUpdateMutation(userId);
   const userProfileUploadMutation = useUserProfileUploadMutation(userId);
   const { user } = useUserQuery(userId);
-  const { channels } = useChannelsQuery();
 
   const [editMode, setEditMode] = useState(false);
   const [fullName, setFullName] = useState("");
-  const [currentChannel, setCurrentChannel] = useState(channels[0]._id);
+  const [currentChannel, setCurrentChannel] = useState("all");
 
   const handleMovePasswordPage = () => {
     navigate(PATH.PASSWORD);
@@ -64,16 +62,14 @@ const UserPage = () => {
 
   return (
     <Flex
-      justify="center"
-      align="center"
       css={css`
         width: 100%;
-        margin: 50px 0;
+        margin: 20px 0;
       `}>
       <Flex
         direction="column"
         css={css`
-          width: 80%;
+          width: 90%;
         `}>
         <UserInfo
           editMode={editMode}

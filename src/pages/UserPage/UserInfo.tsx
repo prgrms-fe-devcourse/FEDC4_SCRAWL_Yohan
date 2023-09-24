@@ -41,12 +41,94 @@ const UserInfo = ({
   const theme = useThemeStore((state) => state.theme);
   const loggedInUser = useUserByTokenQuery();
   return (
-    <>
+    <Flex
+      gap={50}
+      css={css`
+        width: 100%;
+        height: 150px;
+        padding-left: 70px;
+        margin-bottom: 30px;
+        box-sizing: border-box;
+      `}>
+      <Flex justify="center">
+        <label
+          htmlFor={
+            user._id === loggedInUser.data?._id ? "uploadImageFile" : ""
+          }>
+          <Image
+            css={css`
+              cursor: ${user._id === loggedInUser.data?._id && "pointer"};
+              border-radius: 50%;
+              border: 1px solid ${theme.BORDER100};
+            `}
+            src={user.image || placeholderUser}
+            width={150}
+            height={150}
+            alt={"이미지를 불러올 수 없습니다."}
+            mode="contain"></Image>
+        </label>
+        <input
+          onChange={handleUpdateCurrentImageFile}
+          type="file"
+          id="uploadImageFile"
+          accept="image/*"
+          hidden={true}
+        />
+      </Flex>
+      <Flex
+        direction="column"
+        justify="center"
+        align="start"
+        css={css`
+          height: 100%;
+          gap: 20px;
+        `}>
+        <Flex
+          align="center"
+          css={css`
+            gap: 10px;
+          `}>
+          {editMode ? (
+            <Input
+              onChange={handleInputChange}
+              width="100px"
+              height="20px"
+              fontSize="16px"
+              value={fullName}
+              background={theme.BORDER100}
+            />
+          ) : (
+            <Text children={user.fullName} size={20} />
+          )}
+
+          {editMode ? (
+            <Icon
+              css={css`
+                cursor: pointer;
+              `}
+              onClick={handleEditModeOff}
+              Svg={Done}
+              size={20}
+            />
+          ) : (
+            user._id === loggedInUser.data?._id && (
+              <Icon
+                css={css`
+                  cursor: pointer;
+                `}
+                onClick={handleEditModeOn}
+                Svg={Edit}
+                size={20}
+              />
+            )
+          )}
+        </Flex>
+        <div>게시글 {user.posts.length}개</div>
+      </Flex>
       <Flex
         justify="end"
         css={css`
-          width: 100%;
-          margin-bottom: 30px;
+          flex-grow: 1;
         `}>
         {user._id === loggedInUser.data?._id && (
           <div
@@ -58,94 +140,7 @@ const UserInfo = ({
           </div>
         )}
       </Flex>
-      <Flex
-        css={css`
-          width: 100%;
-          height: 150px;
-          margin-bottom: 30px;
-        `}>
-        <Flex
-          justify="center"
-          css={css`
-            width: 33%;
-          `}>
-          <label
-            htmlFor={
-              user._id === loggedInUser.data?._id ? "uploadImageFile" : ""
-            }>
-            <Image
-              css={css`
-                cursor: ${user._id === loggedInUser.data?._id && "pointer"};
-                border-radius: 50%;
-                border: 1px solid ${theme.BORDER100};
-              `}
-              src={user.image || placeholderUser}
-              width={150}
-              height={150}
-              alt={"이미지를 불러올 수 없습니다."}
-              mode="contain"></Image>
-          </label>
-          <input
-            onChange={handleUpdateCurrentImageFile}
-            type="file"
-            id="uploadImageFile"
-            accept="image/*"
-            hidden={true}
-          />
-        </Flex>
-        <Flex
-          direction="column"
-          justify="center"
-          align="start"
-          css={css`
-            width: 66%;
-            height: 100%;
-            gap: 20px;
-          `}>
-          <Flex
-            align="center"
-            css={css`
-              gap: 10px;
-            `}>
-            {editMode ? (
-              <Input
-                onChange={handleInputChange}
-                width="100px"
-                height="15px"
-                fontSize="15px"
-                value={fullName}
-                background={theme.BORDER100}
-              />
-            ) : (
-              <Text children={user.fullName} size={15} />
-            )}
-
-            {editMode ? (
-              <Icon
-                css={css`
-                  cursor: pointer;
-                `}
-                onClick={handleEditModeOff}
-                Svg={Done}
-                size={15}
-              />
-            ) : (
-              user._id === loggedInUser.data?._id && (
-                <Icon
-                  css={css`
-                    cursor: pointer;
-                  `}
-                  onClick={handleEditModeOn}
-                  Svg={Edit}
-                  size={15}
-                />
-              )
-            )}
-          </Flex>
-          <div>{user.posts.length} posts</div>
-        </Flex>
-      </Flex>
-    </>
+    </Flex>
   );
 };
 
