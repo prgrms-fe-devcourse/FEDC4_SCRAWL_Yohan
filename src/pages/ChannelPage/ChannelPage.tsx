@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import { EmptyAlert } from "@components/molecules/EmptyAlert";
@@ -59,6 +61,14 @@ const ChannelPage = () => {
       </Flex>
       {articles?.length === 0 && <EmptyAlert message="게시글이 없습니다" />}
       <CardList articles={articles} isFetchingNext={isFetchingNextPage} />
+      <div
+        css={css`
+          box-sizing: border-box;
+          padding: 20px 20px 0 0;
+          width: 100%;
+        `}>
+        <CardList articles={articles} isFetchingNext={isFetchingNextPage} />
+      </div>
       <div ref={lastElementRef} />
     </Flex>
   );

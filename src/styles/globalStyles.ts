@@ -14,6 +14,31 @@ export const getGlobalStyles = (theme: Theme) => {
     }
     body {
       margin: 0;
+      ::-webkit-scrollbar-thumb {
+        background-color: ${theme.type === "LIGHT" ? "lightgray" : "gray"};
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 0.5em;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 0.25em;
+    }
+    :hover::-webkit-scrollbar-thumb {
+      background-color: ${theme.type === "LIGHT" ? "lightgray" : "gray"};
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
   `;
 };

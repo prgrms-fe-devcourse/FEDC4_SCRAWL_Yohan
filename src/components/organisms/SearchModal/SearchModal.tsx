@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { css } from "@emotion/react";
@@ -15,6 +15,12 @@ import { useThemeStore } from "@stores/theme.store";
 import { ArrowBack, Search } from "@assets/svg";
 
 import ArticleSearchResults from "./ArticleSearchResults";
+import {
+  getSearchModalContainerStyle,
+  getSearchOptionBtnStyle,
+  getTooltipStyle,
+  searchModalHeaderStyle
+} from "./SearchModal.styles";
 import TagSearchResults from "./TagSearchResults";
 import UserSearchResults from "./UserSearchResults";
 
@@ -60,36 +66,27 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
       />
       <Modal.Container
         onClose={onClose}
-        css={css`
-          display: flex;
-          flex-direction: column;
-          width: 520px;
-          height: 470px;
-          border: 1px solid var(--border-color);
-          border-radius: 8px;
-          background-color: ${theme.BACKGROUND100};
-        `}>
-        <Flex
-          align="center"
-          gap={10}
-          css={css`
-            border-bottom: 1px solid var(--border-color);
-            padding: 20px;
-          `}>
+        css={getSearchModalContainerStyle(theme)}>
+        <Flex align="center" gap={10} css={searchModalHeaderStyle}>
           {searchOption === "INITIAL" ? (
             <Icon size={30} Svg={Search} />
           ) : (
-            <Icon
-              size={30}
-              Svg={ArrowBack}
-              css={css`
-                cursor: pointer;
-              `}
-              onClick={() => {
-                setSearchOption("INITIAL");
-                setSearchKeyword("");
-              }}
-            />
+            <>
+              <Icon
+                size={30}
+                Svg={ArrowBack}
+                css={css`
+                  cursor: pointer;
+                `}
+                onClick={() => {
+                  setSearchOption("INITIAL");
+                  setSearchKeyword("");
+                }}
+              />
+              <div css={getTooltipStyle(theme)}>
+                {SEARCH_OPTIONS[searchOption]}
+              </div>
+            </>
           )}
           <input
             value={searchKeyword}
@@ -114,16 +111,7 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
               {Object.entries(SEARCH_OPTIONS).map(([key, option]) => (
                 <div
                   key={key}
-                  css={css`
-                    margin: 10px;
-                    padding: 10px;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    color: ${theme.TEXT300};
-                    :hover {
-                      background-color: ${theme.BACKGROUND200};
-                    }
-                  `}
+                  css={getSearchOptionBtnStyle(theme)}
                   onClick={() =>
                     setSearchOption(key as keyof typeof SEARCH_OPTIONS)
                   }>
@@ -132,22 +120,28 @@ const SearchModal = ({ visible, onClose }: SearchModalProps) => {
               ))}
             </Conditional.Condition>
             <Conditional.Condition name="TAG">
-              <TagSearchResults
-                tag={debouncedSearchKeyword}
-                onClick={onClose}
-              />
+              <Suspense fallback={null}>
+                <TagSearchResults
+                  tag={debouncedSearchKeyword}
+                  onClick={onClose}
+                />
+              </Suspense>
             </Conditional.Condition>
             <Conditional.Condition name="USER">
-              <UserSearchResults
-                searchKeyword={debouncedSearchKeyword}
-                onClick={onClose}
-              />
+              <Suspense fallback={null}>
+                <UserSearchResults
+                  searchKeyword={debouncedSearchKeyword}
+                  onClick={onClose}
+                />
+              </Suspense>
             </Conditional.Condition>
             <Conditional.Condition name="ARTICLE">
-              <ArticleSearchResults
-                keyword={debouncedSearchKeyword}
-                onClick={onClose}
-              />
+              <Suspense fallback={null}>
+                <ArticleSearchResults
+                  keyword={debouncedSearchKeyword}
+                  onClick={onClose}
+                />
+              </Suspense>
             </Conditional.Condition>
           </Conditional>
         </div>

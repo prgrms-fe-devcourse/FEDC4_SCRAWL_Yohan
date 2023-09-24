@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
+import Icon from "@components/atoms/Icon";
 import Image from "@components/atoms/Image";
 import UserInfo from "@components/molecules/UserInfo";
 
@@ -12,6 +13,7 @@ import { Article } from "@type/models/Article";
 
 import { PATH } from "@constants/index";
 
+import { NoImage } from "@assets/svg";
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import { cardImgStyle, getCardOuterStyle, userInfoStyle } from "./Card.styles";
@@ -47,14 +49,17 @@ const Card = ({ article }: CardProps) => {
           onClick={() => navigate(PATH.ARTICLE(article._id))}
         />
       ) : (
-        <div
+        <Flex
+          align="center"
+          justify="center"
           css={css`
             width: 100%;
             aspect-ratio: 16 / 10;
             cursor: pointer;
           `}
-          onClick={() => navigate(PATH.ARTICLE(article._id))}
-        />
+          onClick={() => navigate(PATH.ARTICLE(article._id))}>
+          <Icon Svg={NoImage} size={70} fill={theme.BACKGROUND300} />
+        </Flex>
       )}
 
       <CardFooter article={article} />

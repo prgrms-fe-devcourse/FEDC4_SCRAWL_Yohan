@@ -48,6 +48,7 @@ const DropdownContainer = ({
         left: 0;
         box-sizing: border-box;
         z-index: 2000;
+        animation: 0.2s ease 0s 1 fadeIn;
       `}
       {...props}>
       {children}
