@@ -7,6 +7,23 @@ import { CHANNEL_MAP } from "@constants/channel";
 import { Theme } from "@constants/theme";
 
 import {
+  AI,
+  Back,
+  BigData,
+  Data,
+  DevOps,
+  Embedded,
+  Folder,
+  Free,
+  Front,
+  Game,
+  Job,
+  Question,
+  Security
+} from "@assets/svg";
+
+import {
+  getSelectedSidebarIconText,
   getSidebarIconText,
   getSidebarText,
   sidebarChannelLogin,
@@ -19,13 +36,15 @@ type SidebarChannelsProps = {
   channelIconSize: number;
   channelTextSize: number;
   isLoggedIn: boolean;
+  myLocation: string;
 };
 const SidebarChannels = ({
   theme,
   navigatePage,
   channelIconSize,
   channelTextSize,
-  isLoggedIn
+  isLoggedIn,
+  myLocation
 }: SidebarChannelsProps) => {
   const channelColor = theme.TEXT300;
   const channelList = [...useChannelsQuery().channels];
@@ -50,7 +69,11 @@ const SidebarChannels = ({
                 size: channelTextSize,
                 color: channelColor
               }}
-              css={getSidebarIconText(theme)}
+              css={
+                myLocation.includes(_id)
+                  ? getSelectedSidebarIconText(theme)
+                  : getSidebarIconText(theme)
+              }
               onClick={() => navigatePage("CHANNEL", _id)}
             />
           );

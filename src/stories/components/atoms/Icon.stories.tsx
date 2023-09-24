@@ -22,6 +22,8 @@ import {
   Game,
   Home,
   Job,
+  KeyboardTab,
+  KeyboardTabRtl,
   Like,
   Logo,
   Message,
@@ -72,6 +74,8 @@ export const Default: StoryObj<typeof Icon> = {
       <Icon {...args} Svg={Game} />
       <Icon {...args} Svg={Job} />
       <Icon {...args} Svg={Security} />
+      <Icon {...args} Svg={KeyboardTab} />
+      <Icon {...args} Svg={KeyboardTabRtl} />
     </>
   )
 };

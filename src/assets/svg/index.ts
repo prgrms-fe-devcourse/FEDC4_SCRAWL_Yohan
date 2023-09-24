@@ -20,6 +20,8 @@ import { ReactComponent as Front } from "./front.svg";
 import { ReactComponent as Game } from "./game.svg";
 import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Job } from "./job.svg";
+import { ReactComponent as KeyboardTab } from "./keyboardTab.svg";
+import { ReactComponent as KeyboardTabRtl } from "./keyboardTabRtl.svg";
 import { ReactComponent as Like } from "./like.svg";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as LogoAlert } from "./logoAlert.svg";
@@ -71,6 +73,8 @@ export {
   Moon,
   NotFound,
   ArrowBack,
+  KeyboardTab,
+  KeyboardTabRtl,
   LogoAlert,
   Spinner,
   NoImage

@@ -14,6 +14,8 @@ import placeholderUser from "@assets/svg/placeholderUser.svg";
 import { NotiDropdown } from "../NotiDropdown";
 import { SearchModal } from "../SearchModal";
 import {
+  getSelectedSidebarIconText,
+  getSelectedUserInfoStyle,
   getSidebarIconText,
   getSidebarText,
   getUserInfoStyle
@@ -26,6 +28,7 @@ type SidebarMainProps = {
   channelTextSize: number;
   isLoggedIn: boolean;
   userImage: string | undefined;
+  myLocation: string;
 };
 const SidebarMain = ({
   theme,
@@ -33,9 +36,11 @@ const SidebarMain = ({
   channelIconSize,
   channelTextSize,
   isLoggedIn,
-  userImage
+  userImage,
+  myLocation
 }: SidebarMainProps) => {
   const channelColor = theme.TEXT300;
+
   const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
@@ -55,7 +60,11 @@ const SidebarMain = ({
           size: channelTextSize,
           color: channelColor
         }}
-        css={getSidebarIconText(theme)}
+        css={
+          myLocation === "/"
+            ? getSelectedSidebarIconText(theme)
+            : getSidebarIconText(theme)
+        }
         onClick={() => navigatePage("HOME")}
       />
       <IconText
@@ -69,7 +78,11 @@ const SidebarMain = ({
           size: channelTextSize,
           color: channelColor
         }}
-        css={getSidebarIconText(theme)}
+        css={
+          isSearchModalOpen
+            ? getSelectedSidebarIconText(theme)
+            : getSidebarIconText(theme)
+        }
         onClick={() => setIsSearchModalOpen(true)}
       />
       {isLoggedIn && (
@@ -79,7 +92,11 @@ const SidebarMain = ({
           username="내 정보"
           fontSize={14}
           color={theme.TEXT300}
-          css={getUserInfoStyle(theme)}
+          css={
+            myLocation.includes("users")
+              ? getSelectedUserInfoStyle(theme)
+              : getUserInfoStyle(theme)
+          }
           onClick={() => navigatePage("USER")}
         />
       )}
@@ -99,7 +116,11 @@ const SidebarMain = ({
               size: channelTextSize,
               color: channelColor
             }}
-            css={getSidebarIconText(theme)}
+            css={
+              isNotiDropdownOpen
+                ? getSelectedSidebarIconText(theme)
+                : getSidebarIconText(theme)
+            }
             onClick={() => setIsNotiDropdownOpen(true)}
           />
           <NotiDropdown

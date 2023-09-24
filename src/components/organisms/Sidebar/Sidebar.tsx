@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ import { useLoggedIn } from "@hooks/useLoggedIn";
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
 
-import { getSidebarNav } from "./Sidebar.styles";
+import { getSidebarNav, getSidebarNavMedia } from "./Sidebar.styles";
 import SidebarChannels from "./SidebarChannels";
 import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
@@ -20,13 +20,25 @@ import SidebarMain from "./SidebarMain";
 const channelIconSize = 25;
 const channelTextSize = 14;
 
-const Sidebar = () => {
+type SidebarProps = {
+  outerWidth: number;
+  // sidebarAppear: boolean;
+  sidebarAppearForce: boolean;
+  handleSidebarAppear: () => void;
+};
+
+const Sidebar = ({
+  outerWidth,
+  sidebarAppearForce,
+  handleSidebarAppear
+}: SidebarProps) => {
   const { theme } = useThemeStore();
   const { data: user } = useUserByTokenQuery();
   const { isLoggedIn } = useLoggedIn();
   const queryClient = useQueryClient();
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const navigate = useNavigate();
+  const myLocation = useLocation().pathname;
   const navigatePage = (page: string, channelId?: string) => {
     switch (page) {
       case "HOME":
@@ -34,7 +46,6 @@ const Sidebar = () => {
       case "USER":
         return navigate(`/users/${user?._id}`);
       case "CHANNEL":
-        console.log(channelId);
         return navigate(`/channels/${channelId}`);
       case "LOGIN":
         return navigate("/login");
@@ -46,7 +57,6 @@ const Sidebar = () => {
         console.log("일치하는 경로가 없습니다.");
     }
   };
-
   return (
     <Flex
       direction="column"
@@ -54,8 +64,13 @@ const Sidebar = () => {
         position: fixed;
         height: 100vh;
       `}>
-      <nav css={getSidebarNav(theme)}>
-        <SidebarHeader theme={theme} navigatePage={navigatePage} />
+      <nav css={[getSidebarNav(theme), getSidebarNavMedia(sidebarAppearForce)]}>
+        <SidebarHeader
+          theme={theme}
+          navigatePage={navigatePage}
+          outerWidth={outerWidth}
+          handleSidebarAppear={handleSidebarAppear}
+        />
         <div
           css={css`
             height: calc(100vh - 273px);
@@ -69,6 +84,7 @@ const Sidebar = () => {
             channelTextSize={channelTextSize}
             isLoggedIn={isLoggedIn}
             userImage={user?.image}
+            myLocation={myLocation}
           />
           <SidebarChannels
             theme={theme}
@@ -76,6 +92,7 @@ const Sidebar = () => {
             channelIconSize={channelIconSize}
             channelTextSize={channelTextSize}
             isLoggedIn={isLoggedIn}
+            myLocation={myLocation}
           />
         </div>
         <SidebarFooter

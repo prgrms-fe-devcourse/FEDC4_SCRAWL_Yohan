@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 
+import { WIDTH_MAP } from "@constants/media";
 import { Theme } from "@constants/theme";
 
 const navWidth = "250px";
@@ -20,6 +21,25 @@ export const getSidebarNav = (theme: Theme) => css`
   background-color: ${theme.BACKGROUND100};
   position: relative;
   z-index: 10;
+`;
+
+export const getSidebarNavMedia = (sidebarAppearForce: boolean) => css`
+  @media (max-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 0.5s;
+    transform: translate(-200%);
+
+    transform: translate(${sidebarAppearForce ? 0 : -200}%);
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: visible;
+    }
+  }
+  @media (min-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 0.5s;
+    transform: translate(0%);
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: hidden;
+    }
+  }
 `;
 
 export const getSidebarLogo = (theme: Theme) => css`
@@ -44,6 +64,16 @@ export const getSidebarIconText = (theme: Theme) => css`
     cursor: pointer;
     background: ${theme.BACKGROUND200};
     border-radius: ${borderRadius};
+  }
+`;
+export const getSelectedSidebarIconText = (theme: Theme) => css`
+  margin: ${channelMargine};
+  padding: ${channelPadding};
+  gap: ${channelGap};
+  background: ${theme.BACKGROUND200};
+  border-radius: ${borderRadius};
+  :hover {
+    cursor: pointer;
   }
 `;
 
@@ -80,4 +110,33 @@ export const getUserInfoStyle = (theme: Theme) => css`
     background: ${theme.BACKGROUND200};
     border-radius: ${borderRadius};
   }
+`;
+export const getSelectedUserInfoStyle = (theme: Theme) => css`
+  margin: ${channelMargine};
+  padding: ${channelPadding};
+  color: ${theme.TEXT300};
+  gap: ${channelGap};
+  background: ${theme.BACKGROUND200};
+  border-radius: ${borderRadius};
+  :hover {
+    cursor: pointer;
+  }
+`;
+export const getSidebarAppearButton = (sidebarAppearForce: boolean) => css`
+  position: absolute;
+  top: 15px;
+  z-index: 1;
+  @media (max-width: ${WIDTH_MAP.sm}px) {
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: ${sidebarAppearForce ? "hidden" : "visible"};
+    }
+  }
+  @media (min-width: ${WIDTH_MAP.sm}px) {
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: hidden;
+    }
+  }
+`;
+export const sidebarAppearButtonRtl = css`
+  margin-left: 30px;
 `;
