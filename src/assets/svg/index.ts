@@ -1,8 +1,8 @@
 import { ReactComponent as AI } from "./AI.svg";
 import { ReactComponent as Add } from "./add.svg";
 import { ReactComponent as Alert } from "./alert.svg";
-import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as AlertMore } from "./alertMore.svg";
+import { ReactComponent as ArrowBack } from "./arrowBack.svg";
 import { ReactComponent as Back } from "./back.svg";
 import { ReactComponent as BigData } from "./bigData.svg";
 import { ReactComponent as BracketLower } from "./bracketLower.svg";
@@ -22,6 +22,7 @@ import { ReactComponent as Home } from "./home.svg";
 import { ReactComponent as Job } from "./job.svg";
 import { ReactComponent as Like } from "./like.svg";
 import { ReactComponent as Logo } from "./logo.svg";
+import { ReactComponent as LogoAlert } from "./logoAlert.svg";
 import { ReactComponent as Message } from "./message.svg";
 import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as My } from "./my.svg";
@@ -63,6 +64,7 @@ export {
   Sun,
   Moon,
   NotFound,
-  ArrowBack
+  ArrowBack,
+  LogoAlert
 };
 export type SVGType = typeof Alert;
