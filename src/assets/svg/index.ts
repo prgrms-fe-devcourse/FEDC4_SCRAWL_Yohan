@@ -26,6 +26,7 @@ import { ReactComponent as Message } from "./message.svg";
 import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as My } from "./my.svg";
 import { ReactComponent as Next } from "./next.svg";
+import { ReactComponent as NoImage } from "./noImage.svg";
 import { ReactComponent as NotFound } from "./notFound.svg";
 import { ReactComponent as Prev } from "./prev.svg";
 import { ReactComponent as Question } from "./question.svg";
@@ -67,6 +68,7 @@ export {
   Sun,
   Moon,
   NotFound,
-  ArrowBack
+  ArrowBack,
+  NoImage
 };
 export type SVGType = typeof Alert;
