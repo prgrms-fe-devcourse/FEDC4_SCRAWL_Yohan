@@ -7,22 +7,6 @@ import { CHANNEL_MAP } from "@constants/channel";
 import { Theme } from "@constants/theme";
 
 import {
-  AI,
-  Back,
-  BigData,
-  Data,
-  DevOps,
-  Embedded,
-  Folder,
-  Free,
-  Front,
-  Game,
-  Job,
-  Question,
-  Security
-} from "@assets/svg";
-
-import {
   getSelectedSidebarIconText,
   getSidebarIconText,
   getSidebarText,
