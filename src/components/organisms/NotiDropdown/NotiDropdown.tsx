@@ -21,7 +21,10 @@ import {
   getNotiDropdownOuterStyle,
   getReadButtonStyle,
   getUserImageStyle,
-  notiDropdownInnerStyle
+  noNotificationStyle,
+  notiDropdownInnerStyle,
+  notiDropdownItemStyle,
+  readButtonWarpperStyle
 } from "./NotiDropdown.styles";
 import { filterNotifications } from "./filterNotifications";
 
@@ -47,18 +50,27 @@ const NotiDropdown = ({ visible, onClose }: NotiDropdownProps) => {
       visible={visible}
       onClose={onClose}
       css={getNotiDropdownOuterStyle(theme)}>
-      <Flex direction="column">
-        <button
-          onClick={() => notificationsReadMutate()}
-          css={getReadButtonStyle(theme)}>
-          모두 읽음 처리
-        </button>
+      <Flex direction="column" css={notiDropdownInnerStyle}>
+        <div css={readButtonWarpperStyle}>
+          <button
+            onClick={() => notificationsReadMutate()}
+            css={getReadButtonStyle(theme)}>
+            모두 읽음 처리
+          </button>
+        </div>
+        {notifications.length === 0 && (
+          <Flex align="center" justify="center" css={noNotificationStyle}>
+            <Text size={20} strong={true}>
+              새로운 알림 없음
+            </Text>
+          </Flex>
+        )}
         {notifications.map(({ _id, author, post, like, createdAt, seen }) => (
           <Flex
             key={_id}
             align="center"
             gap={10}
-            css={notiDropdownInnerStyle}
+            css={notiDropdownItemStyle}
             onClick={() => {
               onClose();
               post && navigate(PATH.ARTICLE(post));

@@ -16,6 +16,14 @@ export const getNotiDropdownOuterStyle = (theme: Theme) => css`
   overflow-x: hidden;
 `;
 
+export const notiDropdownInnerStyle = css`
+  height: 100%;
+`;
+
+export const readButtonWarpperStyle = css`
+  width: 100%;
+  border-bottom: 1px solid var(--border-color);
+`;
 export const getReadButtonStyle = (theme: Theme) => css`
   all: unset;
   padding: 5px;
@@ -27,7 +35,12 @@ export const getReadButtonStyle = (theme: Theme) => css`
   }
 `;
 
-export const notiDropdownInnerStyle = css`
+export const noNotificationStyle = css`
+  width: 100%;
+  flex-grow: 1;
+`;
+
+export const notiDropdownItemStyle = css`
   cursor: pointer;
   width: 100%;
   padding: 10px;
