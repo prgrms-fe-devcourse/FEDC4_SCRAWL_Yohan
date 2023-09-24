@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
+import MDEditor from "@uiw/react-md-editor";
 
 import Flex from "@components/atoms/Flex";
 
 import { useArticleQuery } from "@hooks/api/useArticleQuery";
 import { useError } from "@hooks/useError";
 import { useLoggedIn } from "@hooks/useLoggedIn";
+
+import { getEditorStyle } from "@styles/getEditorStyles";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -17,7 +20,6 @@ import { AuthError } from "@utils/AuthError";
 
 import ArticleChannelSelect from "./ArticleChannelSelect";
 import ArticleWriteButtons from "./ArticleWriteButtons";
-import ArticleWriteEditor from "./ArticleWriteEditor";
 import ArticleWriteTag from "./ArticleWriteTag";
 import ArticleWriteTitle from "./ArticleWriteTitle";
 
@@ -71,10 +73,14 @@ const ArticleEdit = () => {
         state={tags}
         width={width}
       />
-      <ArticleWriteEditor
-        stateChange={(value) => setContent(value)}
-        state={content}
-        width={width}
+      <MDEditor
+        data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}
+        preview="live"
+        height="calc(100vh - 300px)"
+        highlightEnable={false}
+        value={content}
+        onChange={(str) => setContent(str || "")}
+        css={getEditorStyle(theme)}
       />
       <ArticleWriteButtons
         theme={theme}

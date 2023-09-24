@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import DOMPurify from "dompurify";
+import MDEditor from "@uiw/react-md-editor";
 
 import Flex from "@components/atoms/Flex";
 import Modal from "@components/atoms/Modal";
@@ -11,6 +11,8 @@ import UserInfo from "@components/molecules/UserInfo";
 
 import { useCommentDeleteMutation } from "@hooks/api/useCommentDeleteMutation";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
+
+import { getEditorStyle } from "@styles/getEditorStyles";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -27,7 +29,6 @@ import { createdAtToString } from "@utils/createdAtToString";
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import {
-  getThreadContentStyle,
   getThreadDeleteBtnStyle,
   getThreadOuterStyle,
   getThreadUserInfoStyle,
@@ -51,11 +52,9 @@ const Thread = ({ data }: ThreadProps) => {
     return "comment" in data;
   };
 
-  const htmlContent = getIsComment(data)
+  const content = getIsComment(data)
     ? data.comment
     : articleTitleDataToArticleContent(data.title).content;
-
-  const sanitizedHTML = DOMPurify.sanitize(htmlContent);
 
   const handleMoveUserPage = (userId: string) => {
     navigate(PATH.USER(userId));
@@ -107,10 +106,11 @@ const Thread = ({ data }: ThreadProps) => {
             />
           </Modal>
         </Flex>
-
-        <Flex css={getThreadContentStyle(theme)}>
-          <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></div>
-        </Flex>
+        <div
+          data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}
+          css={getEditorStyle(theme)}>
+          <MDEditor.Markdown source={content} />
+        </div>
       </Flex>
     </Flex>
   );

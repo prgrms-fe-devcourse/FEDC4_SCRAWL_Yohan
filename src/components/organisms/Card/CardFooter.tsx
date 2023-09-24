@@ -17,7 +17,7 @@ import {
 import { PATH } from "@constants/index";
 
 import { createdAtToString } from "@utils/createdAtToString";
-import { htmlToPlainText } from "@utils/htmlToPlainText";
+import { markdownToPlainText } from "@utils/markdownToPlainText";
 
 import { Like, Message } from "@assets/svg";
 
@@ -54,7 +54,7 @@ const CardFooter = ({ article }: CardFooterProps) => {
           {title}
         </Text>
         <Text size={14} css={contentStyle}>
-          <div dangerouslySetInnerHTML={{ __html: htmlToPlainText(html) }} />
+          {markdownToPlainText(html)}
         </Text>
       </Flex>
 
