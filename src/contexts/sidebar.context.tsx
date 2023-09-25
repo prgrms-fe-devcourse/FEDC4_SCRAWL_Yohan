@@ -12,7 +12,7 @@ type SidebarProviderProps = {
   children: React.ReactNode;
 };
 const SidebarProvider = ({ children }: SidebarProviderProps) => {
-  const [sidebarAppear, setSidebarAppear] = useState(true);
+  const [sidebarAppear, setSidebarAppear] = useState(false);
 
   return (
     <SidebarContext.Provider value={{ sidebarAppear, setSidebarAppear }}>
