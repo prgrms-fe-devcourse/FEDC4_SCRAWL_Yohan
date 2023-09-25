@@ -63,6 +63,7 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
       css={css`
         position: fixed;
         height: 100vh;
+        z-index: 1;
       `}>
       <nav css={[getSidebarNav(theme), getSidebarNavMedia(sidebarAppear)]}>
         <SidebarHeader
