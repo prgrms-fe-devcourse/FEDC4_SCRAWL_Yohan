@@ -3,7 +3,7 @@ import { ArticleTitleData } from "@type/models/Article";
 export interface UpdateArticleRequestBody {
   postId: string;
   title: ArticleTitleData;
-  image?: BinaryData | null;
+  image?: File | null;
   imageToDeletePublicId?: string;
   channelId: string;
 }

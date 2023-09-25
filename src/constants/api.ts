@@ -1,4 +1,5 @@
 export const BASE_URL = "https://kdt.frontend.4th.programmers.co.kr:5003";
+export const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 
 export const DOMAIN = {
   HOME: "/",
