@@ -49,6 +49,7 @@ export const getSidebarLogo = (theme: Theme) => css`
 
 export const sidebarLogo = css`
   display: inline-block;
+  margin-left: 10px;
   :hover {
     cursor: pointer;
   }
@@ -122,10 +123,10 @@ export const getSelectedUserInfoStyle = (theme: Theme) => css`
 `;
 export const sidebarAppearButton = css`
   position: absolute;
-  top: -8px;
-  left: 7px;
+  top: 0px;
+  left: 15px;
   z-index: 1;
 `;
 export const sidebarAppearButtonRtl = css`
-  margin-left: 30px;
+  margin-left: 40px;
 `;

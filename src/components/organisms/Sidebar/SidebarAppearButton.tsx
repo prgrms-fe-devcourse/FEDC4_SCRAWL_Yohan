@@ -37,6 +37,8 @@ const SidebarAppearButton = ({ Rtl = true, ...props }: SidebarAppearButton) => {
           background: "transparent",
           children: "",
           shadow: false,
+          width: "35px",
+          height: "35px",
           onClick: () => setSidebarAppear(!sidebarAppear)
         }}
         css={Rtl ? sidebarAppearButtonRtl : sidebarAppearButton}
