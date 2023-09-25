@@ -127,15 +127,17 @@ const SidebarMain = ({
           />
         </div>
       )}
-      <NotiDropdown
-        top={getNotiDropdownPos().top}
-        left={getNotiDropdownPos().left + 100}
-        visible={isNotiDropdownOpen}
-        onClose={() => {
-          setIsNotiDropdownOpen(false);
-          setSidebarAppear(false);
-        }}
-      />
+      {isLoggedIn && (
+        <NotiDropdown
+          top={getNotiDropdownPos().top}
+          left={getNotiDropdownPos().left + 100}
+          visible={isNotiDropdownOpen}
+          onClose={() => {
+            setIsNotiDropdownOpen(false);
+            setSidebarAppear(false);
+          }}
+        />
+      )}
       <SearchModal
         visible={isSearchModalOpen}
         onClose={() => {
