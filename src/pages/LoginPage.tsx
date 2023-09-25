@@ -70,6 +70,7 @@ const LoginPage = () => {
       queryClient.clear();
       setAccessToken(token);
       navigate(DOMAIN.HOME, { replace: true });
+      toast.success("로그인에 성공했습니다.");
     } catch (e) {
       scrawlToast.error("비밀번호 혹은 아이디가 잘못되었습니다.");
       return;
