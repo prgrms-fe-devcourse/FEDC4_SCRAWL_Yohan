@@ -93,9 +93,7 @@ const NotiDropdown = ({ visible, onClose }: NotiDropdownProps) => {
                 <Text size={12} strong={true}>
                   {author.fullName}
                 </Text>
-                {like === null
-                  ? "님이 게시글을 좋아합니다"
-                  : "님이 댓글을 남겼습니다"}
+                {like ? "님이 게시글을 좋아합니다" : "님이 댓글을 남겼습니다"}
               </Text>
               <Text size={10} color={theme.TEXT300}>
                 {createdAtToString(new Date(createdAt))}
