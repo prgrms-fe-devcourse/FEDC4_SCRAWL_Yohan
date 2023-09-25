@@ -5,6 +5,7 @@ import { User } from "@type/models/User";
 export type ArticleSearchResult = Combine<
   {
     author: string;
+    channel: string;
   },
   Article
 >;

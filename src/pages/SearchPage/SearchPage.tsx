@@ -37,7 +37,7 @@ const SearchPage = () => {
           padding: 20px 20px 0 0;
           width: 100%;
         `}>
-        <CardList articles={articles} />
+        <CardList articles={articles} channelVisible={true} />
       </div>
     </Flex>
   );

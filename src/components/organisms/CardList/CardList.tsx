@@ -9,17 +9,19 @@ import { cardListStyle } from "./CardList.styles";
 
 const CardList = ({
   articles,
-  isFetchingNext
+  isFetchingNext,
+  channelVisible = false
 }: {
   articles?: Article[];
   isFetchingNext?: boolean;
+  channelVisible?: boolean;
 }) => {
   return (
     <div css={cardListStyle}>
       {articles?.map((article) => (
         <Fragment key={article._id}>
           <ErrorBoundary fallback={null}>
-            <Card article={article} />
+            <Card article={article} channelVisible={channelVisible} />
           </ErrorBoundary>
         </Fragment>
       ))}
