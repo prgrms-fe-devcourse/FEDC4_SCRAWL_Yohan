@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { css } from "@emotion/react";
+import { useCallback, useRef, useState } from "react";
 
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
@@ -43,6 +41,17 @@ const SidebarMain = ({
 
   const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+  const notificationRef = useRef<HTMLDivElement | null>(null);
+
+  const getNotiDropdownPos = useCallback(() => {
+    if (!notificationRef.current) {
+      return { top: 0, left: 0 };
+    }
+
+    const { top, left } = notificationRef.current.getBoundingClientRect();
+
+    return { top, left };
+  }, []);
 
   return (
     <>
@@ -97,10 +106,7 @@ const SidebarMain = ({
         />
       )}
       {isLoggedIn && (
-        <div
-          css={css`
-            position: relative;
-          `}>
+        <div ref={notificationRef}>
           <IconText
             iconValue={{
               Svg: Alert,
@@ -115,12 +121,14 @@ const SidebarMain = ({
             css={getSidebarIconText(theme)}
             onClick={() => setIsNotiDropdownOpen(true)}
           />
-          <NotiDropdown
-            visible={isNotiDropdownOpen}
-            onClose={() => setIsNotiDropdownOpen(false)}
-          />
         </div>
       )}
+      <NotiDropdown
+        top={getNotiDropdownPos().top}
+        left={getNotiDropdownPos().left + 100}
+        visible={isNotiDropdownOpen}
+        onClose={() => setIsNotiDropdownOpen(false)}
+      />
       <SearchModal
         visible={isSearchModalOpen}
         onClose={() => setIsSearchModalOpen(false)}
