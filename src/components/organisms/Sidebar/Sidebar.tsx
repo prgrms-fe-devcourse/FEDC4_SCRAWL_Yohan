@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -11,7 +12,9 @@ import { useLoggedIn } from "@hooks/useLoggedIn";
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
 
-import { getSidebarNav } from "./Sidebar.styles";
+import { SidebarContext } from "@contexts/sidebar.context";
+
+import { getSidebarNav, getSidebarNavMedia } from "./Sidebar.styles";
 import SidebarChannels from "./SidebarChannels";
 import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
@@ -32,6 +35,10 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const navigate = useNavigate();
   const myLocation = useLocation().pathname;
+  const sidebarCtx = useContext(SidebarContext);
+  if (!sidebarCtx) throw new Error("sidebarProvider is not founded");
+  const { sidebarAppear } = sidebarCtx;
+
   const navigatePage = (page: string, channelId?: string) => {
     switch (page) {
       case "HOME":
@@ -57,11 +64,7 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
         position: fixed;
         height: 100vh;
       `}>
-      <nav
-        css={[
-          getSidebarNav(theme)
-          // getSidebarNavMedia(sidebarAppearForce)
-        ]}>
+      <nav css={[getSidebarNav(theme), getSidebarNavMedia(sidebarAppear)]}>
         <SidebarHeader
           theme={theme}
           navigatePage={navigatePage}

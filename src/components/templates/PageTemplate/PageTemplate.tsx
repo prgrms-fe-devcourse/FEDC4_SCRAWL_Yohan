@@ -12,6 +12,8 @@ import {
 
 import { useViewportStore } from "@stores/resize.store";
 
+import SidebarProvider from "@contexts/sidebar.context";
+
 const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [resizeWidth, setResizeWidth] = useState(0);
@@ -44,11 +46,13 @@ const PageTemplate = () => {
   return (
     <>
       <Flex css={pageTemplateWrapperStyle}>
-        <SidebarAppearButton
-          Rtl={false}
-          // css={getSidebarAppearButton(sidebarAppearForce)}
-        />
-        <Sidebar outerWidth={outerWidth} />
+        <SidebarProvider>
+          <SidebarAppearButton
+            Rtl={false}
+            // css={getSidebarAppearButton(sidebarAppearForce)}
+          />
+          <Sidebar outerWidth={outerWidth} />
+        </SidebarProvider>
         <div css={pageInnerWrapperStyle}>
           <Outlet />
         </div>

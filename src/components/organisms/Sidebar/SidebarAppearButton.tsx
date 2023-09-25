@@ -1,8 +1,10 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useContext } from "react";
 
 import FloatingButton from "@components/molecules/FloatingButton";
 
 import { useThemeStore } from "@stores/theme.store";
+
+import { SidebarContext } from "@contexts/sidebar.context";
 
 import { Combine } from "@type/Combine";
 
@@ -17,6 +19,10 @@ type SidebarAppearButton = Combine<
 
 const SidebarAppearButton = ({ Rtl = true, ...props }: SidebarAppearButton) => {
   const { theme } = useThemeStore();
+  const sidebarCtx = useContext(SidebarContext);
+  if (!sidebarCtx) throw new Error("sidebarProvider is not founded");
+  const { sidebarAppear, setSidebarAppear } = sidebarCtx;
+
   return (
     <>
       <FloatingButton
@@ -28,8 +34,8 @@ const SidebarAppearButton = ({ Rtl = true, ...props }: SidebarAppearButton) => {
         buttonValue={{
           background: "transparent",
           children: "",
-          shadow: false
-          // onClick: handleSidebarAppear
+          shadow: false,
+          onClick: () => setSidebarAppear(!sidebarAppear)
         }}
         {...props}></FloatingButton>
     </>

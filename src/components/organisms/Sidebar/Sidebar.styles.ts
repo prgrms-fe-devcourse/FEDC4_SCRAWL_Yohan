@@ -25,12 +25,12 @@ export const getSidebarNav = (theme: Theme) => css`
   z-index: 10;
 `;
 
-export const getSidebarNavMedia = (sidebarAppearForce: boolean) => css`
+export const getSidebarNavMedia = (sidebarAppear: boolean) => css`
   @media (max-width: ${WIDTH_MAP.sm}px) {
     transition: transform 0.5s;
     transform: translate(-200%);
 
-    transform: translate(${sidebarAppearForce ? 0 : -200}%);
+    transform: translate(${sidebarAppear ? 0 : -200}%);
     [class^="css-"][class$="-FloatingButton"] {
       visibility: visible;
     }
