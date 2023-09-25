@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
@@ -8,6 +7,7 @@ import Text from "@components/atoms/Text";
 import ConfirmModal from "@components/molecules/ConfirmModal";
 import IconText from "@components/molecules/IconText";
 import { Tags } from "@components/organisms/Tags";
+import { scrawlToast } from "@components/toast";
 
 import { useArticleDeleteMutation } from "@hooks/api/useArticleDeleteMutation";
 import { useLikeCreateMutation } from "@hooks/api/useLikeCreateMutation";
@@ -89,7 +89,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
       return;
     }
     if (!myInfo) {
-      toast.error("로그인이 필요한 서비스입니다.");
+      scrawlToast.error("로그인이 필요한 서비스입니다.");
     } else {
       toggleLikeMutate();
     }

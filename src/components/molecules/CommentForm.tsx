@@ -1,5 +1,4 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 import { css } from "@emotion/react";
 import MDEditor from "@uiw/react-md-editor";
@@ -7,6 +6,7 @@ import MDEditor from "@uiw/react-md-editor";
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
+import { scrawlToast } from "@components/toast";
 
 import { useCommentCreateMutation } from "@hooks/api/useCommentCreateMutation";
 import { useNotificationCreateMutation } from "@hooks/api/useNotificationCreateMutation";
@@ -35,7 +35,7 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
 
   const handleSubmitComment = () => {
     if (comment === "") {
-      toast.error("댓글에 내용을 입력해주세요.");
+      scrawlToast.error("댓글에 내용을 입력해주세요.");
       return;
     }
     commentCreateMutate(

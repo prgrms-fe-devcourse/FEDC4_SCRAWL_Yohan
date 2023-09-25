@@ -1,8 +1,8 @@
-import toast from "react-hot-toast";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createComment } from "@apis/comment/createComment";
+
+import { scrawlToast } from "@components/toast";
 
 export const useCommentCreateMutation = () => {
   const queryClient = useQueryClient();
@@ -13,7 +13,7 @@ export const useCommentCreateMutation = () => {
       queryClient.invalidateQueries(["article", comment.post]);
     },
     onError: () => {
-      toast.error("댓글을 추가하던 중 오류가 발생하였습니다.");
+      scrawlToast.error("댓글을 추가하던 중 오류가 발생하였습니다.");
     }
   });
 };

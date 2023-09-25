@@ -4,7 +4,6 @@ import {
   useEffect,
   useState
 } from "react";
-import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -17,6 +16,7 @@ import Flex from "@components/atoms/Flex";
 import Input from "@components/atoms/Input";
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
+import { scrawlToast } from "@components/toast";
 
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
@@ -58,11 +58,11 @@ const LoginPage = () => {
 
   const handleLogin = async (form: loginFormState) => {
     if (form.email === "" || form.password === "") {
-      toast.error("비밀번호 혹은 아이디가 입력되지 않았습니다.");
+      scrawlToast.success("비밀번호 혹은 아이디가 입력되지 않았습니다.");
       return;
     }
     if (!testRegex(emailPattern, form.email)) {
-      toast.error("이메일 형식이 맞지 않습니다.");
+      scrawlToast.error("이메일 형식이 맞지 않습니다.");
       return;
     }
     try {
@@ -71,7 +71,7 @@ const LoginPage = () => {
       setAccessToken(token);
       navigate(DOMAIN.HOME, { replace: true });
     } catch (e) {
-      toast.error("비밀번호 혹은 아이디가 잘못되었습니다.");
+      scrawlToast.error("비밀번호 혹은 아이디가 잘못되었습니다.");
       return;
     }
   };
