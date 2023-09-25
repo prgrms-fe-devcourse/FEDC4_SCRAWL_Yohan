@@ -14,7 +14,7 @@ export const getSidebar = (sidebarAppear: boolean) => css`
   position: fixed;
   height: 100vh;
   z-index: 1;
-  @media (max-width: ${WIDTH_MAP.sm}px) {
+  @media (max-width: ${WIDTH_MAP.md}px) {
     transition: transform 0.5s;
     transform: translate(${sidebarAppear ? 0 : -200}%);
     z-index: ${sidebarAppear ? 1 : 0};
@@ -22,7 +22,7 @@ export const getSidebar = (sidebarAppear: boolean) => css`
       visibility: visible;
     }
   }
-  @media (min-width: ${WIDTH_MAP.sm}px) {
+  @media (min-width: ${WIDTH_MAP.md}px) {
     transition: transform 0.5s;
     transform: translate(0%);
     [class^="css-"][class$="-FloatingButton"] {
@@ -131,11 +131,11 @@ export const sidebarAppearButton = () => css`
   top: -12px;
   left: 7px;
   z-index: 1;
-  @media (max-width: ${WIDTH_MAP.sm}px) {
+  @media (max-width: ${WIDTH_MAP.md}px) {
     [class^="css-"][class$="-FloatingButton"] {
     }
   }
-  @media (min-width: ${WIDTH_MAP.sm}px) {
+  @media (min-width: ${WIDTH_MAP.md}px) {
     [class^="css-"][class$="-FloatingButton"] {
       visibility: hidden;
     }

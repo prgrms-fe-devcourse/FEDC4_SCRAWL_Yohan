@@ -11,11 +11,11 @@ export const pageTemplateWrapperStyle = css`
 export const pageInnerWrapperStyle = css`
   flex-grow: 1;
   margin-left: 330px;
-  @media (max-width: ${WIDTH_MAP.sm}px) {
+  @media (max-width: ${WIDTH_MAP.md}px) {
     transition: margin-left 0.5s ease-in-out;
     margin-left: 20px;
   }
-  @media (min-width: ${WIDTH_MAP.sm}px) {
+  @media (min-width: ${WIDTH_MAP.md}px) {
     transition: margin-left 0.5s ease-in-out;
     margin-left: 330px;
   }
