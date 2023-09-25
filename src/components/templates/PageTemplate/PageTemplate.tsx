@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Flex from "@components/atoms/Flex";
 import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import { Sidebar } from "@components/organisms/Sidebar";
+import { sidebarAppearButton } from "@components/organisms/Sidebar/Sidebar.styles";
 import SidebarAppearButton from "@components/organisms/Sidebar/SidebarAppearButton";
 import {
   pageInnerWrapperStyle,
@@ -47,10 +48,7 @@ const PageTemplate = () => {
     <>
       <Flex css={pageTemplateWrapperStyle}>
         <SidebarProvider>
-          <SidebarAppearButton
-            Rtl={false}
-            // css={getSidebarAppearButton(sidebarAppearForce)}
-          />
+          <SidebarAppearButton Rtl={false} css={sidebarAppearButton} />
           <Sidebar outerWidth={outerWidth} />
         </SidebarProvider>
         <div css={pageInnerWrapperStyle}>

@@ -28,9 +28,8 @@ export const getSidebarNav = (theme: Theme) => css`
 export const getSidebarNavMedia = (sidebarAppear: boolean) => css`
   @media (max-width: ${WIDTH_MAP.sm}px) {
     transition: transform 0.5s;
-    transform: translate(-200%);
-
     transform: translate(${sidebarAppear ? 0 : -200}%);
+    z-index: ${sidebarAppear ? 1 : -1};
     [class^="css-"][class$="-FloatingButton"] {
       visibility: visible;
     }
@@ -124,13 +123,13 @@ export const getSelectedUserInfoStyle = (theme: Theme) => css`
     cursor: pointer;
   }
 `;
-export const getSidebarAppearButton = (sidebarAppearForce: boolean) => css`
+export const sidebarAppearButton = () => css`
   position: absolute;
-  top: 15px;
+  top: -12px;
+  left: 7px;
   z-index: 1;
   @media (max-width: ${WIDTH_MAP.sm}px) {
     [class^="css-"][class$="-FloatingButton"] {
-      visibility: ${sidebarAppearForce ? "hidden" : "visible"};
     }
   }
   @media (min-width: ${WIDTH_MAP.sm}px) {

@@ -13,7 +13,7 @@ export const pageInnerWrapperStyle = css`
   margin-left: 330px;
   @media (max-width: ${WIDTH_MAP.sm}px) {
     transition: margin-left 0.5s ease-in-out;
-    margin-left: 40px;
+    margin-left: 20px;
   }
   @media (min-width: ${WIDTH_MAP.sm}px) {
     transition: margin-left 0.5s ease-in-out;
