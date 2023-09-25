@@ -58,7 +58,7 @@ const LoginPage = () => {
 
   const handleLogin = async (form: loginFormState) => {
     if (form.email === "" || form.password === "") {
-      scrawlToast.success("비밀번호 혹은 아이디가 입력되지 않았습니다.");
+      scrawlToast.error("비밀번호 혹은 아이디가 입력되지 않았습니다.");
       return;
     }
     if (!testRegex(emailPattern, form.email)) {
