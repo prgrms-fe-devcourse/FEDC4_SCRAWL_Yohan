@@ -7,11 +7,9 @@ export const getNotiDropdownOuterStyle = (theme: Theme) => css`
   border-radius: 0.4em;
   background-color: ${theme.BACKGROUND100};
   width: 300px;
-  height: calc(100vh - 300px);
+  height: calc(100vh - 293px);
   min-height: 150px;
   max-height: 400px;
-  top: 5px;
-  left: 100px;
   box-shadow: ${theme.SHADOW};
   overflow-x: hidden;
 `;
