@@ -4,12 +4,13 @@ import { Outlet } from "react-router-dom";
 import Flex from "@components/atoms/Flex";
 import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import { Sidebar } from "@components/organisms/Sidebar";
-import { sidebarAppearButton } from "@components/organisms/Sidebar/Sidebar.styles";
 import SidebarAppearButton from "@components/organisms/Sidebar/SidebarAppearButton";
 import {
   pageInnerWrapperStyle,
   pageTemplateWrapperStyle
 } from "@components/templates/PageTemplate/PageTemplate.styles";
+
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
 
 import { useViewportStore } from "@stores/resize.store";
 
@@ -17,7 +18,7 @@ import SidebarProvider from "@contexts/sidebar.context";
 
 const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [resizeWidth, setResizeWidth] = useState(0);
+  const [resizeWidth, setResizeWidth] = useState(window.innerWidth);
   const { setWidth } = useViewportStore();
 
   const handleScroll = useCallback(() => {
@@ -34,6 +35,7 @@ const PageTemplate = () => {
   }, []);
 
   useEffect(() => {
+    handleResize();
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize, { passive: false });
     return () => {
@@ -51,8 +53,7 @@ const PageTemplate = () => {
           <Outlet />
         </div>
         <SidebarProvider>
-          <SidebarAppearButton Rtl={false} css={sidebarAppearButton} />
-          <Sidebar outerWidth={outerWidth} />
+          <SidebarWrapper />
         </SidebarProvider>
         <FloatingButtons scrollPosition={scrollPosition} />
       </Flex>
@@ -61,3 +62,16 @@ const PageTemplate = () => {
 };
 
 export default PageTemplate;
+
+const SidebarWrapper = () => {
+  const { sidebarAppear, sidebarOpenBtnAppear } = useSidebarContext();
+
+  return (
+    <>
+      {sidebarOpenBtnAppear && !sidebarAppear && (
+        <SidebarAppearButton Rtl={false} />
+      )}
+      <Sidebar outerWidth={outerWidth} />
+    </>
+  );
+};

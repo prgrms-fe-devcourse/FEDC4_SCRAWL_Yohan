@@ -2,8 +2,10 @@ import React, { createContext, useState } from "react";
 
 type SidebarContextType = {
   sidebarAppear: boolean;
+  sidebarOpenBtnAppear: boolean;
   setSidebarAppear: (value: boolean) => void;
   setsidebarAppearFalse: () => void;
+  setSidebarOpenBtnAppear: (value: boolean) => void;
 };
 
 export const SidebarContext = createContext<SidebarContextType | undefined>(
@@ -14,10 +16,17 @@ type SidebarProviderProps = {
 };
 const SidebarProvider = ({ children }: SidebarProviderProps) => {
   const [sidebarAppear, setSidebarAppear] = useState(false);
+  const [sidebarOpenBtnAppear, setSidebarOpenBtnAppear] = useState(false);
   const setsidebarAppearFalse = () => setSidebarAppear(false);
   return (
     <SidebarContext.Provider
-      value={{ sidebarAppear, setSidebarAppear, setsidebarAppearFalse }}>
+      value={{
+        sidebarAppear,
+        sidebarOpenBtnAppear,
+        setSidebarAppear,
+        setsidebarAppearFalse,
+        setSidebarOpenBtnAppear
+      }}>
       {children}
     </SidebarContext.Provider>
   );

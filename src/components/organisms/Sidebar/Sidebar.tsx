@@ -40,14 +40,18 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
   const myLocation = useLocation().pathname;
   const sidebarCtx = useContext(SidebarContext);
   if (!sidebarCtx) throw new Error("sidebarProvider is not founded");
-  const { sidebarAppear, setsidebarAppearFalse } = sidebarCtx;
+  const { sidebarAppear, setsidebarAppearFalse, setSidebarOpenBtnAppear } =
+    sidebarCtx;
   const { currentWidth } = useViewportStore();
 
   useEffect(() => {
     if (WIDTH_MAP.md < currentWidth) {
       setsidebarAppearFalse();
+      setSidebarOpenBtnAppear(false);
+    } else {
+      setSidebarOpenBtnAppear(true);
     }
-  }, [currentWidth, setsidebarAppearFalse]);
+  }, [currentWidth, setsidebarAppearFalse, setSidebarOpenBtnAppear]);
 
   const navigatePage = (page: string, channelId?: string) => {
     switch (page) {

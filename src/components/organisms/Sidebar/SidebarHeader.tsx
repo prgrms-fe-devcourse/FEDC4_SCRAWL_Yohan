@@ -1,11 +1,12 @@
 import Flex from "@components/atoms/Flex";
 import IconText from "@components/molecules/IconText";
 
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
+
 import { Theme } from "@constants/theme";
 
 import { Logo } from "@assets/svg";
 
-import { sidebarAppearButtonRtl } from "./Sidebar.styles";
 import { getSidebarLogo, sidebarLogo } from "./Sidebar.styles";
 import SidebarAppearButton from "./SidebarAppearButton";
 
@@ -15,6 +16,7 @@ type SidebarHeaderProps = {
   navigatePage: (page: string, channelID?: string) => void;
 };
 const SidebarHeader = ({ theme, navigatePage }: SidebarHeaderProps) => {
+  const { sidebarAppear } = useSidebarContext();
   return (
     <div css={getSidebarLogo(theme)}>
       <Flex>
@@ -29,7 +31,7 @@ const SidebarHeader = ({ theme, navigatePage }: SidebarHeaderProps) => {
             onClick={() => navigatePage("HOME")}
           />
         </div>
-        <SidebarAppearButton Rtl={true} css={sidebarAppearButtonRtl} />
+        {sidebarAppear && <SidebarAppearButton Rtl={true} />}
       </Flex>
     </div>
   );

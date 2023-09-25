@@ -10,6 +10,8 @@ import { Combine } from "@type/Combine";
 
 import { KeyboardTab, KeyboardTabRtl } from "@assets/svg";
 
+import { sidebarAppearButton, sidebarAppearButtonRtl } from "./Sidebar.styles";
+
 type SidebarAppearButton = Combine<
   {
     Rtl: boolean;
@@ -37,6 +39,7 @@ const SidebarAppearButton = ({ Rtl = true, ...props }: SidebarAppearButton) => {
           shadow: false,
           onClick: () => setSidebarAppear(!sidebarAppear)
         }}
+        css={Rtl ? sidebarAppearButtonRtl : sidebarAppearButton}
         {...props}></FloatingButton>
     </>
   );
