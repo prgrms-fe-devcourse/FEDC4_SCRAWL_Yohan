@@ -6,6 +6,8 @@ import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 import UserInfo from "@components/molecules/UserInfo";
 
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
+
 import { Theme } from "@constants/theme";
 
 import { Alert, Home, Search } from "@assets/svg";
@@ -40,7 +42,7 @@ const SidebarMain = ({
   myLocation
 }: SidebarMainProps) => {
   const channelColor = theme.TEXT300;
-
+  const { setSidebarAppear } = useSidebarContext();
   const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
@@ -117,13 +119,19 @@ const SidebarMain = ({
           />
           <NotiDropdown
             visible={isNotiDropdownOpen}
-            onClose={() => setIsNotiDropdownOpen(false)}
+            onClose={() => {
+              setIsNotiDropdownOpen(false);
+              setSidebarAppear(false);
+            }}
           />
         </div>
       )}
       <SearchModal
         visible={isSearchModalOpen}
-        onClose={() => setIsSearchModalOpen(false)}
+        onClose={() => {
+          setIsSearchModalOpen(false);
+          setSidebarAppear(false);
+        }}
       />
     </>
   );

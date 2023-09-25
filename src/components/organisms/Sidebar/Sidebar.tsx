@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -7,13 +7,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import Flex from "@components/atoms/Flex";
 
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useViewportStore } from "@stores/resize.store";
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
-
-import { SidebarContext } from "@contexts/sidebar.context";
 
 import { WIDTH_MAP } from "@constants/media";
 
@@ -38,22 +37,21 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const navigate = useNavigate();
   const myLocation = useLocation().pathname;
-  const sidebarCtx = useContext(SidebarContext);
-  if (!sidebarCtx) throw new Error("sidebarProvider is not founded");
-  const { sidebarAppear, setsidebarAppearFalse, setSidebarOpenBtnAppear } =
-    sidebarCtx;
+  const { sidebarAppear, setSidebarAppear, setSidebarOpenBtnAppear } =
+    useSidebarContext();
   const { currentWidth } = useViewportStore();
 
   useEffect(() => {
     if (WIDTH_MAP.md < currentWidth) {
-      setsidebarAppearFalse();
+      setSidebarAppear(false);
       setSidebarOpenBtnAppear(false);
     } else {
       setSidebarOpenBtnAppear(true);
     }
-  }, [currentWidth, setsidebarAppearFalse, setSidebarOpenBtnAppear]);
+  }, [currentWidth, setSidebarAppear, setSidebarOpenBtnAppear]);
 
   const navigatePage = (page: string, channelId?: string) => {
+    setSidebarAppear(false);
     switch (page) {
       case "HOME":
         return navigate("/");
