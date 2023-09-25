@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 
 import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 import ErrorPage from "@pages/ErrorPage";
-import HomePage from "@pages/HomePage";
+import HomePage from "@pages/HomePage/HomePage";
+import HomePageSkeleton from "@pages/HomePage/HomePageSkeleton";
 import LoginPage from "@pages/LoginPage";
 import PasswordPage from "@pages/PasswordPage";
 import SearchPage from "@pages/SearchPage/SearchPage";
@@ -24,7 +25,7 @@ const AppRouter = () => {
         <Route
           path={PATH.HOME}
           element={
-            <Suspense fallback={"글 목록을 불러오는 중입니다."}>
+            <Suspense fallback={<HomePageSkeleton />}>
               <ErrorBoundary
                 fallback={"전체 글 목록을 불러오는데 실패하였습니다."}>
                 <HomePage />
