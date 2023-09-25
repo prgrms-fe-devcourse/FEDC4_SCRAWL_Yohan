@@ -18,6 +18,7 @@
     "^@hooks/(.*)$",
     "^@styles/(.*)$",
     "^@stores/(.*)$",
+    "^@contexts/(.*)$",
     "^@type/(.*)$",
     "^@constants/(.*)$",
     "^@utils/(.*)$",
