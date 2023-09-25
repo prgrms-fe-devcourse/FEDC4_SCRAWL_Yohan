@@ -30,10 +30,12 @@ import { filterNotifications } from "./filterNotifications";
 
 type NotiDropdownProps = {
   visible: boolean;
+  top?: number;
+  left?: number;
   onClose: () => void;
 };
 
-const NotiDropdown = ({ visible, onClose }: NotiDropdownProps) => {
+const NotiDropdown = ({ visible, onClose, top, left }: NotiDropdownProps) => {
   const theme = useThemeStore((state) => state.theme);
   const navigate = useNavigate();
 
@@ -47,6 +49,8 @@ const NotiDropdown = ({ visible, onClose }: NotiDropdownProps) => {
 
   return (
     <Dropdown
+      top={`${top}px`}
+      left={`${left}px`}
       visible={visible}
       onClose={onClose}
       css={getNotiDropdownOuterStyle(theme)}>
