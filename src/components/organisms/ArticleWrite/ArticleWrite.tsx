@@ -44,20 +44,19 @@ const ArticleWrite = () => {
         return navigate(-1);
     }
   };
-  const width = "70%";
 
   return (
     <Flex
       direction="column"
       css={css`
-        margin: 20px;
+        margin: 20px 20px 0 0;
       `}>
       <ArticleChannelSelect stateChange={(value) => setChannelId(value)} />
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}
-        width={width}
+        width="100%"
       />
-      <ArticleWriteTag stateChange={(value) => setTags(value)} width={width} />
+      <ArticleWriteTag stateChange={(value) => setTags(value)} width="100%" />
       <div
         css={css`
           width: 100%;

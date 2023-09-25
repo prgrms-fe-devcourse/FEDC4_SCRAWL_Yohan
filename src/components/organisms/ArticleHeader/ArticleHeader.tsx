@@ -60,7 +60,9 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
 
   const toggleLikeMutate = () => {
     if (myLike) {
-      likeDeleteMutate(myLike._id, {
+      likeDeleteMutate(myLike._id);
+    } else {
+      likeCreateMutate(article._id, {
         onSuccess: (newLike) =>
           notificationCreateMutate({
             notificationType: "LIKE",
@@ -69,8 +71,6 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
             userId: article.author._id
           })
       });
-    } else {
-      likeCreateMutate(article._id);
     }
   };
 
