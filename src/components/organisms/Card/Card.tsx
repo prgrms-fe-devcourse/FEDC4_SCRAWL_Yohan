@@ -54,6 +54,7 @@ const Card = ({ article, channelVisible = false }: CardProps) => {
             css={css`
               cursor: pointer;
               margin: 8px 12px 0 0;
+              white-space: nowrap;
             `}
             onClick={() => navigate(PATH.CHANNEL(article.channel._id))}>
             {channelName}
