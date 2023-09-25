@@ -20,6 +20,7 @@ export const getGlobalStyles = (theme: Theme) => {
     }
 
     ::-webkit-scrollbar {
+      height: 0.5em;
       width: 0.5em;
     }
     ::-webkit-scrollbar-track {
