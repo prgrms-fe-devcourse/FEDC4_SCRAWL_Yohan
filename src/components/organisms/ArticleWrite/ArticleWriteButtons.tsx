@@ -1,5 +1,4 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
@@ -105,7 +104,7 @@ const ArticleWriteButtons = ({
     }
 
     if (thumnailUrl === "") {
-      toast.error("썸네일을 선택해주세요.");
+      scrawlToast.error("썸네일을 선택해주세요.");
       return;
     }
     try {

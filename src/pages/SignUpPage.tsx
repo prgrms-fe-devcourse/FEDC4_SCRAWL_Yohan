@@ -92,7 +92,7 @@ const SignUpPage = () => {
       queryClient.clear();
       setAccessToken(token);
       navigate(DOMAIN.HOME, { replace: true });
-      toast.success("회원가입에 성공했습니다.");
+      scrawlToast.success("회원가입에 성공했습니다.");
     } catch (e) {
       scrawlToast.error("이미 존재하는 이메일 입니다.");
       return;

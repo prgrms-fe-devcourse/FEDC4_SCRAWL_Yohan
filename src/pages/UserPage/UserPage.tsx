@@ -1,10 +1,10 @@
 import { ChangeEventHandler, useState } from "react";
-import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
+import { scrawlToast } from "@components/toast";
 
 import { useUserProfileUploadMutation } from "@hooks/api/useUserProfileUploadMutation";
 import { useUserQuery } from "@hooks/api/useUserQuery";
@@ -45,12 +45,12 @@ const UserPage = () => {
   };
   const handleEditModeOff = () => {
     if (!testRegex(nicknamePattern, fullName)) {
-      toast.error("닉네임 형식이 맞지 않습니다.");
+      scrawlToast.error("닉네임 형식이 맞지 않습니다.");
       return;
     }
     setEditMode(false);
     userUpdateMutation.mutate({ fullName });
-    toast.success("잠시 후 닉네임이 변경 됩니다.");
+    scrawlToast.success("잠시 후 닉네임이 변경 됩니다.");
   };
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setFullName(e.currentTarget.value);
@@ -68,7 +68,7 @@ const UserPage = () => {
       isCover: false,
       image: e.target.files[0]
     });
-    toast.success("잠시 후 프로필이 변경 됩니다.");
+    scrawlToast.success("잠시 후 프로필이 변경 됩니다.");
   };
 
   return (

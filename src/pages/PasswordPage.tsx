@@ -70,7 +70,7 @@ const PasswordPage = () => {
       userPasswordUpdate.mutate(form);
       queryClient.clear();
       navigate(DOMAIN.HOME);
-      toast.success("비빌번호 변경에 성공했습니다.");
+      scrawlToast.success("비빌번호 변경에 성공했습니다.");
     } catch (e) {
       scrawlToast.error("비밀번호 변경 중 오류가 발생하였습니다.");
       return;

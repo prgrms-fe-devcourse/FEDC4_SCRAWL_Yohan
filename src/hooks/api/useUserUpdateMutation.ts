@@ -1,8 +1,8 @@
-import toast from "react-hot-toast";
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { updateUser } from "@apis/user/updateUser";
+
+import { scrawlToast } from "@components/toast";
 
 export const useUserUpdateMutation = (userId: string) => {
   const queryClient = useQueryClient();
@@ -13,7 +13,7 @@ export const useUserUpdateMutation = (userId: string) => {
       queryClient.invalidateQueries(["articles", userId]);
     },
     onError: () => {
-      toast.error("닉네임을 변경하던 중 오류가 발생하였습니다.");
+      scrawlToast.error("닉네임을 변경하던 중 오류가 발생하였습니다.");
     }
   });
 };
