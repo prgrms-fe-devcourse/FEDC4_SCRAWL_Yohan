@@ -13,13 +13,8 @@ type SidebarHeaderProps = {
   theme: Theme;
   outerWidth: number;
   navigatePage: (page: string, channelID?: string) => void;
-  handleSidebarAppear: () => void;
 };
-const SidebarHeader = ({
-  theme,
-  navigatePage,
-  handleSidebarAppear
-}: SidebarHeaderProps) => {
+const SidebarHeader = ({ theme, navigatePage }: SidebarHeaderProps) => {
   return (
     <div css={getSidebarLogo(theme)}>
       <Flex>
@@ -34,11 +29,7 @@ const SidebarHeader = ({
             onClick={() => navigatePage("HOME")}
           />
         </div>
-        <SidebarAppearButton
-          Rtl={true}
-          handleSidebarAppear={handleSidebarAppear}
-          css={sidebarAppearButtonRtl}
-        />
+        <SidebarAppearButton Rtl={true} css={sidebarAppearButtonRtl} />
       </Flex>
     </div>
   );

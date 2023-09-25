@@ -11,16 +11,11 @@ import { KeyboardTab, KeyboardTabRtl } from "@assets/svg";
 type SidebarAppearButton = Combine<
   {
     Rtl: boolean;
-    handleSidebarAppear: () => void;
   },
   HTMLAttributes<HTMLElement>
 >;
 
-const SidebarAppearButton = ({
-  Rtl = true,
-  handleSidebarAppear,
-  ...props
-}: SidebarAppearButton) => {
+const SidebarAppearButton = ({ Rtl = true, ...props }: SidebarAppearButton) => {
   const { theme } = useThemeStore();
   return (
     <>
@@ -33,8 +28,8 @@ const SidebarAppearButton = ({
         buttonValue={{
           background: "transparent",
           children: "",
-          shadow: false,
-          onClick: handleSidebarAppear
+          shadow: false
+          // onClick: handleSidebarAppear
         }}
         {...props}></FloatingButton>
     </>

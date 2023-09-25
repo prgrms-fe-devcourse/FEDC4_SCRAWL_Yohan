@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import Flex from "@components/atoms/Flex";
 import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import { Sidebar } from "@components/organisms/Sidebar";
-import { getSidebarAppearButton } from "@components/organisms/Sidebar/Sidebar.styles";
 import SidebarAppearButton from "@components/organisms/Sidebar/SidebarAppearButton";
 import {
   pageInnerWrapperStyle,
@@ -15,12 +14,8 @@ import { useViewportStore } from "@stores/resize.store";
 
 const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [sidebarAppearForce, setSidebarAppearForce] = useState(true);
   const [resizeWidth, setResizeWidth] = useState(0);
   const { setWidth } = useViewportStore();
-  const handleSidebarAppear = () => {
-    setSidebarAppearForce(!sidebarAppearForce);
-  };
 
   const handleScroll = useCallback(() => {
     setScrollPosition(window.scrollY);
@@ -51,14 +46,9 @@ const PageTemplate = () => {
       <Flex css={pageTemplateWrapperStyle}>
         <SidebarAppearButton
           Rtl={false}
-          handleSidebarAppear={handleSidebarAppear}
-          css={getSidebarAppearButton(sidebarAppearForce)}
+          // css={getSidebarAppearButton(sidebarAppearForce)}
         />
-        <Sidebar
-          outerWidth={outerWidth}
-          sidebarAppearForce={sidebarAppearForce}
-          handleSidebarAppear={handleSidebarAppear}
-        />
+        <Sidebar outerWidth={outerWidth} />
         <div css={pageInnerWrapperStyle}>
           <Outlet />
         </div>
