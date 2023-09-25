@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -9,10 +9,13 @@ import Flex from "@components/atoms/Flex";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
+import { useViewportStore } from "@stores/resize.store";
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
 
 import { SidebarContext } from "@contexts/sidebar.context";
+
+import { WIDTH_MAP } from "@constants/media";
 
 import { getSidebar, getSidebarNav } from "./Sidebar.styles";
 import SidebarChannels from "./SidebarChannels";
@@ -37,7 +40,14 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
   const myLocation = useLocation().pathname;
   const sidebarCtx = useContext(SidebarContext);
   if (!sidebarCtx) throw new Error("sidebarProvider is not founded");
-  const { sidebarAppear } = sidebarCtx;
+  const { sidebarAppear, setsidebarAppearFalse } = sidebarCtx;
+  const { currentWidth } = useViewportStore();
+
+  useEffect(() => {
+    if (WIDTH_MAP.md < currentWidth) {
+      setsidebarAppearFalse();
+    }
+  }, [currentWidth, setsidebarAppearFalse]);
 
   const navigatePage = (page: string, channelId?: string) => {
     switch (page) {
