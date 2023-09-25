@@ -21,7 +21,7 @@ const ArticleList = ({ userId, currentChannel }: ArticleListProps) => {
       css={css`
         width: 100%;
       `}>
-      <CardList articles={articles} />
+      <CardList articles={articles} channelVisible={currentChannel === "all"} />
     </div>
   );
 };
