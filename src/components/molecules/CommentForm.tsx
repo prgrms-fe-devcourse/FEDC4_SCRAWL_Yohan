@@ -2,7 +2,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 import { css } from "@emotion/react";
-import MDEditor from "@uiw/react-md-editor";
+import MDEditor, {
+  codeEdit,
+  codeLive,
+  codePreview
+} from "@uiw/react-md-editor";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
@@ -89,6 +93,7 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
         <MDEditor
           data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}
           preview="live"
+          extraCommands={[codeEdit, codePreview, codeLive]}
           height={100}
           highlightEnable={false}
           value={comment}
