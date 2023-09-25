@@ -1,3 +1,4 @@
+import { getChannels } from "@apis/channel/getChannels";
 import { getUser } from "@apis/user/getUser";
 
 import { ArticleSearchResult } from "@type/apis/etc/SearchAll";
@@ -6,7 +7,10 @@ import { Article } from "@type/models/Article";
 import { searchAll } from "./searchAll";
 
 export const searchArticles = async (searchKeyword: string) => {
-  const searchResults = await searchAll(searchKeyword);
+  const [searchResults, channels] = await Promise.all([
+    searchAll(searchKeyword),
+    getChannels()
+  ]);
   const articleSearchResults = searchResults.filter(
     (searchResult): searchResult is ArticleSearchResult =>
       "title" in searchResult
@@ -20,7 +24,8 @@ export const searchArticles = async (searchKeyword: string) => {
     (result, i) =>
       ({
         ...result,
-        author: users[i]
+        author: users[i],
+        channel: channels.find((channel) => channel._id === result.channel)
       }) as Article
   );
 };
