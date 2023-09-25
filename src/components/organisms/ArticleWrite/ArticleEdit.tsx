@@ -51,13 +51,12 @@ const ArticleEdit = () => {
         return navigate(-1);
     }
   };
-  const width = "70%";
 
   return (
     <Flex
       direction="column"
       css={css`
-        margin: 20px;
+        margin: 20px 20px 0 0;
       `}>
       <ArticleChannelSelect
         stateChange={(value) => setChannelId(value)}
@@ -66,12 +65,12 @@ const ArticleEdit = () => {
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}
         state={title}
-        width={width}
+        width="100%"
       />
       <ArticleWriteTag
         stateChange={(value) => setTags(value)}
         state={tags}
-        width={width}
+        width="100%"
       />
       <MDEditor
         data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}

@@ -4,7 +4,7 @@ import { Theme } from "@constants/theme";
 
 export const articleOuterStyle = css`
   min-width: 500px;
-  max-width: 1000px;
+  max-width: 1080px;
   margin: 20px 20px 20px 0;
 `;
 
