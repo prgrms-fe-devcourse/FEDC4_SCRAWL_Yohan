@@ -6,6 +6,8 @@ import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
 import Text from "@components/atoms/Text";
 
+import { getLineClampStyle } from "@styles/lineClamp";
+
 import { useThemeStore } from "@stores/theme.store";
 
 import { Combine } from "@type/Combine";
@@ -46,7 +48,7 @@ const UserInfo = ({
           border-radius: 50%;
         `}
       />
-      <Text size={fontSize} color={color}>
+      <Text size={fontSize} color={color} css={getLineClampStyle(1)}>
         {username}
       </Text>
     </Flex>

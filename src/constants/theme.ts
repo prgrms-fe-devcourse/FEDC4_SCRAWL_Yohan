@@ -9,6 +9,7 @@ export type Theme = Readonly<{
   TEXT600: string;
   SHADOW: string;
   PRIMARY: string;
+  SECONDARY: string;
 }>;
 
 export const LIGHT_MODE_THEME: Theme = {
@@ -21,7 +22,8 @@ export const LIGHT_MODE_THEME: Theme = {
   TEXT300: "#5C5E64",
   TEXT600: "#080C1E",
   SHADOW: "0px 0px 15px 0px rgba(0, 0, 0, 0.1)",
-  PRIMARY: "#007AFF"
+  PRIMARY: "#007AFF",
+  SECONDARY: "rgb(255, 30, 30)"
 };
 
 export const DARK_MODE_THEME: Theme = {
@@ -34,7 +36,8 @@ export const DARK_MODE_THEME: Theme = {
   TEXT300: "#CFCFCF",
   TEXT600: "#C0C0C0",
   SHADOW: "0px 0px 15px 0px rgba(0, 0, 0, 0.1)",
-  PRIMARY: "#007AFF"
+  PRIMARY: "#007AFF",
+  SECONDARY: "rgb(255, 100, 100)"
 };
 
 export const THEME_KEY = "THEME";

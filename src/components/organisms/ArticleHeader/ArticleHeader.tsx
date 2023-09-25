@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+
+import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
 import Modal from "@components/atoms/Modal";
@@ -8,12 +9,14 @@ import Text from "@components/atoms/Text";
 import ConfirmModal from "@components/molecules/ConfirmModal";
 import IconText from "@components/molecules/IconText";
 import { Tags } from "@components/organisms/Tags";
+import { scrawlToast } from "@components/toast";
 
 import { useArticleDeleteMutation } from "@hooks/api/useArticleDeleteMutation";
 import { useLikeCreateMutation } from "@hooks/api/useLikeCreateMutation";
 import { useLikeDeleteMutation } from "@hooks/api/useLikeDeleteMutation";
 import { useNotificationCreateMutation } from "@hooks/api/useNotificationCreateMutation";
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
+import { useChannelName } from "@hooks/useChannelName";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -43,6 +46,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
   const navigate = useNavigate();
   const { data: myInfo } = useUserByTokenQuery();
   const [isOpen, setIsOpen] = useState(false);
+  const channelName = useChannelName(article.channel._id);
 
   const isMyArticle = myInfo?._id === article.author._id;
   const myLike = article.likes.find(({ user }) => user === myInfo?._id);
@@ -56,7 +60,9 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
 
   const toggleLikeMutate = () => {
     if (myLike) {
-      likeDeleteMutate(myLike._id, {
+      likeDeleteMutate(myLike._id);
+    } else {
+      likeCreateMutate(article._id, {
         onSuccess: (newLike) =>
           notificationCreateMutate({
             notificationType: "LIKE",
@@ -65,8 +71,6 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
             userId: article.author._id
           })
       });
-    } else {
-      likeCreateMutate(article._id);
     }
   };
 
@@ -89,7 +93,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
       return;
     }
     if (!myInfo) {
-      toast.error("로그인이 필요한 서비스입니다.");
+      scrawlToast.error("로그인이 필요한 서비스입니다.");
     } else {
       toggleLikeMutate();
     }
@@ -97,7 +101,16 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
 
   return (
     <Flex justify="space-between" css={headerStyle}>
-      <Flex direction="column" gap={20} css={headerLeftItemStyle}>
+      <Flex direction="column" gap={10} css={headerLeftItemStyle}>
+        <Text
+          size={16}
+          color={theme.TEXT300}
+          css={css`
+            cursor: pointer;
+          `}
+          onClick={() => navigate(PATH.CHANNEL(article.channel._id))}>
+          {channelName}
+        </Text>
         <Text size={32} strong={true}>
           {title}
         </Text>
@@ -119,7 +132,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
           </Text>
         </Flex>
         <IconText
-          iconValue={{ Svg: Like, fill: myLike ? "red" : undefined }}
+          iconValue={{ Svg: Like, fill: myLike ? theme.SECONDARY : undefined }}
           textValue={{ size: 12, children: article.likes.length }}
           css={getLikeIconTextStyle(theme, isMyArticle)}
           onClick={handleLikeButtonClick}

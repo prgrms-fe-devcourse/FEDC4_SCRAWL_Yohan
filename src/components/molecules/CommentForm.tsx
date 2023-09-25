@@ -1,12 +1,16 @@
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 import { css } from "@emotion/react";
-import MDEditor from "@uiw/react-md-editor";
+import MDEditor, {
+  codeEdit,
+  codeLive,
+  codePreview
+} from "@uiw/react-md-editor";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
+import { scrawlToast } from "@components/toast";
 
 import { useCommentCreateMutation } from "@hooks/api/useCommentCreateMutation";
 import { useNotificationCreateMutation } from "@hooks/api/useNotificationCreateMutation";
@@ -35,7 +39,7 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
 
   const handleSubmitComment = () => {
     if (comment === "") {
-      toast.error("댓글에 내용을 입력해주세요.");
+      scrawlToast.error("댓글에 내용을 입력해주세요.");
       return;
     }
     commentCreateMutate(
@@ -43,12 +47,14 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
       {
         onSuccess: (newComment) => {
           setComment("");
-          notificationCreateMutate({
-            notificationType: "COMMENT",
-            notificationTypeId: newComment._id,
-            postId: newComment.post,
-            userId: article.author._id
-          });
+          if (article.author._id !== data?._id) {
+            notificationCreateMutate({
+              notificationType: "COMMENT",
+              notificationTypeId: newComment._id,
+              postId: newComment.post,
+              userId: article.author._id
+            });
+          }
         }
       }
     );
@@ -89,6 +95,7 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
         <MDEditor
           data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}
           preview="live"
+          extraCommands={[codeEdit, codePreview, codeLive]}
           height={100}
           highlightEnable={false}
           value={comment}

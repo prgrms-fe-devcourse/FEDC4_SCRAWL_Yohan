@@ -4,7 +4,6 @@ import {
   useEffect,
   useState
 } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -16,6 +15,7 @@ import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Input from "@components/atoms/Input";
 import IconText from "@components/molecules/IconText";
+import { scrawlToast } from "@components/toast";
 
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
@@ -68,23 +68,23 @@ const SignUpPage = () => {
 
   const handleSignUp = async (form: FormState) => {
     if (form.email === "" || form.fullName === "" || form.password === "") {
-      toast.error("모든 입력이 완료되지 않았습니다.");
+      scrawlToast.error("모든 입력이 완료되지 않았습니다.");
       return;
     }
     if (!testRegex(emailPattern, form.email)) {
-      toast.error("이메일 형식이 맞지 않습니다.");
+      scrawlToast.error("이메일 형식이 맞지 않습니다.");
       return;
     }
     if (!testRegex(nicknamePattern, form.fullName)) {
-      toast.error("닉네임 형식이 맞지 않습니다.");
+      scrawlToast.error("닉네임 형식이 맞지 않습니다.");
       return;
     }
     if (!testRegex(passwordPattern, form.password)) {
-      toast.error("패스워드 형식이 맞지 않습니다.");
+      scrawlToast.error("패스워드 형식이 맞지 않습니다.");
       return;
     }
     if (form.password !== form.passwordConfirm) {
-      toast.error("패스워드와 패스워드 확인이 일치하지 않습니다.");
+      scrawlToast.error("패스워드와 패스워드 확인이 일치하지 않습니다.");
       return;
     }
     try {
@@ -92,8 +92,9 @@ const SignUpPage = () => {
       queryClient.clear();
       setAccessToken(token);
       navigate(DOMAIN.HOME, { replace: true });
+      scrawlToast.success("회원가입에 성공했습니다.");
     } catch (e) {
-      toast.error("이미 존재하는 이메일 입니다.");
+      scrawlToast.error("이미 존재하는 이메일 입니다.");
       return;
     }
   };

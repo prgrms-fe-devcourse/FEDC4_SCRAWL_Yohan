@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
+import markdownToTxt from "markdown-to-txt";
 
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
@@ -17,7 +18,6 @@ import {
 import { PATH } from "@constants/index";
 
 import { createdAtToString } from "@utils/createdAtToString";
-import { markdownToPlainText } from "@utils/markdownToPlainText";
 
 import { Like, Message } from "@assets/svg";
 
@@ -37,11 +37,9 @@ const CardFooter = ({ article }: CardFooterProps) => {
   const { theme } = useThemeStore();
   const navigate = useNavigate();
 
-  const {
-    title,
-    content: html,
-    tags
-  } = articleTitleDataToArticleContent(article.title);
+  const { title, content, tags } = articleTitleDataToArticleContent(
+    article.title
+  );
 
   return (
     <Flex direction="column" gap={8} css={cardFoorterOuterStyle}>
@@ -54,7 +52,7 @@ const CardFooter = ({ article }: CardFooterProps) => {
           {title}
         </Text>
         <Text size={14} css={contentStyle}>
-          {markdownToPlainText(html)}
+          {markdownToTxt(content)}
         </Text>
       </Flex>
 
@@ -76,7 +74,11 @@ const CardFooter = ({ article }: CardFooterProps) => {
           width: 100%;
         `}>
         <IconText
-          iconValue={{ Svg: Like, fill: theme.TEXT300, size: 16 }}
+          iconValue={{
+            Svg: Like,
+            fill: theme.SECONDARY,
+            size: 16
+          }}
           textValue={{
             children: article.likes.length,
             size: 12,

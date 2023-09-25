@@ -8,7 +8,12 @@ import { DOMAIN } from "@constants/api";
 export const createArticle = async (article: CreateArticleRequestBody) => {
   const { data } = await axiosInstance.post<Article>(
     DOMAIN.CREATE_ARTICLE,
-    article
+    article,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }
   );
 
   return data;

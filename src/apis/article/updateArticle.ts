@@ -8,7 +8,12 @@ import { DOMAIN } from "@constants/api";
 export const updateArticle = async (article: UpdateArticleRequestBody) => {
   const { data } = await axiosInstance.put<Article>(
     DOMAIN.UPDATE_ARTICLE,
-    article
+    article,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    }
   );
 
   return data;

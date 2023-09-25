@@ -4,7 +4,6 @@ import {
   useEffect,
   useState
 } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -14,6 +13,7 @@ import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Input from "@components/atoms/Input";
 import IconText from "@components/molecules/IconText";
+import { scrawlToast } from "@components/toast";
 
 import { useUserPasswordUpdateMutation } from "@hooks/api/useUserPasswordUpdateMutation";
 import { useLoggedIn } from "@hooks/useLoggedIn";
@@ -54,15 +54,15 @@ const PasswordPage = () => {
 
   const handleUpdatePassword = () => {
     if (form.password === "" || form.passwordConfirm === "") {
-      toast.error("비밀번호 혹은 비밀번호 확인이 입력되지 않았습니다.");
+      scrawlToast.error("비밀번호 혹은 비밀번호 확인이 입력되지 않았습니다.");
       return;
     }
     if (form.password !== form.passwordConfirm) {
-      toast.error("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      scrawlToast.error("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
       return;
     }
     if (!testRegex(passwordPattern, form.password)) {
-      toast.error("패스워드 형식이 맞지 않습니다.");
+      scrawlToast.error("패스워드 형식이 맞지 않습니다.");
       return;
     }
 
@@ -70,8 +70,9 @@ const PasswordPage = () => {
       userPasswordUpdate.mutate(form);
       queryClient.clear();
       navigate(DOMAIN.HOME);
+      scrawlToast.success("비빌번호 변경에 성공했습니다.");
     } catch (e) {
-      toast.error("비밀번호 변경 중 오류가 발생하였습니다.");
+      scrawlToast.error("비밀번호 변경 중 오류가 발생하였습니다.");
       return;
     }
   };
