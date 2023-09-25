@@ -4,7 +4,6 @@ type SidebarContextType = {
   sidebarAppear: boolean;
   sidebarOpenBtnAppear: boolean;
   setSidebarAppear: (value: boolean) => void;
-  setsidebarAppearFalse: () => void;
   setSidebarOpenBtnAppear: (value: boolean) => void;
 };
 
@@ -17,14 +16,13 @@ type SidebarProviderProps = {
 const SidebarProvider = ({ children }: SidebarProviderProps) => {
   const [sidebarAppear, setSidebarAppear] = useState(false);
   const [sidebarOpenBtnAppear, setSidebarOpenBtnAppear] = useState(false);
-  const setsidebarAppearFalse = () => setSidebarAppear(false);
+
   return (
     <SidebarContext.Provider
       value={{
         sidebarAppear,
         sidebarOpenBtnAppear,
         setSidebarAppear,
-        setsidebarAppearFalse,
         setSidebarOpenBtnAppear
       }}>
       {children}
