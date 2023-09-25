@@ -12,7 +12,6 @@ export const articleWriteButton = css`
 `;
 export const articleChanneldropdown = (theme: Theme) => css`
   position: relative;
-  z-index: 2;
   input {
     font-size: 20px;
     color: ${theme.PRIMARY};

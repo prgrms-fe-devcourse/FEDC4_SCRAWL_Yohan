@@ -10,6 +10,21 @@ const channelPadding = "10px";
 const channelGap = "15px";
 const borderRadius = "8px";
 
+export const getSidebar = (sidebarAppear: boolean) => css`
+  position: fixed;
+  height: 100vh;
+  z-index: 1;
+  @media (max-width: ${WIDTH_MAP.md}px) {
+    transition: transform 0.5s;
+    transform: translate(${sidebarAppear ? 0 : -200}%);
+    z-index: ${sidebarAppear ? 1 : 0};
+  }
+  @media (min-width: ${WIDTH_MAP.md}px) {
+    transition: transform 0.5s;
+    transform: translate(0%);
+  }
+`;
+
 export const getSidebarNav = (theme: Theme) => css`
   margin: 20px;
   width: ${navWidth};
@@ -25,25 +40,6 @@ export const getSidebarNav = (theme: Theme) => css`
   z-index: 10;
 `;
 
-export const getSidebarNavMedia = (sidebarAppearForce: boolean) => css`
-  @media (max-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 0.5s;
-    transform: translate(-200%);
-
-    transform: translate(${sidebarAppearForce ? 0 : -200}%);
-    [class^="css-"][class$="-FloatingButton"] {
-      visibility: visible;
-    }
-  }
-  @media (min-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 0.5s;
-    transform: translate(0%);
-    [class^="css-"][class$="-FloatingButton"] {
-      visibility: hidden;
-    }
-  }
-`;
-
 export const getSidebarLogo = (theme: Theme) => css`
   background-color: ${theme.BACKGROUND200};
   padding: 10px;
@@ -53,6 +49,7 @@ export const getSidebarLogo = (theme: Theme) => css`
 
 export const sidebarLogo = css`
   display: inline-block;
+  margin-left: 10px;
   :hover {
     cursor: pointer;
   }
@@ -124,21 +121,12 @@ export const getSelectedUserInfoStyle = (theme: Theme) => css`
     cursor: pointer;
   }
 `;
-export const getSidebarAppearButton = (sidebarAppearForce: boolean) => css`
+export const sidebarAppearButton = css`
   position: absolute;
-  top: 15px;
+  top: 0px;
+  left: 15px;
   z-index: 1;
-  @media (max-width: ${WIDTH_MAP.sm}px) {
-    [class^="css-"][class$="-FloatingButton"] {
-      visibility: ${sidebarAppearForce ? "hidden" : "visible"};
-    }
-  }
-  @media (min-width: ${WIDTH_MAP.sm}px) {
-    [class^="css-"][class$="-FloatingButton"] {
-      visibility: hidden;
-    }
-  }
 `;
 export const sidebarAppearButtonRtl = css`
-  margin-left: 30px;
+  margin-left: 40px;
 `;

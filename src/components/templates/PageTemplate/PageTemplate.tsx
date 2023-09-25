@@ -4,23 +4,22 @@ import { Outlet } from "react-router-dom";
 import Flex from "@components/atoms/Flex";
 import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import { Sidebar } from "@components/organisms/Sidebar";
-import { getSidebarAppearButton } from "@components/organisms/Sidebar/Sidebar.styles";
 import SidebarAppearButton from "@components/organisms/Sidebar/SidebarAppearButton";
 import {
   pageInnerWrapperStyle,
   pageTemplateWrapperStyle
 } from "@components/templates/PageTemplate/PageTemplate.styles";
 
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
+
 import { useViewportStore } from "@stores/resize.store";
+
+import SidebarProvider from "@contexts/sidebar.context";
 
 const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [sidebarAppearForce, setSidebarAppearForce] = useState(true);
-  const [resizeWidth, setResizeWidth] = useState(0);
+  const [resizeWidth, setResizeWidth] = useState(window.innerWidth);
   const { setWidth } = useViewportStore();
-  const handleSidebarAppear = () => {
-    setSidebarAppearForce(!sidebarAppearForce);
-  };
 
   const handleScroll = useCallback(() => {
     setScrollPosition(window.scrollY);
@@ -36,6 +35,7 @@ const PageTemplate = () => {
   }, []);
 
   useEffect(() => {
+    handleResize();
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize, { passive: false });
     return () => {
@@ -49,19 +49,12 @@ const PageTemplate = () => {
   return (
     <>
       <Flex css={pageTemplateWrapperStyle}>
-        <SidebarAppearButton
-          Rtl={false}
-          handleSidebarAppear={handleSidebarAppear}
-          css={getSidebarAppearButton(sidebarAppearForce)}
-        />
-        <Sidebar
-          outerWidth={outerWidth}
-          sidebarAppearForce={sidebarAppearForce}
-          handleSidebarAppear={handleSidebarAppear}
-        />
         <div css={pageInnerWrapperStyle}>
           <Outlet />
         </div>
+        <SidebarProvider>
+          <SidebarWrapper />
+        </SidebarProvider>
         <FloatingButtons scrollPosition={scrollPosition} />
       </Flex>
     </>
@@ -69,3 +62,16 @@ const PageTemplate = () => {
 };
 
 export default PageTemplate;
+
+const SidebarWrapper = () => {
+  const { sidebarAppear, sidebarOpenBtnAppear } = useSidebarContext();
+
+  return (
+    <>
+      {sidebarOpenBtnAppear && !sidebarAppear && (
+        <SidebarAppearButton Rtl={false} />
+      )}
+      <Sidebar outerWidth={outerWidth} />
+    </>
+  );
+};

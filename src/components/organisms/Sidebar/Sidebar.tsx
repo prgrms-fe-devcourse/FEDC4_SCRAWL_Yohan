@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -6,12 +7,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import Flex from "@components/atoms/Flex";
 
 import { useUserByTokenQuery } from "@hooks/api/useUserByTokenQuery";
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
+import { useViewportStore } from "@stores/resize.store";
 import { useThemeStore } from "@stores/theme.store";
 import { useTokenStore } from "@stores/token.store";
 
-import { getSidebarNav, getSidebarNavMedia } from "./Sidebar.styles";
+import { WIDTH_MAP } from "@constants/media";
+
+import { getSidebar, getSidebarNav } from "./Sidebar.styles";
 import SidebarChannels from "./SidebarChannels";
 import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
@@ -22,16 +27,9 @@ const channelTextSize = 14;
 
 type SidebarProps = {
   outerWidth: number;
-  // sidebarAppear: boolean;
-  sidebarAppearForce: boolean;
-  handleSidebarAppear: () => void;
 };
 
-const Sidebar = ({
-  outerWidth,
-  sidebarAppearForce,
-  handleSidebarAppear
-}: SidebarProps) => {
+const Sidebar = ({ outerWidth }: SidebarProps) => {
   const { theme } = useThemeStore();
   const { data: user } = useUserByTokenQuery();
   const { isLoggedIn } = useLoggedIn();
@@ -39,7 +37,21 @@ const Sidebar = ({
   const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const navigate = useNavigate();
   const myLocation = useLocation().pathname;
+  const { sidebarAppear, setSidebarAppear, setSidebarOpenBtnAppear } =
+    useSidebarContext();
+  const { currentWidth } = useViewportStore();
+
+  useEffect(() => {
+    if (WIDTH_MAP.md < currentWidth) {
+      setSidebarAppear(false);
+      setSidebarOpenBtnAppear(false);
+    } else {
+      setSidebarOpenBtnAppear(true);
+    }
+  }, [currentWidth, setSidebarAppear, setSidebarOpenBtnAppear]);
+
   const navigatePage = (page: string, channelId?: string) => {
+    setSidebarAppear(false);
     switch (page) {
       case "HOME":
         return navigate("/");
@@ -58,18 +70,12 @@ const Sidebar = ({
     }
   };
   return (
-    <Flex
-      direction="column"
-      css={css`
-        position: fixed;
-        height: 100vh;
-      `}>
-      <nav css={[getSidebarNav(theme), getSidebarNavMedia(sidebarAppearForce)]}>
+    <Flex direction="column" css={getSidebar(sidebarAppear)}>
+      <nav css={getSidebarNav(theme)}>
         <SidebarHeader
           theme={theme}
           navigatePage={navigatePage}
           outerWidth={outerWidth}
-          handleSidebarAppear={handleSidebarAppear}
         />
         <div
           css={css`
@@ -84,6 +90,7 @@ const Sidebar = ({
             channelTextSize={channelTextSize}
             isLoggedIn={isLoggedIn}
             userImage={user?.image}
+            userId={user?._id}
             myLocation={myLocation}
           />
           <SidebarChannels

@@ -4,6 +4,8 @@ import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 import UserInfo from "@components/molecules/UserInfo";
 
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
+
 import { Theme } from "@constants/theme";
 
 import { Alert, Home, Search } from "@assets/svg";
@@ -26,6 +28,7 @@ type SidebarMainProps = {
   channelTextSize: number;
   isLoggedIn: boolean;
   userImage: string | undefined;
+  userId: string | undefined;
   myLocation: string;
 };
 const SidebarMain = ({
@@ -35,10 +38,11 @@ const SidebarMain = ({
   channelTextSize,
   isLoggedIn,
   userImage,
+  userId,
   myLocation
 }: SidebarMainProps) => {
   const channelColor = theme.TEXT300;
-
+  const { setSidebarAppear } = useSidebarContext();
   const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const notificationRef = useRef<HTMLDivElement | null>(null);
@@ -98,7 +102,7 @@ const SidebarMain = ({
           fontSize={14}
           color={theme.TEXT300}
           css={
-            myLocation.includes("users")
+            myLocation.includes(`users/${userId}`)
               ? getSelectedUserInfoStyle(theme)
               : getUserInfoStyle(theme)
           }
@@ -127,11 +131,17 @@ const SidebarMain = ({
         top={getNotiDropdownPos().top}
         left={getNotiDropdownPos().left + 100}
         visible={isNotiDropdownOpen}
-        onClose={() => setIsNotiDropdownOpen(false)}
+        onClose={() => {
+          setIsNotiDropdownOpen(false);
+          setSidebarAppear(false);
+        }}
       />
       <SearchModal
         visible={isSearchModalOpen}
-        onClose={() => setIsSearchModalOpen(false)}
+        onClose={() => {
+          setIsSearchModalOpen(false);
+          setSidebarAppear(false);
+        }}
       />
     </>
   );
