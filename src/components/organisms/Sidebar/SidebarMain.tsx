@@ -30,6 +30,7 @@ type SidebarMainProps = {
   channelTextSize: number;
   isLoggedIn: boolean;
   userImage: string | undefined;
+  userId: string | undefined;
   myLocation: string;
 };
 const SidebarMain = ({
@@ -39,6 +40,7 @@ const SidebarMain = ({
   channelTextSize,
   isLoggedIn,
   userImage,
+  userId,
   myLocation
 }: SidebarMainProps) => {
   const channelColor = theme.TEXT300;
@@ -91,7 +93,7 @@ const SidebarMain = ({
           fontSize={14}
           color={theme.TEXT300}
           css={
-            myLocation.includes("users")
+            myLocation.includes(`users/${userId}`)
               ? getSelectedUserInfoStyle(theme)
               : getUserInfoStyle(theme)
           }

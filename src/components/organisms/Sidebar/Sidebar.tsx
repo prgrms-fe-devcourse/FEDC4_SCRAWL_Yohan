@@ -90,6 +90,7 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
             channelTextSize={channelTextSize}
             isLoggedIn={isLoggedIn}
             userImage={user?.image}
+            userId={user?._id}
             myLocation={myLocation}
           />
           <SidebarChannels
