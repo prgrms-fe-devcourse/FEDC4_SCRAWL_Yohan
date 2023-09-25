@@ -14,7 +14,7 @@ import { useTokenStore } from "@stores/token.store";
 
 import { SidebarContext } from "@contexts/sidebar.context";
 
-import { getSidebarNav, getSidebarNavMedia } from "./Sidebar.styles";
+import { getSidebar, getSidebarNav } from "./Sidebar.styles";
 import SidebarChannels from "./SidebarChannels";
 import SidebarFooter from "./SidebarFooter";
 import SidebarHeader from "./SidebarHeader";
@@ -58,14 +58,8 @@ const Sidebar = ({ outerWidth }: SidebarProps) => {
     }
   };
   return (
-    <Flex
-      direction="column"
-      css={css`
-        position: fixed;
-        height: 100vh;
-        z-index: 1;
-      `}>
-      <nav css={[getSidebarNav(theme), getSidebarNavMedia(sidebarAppear)]}>
+    <Flex direction="column" css={getSidebar(sidebarAppear)}>
+      <nav css={getSidebarNav(theme)}>
         <SidebarHeader
           theme={theme}
           navigatePage={navigatePage}

@@ -10,6 +10,27 @@ const channelPadding = "10px";
 const channelGap = "15px";
 const borderRadius = "8px";
 
+export const getSidebar = (sidebarAppear: boolean) => css`
+  position: fixed;
+  height: 100vh;
+  z-index: 1;
+  @media (max-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 0.5s;
+    transform: translate(${sidebarAppear ? 0 : -200}%);
+    z-index: ${sidebarAppear ? 1 : 0};
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: visible;
+    }
+  }
+  @media (min-width: ${WIDTH_MAP.sm}px) {
+    transition: transform 0.5s;
+    transform: translate(0%);
+    [class^="css-"][class$="-FloatingButton"] {
+      visibility: hidden;
+    }
+  }
+`;
+
 export const getSidebarNav = (theme: Theme) => css`
   margin: 20px;
   width: ${navWidth};
@@ -23,24 +44,6 @@ export const getSidebarNav = (theme: Theme) => css`
   background-color: ${theme.BACKGROUND100};
   position: relative;
   z-index: 10;
-`;
-
-export const getSidebarNavMedia = (sidebarAppear: boolean) => css`
-  @media (max-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 0.5s;
-    transform: translate(${sidebarAppear ? 0 : -200}%);
-    z-index: ${sidebarAppear ? 1 : -1};
-    [class^="css-"][class$="-FloatingButton"] {
-      visibility: visible;
-    }
-  }
-  @media (min-width: ${WIDTH_MAP.sm}px) {
-    transition: transform 0.5s;
-    transform: translate(0%);
-    [class^="css-"][class$="-FloatingButton"] {
-      visibility: hidden;
-    }
-  }
 `;
 
 export const getSidebarLogo = (theme: Theme) => css`
