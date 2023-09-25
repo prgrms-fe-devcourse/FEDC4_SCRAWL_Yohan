@@ -13,6 +13,7 @@ import { useUserUpdateMutation } from "@hooks/api/useUserUpdateMutation";
 import { PATH } from "@constants/index";
 import { WIDTH_MAP } from "@constants/media";
 import { nicknamePattern } from "@constants/regex";
+import { MAX_WIDTH } from "@constants/width";
 
 import { testRegex } from "@utils/testRegEx";
 
@@ -84,7 +85,7 @@ const UserPage = () => {
           box-sizing: border-box;
           width: calc(100vw - 400px);
           min-width: ${WIDTH_MAP.sm}px;
-          max-width: ${WIDTH_MAP.lg + 20}px;
+          max-width: ${MAX_WIDTH.lg}px;
         `}>
         <UserInfo
           editMode={editMode}

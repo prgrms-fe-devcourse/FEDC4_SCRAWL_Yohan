@@ -1,11 +1,12 @@
 import { css } from "@emotion/react";
 
 import { Theme } from "@constants/theme";
+import { MAX_WIDTH } from "@constants/width";
 
 export const articleWriteButton = css`
   margin-top: 10px;
   width: 100%;
-  max-width: 1080px;
+  max-width: ${MAX_WIDTH.md}px;
   :hover {
     cursor: pointer;
   }

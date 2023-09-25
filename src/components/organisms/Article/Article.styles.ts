@@ -1,10 +1,11 @@
 import { css } from "@emotion/react";
 
 import { Theme } from "@constants/theme";
+import { MAX_WIDTH } from "@constants/width";
 
 export const articleOuterStyle = css`
   min-width: 500px;
-  max-width: 1080px;
+  max-width: ${MAX_WIDTH.md}px;
   margin: 20px 20px 20px 0;
 `;
 

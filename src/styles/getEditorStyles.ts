@@ -1,13 +1,14 @@
 import { css } from "@emotion/react";
 
 import { Theme } from "@constants/theme";
+import { MAX_WIDTH } from "@constants/width";
 
 export const getEditorStyle = (theme: Theme) => css`
   .w-md-editor-content {
     border: none;
   }
   width: 100%;
-  max-width: 1080px;
+  max-width: ${MAX_WIDTH.md}px;
   background-color: transparent;
   color: inherit;
   .code-highlight {

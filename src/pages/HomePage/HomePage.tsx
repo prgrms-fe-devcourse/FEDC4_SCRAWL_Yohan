@@ -11,6 +11,8 @@ import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 
 import { useThemeStore } from "@stores/theme.store";
 
+import { MAX_WIDTH } from "@constants/width";
+
 const HomePage = () => {
   const { articles } = useArticlesQuery();
   const { channels } = useChannelsQuery();
@@ -21,6 +23,7 @@ const HomePage = () => {
     <Flex
       direction="column"
       css={css`
+        max-width: ${MAX_WIDTH.lg}px;
         margin: 20px 0;
       `}>
       <Flex gap={10}>
