@@ -8,8 +8,8 @@ type ImageProps = Combine<
   {
     src: string;
     block?: boolean;
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     alt: string;
     mode: CSSProperties["objectFit"];
   },

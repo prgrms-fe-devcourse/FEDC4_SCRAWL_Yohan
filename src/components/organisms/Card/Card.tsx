@@ -40,8 +40,6 @@ const Card = ({ article }: CardProps) => {
 
       {article.image ? (
         <Image
-          width={0}
-          height={0}
           src={article.image}
           alt="contentImg"
           mode="cover"
