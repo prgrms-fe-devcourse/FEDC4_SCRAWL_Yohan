@@ -40,4 +40,4 @@ export const DARK_MODE_THEME: Theme = {
   SECONDARY: "rgb(255, 100, 100)"
 };
 
-export const THEME_KEY = "THEME";
+export const THEME_KEY = "THEME_";
