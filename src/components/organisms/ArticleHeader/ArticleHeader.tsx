@@ -119,7 +119,7 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
           </Text>
         </Flex>
         <IconText
-          iconValue={{ Svg: Like, fill: myLike ? "red" : undefined }}
+          iconValue={{ Svg: Like, fill: myLike ? theme.SECONDARY : undefined }}
           textValue={{ size: 12, children: article.likes.length }}
           css={getLikeIconTextStyle(theme, isMyArticle)}
           onClick={handleLikeButtonClick}

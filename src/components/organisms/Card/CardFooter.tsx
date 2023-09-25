@@ -76,7 +76,11 @@ const CardFooter = ({ article }: CardFooterProps) => {
           width: 100%;
         `}>
         <IconText
-          iconValue={{ Svg: Like, fill: theme.TEXT300, size: 16 }}
+          iconValue={{
+            Svg: Like,
+            fill: theme.SECONDARY,
+            size: 16
+          }}
           textValue={{
             children: article.likes.length,
             size: 12,
