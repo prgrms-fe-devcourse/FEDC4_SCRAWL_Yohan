@@ -47,13 +47,13 @@ const PageTemplate = () => {
   return (
     <>
       <Flex css={pageTemplateWrapperStyle}>
+        <div css={pageInnerWrapperStyle}>
+          <Outlet />
+        </div>
         <SidebarProvider>
           <SidebarAppearButton Rtl={false} css={sidebarAppearButton} />
           <Sidebar outerWidth={outerWidth} />
         </SidebarProvider>
-        <div css={pageInnerWrapperStyle}>
-          <Outlet />
-        </div>
         <FloatingButtons scrollPosition={scrollPosition} />
       </Flex>
     </>
