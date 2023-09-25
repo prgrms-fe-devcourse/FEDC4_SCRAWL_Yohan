@@ -6,7 +6,7 @@ import { useThemeStore } from "@stores/theme.store";
 
 import { Spinner } from "@assets/svg";
 
-const Spinning = () => {
+const Spinning = ({ width }: { width: number }) => {
   const theme = useThemeStore((state) => state.theme);
 
   return (
@@ -17,7 +17,10 @@ const Spinning = () => {
         width: 100%;
         height: 100%;
       `}>
-      <Spinner stroke={theme.type === "LIGHT" ? "lightgray" : "gray"} />
+      <Spinner
+        stroke={theme.type === "LIGHT" ? "lightgray" : "gray"}
+        width={width}
+      />
     </Flex>
   );
 };

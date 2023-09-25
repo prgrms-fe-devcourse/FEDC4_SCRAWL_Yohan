@@ -25,6 +25,7 @@ import { ReactComponent as KeyboardTabRtl } from "./keyboardTabRtl.svg";
 import { ReactComponent as Like } from "./like.svg";
 import { ReactComponent as Logo } from "./logo.svg";
 import { ReactComponent as LogoAlert } from "./logoAlert.svg";
+import { ReactComponent as LogoSuccess } from "./logoSuccess.svg";
 import { ReactComponent as Message } from "./message.svg";
 import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as My } from "./my.svg";
@@ -77,6 +78,7 @@ export {
   KeyboardTabRtl,
   LogoAlert,
   Spinner,
-  NoImage
+  NoImage,
+  LogoSuccess
 };
 export type SVGType = typeof Alert;

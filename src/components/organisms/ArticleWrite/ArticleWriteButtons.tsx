@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
 import Modal from "@components/atoms/Modal";
+import { scrawlToast } from "@components/toast";
 
 import { useArticleCreateMutation } from "@hooks/api/useArticleCreateMutation";
 import { useArticleUpdateMutation } from "@hooks/api/useArticleUpdateMutation";
@@ -89,11 +90,11 @@ const ArticleWriteButtons = ({
       }
       navigatePage("CHANNEL");
     } else if (!title && channelId) {
-      toast.error("제목을 입력해 주세요.");
+      scrawlToast.error("제목을 입력해 주세요.");
     } else if (title && !channelId) {
-      toast.error("채널을 선택해 주세요.");
+      scrawlToast.error("채널을 선택해 주세요.");
     } else {
-      toast.error("채널 선택과 제목 입력은 필수사항입니다.");
+      scrawlToast.error("채널 선택과 제목 입력은 필수사항입니다.");
     }
   };
 

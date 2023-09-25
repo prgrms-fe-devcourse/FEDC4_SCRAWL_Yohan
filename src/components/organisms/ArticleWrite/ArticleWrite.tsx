@@ -2,7 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
-import MDEditor from "@uiw/react-md-editor";
+import MDEditor, {
+  codeEdit,
+  codeLive,
+  codePreview
+} from "@uiw/react-md-editor";
 
 import Flex from "@components/atoms/Flex";
 
@@ -40,20 +44,19 @@ const ArticleWrite = () => {
         return navigate(-1);
     }
   };
-  const width = "70%";
 
   return (
     <Flex
       direction="column"
       css={css`
-        margin: 20px;
+        margin: 20px 20px 0 0;
       `}>
       <ArticleChannelSelect stateChange={(value) => setChannelId(value)} />
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}
-        width={width}
+        width="100%"
       />
-      <ArticleWriteTag stateChange={(value) => setTags(value)} width={width} />
+      <ArticleWriteTag stateChange={(value) => setTags(value)} width="100%" />
       <div
         css={css`
           width: 100%;
@@ -61,6 +64,7 @@ const ArticleWrite = () => {
         <MDEditor
           data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}
           preview="live"
+          extraCommands={[codeEdit, codePreview, codeLive]}
           highlightEnable={false}
           height="calc(100vh - 300px)"
           value={content}

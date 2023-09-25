@@ -2,11 +2,10 @@ import { css } from "@emotion/react";
 
 import { Theme } from "@constants/theme";
 
-const width = "70%";
-
 export const articleWriteButton = css`
   margin-top: 10px;
-  width: ${width};
+  width: 100%;
+  max-width: 1080px;
   :hover {
     cursor: pointer;
   }

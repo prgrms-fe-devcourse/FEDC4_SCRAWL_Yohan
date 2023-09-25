@@ -11,6 +11,7 @@ export const pageTemplateWrapperStyle = css`
 export const pageInnerWrapperStyle = css`
   flex-grow: 1;
   margin-left: 330px;
+  margin-right: 60px;
   @media (max-width: ${WIDTH_MAP.sm}px) {
     transition: margin-left 0.5s ease-in-out;
     margin-left: 40px;

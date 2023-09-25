@@ -21,6 +21,7 @@ export const cardImgStyle = css`
 `;
 
 export const userInfoStyle = css`
+  width: 60%;
   margin: 8px 0 0 8px;
   cursor: pointer;
 `;

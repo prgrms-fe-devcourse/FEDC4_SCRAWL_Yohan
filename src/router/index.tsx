@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router-dom";
 
 import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 import ErrorPage from "@pages/ErrorPage";
-import HomePage from "@pages/HomePage";
+import HomePage from "@pages/HomePage/HomePage";
+import HomePageSkeleton from "@pages/HomePage/HomePageSkeleton";
 import LoginPage from "@pages/LoginPage";
 import PasswordPage from "@pages/PasswordPage";
 import SearchPage from "@pages/SearchPage/SearchPage";
@@ -11,7 +12,8 @@ import SignUpPage from "@pages/SignUpPage";
 import UserPage from "@pages/UserPage/UserPage";
 
 import ErrorBoundary from "@components/_errorBoundaries/ErrorBoundary";
-import { Article, ArticleSkeleton } from "@components/organisms/Article";
+import FallbackPage from "@components/molecules/FallbackPage";
+import { Article } from "@components/organisms/Article";
 import { ArticleEdit, ArticleWrite } from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
@@ -24,7 +26,7 @@ const AppRouter = () => {
         <Route
           path={PATH.HOME}
           element={
-            <Suspense fallback={"글 목록을 불러오는 중입니다."}>
+            <Suspense fallback={<HomePageSkeleton />}>
               <ErrorBoundary
                 fallback={"전체 글 목록을 불러오는데 실패하였습니다."}>
                 <HomePage />
@@ -43,7 +45,7 @@ const AppRouter = () => {
         <Route
           path={PATH.ARTICLE(":articleId")}
           element={
-            <Suspense fallback={<ArticleSkeleton />}>
+            <Suspense fallback={<FallbackPage />}>
               <Article />
             </Suspense>
           }
@@ -53,8 +55,22 @@ const AppRouter = () => {
           path={PATH.EDIT_ARTICLE(":articleId")}
           element={<ArticleEdit />}
         />
-        <Route path={PATH.SEARCH} element={<SearchPage />} />
-        <Route path={PATH.USER(":userId")} element={<UserPage />} />
+        <Route
+          path={PATH.SEARCH}
+          element={
+            <Suspense fallback={<FallbackPage />}>
+              <SearchPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path={PATH.USER(":userId")}
+          element={
+            <Suspense fallback={<FallbackPage />}>
+              <UserPage />
+            </Suspense>
+          }
+        />
       </Route>
       <Route path={PATH.SIGNUP} element={<SignUpPage />} />
       <Route path={PATH.LOGIN} element={<LoginPage />} />

@@ -6,6 +6,8 @@ import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import UserInfo from "@components/molecules/UserInfo";
 
+import { useChannelName } from "@hooks/useChannelName";
+
 import { useThemeStore } from "@stores/theme.store";
 
 import {
@@ -26,6 +28,7 @@ const SearchItem = ({
 }) => {
   const theme = useThemeStore((state) => state.theme);
   const navigate = useNavigate();
+  const channelName = useChannelName(article.channel._id);
 
   const { title } = articleTitleDataToArticleContent(article.title);
 
@@ -48,17 +51,22 @@ const SearchItem = ({
           background-color: ${theme.BACKGROUND200};
         }
       `}>
-      <Text
-        size={20}
-        strong={true}
-        css={css`
-          width: 300px;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        `}>
-        {title}
-      </Text>
+      <Flex direction="column">
+        <Text size={12} color={theme.TEXT300}>
+          {channelName}
+        </Text>
+        <Text
+          size={20}
+          strong={true}
+          css={css`
+            width: 300px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          `}>
+          {title}
+        </Text>
+      </Flex>
       <UserInfo
         imageSrc={article.author.image || placeholderUser}
         imgWidth={30}

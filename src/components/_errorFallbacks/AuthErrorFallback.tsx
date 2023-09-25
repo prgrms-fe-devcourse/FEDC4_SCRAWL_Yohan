@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { toast } from "react-hot-toast";
 import { Navigate } from "react-router-dom";
 
 import { useQueryClient } from "@tanstack/react-query";
+
+import { scrawlToast } from "@components/toast";
 
 import { useTokenStore } from "@stores/token.store";
 
@@ -22,7 +23,7 @@ const AuthErrorFallback = ({ error, onMounted }: AuthErrorFallbackProps) => {
   useEffect(() => {
     queryClient.clear();
     setAccessToken(null);
-    toast.error(error.message);
+    scrawlToast.error(error.message);
     onMounted();
   }, [error, queryClient, setAccessToken, onMounted]);
 

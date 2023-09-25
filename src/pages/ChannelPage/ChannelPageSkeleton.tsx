@@ -1,3 +1,5 @@
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import { CardList } from "@components/organisms/CardList";
@@ -19,7 +21,14 @@ const ChannelPageSkeleton = () => {
           채널
         </Text>
       </Flex>
-      <CardList isFetchingNext={true} />
+      <div
+        css={css`
+          box-sizing: border-box;
+          padding: 20px 20px 0 0;
+          width: 100%;
+        `}>
+        <CardList isFetchingNext={true} />
+      </div>
     </Flex>
   );
 };
