@@ -47,12 +47,14 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
       {
         onSuccess: (newComment) => {
           setComment("");
-          notificationCreateMutate({
-            notificationType: "COMMENT",
-            notificationTypeId: newComment._id,
-            postId: newComment.post,
-            userId: article.author._id
-          });
+          if (article.author._id !== data?._id) {
+            notificationCreateMutate({
+              notificationType: "COMMENT",
+              notificationTypeId: newComment._id,
+              postId: newComment.post,
+              userId: article.author._id
+            });
+          }
         }
       }
     );
