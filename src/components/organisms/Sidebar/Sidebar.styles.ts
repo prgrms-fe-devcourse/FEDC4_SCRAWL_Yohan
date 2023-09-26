@@ -13,7 +13,7 @@ const borderRadius = "8px";
 export const getSidebar = (sidebarAppear: boolean) => css`
   position: fixed;
   height: 100vh;
-  z-index: 1;
+  z-index: 2;
   @media (max-width: ${WIDTH_MAP.md}px) {
     transition: transform 0.5s;
     transform: translate(${sidebarAppear ? 0 : -200}%);
