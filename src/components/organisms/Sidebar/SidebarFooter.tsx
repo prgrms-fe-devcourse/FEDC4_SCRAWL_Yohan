@@ -1,7 +1,11 @@
+import { useState } from "react";
+
 import { css } from "@emotion/react";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
+import Modal from "@components/atoms/Modal";
+import ConfirmModal from "@components/molecules/ConfirmModal";
 
 import { Theme } from "@constants/theme";
 
@@ -20,6 +24,10 @@ const SidebarFooter = ({
 }: SidebarFooterProps) => {
   const buttonWidth = "200px";
   const buttonHeight = "40px";
+  const [isOpen, setIsOpen] = useState(false);
+  const handleToggleModal = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div css={getSidebarFooter(theme)}>
@@ -29,18 +37,34 @@ const SidebarFooter = ({
             margin-left: 26px;
           `}>
           {isLoggedIn ? (
-            <Button
-              width={buttonWidth}
-              height={buttonHeight}
-              background={theme.BACKGROUND200}
-              color={theme.TEXT300}
-              css={css`
-                margin-bottom: 10px;
-                border: 1px solid var(--border-color);
-              `}
-              onClick={() => navigatePage("LOGOUT")}>
-              로그아웃
-            </Button>
+            <div>
+              <Button
+                width={buttonWidth}
+                height={buttonHeight}
+                background={theme.BACKGROUND200}
+                color={theme.TEXT300}
+                css={css`
+                  margin-bottom: 10px;
+                  border: 1px solid var(--border-color);
+                `}
+                onClick={handleToggleModal}>
+                로그아웃
+              </Button>
+              <Modal visible={isOpen}>
+                <Modal.Background></Modal.Background>
+                <Modal.Container
+                  onClose={handleToggleModal}
+                  children={
+                    <ConfirmModal
+                      message="정말 로그아웃 하시겠습니까?"
+                      subMessage="다시 한번 확인해 보세요!"
+                      onYesButtonClick={() => navigatePage("LOGOUT")}
+                      onNoButtonClick={handleToggleModal}
+                    />
+                  }
+                />
+              </Modal>
+            </div>
           ) : (
             <Button
               width={buttonWidth}

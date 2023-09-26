@@ -43,7 +43,15 @@ const ConfirmModal = ({
       <Button width="100%" height="35px" onClick={onYesButtonClick}>
         네
       </Button>
-      <Button width="100%" height="35px" onClick={onNoButtonClick}>
+      <Button
+        width="100%"
+        height="35px"
+        background="#ffffff"
+        color={theme.TEXT300}
+        css={css`
+          border: 1px solid ${theme.TEXT300};
+        `}
+        onClick={onNoButtonClick}>
         아니오
       </Button>
     </Flex>
