@@ -11,7 +11,6 @@ import SearchPage from "@pages/SearchPage/SearchPage";
 import SignUpPage from "@pages/SignUpPage";
 import UserPage from "@pages/UserPage/UserPage";
 
-import ErrorBoundary from "@components/_errorBoundaries/ErrorBoundary";
 import FallbackPage from "@components/molecules/FallbackPage";
 import { Article } from "@components/organisms/Article";
 import { ArticleEdit, ArticleWrite } from "@components/organisms/ArticleWrite";
@@ -27,10 +26,7 @@ const AppRouter = () => {
           path={PATH.HOME}
           element={
             <Suspense fallback={<HomePageSkeleton />}>
-              <ErrorBoundary
-                fallback={"전체 글 목록을 불러오는데 실패하였습니다."}>
-                <HomePage />
-              </ErrorBoundary>
+              <HomePage />
             </Suspense>
           }
         />
