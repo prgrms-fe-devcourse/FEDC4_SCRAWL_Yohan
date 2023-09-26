@@ -7,6 +7,7 @@ import CardSliderSkeleton from "@components/organisms/ArticlesByChannelSlider/Ca
 import { useThemeStore } from "@stores/theme.store";
 
 import { CHANNEL_MAP } from "@constants/channel";
+import { MAX_WIDTH } from "@constants/width";
 
 const HomePageSkeleton = () => {
   const { theme } = useThemeStore();
@@ -17,6 +18,7 @@ const HomePageSkeleton = () => {
       direction="column"
       css={css`
         margin: 20px 0;
+        max-width: ${MAX_WIDTH.lg}px;
       `}>
       <Flex css={css``} gap={10}>
         <Text size={20} color={theme.PRIMARY} strong={true}>
