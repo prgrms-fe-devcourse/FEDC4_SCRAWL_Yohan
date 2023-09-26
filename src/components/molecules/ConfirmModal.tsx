@@ -28,16 +28,22 @@ const ConfirmModal = ({
       gap={10}
       css={css`
         box-sizing: border-box;
-        padding: 24px;
+        padding: 40px;
         width: 320px;
-        height: 400px;
+        height: 250px;
         border-radius: 8px;
         background-color: ${theme.BACKGROUND100};
       `}>
       <Text size={18} strong={true}>
         {message}
       </Text>
-      <Text size={12} strong={true} color={theme.TEXT100}>
+      <Text
+        size={12}
+        strong={true}
+        color={theme.TEXT100}
+        css={css`
+          margin-bottom: 20px;
+        `}>
         {subMessage}
       </Text>
       <Button width="100%" height="35px" onClick={onYesButtonClick}>
