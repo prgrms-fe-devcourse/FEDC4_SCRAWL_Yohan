@@ -55,10 +55,7 @@ const FloatingButtons = ({ scrollPosition }: { scrollPosition: number }) => {
                   : LIGHT_MODE_THEME.BACKGROUND100,
               color: theme.TEXT300,
               children: "",
-              onClick: () => {
-                console.log("up");
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }
+              onClick: () => window.scrollTo({ top: 0, behavior: "smooth" })
             }}
           />
         )}

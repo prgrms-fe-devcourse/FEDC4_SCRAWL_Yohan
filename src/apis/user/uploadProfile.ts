@@ -10,7 +10,6 @@ type Payload = {
 };
 
 export const uploadProfile = async (payload: Payload) => {
-  console.log(payload);
   const { data } = await axiosInstance.post<UpdateUserResponse>(
     DOMAIN.UPLOAD_PROFILE,
     payload,
@@ -20,6 +19,6 @@ export const uploadProfile = async (payload: Payload) => {
       }
     }
   );
-  console.log(data);
+
   return { user: data };
 };
