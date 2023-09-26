@@ -1,6 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
 import CommentForm from "@components/molecules/CommentForm";
 import { ArticleHeader } from "@components/organisms/ArticleHeader";
@@ -30,6 +32,12 @@ const Article = () => {
       </Helmet>
       <ArticleHeader title={title} tags={tags} article={article} />
       <Thread data={article} />
+      <div
+        css={css`
+          margin-top: 20px;
+        `}>
+        댓글 {article.comments.length}개
+      </div>
       {article.comments.map((comment) => (
         <Thread key={comment._id} data={comment} />
       ))}
