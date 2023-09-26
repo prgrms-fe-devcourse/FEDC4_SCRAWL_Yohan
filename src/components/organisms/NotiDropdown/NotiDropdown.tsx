@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Dropdown from "@components/atoms/Dropdown";
@@ -6,10 +5,11 @@ import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
 import Text from "@components/atoms/Text";
 
-import { useNotificationsQuery } from "@hooks/api/useNotificationsQuery";
 import { useNotificationsReadMutation } from "@hooks/api/useNotificationsReadMutation";
 
 import { useThemeStore } from "@stores/theme.store";
+
+import { Notification } from "@type/models/Notification";
 
 import { PATH } from "@constants/index";
 
@@ -18,32 +18,32 @@ import { createdAtToString } from "@utils/createdAtToString";
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import {
+  getNotiDropdownItemStyle,
   getNotiDropdownOuterStyle,
   getReadButtonStyle,
   getUserImageStyle,
   noNotificationStyle,
   notiDropdownInnerStyle,
-  notiDropdownItemStyle,
   readButtonWarpperStyle
 } from "./NotiDropdown.styles";
-import { filterNotifications } from "./filterNotifications";
 
 type NotiDropdownProps = {
+  notifications: Notification[];
   visible: boolean;
   top?: number;
   left?: number;
   onClose: () => void;
 };
 
-const NotiDropdown = ({ visible, onClose, top, left }: NotiDropdownProps) => {
+const NotiDropdown = ({
+  notifications,
+  visible,
+  onClose,
+  top,
+  left
+}: NotiDropdownProps) => {
   const theme = useThemeStore((state) => state.theme);
   const navigate = useNavigate();
-
-  const { notifications: rawNotifications } = useNotificationsQuery();
-  const notifications = useMemo(
-    () => filterNotifications(rawNotifications),
-    [rawNotifications]
-  );
 
   const { mutate: notificationsReadMutate } = useNotificationsReadMutation();
 
@@ -74,7 +74,7 @@ const NotiDropdown = ({ visible, onClose, top, left }: NotiDropdownProps) => {
             key={_id}
             align="center"
             gap={10}
-            css={notiDropdownItemStyle}
+            css={getNotiDropdownItemStyle(theme)}
             onClick={() => {
               onClose();
               post && navigate(PATH.ARTICLE(post));

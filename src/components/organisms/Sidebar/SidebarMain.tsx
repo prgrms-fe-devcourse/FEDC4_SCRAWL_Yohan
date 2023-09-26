@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 
 import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
@@ -8,11 +8,11 @@ import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
 
 import { Theme } from "@constants/theme";
 
-import { Alert, Home, Search } from "@assets/svg";
+import { Home, Search } from "@assets/svg";
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
-import { NotiDropdown } from "../NotiDropdown";
 import { SearchModal } from "../SearchModal";
+import NotificationItem from "./NotificationItem";
 import {
   getSelectedSidebarIconText,
   getSelectedUserInfoStyle,
@@ -43,19 +43,7 @@ const SidebarMain = ({
 }: SidebarMainProps) => {
   const channelColor = theme.TEXT300;
   const { setSidebarAppear } = useSidebarContext();
-  const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const notificationRef = useRef<HTMLDivElement | null>(null);
-
-  const getNotiDropdownPos = useCallback(() => {
-    if (!notificationRef.current) {
-      return { top: 0, left: 0 };
-    }
-
-    const { top, left } = notificationRef.current.getBoundingClientRect();
-
-    return { top, left };
-  }, []);
 
   return (
     <>
@@ -110,32 +98,11 @@ const SidebarMain = ({
         />
       )}
       {isLoggedIn && (
-        <div ref={notificationRef}>
-          <IconText
-            iconValue={{
-              Svg: Alert,
-              size: channelIconSize,
-              fill: channelColor
-            }}
-            textValue={{
-              children: "알림",
-              size: channelTextSize,
-              color: channelColor
-            }}
-            css={getSidebarIconText(theme)}
-            onClick={() => setIsNotiDropdownOpen(true)}
-          />
-        </div>
-      )}
-      {isLoggedIn && (
-        <NotiDropdown
-          top={getNotiDropdownPos().top}
-          left={getNotiDropdownPos().left + 100}
-          visible={isNotiDropdownOpen}
-          onClose={() => {
-            setIsNotiDropdownOpen(false);
-            setSidebarAppear(false);
-          }}
+        <NotificationItem
+          theme={theme}
+          channelIconSize={channelIconSize}
+          channelTextSize={channelTextSize}
+          channelColor={channelColor}
         />
       )}
       <SearchModal
