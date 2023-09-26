@@ -38,15 +38,22 @@ export const noNotificationStyle = css`
   flex-grow: 1;
 `;
 
-export const notiDropdownItemStyle = css`
+export const getNotiDropdownItemStyle = (theme: Theme) => css`
   cursor: pointer;
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
   border-bottom: 1px solid var(--border-color);
+  :hover {
+    background-color: ${theme.BACKGROUND200};
+  }
 `;
 
 export const getUserImageStyle = (theme: Theme, seen: boolean) => css`
+  box-sizing: border-box;
   border: 1px solid ${seen ? "var(--border-color)" : theme.PRIMARY};
   border-radius: 50%;
+  :hover {
+    border-width: 3px;
+  }
 `;

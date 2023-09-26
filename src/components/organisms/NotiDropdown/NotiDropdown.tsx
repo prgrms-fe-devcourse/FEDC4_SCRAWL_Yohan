@@ -18,12 +18,12 @@ import { createdAtToString } from "@utils/createdAtToString";
 import placeholderUser from "@assets/svg/placeholderUser.svg";
 
 import {
+  getNotiDropdownItemStyle,
   getNotiDropdownOuterStyle,
   getReadButtonStyle,
   getUserImageStyle,
   noNotificationStyle,
   notiDropdownInnerStyle,
-  notiDropdownItemStyle,
   readButtonWarpperStyle
 } from "./NotiDropdown.styles";
 
@@ -74,7 +74,7 @@ const NotiDropdown = ({
             key={_id}
             align="center"
             gap={10}
-            css={notiDropdownItemStyle}
+            css={getNotiDropdownItemStyle(theme)}
             onClick={() => {
               onClose();
               post && navigate(PATH.ARTICLE(post));
