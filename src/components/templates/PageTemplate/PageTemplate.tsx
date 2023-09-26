@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
 import { FloatingButtons } from "@components/organisms/FloatingButtons";
 import { Sidebar } from "@components/organisms/Sidebar";
@@ -64,12 +66,26 @@ const PageTemplate = () => {
 export default PageTemplate;
 
 const SidebarWrapper = () => {
-  const { sidebarAppear, sidebarOpenBtnAppear } = useSidebarContext();
+  const { sidebarAppear, setSidebarAppear, sidebarOpenBtnAppear } =
+    useSidebarContext();
 
   return (
     <>
       {sidebarOpenBtnAppear && !sidebarAppear && (
         <SidebarAppearButton Rtl={false} />
+      )}
+      {sidebarOpenBtnAppear && sidebarAppear && (
+        <div
+          css={css`
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+          `}
+          onClick={() => setSidebarAppear(false)}
+        />
       )}
       <Sidebar outerWidth={outerWidth} />
     </>
