@@ -97,7 +97,7 @@ const ArticleWriteButtons = ({
       <Button
         background="none"
         children="나가기"
-        width="50px"
+        width="fit-content"
         height="30px"
         color={theme.TEXT600}
         onClick={() => navigatePage("BACK")}></Button>
