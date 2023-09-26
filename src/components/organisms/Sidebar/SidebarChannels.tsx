@@ -32,17 +32,13 @@ const SidebarChannels = ({
 }: SidebarChannelsProps) => {
   const channelColor = theme.TEXT300;
   const channelList = [...useChannelsQuery().channels];
-  const handleWheel = (e: React.WheelEvent) => {
-    e.stopPropagation();
-  };
+
   return (
     <>
       <Text size={12} css={getSidebarText}>
         CHANNELS
       </Text>
-      <div
-        css={isLoggedIn ? sidebarChannelLogin : sidebarChannelLogout}
-        onWheel={handleWheel}>
+      <div css={isLoggedIn ? sidebarChannelLogin : sidebarChannelLogout}>
         {channelList.map(({ name, _id }) => {
           return (
             <IconText

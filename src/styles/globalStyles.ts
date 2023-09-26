@@ -32,6 +32,9 @@ export const getGlobalStyles = (theme: Theme) => {
     :hover::-webkit-scrollbar-thumb {
       background-color: ${theme.type === "LIGHT" ? "lightgray" : "gray"};
     }
+    * {
+      overscroll-behavior: none;
+    }
 
     @keyframes fadeIn {
       0% {
