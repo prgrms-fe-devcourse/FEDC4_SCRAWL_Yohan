@@ -37,7 +37,7 @@ const SidebarFooter = ({
             margin-left: 26px;
           `}>
           {isLoggedIn ? (
-            <div>
+            <>
               <Button
                 width={buttonWidth}
                 height={buttonHeight}
@@ -64,7 +64,7 @@ const SidebarFooter = ({
                   }
                 />
               </Modal>
-            </div>
+            </>
           ) : (
             <Button
               width={buttonWidth}
