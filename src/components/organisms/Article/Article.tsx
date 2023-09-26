@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
@@ -24,6 +25,10 @@ const Article = () => {
 
   const { article } = useArticleQuery(articleId);
   const { title, tags } = articleTitleDataToArticleContent(article.title);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0 });
+  }, []);
 
   return (
     <Flex direction="column" gap={20} css={articleOuterStyle}>
