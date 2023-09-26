@@ -7,9 +7,6 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
-import { useQueryClient } from "@tanstack/react-query";
-
-import { signUp } from "@apis/user/signUp";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
@@ -17,10 +14,10 @@ import Input from "@components/atoms/Input";
 import IconText from "@components/molecules/IconText";
 import { scrawlToast } from "@components/toast";
 
+import { useSignUpMutation } from "@hooks/api/useSignUpMutation";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
-import { useTokenStore } from "@stores/token.store";
 
 import { DOMAIN } from "@constants/api";
 import {
@@ -43,8 +40,6 @@ type FormState = {
 
 const SignUpPage = () => {
   const theme = useThemeStore((state) => state.theme);
-  const queryClient = useQueryClient();
-  const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const [form, setForm] = useState<FormState>({
     email: "",
     fullName: "",
@@ -53,13 +48,14 @@ const SignUpPage = () => {
   });
   const navigate = useNavigate();
   const { isLoggedIn } = useLoggedIn();
+  const signUpMutation = useSignUpMutation();
 
   useEffect(() => {
     if (isLoggedIn) {
       navigate(DOMAIN.HOME, { replace: true });
       return;
     }
-  }, []);
+  }, [isLoggedIn, navigate]);
 
   const handleUpdateForm: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
@@ -87,16 +83,7 @@ const SignUpPage = () => {
       scrawlToast.error("패스워드와 패스워드 확인이 일치하지 않습니다.");
       return;
     }
-    try {
-      const token = await signUp(form);
-      queryClient.clear();
-      setAccessToken(token);
-      navigate(DOMAIN.HOME, { replace: true });
-      scrawlToast.success("회원가입에 성공했습니다.");
-    } catch (e) {
-      scrawlToast.error("이미 존재하는 이메일 입니다.");
-      return;
-    }
+    signUpMutation.mutate(form);
   };
 
   const handleSignUpWithEnter: KeyboardEventHandler<HTMLElement> = (e) => {
