@@ -1,25 +1,93 @@
+import { useCallback, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
-import FloatingButtons from "@components/organisms/FloatingButtons/FloatingButtons";
-import Sidebar from "@components/organisms/Sidebar";
+import { FloatingButtons } from "@components/organisms/FloatingButtons";
+import { Sidebar } from "@components/organisms/Sidebar";
+import SidebarAppearButton from "@components/organisms/Sidebar/SidebarAppearButton";
 import {
   pageInnerWrapperStyle,
   pageTemplateWrapperStyle
 } from "@components/templates/PageTemplate/PageTemplate.styles";
 
+import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
+
+import { useViewportStore } from "@stores/resize.store";
+
+import SidebarProvider from "@contexts/sidebar.context";
+
 const PageTemplate = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [resizeWidth, setResizeWidth] = useState(window.innerWidth);
+  const { setWidth } = useViewportStore();
+
+  const handleScroll = useCallback(() => {
+    setScrollPosition(window.scrollY);
+  }, []);
+  const handleResize = useCallback(() => {
+    let timer = null;
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      setResizeWidth(window.innerWidth);
+    }, 300);
+  }, []);
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: false });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [handleScroll, handleResize]);
+  useEffect(() => {
+    setWidth(resizeWidth);
+  }, [resizeWidth, setWidth]);
   return (
     <>
       <Flex css={pageTemplateWrapperStyle}>
-        <Sidebar />
         <div css={pageInnerWrapperStyle}>
           <Outlet />
         </div>
-        <FloatingButtons />
+        <SidebarProvider>
+          <SidebarWrapper />
+        </SidebarProvider>
+        <FloatingButtons scrollPosition={scrollPosition} />
       </Flex>
     </>
   );
 };
 
 export default PageTemplate;
+
+const SidebarWrapper = () => {
+  const { sidebarAppear, setSidebarAppear, sidebarOpenBtnAppear } =
+    useSidebarContext();
+
+  return (
+    <>
+      {sidebarOpenBtnAppear && !sidebarAppear && (
+        <SidebarAppearButton Rtl={false} />
+      )}
+      {sidebarOpenBtnAppear && sidebarAppear && (
+        <div
+          css={css`
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+          `}
+          onClick={() => setSidebarAppear(false)}
+        />
+      )}
+      <Sidebar outerWidth={outerWidth} />
+    </>
+  );
+};

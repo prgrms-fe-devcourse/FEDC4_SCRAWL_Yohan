@@ -6,6 +6,8 @@ import Flex from "@components/atoms/Flex";
 import Image from "@components/atoms/Image";
 import Text from "@components/atoms/Text";
 
+import { getLineClampStyle } from "@styles/lineClamp";
+
 import { useThemeStore } from "@stores/theme.store";
 
 import { Combine } from "@type/Combine";
@@ -17,6 +19,7 @@ type UserInfoProps = Combine<
     username: string;
     fontSize: number;
     gap?: number;
+    color?: string;
   },
   HTMLAttributes<HTMLDivElement>
 >;
@@ -27,6 +30,7 @@ const UserInfo = ({
   username,
   fontSize,
   gap = 5,
+  color,
   ...props
 }: UserInfoProps) => {
   const { theme } = useThemeStore();
@@ -44,7 +48,9 @@ const UserInfo = ({
           border-radius: 50%;
         `}
       />
-      <Text size={fontSize}>{username}</Text>
+      <Text size={fontSize} color={color} css={getLineClampStyle(1)}>
+        {username}
+      </Text>
     </Flex>
   );
 };

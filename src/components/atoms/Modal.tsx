@@ -51,6 +51,7 @@ const ModalContainer = ({
         transform: translate(-50%, -50%);
         box-sizing: border-box;
         z-index: 2000;
+        animation: 0.2s ease 0s 1 fadeIn;
       `}
       {...props}>
       {children}

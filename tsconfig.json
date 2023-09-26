@@ -30,6 +30,7 @@
       "@hooks/*": ["./src/hooks/*"],
       "@styles/*": ["./src/styles/*"],
       "@stores/*": ["./src/stores/*"],
+      "@contexts/*": ["./src/contexts/*"],
       "@type/*": ["./src/types/*"],
       "@constants/*": ["./src/constants/*"],
       "@utils/*": ["./src/utils/*"],

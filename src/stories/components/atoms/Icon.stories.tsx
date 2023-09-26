@@ -3,20 +3,34 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Icon from "@components/atoms/Icon";
 
 import {
+  AI,
   Add,
   Alert,
+  AlertMore,
+  Back,
+  BigData,
   BracketLower,
   BracketUpper,
+  Data,
+  DevOps,
+  Embedded,
   ExpandLess,
   ExpandMore,
   Folder,
+  Free,
+  Front,
+  Game,
   Home,
+  Job,
+  KeyboardTab,
+  KeyboardTabRtl,
   Like,
   Logo,
   Message,
   My,
   Question,
-  Search
+  Search,
+  Security
 } from "@assets/svg";
 
 const meta = {
@@ -48,6 +62,20 @@ export const Default: StoryObj<typeof Icon> = {
       <Icon {...args} Svg={Question} />
       <Icon {...args} Svg={Search} />
       <Icon {...args} Svg={Add} />
+      <Icon {...args} Svg={AI} />
+      <Icon {...args} Svg={AlertMore} />
+      <Icon {...args} Svg={Back} />
+      <Icon {...args} Svg={BigData} />
+      <Icon {...args} Svg={Data} />
+      <Icon {...args} Svg={DevOps} />
+      <Icon {...args} Svg={Embedded} />
+      <Icon {...args} Svg={Free} />
+      <Icon {...args} Svg={Front} />
+      <Icon {...args} Svg={Game} />
+      <Icon {...args} Svg={Job} />
+      <Icon {...args} Svg={Security} />
+      <Icon {...args} Svg={KeyboardTab} />
+      <Icon {...args} Svg={KeyboardTabRtl} />
     </>
   )
 };

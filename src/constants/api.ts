@@ -1,4 +1,5 @@
 export const BASE_URL = "https://kdt.frontend.4th.programmers.co.kr:5003";
+export const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 
 export const DOMAIN = {
   HOME: "/",
@@ -30,7 +31,7 @@ export const DOMAIN = {
   READ_NOTIFICATION: "/notifications/seen",
   CREATE_NOTIFICATION: "/notifications/create",
   SEARCH_USER: (searchKeyword: string) => `/search/users/${searchKeyword}`,
-  SEARCH_ALL: (searchKeyword: string) => ` /search/all/${searchKeyword}`
+  SEARCH_ALL: (searchKeyword: string) => `/search/all/${searchKeyword}`
 } as const;
 
 export const NETWORK = {

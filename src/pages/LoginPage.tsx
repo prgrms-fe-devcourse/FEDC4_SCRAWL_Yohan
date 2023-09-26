@@ -1,22 +1,80 @@
+import {
+  ChangeEventHandler,
+  KeyboardEventHandler,
+  useEffect,
+  useState
+} from "react";
+import { Helmet } from "react-helmet-async";
+import { Link, useNavigate } from "react-router-dom";
+
 import { css } from "@emotion/react";
-import { useQueryClient } from "@tanstack/react-query";
 
-import { login } from "@apis/user/login";
-
+import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
+import Input from "@components/atoms/Input";
+import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
-import UserForm from "@components/molecules/UserForm";
+import { scrawlToast } from "@components/toast";
+
+import { useLoginMutation } from "@hooks/api/useLoginMutation";
+import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
 
+import { DOMAIN } from "@constants/api";
+import { emailPattern } from "@constants/regex";
+
+import { testRegex } from "@utils/testRegEx";
+import withEnter from "@utils/withEnter";
+
 import { Logo } from "@assets/svg";
+
+type loginFormState = {
+  email: string;
+  password: string;
+};
 
 const LoginPage = () => {
   const theme = useThemeStore((state) => state.theme);
-  const queryClient = useQueryClient();
+  const [form, setForm] = useState<loginFormState>({ email: "", password: "" });
+  const navigate = useNavigate();
+  const { isLoggedIn } = useLoggedIn();
+  const loginMutation = useLoginMutation();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate(DOMAIN.HOME, { replace: true });
+      return;
+    }
+  }, [isLoggedIn, navigate]);
+
+  const handleUpdateForm: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { name, value } = e.target;
+    setForm((form) => ({ ...form, [name]: value }));
+  };
+
+  const handleLogin = async (form: loginFormState) => {
+    if (form.email === "" || form.password === "") {
+      scrawlToast.error("모든 입력이 완료되지 않았습니다.");
+      return;
+    }
+    if (!testRegex(emailPattern, form.email)) {
+      scrawlToast.error("이메일 형식이 맞지 않습니다.");
+      return;
+    }
+    loginMutation.mutate(form);
+  };
+  const handleLoginWithEnter: KeyboardEventHandler<HTMLElement> = (e) => {
+    withEnter(e, () => handleLogin(form));
+  };
+
+  const handleMoveHome = () => {
+    navigate(DOMAIN.HOME);
+  };
 
   return (
     <Flex
+      onKeyUp={handleLoginWithEnter}
       justify="center"
       align="center"
       css={css`
@@ -24,6 +82,9 @@ const LoginPage = () => {
         height: 100vh;
         background: ${theme.BACKGROUND200};
       `}>
+      <Helmet key={location.pathname}>
+        <title>로그인</title>
+      </Helmet>
       <Flex
         direction="column"
         justify="center"
@@ -32,23 +93,114 @@ const LoginPage = () => {
           width: 320px;
           height: 428px;
           gap: 20px;
+          cursor: pointer;
         `}>
-        <IconText
-          iconValue={{ Svg: Logo, size: 80, fill: theme.TEXT300 }}
-          textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
-        />
-        <UserForm
-          formFilelds={[
-            { type: "email", label: "이메일", name: "email" },
-            { type: "password", label: "비밀번호", name: "password" }
-          ]}
-          buttonText="로그인"
-          handleGetAccessToken={async (formState) => {
-            const token = await login(formState);
-            queryClient.clear();
-            return token;
-          }}
-        />
+        <Flex>
+          <IconText
+            css={css`
+              gap: 10px;
+            `}
+            onClick={handleMoveHome}
+            iconValue={{ Svg: Logo, size: 64, fill: theme.TEXT300 }}
+            textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
+          />
+        </Flex>
+
+        <Flex
+          justify="center"
+          align="center"
+          css={css`
+            background: ${theme.BACKGROUND100};
+            box-shadow: ${theme.SHADOW};
+            width: 320px;
+            border-radius: 8px;
+          `}>
+          <Flex
+            direction="column"
+            justify="center"
+            align="center"
+            css={css`
+              width: 272px;
+              gap: 24px;
+              margin: 24px 0;
+            `}>
+            <Flex
+              direction="column"
+              justify="space-between"
+              align="start"
+              css={css`
+                width: 272px;
+                height: 62px;
+              `}>
+              <Flex
+                css={css`
+                  color: ${theme.TEXT600};
+                `}>
+                이메일
+              </Flex>
+              <Input
+                width="100%"
+                height="35px"
+                fontSize="14px"
+                background={theme.BACKGROUND200}
+                color={theme.TEXT300}
+                border={`1px solid ${theme.BORDER100}`}
+                borderRadius="4px"
+                type="email"
+                value={form.email}
+                name="email"
+                onChange={handleUpdateForm}
+              />
+            </Flex>
+            <Flex
+              direction="column"
+              justify="space-between"
+              align="start"
+              css={css`
+                width: 272px;
+                height: 62px;
+              `}>
+              <Flex
+                css={css`
+                  color: ${theme.TEXT600};
+                `}>
+                비밀번호
+              </Flex>
+              <Input
+                width="100%"
+                height="35px"
+                fontSize="14px"
+                background={theme.BACKGROUND200}
+                color={theme.TEXT300}
+                border={`1px solid ${theme.BORDER100}`}
+                borderRadius="4px"
+                type="password"
+                value={form.password}
+                name="password"
+                onChange={handleUpdateForm}
+              />
+            </Flex>
+            <Button
+              width="100%"
+              height="35px"
+              onClick={() => handleLogin(form)}>
+              로그인
+            </Button>
+            <Text size={14}>
+              아직 회원이 아니신가요?&nbsp;
+              <Link
+                css={css`
+                  color: ${theme.PRIMARY};
+                  &:visited {
+                    color: ${theme.PRIMARY};
+                  }
+                `}
+                to={DOMAIN.SIGNUP}>
+                회원가입
+              </Link>
+            </Text>
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   );

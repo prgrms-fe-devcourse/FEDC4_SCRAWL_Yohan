@@ -3,14 +3,17 @@ import { Route, Routes } from "react-router-dom";
 
 import { ChannelPage, ChannelPageSkeleton } from "@pages/ChannelPage";
 import ErrorPage from "@pages/ErrorPage";
-import HomePage from "@pages/HomePage";
+import HomePage from "@pages/HomePage/HomePage";
+import HomePageSkeleton from "@pages/HomePage/HomePageSkeleton";
 import LoginPage from "@pages/LoginPage";
-import PasswordPage from "@pages/PasswordPage/PasswordPage";
+import PasswordPage from "@pages/PasswordPage";
+import SearchPage from "@pages/SearchPage/SearchPage";
 import SignUpPage from "@pages/SignUpPage";
 import UserPage from "@pages/UserPage/UserPage";
 
-import { Article, ArticleSkeleton } from "@components/organisms/Article";
-import ArticleWrite from "@components/organisms/ArticleWrite";
+import FallbackPage from "@components/molecules/FallbackPage";
+import { Article } from "@components/organisms/Article";
+import { ArticleEdit, ArticleWrite } from "@components/organisms/ArticleWrite";
 import { PageTemplate } from "@components/templates/PageTemplate";
 
 import { PATH } from "@constants/index";
@@ -19,7 +22,14 @@ const AppRouter = () => {
   return (
     <Routes>
       <Route path="" element={<PageTemplate />}>
-        <Route path={PATH.HOME} element={<HomePage />} />
+        <Route
+          path={PATH.HOME}
+          element={
+            <Suspense fallback={<HomePageSkeleton />}>
+              <HomePage />
+            </Suspense>
+          }
+        />
         <Route
           path={PATH.CHANNEL(":channelId")}
           element={
@@ -31,7 +41,7 @@ const AppRouter = () => {
         <Route
           path={PATH.ARTICLE(":articleId")}
           element={
-            <Suspense fallback={<ArticleSkeleton />}>
+            <Suspense fallback={<FallbackPage />}>
               <Article />
             </Suspense>
           }
@@ -39,10 +49,24 @@ const AppRouter = () => {
         <Route path={PATH.CREATE_ARTICLE} element={<ArticleWrite />} />
         <Route
           path={PATH.EDIT_ARTICLE(":articleId")}
-          element={<ArticleWrite />}
+          element={<ArticleEdit />}
         />
-        <Route path={PATH.SEARCH} element={<div>search</div>} />
-        <Route path={PATH.USER(":userId")} element={<UserPage />} />
+        <Route
+          path={PATH.SEARCH}
+          element={
+            <Suspense fallback={<FallbackPage />}>
+              <SearchPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path={PATH.USER(":userId")}
+          element={
+            <Suspense fallback={<FallbackPage />}>
+              <UserPage />
+            </Suspense>
+          }
+        />
       </Route>
       <Route path={PATH.SIGNUP} element={<SignUpPage />} />
       <Route path={PATH.LOGIN} element={<LoginPage />} />

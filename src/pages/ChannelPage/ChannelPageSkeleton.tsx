@@ -1,11 +1,12 @@
+import { css } from "@emotion/react";
+
 import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
-import { CardSkeleton } from "@components/organisms/Card";
+import { CardList } from "@components/organisms/CardList";
 
 import { useThemeStore } from "@stores/theme.store";
 
 import {
-  cardListStyle,
   channelPageHeaderStyle,
   channelPageOuterStyle
 } from "./ChannelPage.styles";
@@ -20,13 +21,14 @@ const ChannelPageSkeleton = () => {
           채널
         </Text>
       </Flex>
-      <Flex gap={30} css={cardListStyle}>
-        {Array(20)
-          .fill(null)
-          .map((_, i) => (
-            <CardSkeleton key={i} width={300} />
-          ))}
-      </Flex>
+      <div
+        css={css`
+          box-sizing: border-box;
+          padding: 20px 20px 0 0;
+          width: 100%;
+        `}>
+        <CardList isFetchingNext={true} />
+      </div>
     </Flex>
   );
 };

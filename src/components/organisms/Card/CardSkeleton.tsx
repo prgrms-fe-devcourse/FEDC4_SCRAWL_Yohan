@@ -1,15 +1,26 @@
+import { css } from "@emotion/react";
+
 import { useThemeStore } from "@stores/theme.store";
 
-import { MIN_CARD_WIDTH } from "@constants/card";
+import { getCardOuterStyle } from "./Card.styles";
 
-import { getCardSkeletionOuterStyle } from "./Card.styles";
-
-const CardSkeleton = ({ width: w }: { width: number }) => {
+const CardSkeleton = () => {
   const { theme } = useThemeStore();
 
-  const width = Math.max(w, MIN_CARD_WIDTH);
-
-  return <div css={getCardSkeletionOuterStyle(theme, width)}></div>;
+  return (
+    <div css={getCardOuterStyle(theme)}>
+      <div
+        css={css`
+          height: 192px;
+        `}></div>
+      <div
+        css={css`
+          width: 100%;
+          aspect-ratio: 16 / 10;
+        `}
+      />
+    </div>
+  );
 };
 
 export default CardSkeleton;

@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 import { Theme } from "@constants/theme";
 
 export const getThreadOuterStyle = (theme: Theme) => css`
-  position: relative;
   width: 100%;
   box-shadow: ${theme.SHADOW};
   background: ${theme.BACKGROUND100};
@@ -23,6 +22,7 @@ export const threadHeaderStyle = css`
 `;
 
 export const getThreadUserInfoStyle = (theme: Theme) => css`
+  cursor: pointer;
   font-weight: 600;
   color: ${theme.TEXT600};
 `;

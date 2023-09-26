@@ -1,3 +1,4 @@
+import { Like } from "./Like";
 import { User } from "./User";
 
 export interface Notification {
@@ -9,7 +10,7 @@ export interface Notification {
   follow?: string;
   comment?: Comment;
   message?: string;
-  like?: null;
+  like?: Like;
   createdAt: string;
   updatedAt: string;
 }

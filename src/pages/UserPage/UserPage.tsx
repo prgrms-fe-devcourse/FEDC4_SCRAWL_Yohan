@@ -1,16 +1,22 @@
 import { ChangeEventHandler, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
+import { scrawlToast } from "@components/toast";
 
-import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 import { useUserProfileUploadMutation } from "@hooks/api/useUserProfileUploadMutation";
 import { useUserQuery } from "@hooks/api/useUserQuery";
 import { useUserUpdateMutation } from "@hooks/api/useUserUpdateMutation";
 
 import { PATH } from "@constants/index";
+import { WIDTH_MAP } from "@constants/media";
+import { nicknamePattern } from "@constants/regex";
+import { MAX_WIDTH } from "@constants/width";
+
+import { testRegex } from "@utils/testRegEx";
 
 import ArticleList from "./ArticleList";
 import ChannelList from "./ChannelTab";
@@ -27,11 +33,10 @@ const UserPage = () => {
   const userUpdateMutation = useUserUpdateMutation(userId);
   const userProfileUploadMutation = useUserProfileUploadMutation(userId);
   const { user } = useUserQuery(userId);
-  const { channels } = useChannelsQuery();
 
   const [editMode, setEditMode] = useState(false);
   const [fullName, setFullName] = useState("");
-  const [currentChannel, setCurrentChannel] = useState(channels[0]._id);
+  const [currentChannel, setCurrentChannel] = useState("all");
 
   const handleMovePasswordPage = () => {
     navigate(PATH.PASSWORD);
@@ -41,8 +46,13 @@ const UserPage = () => {
     setFullName(user.fullName);
   };
   const handleEditModeOff = () => {
+    if (!testRegex(nicknamePattern, fullName)) {
+      scrawlToast.error("닉네임 형식이 맞지 않습니다.");
+      return;
+    }
     setEditMode(false);
     userUpdateMutation.mutate({ fullName });
+    scrawlToast.success("잠시 후 닉네임이 변경 됩니다.");
   };
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setFullName(e.currentTarget.value);
@@ -60,20 +70,29 @@ const UserPage = () => {
       isCover: false,
       image: e.target.files[0]
     });
+    scrawlToast.success("잠시 후 프로필이 변경 됩니다.");
   };
 
   return (
     <Flex
-      justify="center"
-      align="center"
       css={css`
         width: 100%;
-        margin: 50px 0;
+        margin: 20px 0;
       `}>
+      <Helmet key={location.pathname}>
+        <title>{user.fullName}</title>
+      </Helmet>
       <Flex
         direction="column"
         css={css`
-          width: 80%;
+          padding-right: 20px;
+          box-sizing: border-box;
+          width: calc(100vw - 400px);
+          max-width: ${MAX_WIDTH.lg}px;
+          @media (max-width: ${WIDTH_MAP.md}px) {
+            width: calc(100vw - 100px);
+            max-width: ${MAX_WIDTH.md}px;
+          }
         `}>
         <UserInfo
           editMode={editMode}
