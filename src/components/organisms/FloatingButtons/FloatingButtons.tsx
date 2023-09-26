@@ -30,7 +30,7 @@ const FloatingButtons = ({ scrollPosition }: { scrollPosition: number }) => {
 
   const getMaxWidth = () => {
     if (pathname.includes("article")) {
-      return WIDTH_MAP.lg;
+      return WIDTH_MAP.lg + 80;
     }
     return WIDTH_MAP.xl;
   };
