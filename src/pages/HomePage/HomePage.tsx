@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 import { css } from "@emotion/react";
 
@@ -26,6 +27,9 @@ const HomePage = () => {
         max-width: ${MAX_WIDTH.lg}px;
         margin: 20px 0;
       `}>
+      <Helmet>
+        <title>괴발개발</title>
+      </Helmet>
       <Flex gap={10}>
         <Text
           css={css`

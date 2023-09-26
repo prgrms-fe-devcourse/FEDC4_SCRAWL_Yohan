@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -27,6 +28,9 @@ const ErrorPage = () => {
         height: 100vh;
         background: ${theme.BACKGROUND200};
       `}>
+      <Helmet key={location.pathname}>
+        <title>404 not found</title>
+      </Helmet>
       <Flex
         direction="column"
         justify="center"

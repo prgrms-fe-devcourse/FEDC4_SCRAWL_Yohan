@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { Helmet } from "react-helmet-async";
 
 import { Global } from "@emotion/react";
 
@@ -17,6 +18,9 @@ function App() {
 
   return (
     <>
+      <Helmet key={location.pathname}>
+        <title>괴발개발</title>
+      </Helmet>
       <Global styles={getGlobalStyles(theme)} />
       <RootErrorBoundary>
         <AuthErrorBoundary>
