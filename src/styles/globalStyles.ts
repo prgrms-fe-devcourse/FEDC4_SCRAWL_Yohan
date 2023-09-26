@@ -35,6 +35,11 @@ export const getGlobalStyles = (theme: Theme) => {
     * {
       overscroll-behavior: none;
     }
+    .wmde-markdown {
+      * {
+        overscroll-behavior: initial;
+      }
+    }
 
     @keyframes fadeIn {
       0% {
