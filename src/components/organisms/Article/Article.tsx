@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 import Flex from "@components/atoms/Flex";
@@ -24,6 +25,9 @@ const Article = () => {
 
   return (
     <Flex direction="column" gap={20} css={articleOuterStyle}>
+      <Helmet key={location.pathname}>
+        <title>{title}</title>
+      </Helmet>
       <ArticleHeader title={title} tags={tags} article={article} />
       <Thread data={article} />
       {article.comments.map((comment) => (

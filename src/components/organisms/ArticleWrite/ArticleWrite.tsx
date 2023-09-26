@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -51,6 +52,9 @@ const ArticleWrite = () => {
       css={css`
         margin: 20px 20px 0 0;
       `}>
+      <Helmet key={location.pathname}>
+        <title>새 글 작성</title>
+      </Helmet>
       <ArticleChannelSelect stateChange={(value) => setChannelId(value)} />
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}

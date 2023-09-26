@@ -4,6 +4,7 @@ import {
   useEffect,
   useState
 } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -81,6 +82,9 @@ const LoginPage = () => {
         height: 100vh;
         background: ${theme.BACKGROUND200};
       `}>
+      <Helmet key={location.pathname}>
+        <title>로그인</title>
+      </Helmet>
       <Flex
         direction="column"
         justify="center"

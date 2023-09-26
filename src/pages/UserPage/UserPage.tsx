@@ -1,4 +1,5 @@
 import { ChangeEventHandler, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -78,6 +79,9 @@ const UserPage = () => {
         width: 100%;
         margin: 20px 0;
       `}>
+      <Helmet key={location.pathname}>
+        <title>{user.fullName}</title>
+      </Helmet>
       <Flex
         direction="column"
         css={css`

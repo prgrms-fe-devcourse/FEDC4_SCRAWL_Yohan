@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -62,6 +63,9 @@ const ArticleEdit = () => {
       css={css`
         margin: 20px 20px 0 0;
       `}>
+      <Helmet key={location.pathname}>
+        <title>{title}</title>
+      </Helmet>
       <ArticleChannelSelect
         stateChange={(value) => setChannelId(value)}
         state={channelId}

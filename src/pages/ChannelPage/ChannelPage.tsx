@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -51,6 +52,9 @@ const ChannelPage = () => {
 
   return (
     <Flex direction="column" css={channelPageOuterStyle}>
+      <Helmet key={location.pathname}>
+        <title>{channel?.name}</title>
+      </Helmet>
       <Flex align="center" css={channelPageHeaderStyle}>
         <Text size={28} color={theme.TEXT300}>
           채널
