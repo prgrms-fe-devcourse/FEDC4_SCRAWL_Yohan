@@ -13,6 +13,9 @@ export const getGlobalStyles = (theme: Theme) => {
       box-sizing: border-box;
     }
     body {
+      * {
+        overscroll-behavior: none;
+      }
       margin: 0;
       ::-webkit-scrollbar-thumb {
         background-color: ${theme.type === "LIGHT" ? "lightgray" : "gray"};
@@ -31,9 +34,6 @@ export const getGlobalStyles = (theme: Theme) => {
     }
     :hover::-webkit-scrollbar-thumb {
       background-color: ${theme.type === "LIGHT" ? "lightgray" : "gray"};
-    }
-    * {
-      overscroll-behavior: none;
     }
     .wmde-markdown {
       * {
