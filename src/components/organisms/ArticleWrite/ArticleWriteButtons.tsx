@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
@@ -11,9 +11,6 @@ import { useArticleUpdateMutation } from "@hooks/api/useArticleUpdateMutation";
 import { articleContentToArticleTitleData } from "@type/models/Article";
 
 import { Theme } from "@constants/theme";
-
-import { extractImageUrls } from "@utils/extractImageUrls";
-import { urlToImageFile } from "@utils/urlToImageFile";
 
 import { articleWriteButton } from "./ArticleWrite.styles";
 import ThumnailChooseModal from "./ThumnailChooseModal";
@@ -43,27 +40,25 @@ const ArticleWriteButtons = ({
   const { mutate: cretateMutate } = useArticleCreateMutation();
   const { mutate: updateMutate } = useArticleUpdateMutation();
   const { title, channelId, content, tags } = totalContent;
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [thumnailUrl, setThumnailUrl] = useState("");
 
   const handleToggleModal = () => {
     setIsOpen((state) => !state);
   };
 
-  const handleOpenThumnailSelectModal = () => {
-    handleToggleModal();
-    const filteredUrls = extractImageUrls(totalContent.content).filter(
-      (_, index) => index < 3
-    );
-    setImageUrls(filteredUrls);
+  const handleChangeImageFile: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (!e.target.files) {
+      return;
+    }
+    const currentFile = e.target.files[0];
+    setImageFile(currentFile);
+    const blobUrl = URL.createObjectURL(currentFile);
+    setImageUrl(blobUrl);
   };
 
-  const handleSelectThumnail = (imageUrl: string) => {
-    setThumnailUrl(imageUrl);
-  };
-
-  const handleCreateArticle = (file: File | null) => {
+  const handleCreateArticle: MouseEventHandler<HTMLButtonElement> = () => {
     if (title && channelId) {
       {
         purpose === "create"
@@ -73,7 +68,7 @@ const ArticleWriteButtons = ({
                 content,
                 tags
               }),
-              image: file,
+              image: imageFile,
               channelId: channelId
             })
           : updateMutate({
@@ -83,7 +78,7 @@ const ArticleWriteButtons = ({
                 content,
                 tags
               }),
-              image: file,
+              image: imageFile,
               channelId: channelId
             });
       }
@@ -94,24 +89,6 @@ const ArticleWriteButtons = ({
       scrawlToast.error("채널을 선택해 주세요.");
     } else {
       scrawlToast.error("채널 선택과 제목 입력은 필수사항입니다.");
-    }
-  };
-
-  const handleCreateArticleWithThumnail = async () => {
-    if (thumnailUrl === "" && imageUrls.length === 0) {
-      handleCreateArticle(null);
-      return;
-    }
-
-    if (thumnailUrl === "") {
-      scrawlToast.error("썸네일을 선택해주세요.");
-      return;
-    }
-    try {
-      const file = await urlToImageFile(thumnailUrl, `${title}_thumnail.jpg`);
-      handleCreateArticle(file);
-    } catch (e) {
-      console.error(e);
     }
   };
 
@@ -128,17 +105,17 @@ const ArticleWriteButtons = ({
         children={purpose === "create" ? "생성" : "수정"}
         width="50px"
         height="30px"
-        onClick={handleOpenThumnailSelectModal}></Button>
+        onClick={handleToggleModal}></Button>
       <Modal visible={isOpen}>
         <Modal.Background></Modal.Background>
         <Modal.Container
           onClose={handleToggleModal}
           children={
             <ThumnailChooseModal
-              onImageClick={handleSelectThumnail}
-              onButtonClick={handleCreateArticleWithThumnail}
-              imageUrls={imageUrls}
-              thumnailUrl={thumnailUrl}
+              onImageChange={handleChangeImageFile}
+              onButtonClick={handleCreateArticle}
+              imageFile={imageFile}
+              imageUrl={imageUrl}
             />
           }
         />
