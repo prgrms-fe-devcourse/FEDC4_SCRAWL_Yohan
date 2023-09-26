@@ -58,8 +58,10 @@ const ChannelList = ({
     handleScroll();
 
     el.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
     return () => {
       el.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
 
@@ -128,7 +130,7 @@ const ChannelList = ({
           align="center"
           css={css`
             ${tabScrollBtnOuterStyle}
-            right: -10px;
+            right: 0;
             box-shadow: inset -40px 0px 10px -10px ${theme.BACKGROUND200};
           `}
           onClick={handleNextBtnClick}>
