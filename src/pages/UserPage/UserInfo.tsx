@@ -49,6 +49,7 @@ const UserInfo = ({
         padding-left: 70px;
         margin-bottom: 30px;
         box-sizing: border-box;
+        white-space: nowrap;
       `}>
       <Flex justify="center">
         <label

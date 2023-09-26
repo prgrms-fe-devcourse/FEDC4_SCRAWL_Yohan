@@ -84,8 +84,11 @@ const UserPage = () => {
           padding-right: 20px;
           box-sizing: border-box;
           width: calc(100vw - 400px);
-          min-width: ${WIDTH_MAP.sm}px;
           max-width: ${MAX_WIDTH.lg}px;
+          @media (max-width: ${WIDTH_MAP.md}px) {
+            width: calc(100vw - 100px);
+            max-width: ${MAX_WIDTH.md}px;
+          }
         `}>
         <UserInfo
           editMode={editMode}
