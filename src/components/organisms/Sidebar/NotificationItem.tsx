@@ -75,12 +75,13 @@ const NotificationItem = ({
       {notifications.length > 0 && (
         <div
           css={css`
+            border: 2px solid ${theme.BACKGROUND100};
             border-radius: 50%;
             padding: 5px;
             background-color: ${theme.PRIMARY};
             position: absolute;
-            top: 11px;
-            left: 28px;
+            top: 10px;
+            left: 27px;
           `}
         />
       )}
