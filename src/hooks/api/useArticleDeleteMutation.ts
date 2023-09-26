@@ -11,6 +11,7 @@ export const useArticleDeleteMutation = () => {
       Promise.all([
         queryClient.resetQueries(["articles", article.channel]),
         queryClient.invalidateQueries(["article", article._id]),
+        queryClient.invalidateQueries(["main-articles"]),
         queryClient.invalidateQueries(["user-by-token"])
       ])
   });
