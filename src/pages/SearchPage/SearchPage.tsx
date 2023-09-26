@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useSearchParams } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -23,6 +24,9 @@ const SearchPage = () => {
 
   return (
     <Flex direction="column" css={searchPageOuterStyle}>
+      <Helmet key={location.search}>
+        <title>검색 결과</title>
+      </Helmet>
       <Flex align="center" css={searchPageHeaderStyle}>
         <Text size={28} color={theme.TEXT300}>
           {option}
