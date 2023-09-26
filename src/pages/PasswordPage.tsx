@@ -50,7 +50,7 @@ const PasswordPage = () => {
       navigate(DOMAIN.HOME, { replace: true });
       return;
     }
-  }, []);
+  }, [isLoggedIn, navigate]);
 
   const handleUpdatePassword = () => {
     if (form.password === "" || form.passwordConfirm === "") {

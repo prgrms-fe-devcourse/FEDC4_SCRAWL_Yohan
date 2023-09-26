@@ -49,7 +49,7 @@ const LoginPage = () => {
       navigate(DOMAIN.HOME, { replace: true });
       return;
     }
-  }, []);
+  }, [isLoggedIn, navigate]);
 
   const handleUpdateForm: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
