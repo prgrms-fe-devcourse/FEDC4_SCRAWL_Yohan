@@ -7,9 +7,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
-import { useQueryClient } from "@tanstack/react-query";
-
-import { login } from "@apis/user/login";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
@@ -18,10 +15,10 @@ import Text from "@components/atoms/Text";
 import IconText from "@components/molecules/IconText";
 import { scrawlToast } from "@components/toast";
 
+import { useLoginMutation } from "@hooks/api/useLoginMutation";
 import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { useThemeStore } from "@stores/theme.store";
-import { useTokenStore } from "@stores/token.store";
 
 import { DOMAIN } from "@constants/api";
 import { emailPattern } from "@constants/regex";
@@ -38,11 +35,10 @@ type loginFormState = {
 
 const LoginPage = () => {
   const theme = useThemeStore((state) => state.theme);
-  const queryClient = useQueryClient();
-  const setAccessToken = useTokenStore((state) => state.setAccessToken);
   const [form, setForm] = useState<loginFormState>({ email: "", password: "" });
   const navigate = useNavigate();
   const { isLoggedIn } = useLoggedIn();
+  const loginMutation = useLoginMutation();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -58,23 +54,14 @@ const LoginPage = () => {
 
   const handleLogin = async (form: loginFormState) => {
     if (form.email === "" || form.password === "") {
-      scrawlToast.error("비밀번호 혹은 아이디가 입력되지 않았습니다.");
+      scrawlToast.error("모든 입력이 완료되지 않았습니다.");
       return;
     }
     if (!testRegex(emailPattern, form.email)) {
       scrawlToast.error("이메일 형식이 맞지 않습니다.");
       return;
     }
-    try {
-      const token = await login(form);
-      queryClient.clear();
-      setAccessToken(token);
-      navigate(DOMAIN.HOME, { replace: true });
-      scrawlToast.success("로그인에 성공했습니다.");
-    } catch (e) {
-      scrawlToast.error("비밀번호 혹은 아이디가 잘못되었습니다.");
-      return;
-    }
+    loginMutation.mutate(form);
   };
   const handleLoginWithEnter: KeyboardEventHandler<HTMLElement> = (e) => {
     withEnter(e, () => handleLogin(form));
