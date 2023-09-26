@@ -66,7 +66,7 @@ const UserInfo = ({
             width={150}
             height={150}
             alt={"이미지를 불러올 수 없습니다."}
-            mode="contain"></Image>
+            mode="cover"></Image>
         </label>
         <input
           onChange={handleUpdateCurrentImageFile}
