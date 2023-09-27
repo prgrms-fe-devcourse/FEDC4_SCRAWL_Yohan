@@ -52,6 +52,30 @@ npm run build && npm run preview
 
 ![스크린샷 2023-09-27 오후 4 14 50](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/f974bd81-2af0-432c-9173-98b475c796b4)
 
+## 시연 영상
+### 홈 페이지, 채널 페이지, 검색 페이지
+![홈, 채널, 검색 페이지](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/77a5e58b-4c2f-4927-92c5-931b349842d8)
 
+### 회원가입 페이지, 로그인 페이지, 로그아웃
+![2-회원가입 페이지, 로그아웃, 로그인 페이지](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/5235b3b1-5fe5-4474-948f-df87b4796b78)
 
+### 사이드바
+![사이드바](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/adc405a5-220d-4b5e-9c07-45198b618bd6)
 
+### 검색 모달
+![검색 모달](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/d9dec403-a060-4dbf-80fa-4bac9b11c59c)
+
+### 게시글 작성, 수정, 조회
+![글 작성 수정](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/e9940dd7-90f5-4151-83e2-750ea186a0fe)
+
+### 유저 정보 페이지, 비밀번호 변경
+![6-유저 정보 페이지, 비밀번호 변경 페이지(25초)](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/8a7bb9d4-156b-4364-9382-51064d2cc2bb)
+
+### 인증 유무에 따른 페이지 접속 허가
+![7-인증 유무에 따른 페이지 접속 허가(20초)](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/e8ba44c1-d1cb-4bda-9513-02d800a31498)
+
+### 에러 페이지
+![404](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/6e064149-ddd8-4e94-9f34-292f19161678)
+
+### 반응형
+![반응형](https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/7e67601e-4ab4-42a0-b555-266a3819e972)
