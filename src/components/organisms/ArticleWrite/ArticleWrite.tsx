@@ -70,7 +70,7 @@ const ArticleWrite = () => {
           preview="live"
           extraCommands={[codeEdit, codePreview, codeLive]}
           highlightEnable={false}
-          height="calc(100vh - 300px)"
+          height="calc(100vh - 270px)"
           value={content}
           onChange={(str) => setContent(str || "")}
           css={getEditorStyle(theme)}
