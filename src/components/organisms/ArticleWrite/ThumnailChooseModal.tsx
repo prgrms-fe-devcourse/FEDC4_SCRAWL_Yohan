@@ -4,12 +4,13 @@ import { css } from "@emotion/react";
 
 import Button from "@components/atoms/Button";
 import Flex from "@components/atoms/Flex";
+import Icon from "@components/atoms/Icon";
 import Image from "@components/atoms/Image";
 import Text from "@components/atoms/Text";
 
 import { useThemeStore } from "@stores/theme.store";
 
-import noImage from "@assets/svg/noImage.svg";
+import { NoImage } from "@assets/svg";
 
 type ThumnailChooseModalProps = {
   imageFile: File | null;
@@ -45,16 +46,27 @@ const ThumnailChooseModal = ({
       </Text>
       <Flex justify="center" align="center" gap={20}>
         <label htmlFor="uploadImageFile">
-          <Image
-            css={css`
-              cursor: pointer;
-              border: 1px solid ${theme.BORDER100};
-            `}
-            src={imageUrl || noImage}
-            width={150}
-            height={150}
-            alt={"이미지를 불러올 수 없습니다."}
-            mode="contain"></Image>
+          {imageUrl === "" ? (
+            <div
+              css={css`
+                padding: 10px;
+                cursor: pointer;
+                border: 1px solid ${theme.BORDER100};
+              `}>
+              <Icon size={150} Svg={NoImage} fill={theme.TEXT600} />
+            </div>
+          ) : (
+            <Image
+              css={css`
+                cursor: pointer;
+                border: 1px solid ${theme.BORDER100};
+              `}
+              src={imageUrl}
+              width={150}
+              height={150}
+              alt={"이미지를 불러올 수 없습니다."}
+              mode="contain"></Image>
+          )}
         </label>
         <input
           onChange={onImageChange}
