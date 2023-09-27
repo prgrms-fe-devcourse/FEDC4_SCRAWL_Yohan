@@ -4,6 +4,8 @@ import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import { CardList } from "@components/organisms/CardList";
 
+import { useScrollToTop } from "@hooks/useScrollToTop";
+
 import { useThemeStore } from "@stores/theme.store";
 
 import {
@@ -13,6 +15,8 @@ import {
 
 const ChannelPageSkeleton = () => {
   const { theme } = useThemeStore();
+
+  useScrollToTop();
 
   return (
     <Flex direction="column" css={channelPageOuterStyle}>

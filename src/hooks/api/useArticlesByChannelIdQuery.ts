@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { getArticlesByChannelId } from "@apis/article/getArticlesByChannelId";
 
-const PAGE_LIMIT = 20;
+const PAGE_LIMIT = 12;
 
 export const useArticlesByChannelIdQuery = (channelId: string) => {
   return useInfiniteQuery(

@@ -12,6 +12,7 @@ import { CardList } from "@components/organisms/CardList";
 import { useArticlesByChannelIdQuery } from "@hooks/api/useArticlesByChannelIdQuery";
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
 import { useIntersectionObserver } from "@hooks/useIntersectionObserver";
+import { useScrollToTop } from "@hooks/useScrollToTop";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -39,6 +40,8 @@ const ChannelPage = () => {
     (articles, page) => [...articles, ...page],
     []
   );
+
+  useScrollToTop();
 
   useEffect(() => {
     if (isFetchingNextPage) {

@@ -10,6 +10,7 @@ import { scrawlToast } from "@components/toast";
 import { useUserProfileUploadMutation } from "@hooks/api/useUserProfileUploadMutation";
 import { useUserQuery } from "@hooks/api/useUserQuery";
 import { useUserUpdateMutation } from "@hooks/api/useUserUpdateMutation";
+import { useScrollToTop } from "@hooks/useScrollToTop";
 
 import { PATH } from "@constants/index";
 import { WIDTH_MAP } from "@constants/media";
@@ -72,6 +73,8 @@ const UserPage = () => {
     });
     scrawlToast.success("잠시 후 프로필이 변경 됩니다.");
   };
+
+  useScrollToTop();
 
   return (
     <Flex

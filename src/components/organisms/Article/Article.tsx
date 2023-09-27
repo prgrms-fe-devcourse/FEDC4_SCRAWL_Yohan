@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 
@@ -11,6 +10,7 @@ import Thread from "@components/organisms/Thread/Thread";
 
 import { useArticleQuery } from "@hooks/api/useArticleQuery";
 import { useLoggedIn } from "@hooks/useLoggedIn";
+import { useScrollToTop } from "@hooks/useScrollToTop";
 
 import { articleTitleDataToArticleContent } from "@type/models/Article";
 
@@ -22,13 +22,10 @@ const Article = () => {
   if (!articleId) {
     throw new Error("articleId is undefined");
   }
-
   const { article } = useArticleQuery(articleId);
   const { title, tags } = articleTitleDataToArticleContent(article.title);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0 });
-  }, []);
+  useScrollToTop();
 
   return (
     <Flex direction="column" gap={20} css={articleOuterStyle}>
