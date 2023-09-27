@@ -3,7 +3,7 @@
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fprgrms-fe-devcourse%2FFEDC4_SCRAWL_Yohan&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
 <img width="100px" src="https://github.com/prgrms-fe-devcourse/FEDC4_SCRAWL_Yohan/assets/81508534/6409d7f4-cbe5-45bc-ac14-d4ef45f63509"/>
-<h2>괴발개발</h2>
+<h1>괴발개발</h1>
 
 <a href="https://goebalgaebal.vercel.app/">괴발개발 바로가기</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://prgrms.notion.site/7c2981f0d45546f2b9be6e20f4a0318b">팀노션</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://prgrms.notion.site/737887631290472ba77039d6f2e70123">괴발개발 기획서</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="https://prgrms.notion.site/75cee041ca3947dfa428f77f8eca4ea1">컨벤션</a>
 <br/>
