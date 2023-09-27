@@ -8,7 +8,7 @@ const FallbackPage = () => {
       css={css`
         height: 100vh;
       `}>
-      <Spinning width={32} />;
+      <Spinning width={32} />
     </div>
   );
 };
