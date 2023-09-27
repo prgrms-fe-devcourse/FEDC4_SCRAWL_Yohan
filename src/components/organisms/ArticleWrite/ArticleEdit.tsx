@@ -84,7 +84,7 @@ const ArticleEdit = () => {
         data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}
         preview="live"
         extraCommands={[codeEdit, codePreview, codeLive]}
-        height="calc(100vh - 300px)"
+        height="calc(100vh - 270px)"
         highlightEnable={false}
         value={content}
         onChange={(str) => setContent(str || "")}
