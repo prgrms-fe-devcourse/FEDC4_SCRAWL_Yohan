@@ -61,7 +61,6 @@ const ArticleEdit = () => {
     <Flex
       direction="column"
       css={css`
-        height: calc(100vh - 50px);
         margin: 20px 20px 0 0;
       `}>
       <Helmet key={location.pathname}>
