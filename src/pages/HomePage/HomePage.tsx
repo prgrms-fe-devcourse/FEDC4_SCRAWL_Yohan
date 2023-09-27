@@ -9,6 +9,7 @@ import { ArticlesByChannelSlider } from "@components/organisms/ArticlesByChannel
 
 import { useArticlesQuery } from "@hooks/api/useArticlesQuery";
 import { useChannelsQuery } from "@hooks/api/useChannelsQuery";
+import { useScrollToTop } from "@hooks/useScrollToTop";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -19,6 +20,8 @@ const HomePage = () => {
   const { channels } = useChannelsQuery();
   const theme = useThemeStore((state) => state.theme);
   const [sortType, setSortType] = useState<"date" | "like">("date");
+
+  useScrollToTop();
 
   return (
     <Flex

@@ -8,6 +8,7 @@ import Text from "@components/atoms/Text";
 import { CardList } from "@components/organisms/CardList";
 
 import { useSearchArticlesQuery } from "@hooks/api/useSearchArticlesQuery";
+import { useScrollToTop } from "@hooks/useScrollToTop";
 
 import { useThemeStore } from "@stores/theme.store";
 
@@ -21,6 +22,8 @@ const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const [option, keyword] = getSearchMap(searchParams);
   const { articles } = useSearchArticlesQuery(keyword);
+
+  useScrollToTop();
 
   return (
     <Flex direction="column" css={searchPageOuterStyle}>

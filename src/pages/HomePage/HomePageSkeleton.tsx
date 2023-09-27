@@ -4,6 +4,8 @@ import Flex from "@components/atoms/Flex";
 import Text from "@components/atoms/Text";
 import CardSliderSkeleton from "@components/organisms/ArticlesByChannelSlider/CardSliderSkeleton";
 
+import { useScrollToTop } from "@hooks/useScrollToTop";
+
 import { useThemeStore } from "@stores/theme.store";
 
 import { CHANNEL_MAP } from "@constants/channel";
@@ -12,6 +14,8 @@ import { MAX_WIDTH } from "@constants/width";
 const HomePageSkeleton = () => {
   const { theme } = useThemeStore();
   const channelValue = Object.values(CHANNEL_MAP);
+
+  useScrollToTop();
 
   return (
     <Flex
