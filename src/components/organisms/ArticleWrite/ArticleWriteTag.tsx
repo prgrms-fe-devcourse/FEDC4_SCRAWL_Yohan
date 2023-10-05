@@ -22,8 +22,7 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
   const { currentWidth } = useViewportStore();
 
   const addToSet = (value: string) => {
-    const updatedSet = new Set(tags);
-    updatedSet.add(value);
+    const updatedSet = new Set([value].concat([...tags]));
     setTags([...updatedSet]);
   };
 
