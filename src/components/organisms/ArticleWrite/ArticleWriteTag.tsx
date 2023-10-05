@@ -5,7 +5,10 @@ import { css } from "@emotion/react";
 import Flex from "@components/atoms/Flex";
 import Tag from "@components/molecules/Tag";
 
+import { useViewportStore } from "@stores/resize.store";
 import { useThemeStore } from "@stores/theme.store";
+
+import { getArticleTag } from "./ArticleWrite.styles";
 
 interface ArticleTagProps {
   stateChange: (value: string[]) => void;
@@ -16,6 +19,7 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState<string[]>(state ? [...state] : []);
   const { theme } = useThemeStore();
+  const { currentWidth } = useViewportStore();
 
   const addToSet = (value: string) => {
     const updatedSet = new Set(tags);
@@ -63,10 +67,7 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
         `}
         maxLength={10}
       />
-      <div
-        css={css`
-          height: 44px;
-        `}>
+      <div css={getArticleTag(currentWidth)}>
         <Flex
           gap={10}
           css={css`

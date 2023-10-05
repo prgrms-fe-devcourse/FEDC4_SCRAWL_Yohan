@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 
+import { WIDTH_MAP } from "@constants/media";
 import { Theme } from "@constants/theme";
 import { MAX_WIDTH } from "@constants/width";
 
@@ -54,4 +55,14 @@ export const articleChanneldropdown = (theme: Theme) => css`
       background-color: ${theme.BACKGROUND300};
     }
   }
+`;
+export const getArticleTag = (currentWidth: number) => css`
+  height: 44px;
+  max-width: ${currentWidth > 1430
+    ? MAX_WIDTH.md + "px"
+    : currentWidth > WIDTH_MAP.md
+    ? currentWidth - 340 + "px"
+    : "100%"};
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;
