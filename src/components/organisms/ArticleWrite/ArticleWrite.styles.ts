@@ -65,4 +65,5 @@ export const getArticleTag = (currentWidth: number) => css`
     : "100%"};
   overflow-x: scroll;
   overflow-y: hidden;
+  white-space: nowrap;
 `;
