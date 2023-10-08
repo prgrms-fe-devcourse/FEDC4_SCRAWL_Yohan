@@ -3,10 +3,12 @@ import React, { useEffect, useState } from "react";
 import { css } from "@emotion/react";
 
 import Flex from "@components/atoms/Flex";
-import Input from "@components/atoms/Input";
 import Tag from "@components/molecules/Tag";
 
+import { useViewportStore } from "@stores/resize.store";
 import { useThemeStore } from "@stores/theme.store";
+
+import { getArticleTag } from "./ArticleWrite.styles";
 
 interface ArticleTagProps {
   stateChange: (value: string[]) => void;
@@ -17,10 +19,10 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
   const [inputValue, setInputValue] = useState("");
   const [tags, setTags] = useState<string[]>(state ? [...state] : []);
   const { theme } = useThemeStore();
+  const { currentWidth } = useViewportStore();
 
   const addToSet = (value: string) => {
-    const updatedSet = new Set(tags);
-    updatedSet.add(value);
+    const updatedSet = new Set([value].concat([...tags]));
     setTags([...updatedSet]);
   };
 
@@ -35,14 +37,12 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
   });
   return (
     <>
-      <Input
+      <input
         value={inputValue}
-        placeholder="태그를 입력하세요"
+        placeholder="태그를 입력하세요(10자 이내)"
         height="30px"
         width={width}
-        fontSize="20px"
         color={theme.TEXT600}
-        background={theme.BACKGROUND100}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setInputValue(e.target.value)
         }
@@ -55,12 +55,18 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
         }}
         css={css`
           border: none;
+          font-size: 20px;
+          background={theme.BACKGROUND100};
+          box-sizing: border-box;
+          width: 272px;
+          height: 35px;
+          border-radius:8px;
+          padding: 10px;
+          outline: none;
         `}
+        maxLength={10}
       />
-      <div
-        css={css`
-          height: 44px;
-        `}>
+      <div css={getArticleTag(currentWidth)}>
         <Flex
           gap={10}
           css={css`
