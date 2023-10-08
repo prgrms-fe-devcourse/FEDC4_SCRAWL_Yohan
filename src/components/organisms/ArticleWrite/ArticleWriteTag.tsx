@@ -57,24 +57,29 @@ const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
           border: none;
         `}
       />
-      <Flex
-        gap={10}
+      <div
         css={css`
-          padding: 10px;
+          height: 44px;
         `}>
-        {tags.map((tag, index) => {
-          return (
-            <Tag
-              key={index}
-              size={16}
-              name={tag}
-              onClick={() => {
-                removeFromSet(tag);
-              }}
-            />
-          );
-        })}
-      </Flex>
+        <Flex
+          gap={10}
+          css={css`
+            padding: 10px;
+          `}>
+          {tags.map((tag, index) => {
+            return (
+              <Tag
+                key={index}
+                size={16}
+                name={tag}
+                onClick={() => {
+                  removeFromSet(tag);
+                }}
+              />
+            );
+          })}
+        </Flex>
+      </div>
     </>
   );
 };
