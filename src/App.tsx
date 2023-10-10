@@ -1,4 +1,5 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import { Global } from "@emotion/react";
 
@@ -21,6 +22,7 @@ function App() {
       <RootErrorBoundary>
         <AuthErrorBoundary>
           <Suspense fallback={null}>
+            <ScrollToTop />
             <AppRouter />
           </Suspense>
         </AuthErrorBoundary>
@@ -29,4 +31,15 @@ function App() {
     </>
   );
 }
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 export default App;
