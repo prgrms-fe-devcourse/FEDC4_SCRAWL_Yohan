@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import { css } from "@emotion/react";
 
@@ -14,6 +14,7 @@ import {
 
 import { useSidebarContext } from "@hooks/contexts/useSidebarContext";
 
+import { useChannel } from "@stores/channel.store";
 import { useViewportStore } from "@stores/resize.store";
 
 import SidebarProvider from "@contexts/sidebar.context";
@@ -22,7 +23,16 @@ const PageTemplate = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [resizeWidth, setResizeWidth] = useState(window.innerWidth);
   const { setWidth } = useViewportStore();
+  const { channel, setChannel } = useChannel();
+  const location = useLocation().pathname.split("/");
 
+  useEffect(() => {
+    if (channel !== location[2]) {
+      if (location[1] !== "create" && location[3] !== "edit") {
+        setChannel(location[2]);
+      }
+    }
+  });
   const handleScroll = useCallback(() => {
     setScrollPosition(window.scrollY);
   }, []);
