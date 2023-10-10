@@ -41,7 +41,12 @@ const ErrorPage = () => {
           gap: 20px;
         `}>
         <IconText
-          iconValue={{ Svg: Logo, size: 80, fill: theme.TEXT300 }}
+          css={css`
+            gap: 10px;
+            cursor: pointer;
+          `}
+          onClick={() => navigate(PATH.HOME)}
+          iconValue={{ Svg: Logo, size: 64, fill: theme.TEXT300 }}
           textValue={{ children: "괴발개발", size: 48, color: theme.TEXT300 }}
         />
         <Flex
@@ -51,6 +56,7 @@ const ErrorPage = () => {
           gap={10}
           css={css`
             box-sizing: border-box;
+            box-shadow: ${theme.SHADOW};
             padding: 24px;
             width: 320px;
             height: 400px;
