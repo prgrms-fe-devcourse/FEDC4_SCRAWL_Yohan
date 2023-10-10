@@ -16,6 +16,7 @@ import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { getEditorStyle } from "@styles/getEditorStyles";
 
+import { useChannel } from "@stores/channel.store";
 import { useThemeStore } from "@stores/theme.store";
 
 import { AuthError } from "@utils/AuthError";
@@ -34,7 +35,7 @@ const ArticleWrite = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [content, setContent] = useState("");
   const { theme } = useThemeStore();
-
+  const { channel } = useChannel();
   if (!isLoggedIn) dispatchError(new AuthError("로그인이 필요합니다."));
 
   const navigatePage = (page: string) => {
@@ -55,7 +56,10 @@ const ArticleWrite = () => {
       <Helmet key={location.pathname}>
         <title>새 글 작성</title>
       </Helmet>
-      <ArticleChannelSelect stateChange={(value) => setChannelId(value)} />
+      <ArticleChannelSelect
+        stateChange={(value) => setChannelId(value)}
+        state={channel}
+      />
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}
         width="100%"
