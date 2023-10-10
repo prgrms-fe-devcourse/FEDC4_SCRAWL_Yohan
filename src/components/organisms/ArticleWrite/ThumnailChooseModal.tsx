@@ -13,14 +13,12 @@ import { useThemeStore } from "@stores/theme.store";
 import { NoImage } from "@assets/svg";
 
 type ThumnailChooseModalProps = {
-  imageFile: File | null;
   imageUrl: string;
   onImageChange: ChangeEventHandler<HTMLInputElement>;
   onButtonClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 const ThumnailChooseModal = ({
-  imageFile,
   imageUrl,
   onImageChange,
   onButtonClick
@@ -77,7 +75,7 @@ const ThumnailChooseModal = ({
         />
       </Flex>
       <Button onClick={onButtonClick}>
-        {imageFile ? "현재" : "기본"} 썸네일로 글 생성
+        {imageUrl ? "현재" : "기본"} 썸네일로 글 생성
       </Button>
     </Flex>
   );
