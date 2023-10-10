@@ -80,11 +80,8 @@ const ArticleHeader = ({ article, tags, title }: ArticleHeaderProps) => {
 
   const handleDeleteArticle = () => {
     if (isMyArticle) {
-      articleDeleteMutate(article._id, {
-        onSuccess: (article) => {
-          navigate(PATH.CHANNEL(article.channel), { replace: true });
-        }
-      });
+      navigate(PATH.CHANNEL(article.channel._id), { replace: true });
+      articleDeleteMutate(article._id);
     }
   };
 
