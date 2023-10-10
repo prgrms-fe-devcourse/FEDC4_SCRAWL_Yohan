@@ -60,6 +60,17 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
     );
   };
 
+  const [editorHeight, setEditorHeight] = useState(100);
+  const editorInputEl = document.querySelector<HTMLDivElement>(
+    ".w-md-editor-text-input"
+  );
+  const editorPreviewEl = document.querySelector<HTMLDivElement>(
+    ".w-md-editor-preview"
+  );
+  const editorToolbarEl = document.querySelector<HTMLDivElement>(
+    ".w-md-editor-toolbar"
+  );
+
   return (
     <Flex
       justify="center"
@@ -97,10 +108,18 @@ const CommentForm = ({ width, article }: CommentFormProps) => {
           data-color-mode={theme.type === "LIGHT" ? "light" : "dark"}
           preview="live"
           extraCommands={[codeEdit, codePreview, codeLive]}
-          height={100}
+          height={editorHeight}
           highlightEnable={false}
           value={comment}
-          onChange={(str) => setComment(str || "")}
+          onChange={(str) => {
+            setComment(str || "");
+            setEditorHeight(
+              Math.max(
+                editorInputEl?.scrollHeight || editorHeight,
+                editorPreviewEl?.scrollHeight || editorHeight
+              ) + (editorToolbarEl?.offsetHeight || 0)
+            );
+          }}
           css={getEditorStyle(theme)}
         />
         <Button
