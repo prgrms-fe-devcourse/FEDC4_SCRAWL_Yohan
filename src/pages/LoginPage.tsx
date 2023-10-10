@@ -93,12 +93,12 @@ const LoginPage = () => {
           width: 320px;
           height: 428px;
           gap: 20px;
-          cursor: pointer;
         `}>
         <Flex>
           <IconText
             css={css`
               gap: 10px;
+              cursor: pointer;
             `}
             onClick={handleMoveHome}
             iconValue={{ Svg: Logo, size: 64, fill: theme.TEXT300 }}
