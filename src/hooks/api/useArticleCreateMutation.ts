@@ -9,6 +9,7 @@ export const useArticleCreateMutation = () => {
     mutationFn: createArticle,
     onSuccess: (article) =>
       Promise.all([
+        queryClient.resetQueries(["articles", article.author._id]),
         queryClient.resetQueries(["articles", article.channel._id]),
         queryClient.invalidateQueries(["main-articles"]),
         queryClient.invalidateQueries(["user-by-token"])
