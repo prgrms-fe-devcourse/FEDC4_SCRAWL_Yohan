@@ -32,8 +32,17 @@ const Card = ({ article, channelVisible = false }: CardProps) => {
   const navigate = useNavigate();
   const channelName = useChannelName(article.channel._id);
 
+  const handleCardClick = (e: React.MouseEvent, path: string) => {
+    e.stopPropagation();
+    navigate(path);
+  };
+
   return (
-    <Flex css={getCardOuterStyle(theme)} direction="column" gap={4}>
+    <Flex
+      css={getCardOuterStyle(theme)}
+      direction="column"
+      gap={4}
+      onClick={(e) => handleCardClick(e, PATH.ARTICLE(article._id))}>
       <Flex
         align="center"
         justify="space-between"
@@ -46,7 +55,7 @@ const Card = ({ article, channelVisible = false }: CardProps) => {
           username={article.author.fullName}
           fontSize={14}
           css={userInfoStyle}
-          onClick={() => navigate(PATH.USER(article.author._id))}
+          onClick={(e) => handleCardClick(e, PATH.USER(article.author._id))}
         />
         {channelVisible && (
           <Text
@@ -56,7 +65,9 @@ const Card = ({ article, channelVisible = false }: CardProps) => {
               margin: 8px 12px 0 0;
               white-space: nowrap;
             `}
-            onClick={() => navigate(PATH.CHANNEL(article.channel._id))}>
+            onClick={(e) =>
+              handleCardClick(e, PATH.CHANNEL(article.channel._id))
+            }>
             {channelName}
           </Text>
         )}
@@ -68,7 +79,7 @@ const Card = ({ article, channelVisible = false }: CardProps) => {
           alt="contentImg"
           mode="cover"
           css={cardImgStyle}
-          onClick={() => navigate(PATH.ARTICLE(article._id))}
+          onClick={(e) => handleCardClick(e, PATH.ARTICLE(article._id))}
         />
       ) : (
         <Flex
@@ -79,7 +90,7 @@ const Card = ({ article, channelVisible = false }: CardProps) => {
             aspect-ratio: 16 / 10;
             cursor: pointer;
           `}
-          onClick={() => navigate(PATH.ARTICLE(article._id))}>
+          onClick={(e) => handleCardClick(e, PATH.ARTICLE(article._id))}>
           <Icon Svg={NoImage} size={70} fill={theme.BACKGROUND300} />
         </Flex>
       )}

@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import { css } from "@emotion/react";
 import markdownToTxt from "markdown-to-txt";
 
@@ -14,8 +12,6 @@ import {
   Article,
   articleTitleDataToArticleContent
 } from "@type/models/Article";
-
-import { PATH } from "@constants/index";
 
 import { createdAtToString } from "@utils/createdAtToString";
 
@@ -35,19 +31,13 @@ type CardFooterProps = {
 
 const CardFooter = ({ article }: CardFooterProps) => {
   const { theme } = useThemeStore();
-  const navigate = useNavigate();
-
   const { title, content, tags } = articleTitleDataToArticleContent(
     article.title
   );
 
   return (
     <Flex direction="column" gap={8} css={cardFoorterOuterStyle}>
-      <Flex
-        direction="column"
-        gap={8}
-        css={cardDescriptionStyle}
-        onClick={() => navigate(PATH.ARTICLE(article._id))}>
+      <Flex direction="column" gap={8} css={cardDescriptionStyle}>
         <Text size={16} strong={true} css={titleStyle}>
           {title}
         </Text>
