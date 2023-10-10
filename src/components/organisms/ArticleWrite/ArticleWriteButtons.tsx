@@ -23,6 +23,7 @@ type totalContentType = {
 };
 
 type ArticleWriteButtonsProps = {
+  image?: string;
   theme: Theme;
   navigatePage: (page: string) => void;
   totalContent: totalContentType;
@@ -31,6 +32,7 @@ type ArticleWriteButtonsProps = {
 };
 
 const ArticleWriteButtons = ({
+  image,
   theme,
   navigatePage,
   totalContent,
@@ -46,6 +48,10 @@ const ArticleWriteButtons = ({
 
   const handleToggleModal = () => {
     setIsOpen((state) => !state);
+    if (image) {
+      setImageUrl(image);
+    }
+    // purpose가 update라면, 서버로 부터 article정보를 가져와서, setImageUrl하기
   };
 
   const handleChangeImageFile: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -114,7 +120,6 @@ const ArticleWriteButtons = ({
             <ThumnailChooseModal
               onImageChange={handleChangeImageFile}
               onButtonClick={handleCreateArticle}
-              imageFile={imageFile}
               imageUrl={imageUrl}
             />
           }

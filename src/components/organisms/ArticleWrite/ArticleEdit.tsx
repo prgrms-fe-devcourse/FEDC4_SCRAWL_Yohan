@@ -35,6 +35,7 @@ const ArticleEdit = () => {
   const { dispatchError } = useError();
   const { isLoggedIn } = useLoggedIn();
   const { article } = useArticleQuery(location.pathname.split("/")[2]);
+  console.log(article);
   const articleId = article.channel._id;
   const {
     title: preTitle,
@@ -91,6 +92,7 @@ const ArticleEdit = () => {
         css={getEditorStyle(theme)}
       />
       <ArticleWriteButtons
+        image={article.image}
         theme={theme}
         navigatePage={navigatePage}
         totalContent={{ title, channelId, content, tags }}
