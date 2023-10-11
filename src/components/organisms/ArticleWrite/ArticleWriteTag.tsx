@@ -14,10 +14,18 @@ interface ArticleTagProps {
   stateChange: (value: string[]) => void;
   state?: string[];
   width: string;
+  savedTags?: string[];
 }
-const ArticleTag = ({ stateChange, state, width }: ArticleTagProps) => {
+const ArticleTag = ({
+  stateChange,
+  state,
+  width,
+  savedTags
+}: ArticleTagProps) => {
   const [inputValue, setInputValue] = useState("");
-  const [tags, setTags] = useState<string[]>(state ? [...state] : []);
+  const [tags, setTags] = useState<string[]>(
+    state ? [...state] : savedTags ? savedTags : []
+  );
   const { theme } = useThemeStore();
   const { currentWidth } = useViewportStore();
 

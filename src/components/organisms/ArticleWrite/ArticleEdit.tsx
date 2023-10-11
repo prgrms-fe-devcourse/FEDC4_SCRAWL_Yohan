@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ import { useLoggedIn } from "@hooks/useLoggedIn";
 
 import { getEditorStyle } from "@styles/getEditorStyles";
 
+import { useEditStore } from "@stores/edit.store";
 import { useThemeStore } from "@stores/theme.store";
 
 import { articleTitleDataToArticleContent } from "@type/models/Article";
@@ -41,11 +42,24 @@ const ArticleEdit = () => {
     content: preContent,
     tags: preTags
   } = articleTitleDataToArticleContent(article.title);
+  const savedArticle = sessionStorage.getItem("edit");
+  let [savedTitle, savedTags, savedContent] = [preTitle, preTags, preContent];
+  if (savedArticle) {
+    const parse = JSON.parse(savedArticle).state.edit;
+    if (parse.article_id === article._id) {
+      [savedTitle, savedTags, savedContent] = [
+        parse.title,
+        parse.tags,
+        parse.content
+      ];
+    }
+  }
   const [channelId, setChannelId] = useState(articleId);
-  const [title, setTitle] = useState(preTitle);
-  const [tags, setTags] = useState<string[]>([...preTags]);
-  const [content, setContent] = useState(preContent);
+  const [title, setTitle] = useState(savedTitle);
+  const [tags, setTags] = useState<string[]>(savedTags);
+  const [content, setContent] = useState(savedContent);
   const { theme } = useThemeStore();
+  const { setEdit } = useEditStore();
   if (!isLoggedIn) dispatchError(new AuthError("로그인이 필요합니다."));
 
   const navigatePage = (page: string) => {
@@ -56,6 +70,15 @@ const ArticleEdit = () => {
         return navigate(-1);
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      return setEdit({ article_id: article._id, title, tags, content });
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [article._id, title, tags, content, setEdit]);
 
   return (
     <Flex

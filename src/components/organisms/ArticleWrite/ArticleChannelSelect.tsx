@@ -44,7 +44,7 @@ const ArticleChannelSelect = ({
   const channelList = [...useChannelsQuery().channels];
   const Mychannel = channelList.filter((x) => x._id === state);
   const [channelIdentify, setChannelIdentify] = useState(
-    state ? Mychannel[0].name : "채널 선택"
+    Mychannel.length ? Mychannel[0].name : "채널 선택"
   );
   const { theme } = useThemeStore();
   const [isOpen, setIsOpen] = useDetectClose(dropdownRef, false);
