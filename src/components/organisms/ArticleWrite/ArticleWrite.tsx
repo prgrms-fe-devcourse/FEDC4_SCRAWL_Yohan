@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 
@@ -17,6 +17,7 @@ import { useLoggedIn } from "@hooks/useLoggedIn";
 import { getEditorStyle } from "@styles/getEditorStyles";
 
 import { useChannel } from "@stores/channel.store";
+import { useCreatStore } from "@stores/create.store";
 import { useThemeStore } from "@stores/theme.store";
 
 import { AuthError } from "@utils/AuthError";
@@ -30,12 +31,24 @@ const ArticleWrite = () => {
   const navigate = useNavigate();
   const { dispatchError } = useError();
   const { isLoggedIn } = useLoggedIn();
+  const savedArticle = sessionStorage.getItem("create");
+  let [savedTitle, savedTags, savedContent] = ["", [], ""];
+  if (savedArticle) {
+    const parse = JSON.parse(savedArticle).state.create;
+    [savedTitle, savedTags, savedContent] = [
+      parse.title,
+      parse.tags,
+      parse.content
+    ];
+  }
+
   const [channelId, setChannelId] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState<string[]>([]);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(savedContent);
   const { theme } = useThemeStore();
   const { channel } = useChannel();
+  const { setCreate } = useCreatStore();
   if (!isLoggedIn) dispatchError(new AuthError("로그인이 필요합니다."));
 
   const navigatePage = (page: string) => {
@@ -46,6 +59,15 @@ const ArticleWrite = () => {
         return navigate(-1);
     }
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      return setCreate({ title, tags, content });
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [title, tags, content, setCreate]);
 
   return (
     <Flex
@@ -63,8 +85,13 @@ const ArticleWrite = () => {
       <ArticleWriteTitle
         stateChange={(value) => setTitle(value)}
         width="100%"
+        savedTitle={savedTitle}
       />
-      <ArticleWriteTag stateChange={(value) => setTags(value)} width="100%" />
+      <ArticleWriteTag
+        stateChange={(value) => setTags(value)}
+        width="100%"
+        savedTags={savedTags}
+      />
       <div
         css={css`
           width: 100%;

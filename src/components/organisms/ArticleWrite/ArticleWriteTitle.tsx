@@ -10,9 +10,17 @@ interface ArticleTagProps {
   stateChange: (value: string) => void;
   state?: string;
   width: string;
+  savedTitle?: string;
 }
-const ArticleTitle = ({ stateChange, state, width }: ArticleTagProps) => {
-  const [inputValue, setInputValue] = useState(state ? state : "");
+const ArticleTitle = ({
+  stateChange,
+  state,
+  width,
+  savedTitle
+}: ArticleTagProps) => {
+  const [inputValue, setInputValue] = useState(
+    state ? state : savedTitle ? savedTitle : ""
+  );
   const { theme } = useThemeStore();
   useEffect(() => {
     stateChange(inputValue);
